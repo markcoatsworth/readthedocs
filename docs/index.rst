@@ -6,7 +6,7 @@
 Welcome to Read the Docs Template's documentation!
 ==================================================
 
-This is a test repo to see how readthedocs integrates into Github.
+This is the stable branch! Hopefully it looks different than the master branch.
 
 Contents:
 
