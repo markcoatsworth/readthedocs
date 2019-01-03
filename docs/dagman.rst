@@ -11,3 +11,5 @@ DAGMan Terminology
 To DAGMan, a node in a DAG may encompass more than a single program submitted to run under HTCondor.
 
 .. image:: images/dagman-node.png
+
+.. note:: At one time, the number of HTCondor jobs per node was restricted to one. This restriction is now relaxed such that all HTCondor jobs within a node must share a single cluster number. See the condor_submit manual page for a further definition of a cluster. A limitation exists such that all jobs within the single cluster must use the same log file. Separate nodes within a DAG may use different log files.
