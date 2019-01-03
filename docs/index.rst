@@ -14,8 +14,11 @@ Contents:
    :maxdepth: 2
    :glob:
 
-   *
-
+   dagman.rst
+   usage.rst
+   template.rst
+   installation.rst
+   authors.rst
 
 
 Indices and tables
