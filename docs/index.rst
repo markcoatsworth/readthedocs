@@ -16,7 +16,6 @@ Contents:
 
    dagman.rst
    usage.rst
-   template.rst
    installation.rst
    authors.rst
 
