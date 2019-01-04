@@ -14,11 +14,9 @@ Contents:
    :maxdepth: 2
    :glob:
 
+   getting-started.rst
    users-manual/index
    man-pages/index
-   usage.rst
-   installation.rst
-   authors.rst
 
 
 Indices and tables
