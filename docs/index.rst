@@ -18,11 +18,3 @@ Contents:
    users-manual/index
    man-pages/index
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
