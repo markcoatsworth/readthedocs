@@ -14,7 +14,8 @@ Contents:
    :maxdepth: 2
    :glob:
 
-   dagman.rst
+   users-manual/index
+   man-pages/index
    usage.rst
    installation.rst
    authors.rst
