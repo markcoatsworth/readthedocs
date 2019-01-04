@@ -23,4 +23,7 @@ Comments may be placed in the DAG input file. The pound character (#) as the fir
 
 A simple diamond-shaped DAG, as shown in Figure 2.2 is presented as a starting point for examples. This DAG contains 4 nodes.
 
-You can insert tickets links like :ticket:`1234` directly inline to paragraphs.
+Custom Extensions
+-----------------
+
+You can insert links to HTCondor tickets links :ticket:`1234` using a custom extension with the following syntax: ``:ticket:`1234```
