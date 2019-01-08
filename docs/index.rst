@@ -9,7 +9,8 @@ Contents:
    :maxdepth: 2
    :glob:
 
-   getting-started.rst
+   getting-started
    users-manual/index
    man-pages/index
+   reference-index
 

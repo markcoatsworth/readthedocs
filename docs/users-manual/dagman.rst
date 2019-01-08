@@ -26,4 +26,6 @@ A simple diamond-shaped DAG, as shown in Figure 2.2 is presented as a starting p
 Custom Extensions
 -----------------
 
-You can insert links to HTCondor tickets like :ticket:`1234` using a custom extension with the following syntax: ``:ticket:`1234```
+You can insert links to HTCondor tickets like :ticket:`1234` using a custom extension with the following syntax: ``:ticket:`1234```.
+
+Let's try adding a macro called :macro:`TEST_MACRO` and see how it looks. We should also add :macro:`ANOTHER_MACRO` to make sure that they both show up correctly in the csv output. Finally, let's try adding a :macro:`THIRD_MACRO`.
