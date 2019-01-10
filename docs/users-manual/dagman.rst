@@ -8,7 +8,7 @@ DAGMan is itself executed as a scheduler universe job within HTCondor. As DAGMan
 DAGMan Terminology
 ------------------
 
-To DAGMan, a node in a DAG may encompass more than a single program submitted to run under HTCondor.
+To DAGMan, a node in a DAG may :index:`DAGMan Terms <pair: DAGMan; Terms>` encompass more than a single program submitted to run under HTCondor.
 
 .. image:: /images/dagman-node.png
 

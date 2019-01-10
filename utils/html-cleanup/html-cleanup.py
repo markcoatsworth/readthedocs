@@ -1,10 +1,18 @@
 #!/usr/bin/env python
 
+import bs4
 import os
 import re
 import sys
 
+def dump(obj):
+    for attr in dir(obj):
+        print("obj.%s = %r" % (attr, getattr(obj, attr)))
+
+
 def main():
+
+    # Command line arguments
     if len(sys.argv) < 2:
         print("Usage: html-cleanup.py <input-file>")
         sys.exit(1)
@@ -15,30 +23,73 @@ def main():
         html_data = input_file.read()
     input_file.close()
 
-    # Testing
-    #html_data = """ """
+    # Now start The Great HTML Parse!
+    soup = bs4.BeautifulSoup(html_data, features="lxml")
 
-    # Test patterns
-    #all_matches = re.findall(r'<span style="font-size: 200%;">([\w\s="<>&#;/\.]*)</span>', html_data)
-    #all_matches = re.findall(r'<div class="verbatim" id="[\w\s-]*">([\w\s\-\.\(\)\'\\="<>!@#$%^&*:;,/|]*)</div>', html_data)
-    #print("Number of matches: " + str(len(all_matches)))
+    # Step 1: Delete things we don't want. Do this before editing any markup.
 
-    # Rip out header and footer navigations
-    html_data = re.sub(r'<span style="font-size: 200%;">([([\w\s="<>&#;/\.]*)</span>', r'', html_data)
-    html_data = re.sub(r'<a href="contentsname.html">Contents</a>&nbsp;<a href="indexname.html">Index</a>', r'', html_data)
-    
-    # Replace generated HTML with native tags
-    html_data = re.sub(r'<span class="textbf"><span class="textit"([\w\s\-&#_]*)</span></span>', r'<b><i>\1</i></b>', html_data)
-    html_data = re.sub(r'<span class="textbf">([\w\s\-&#_]*)</span>', r'<b>\1</b>', html_data)
-    html_data = re.sub(r'<span class="textit">([\w\s\-&#_]*)</span>', r'<i>\1</i>', html_data)
-    html_data = re.sub(r'<span class="texttt">([\w\s\-&#_]*)</span>', r'<code>\1</code>', html_data)
-    html_data = re.sub(r'<span class="emph">([\w\s\-&#_]*)</span>', r'<b>\1</b>', html_data)
-    html_data = re.sub(r'<div class="verbatim" id="[\w\s-]*">([\w\s\-\.\(\)\'\\="<>#$&*:;,/|]*)</div>', r'<pre>\1</pre>', html_data)
-    print(html_data)
+    # Delete the navigation tags (defined by <span style="font-size: 200%;>...</span>")
+    nav_tags = soup.find_all("span", attrs={"style": "font-size: 200%;"})
+    print("Found " + str(len(nav_tags)) + " navigation spans")
+    for tag in nav_tags:
+        tag.decompose()
+
+    # Also delete the "Contents" and "Index" links
+    links_tags = soup.find_all("a")
+    for tag in links_tags:
+        if tag.string:
+            if tag.string == "Contents" or tag.string == "Index":
+                tag.decompose()
+
+    # Delete the table of contents
+    toc_tags = soup.find_all("div", attrs={"class": "sectionTOCS"})
+    for tag in toc_tags:
+        tag.decompose()
+
+    # Delete the section numbering
+    titlemark_tags = soup.find_all("span", attrs={"class": "titlemark"})
+    for tag in titlemark_tags:
+        tag.decompose()
+
+    # Convert all <span class="textbf">...</span> tags to <b>...</b>
+    bold_tags = soup.find_all("span", attrs={"class": "textbf"})
+    print("Found " + str(len(bold_tags)) + " textbf spans")
+    for tag in bold_tags:
+        new_tag = soup.new_tag("b")
+        if tag.string:
+            new_tag.string = tag.string
+        tag.replace_with(new_tag)
+
+    # Convert all <span class="textit">...</span> tags to <i>...</i>
+    italic_tags = soup.find_all("span", attrs={"class": "textit"})
+    print("Found " + str(len(italic_tags)) + " textit spans")
+    for tag in italic_tags:
+        new_tag = soup.new_tag("i")
+        if tag.string:
+            new_tag.string = tag.string
+        tag.replace_with(new_tag)
+
+    # Convert all <span class="texttt">...</span> tags to <code>...</code>
+    code_tags = soup.find_all("span", attrs={"class": "texttt"})
+    print("Found " + str(len(code_tags)) + " texttt spans")
+    for tag in code_tags:
+        new_tag = soup.new_tag("code")
+        if tag.string:
+            new_tag.string = tag.string
+        tag.replace_with(new_tag)
+
+    # Convert all <div class="verbatim">...</div> tags to <pre>...</pre>
+    pre_tags = soup.find_all("div", attrs={"class": "verbatim"})
+    print("Found " + str(len(pre_tags)) + " verbatim divs")
+    for tag in pre_tags:
+        new_tag = soup.new_tag("pre")
+        new_tag.contents = tag.contents
+        tag.replace_with(new_tag)
+
 
     # Overwrite the original file with the parseable markup
     output_file = open(filename + ".out", "w")
-    output_file.write(html_data)
+    output_file.write(str(soup))
     output_file.close()
 
 if __name__ == "__main__":
