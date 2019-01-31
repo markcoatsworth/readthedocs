@@ -9,10 +9,10 @@ Contents:
    :maxdepth: 2
    :glob:
 
-   getting-started
-   users-manual/index
+.. getting-started
+.. users-manual/index
    man-pages/index
-   reference-index
+.. reference-index
 
 Indices and tables
 ------------------
