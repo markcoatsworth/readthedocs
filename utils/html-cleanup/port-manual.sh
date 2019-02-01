@@ -20,18 +20,21 @@ pandoc -f html -t rst PrivacyNotice.html.out -o ../../../docs/rst/PrivacyNotice.
 
 # User's Manual
 pandoc -f html -t rst UsersManual.html.out -o ../../../docs/rst/UsersManual.html.out.rst
+pandoc -f html -t rst WelcometoHTCondor.html.out -o ../../../docs/rst/WelcometoHTCondor.html.out.rst
 pandoc -f html -t rst Introduction.html.out -o ../../../docs/rst/Introduction.html.out.rst
 pandoc -f html -t rst MatchmakingwithClassAds.html.out -o ../../../docs/rst/MatchmakingwithClassAds.html.out.rst
 pandoc -f html -t rst RunningaJobtheStepsToTake.html.out -o ../../../docs/rst/RunningaJobtheStepsToTake.html.out.rst
+pandoc -f html -t rst SubmittingaJob.html.out -o ../../../docs/rst/SubmittingaJob.html.out.rst
 pandoc -f html -t rst ManagingaJob.html.out -o ../../../docs/rst/ManagingaJob.html.out.rst
 pandoc -f html -t rst PrioritiesandPreemption.html.out -o ../../../docs/rst/PrioritiesandPreemption.html.out.rst
 pandoc -f html -t rst JavaApplications.html.out -o ../../../docs/rst/JavaApplications.html.out.rst
 pandoc -f html -t rst ParallelApplicationsIncludingMPIApplications.html.out -o ../../../docs/rst/ParallelApplicationsIncludingMPIApplications.html.out.rst
 pandoc -f html -t rst DAGManApplications.html.out -o ../../../docs/rst/DAGManApplications.html.out.rst
+pandoc -f html -t rst VirtualMachineApplications.html.out -o ../../../docs/rst/VirtualMachineApplications.html.out.rst
 pandoc -f html -t rst DockerUniverseApplications.html.out -o ../../../docs/rst/DockerUniverseApplications.html.out.rst
+pandoc -f html -t rst TimeSchedulingforJobExecution.html.out -o ../../../docs/rst/TimeSchedulingforJobExecution.html.out.rst
 pandoc -f html -t rst SpecialEnvironmentConsiderations.html.out -o ../../../docs/rst/SpecialEnvironmentConsiderations.html.out.rst
 pandoc -f html -t rst PotentialProblems.html.out -o ../../../docs/rst/PotentialProblems.html.out.rst
-
 
 # Administrator's Manual
 pandoc -f html -t rst AdministratorsManual.html.out -o ../../../docs/rst/AdministratorsManual.html.out.rst
@@ -40,11 +43,14 @@ pandoc -f html -t rst InstallationStartUpShutDownandReconfiguration.html.out -o 
 pandoc -f html -t rst IntroductiontoConfiguration.html.out -o ../../../docs/rst/IntroductiontoConfiguration.html.out.rst
 pandoc -f html -t rst ConfigurationTemplates.html.out -o ../../../docs/rst/ConfigurationTemplates.html.out.rst
 pandoc -f html -t rst ConfigurationMacros.html.out -o ../../../docs/rst/ConfigurationMacros.html.out.rst
+pandoc -f html -t rst UserPrioritiesandNegotiation.html.out -o ../../../docs/rst/UserPrioritiesandNegotiation.html.out.rst
 pandoc -f html -t rst PolicyConfigurationforExecuteHostsandforSubmitHosts.html.out -o ../../../docs/rst/PolicyConfigurationforExecuteHostsandforSubmitHosts.html.out.rst
 pandoc -f html -t rst Security.html.out -o ../../../docs/rst/Security.html.out.rst
 pandoc -f html -t rst NetworkingincludessectionsonPortUsageandCCB.html.out -o ../../../docs/rst/NetworkingincludessectionsonPortUsageandCCB.html.out.rst
+pandoc -f html -t rst TheCheckpointServer.html.out -o ../../../docs/rst/TheCheckpointServer.html.out.rst
 pandoc -f html -t rst DaemonCore.html.out -o ../../../docs/rst/DaemonCore.html.out.rst
 pandoc -f html -t rst Monitoring.html.out -o ../../../docs/rst/Monitoring.html.out.rst
+pandoc -f html -t rst TheHighAvailabilityofDaemons.html.out -o ../../../docs/rst/TheHighAvailabilityofDaemons.html.out.rst
 pandoc -f html -t rst SettingUpforSpecialEnvironments.html.out -o ../../../docs/rst/SettingUpforSpecialEnvironments.html.out.rst
 pandoc -f html -t rst JavaSupportInstallation.html.out -o ../../../docs/rst/JavaSupportInstallation.html.out.rst
 pandoc -f html -t rst SettingUptheVMandDockerUniverses.html.out -o ../../../docs/rst/SettingUptheVMandDockerUniverses.html.out.rst
@@ -59,25 +65,28 @@ pandoc -f html -t rst ComputingOnDemandCOD.html.out -o ../../../docs/rst/Computi
 pandoc -f html -t rst Hooks.html.out -o ../../../docs/rst/Hooks.html.out.rst
 pandoc -f html -t rst LogginginHTCondor.html.out -o ../../../docs/rst/LogginginHTCondor.html.out.rst
 
-
 # Grid Computing
 pandoc -f html -t rst GridComputing.html.out -o ../../../docs/rst/GridComputing.html.out.rst
 pandoc -f html -t rst Introduction2.html.out -o ../../../docs/rst/Introduction2.html.out.rst
 pandoc -f html -t rst ConnectingHTCondorPoolswithFlocking.html.out -o ../../../docs/rst/ConnectingHTCondorPoolswithFlocking.html.out.rst
-
+pandoc -f html -t rst TheGridUniverse.html.out -o ../../../docs/rst/TheGridUniverse.html.out.rst
+pandoc -f html -t rst TheHTCondorJobRouter.html.out -o ../../../docs/rst/TheHTCondorJobRouter.html.out.rst
 
 # Cloud Computing
 pandoc -f html -t rst CloudComputing.html.out -o ../../../docs/rst/CloudComputing.html.out.rst
 pandoc -f html -t rst Introduction3.html.out -o ../../../docs/rst/Introduction3.html.out.rst
 pandoc -f html -t rst HTCondorAnnexUsersGuide.html.out -o ../../../docs/rst/HTCondorAnnexUsersGuide.html.out.rst
+pandoc -f html -t rst UsingCondorannexfortheFirstTime.html.out -o ../../../docs/rst/UsingCondorannexfortheFirstTime.html.out.rst
 pandoc -f html -t rst HTCondorAnnexCustomizationGuide.html.out -o ../../../docs/rst/HTCondorAnnexCustomizationGuide.html.out.rst
 pandoc -f html -t rst HTCondorAnnexConfiguration.html.out -o ../../../docs/rst/HTCondorAnnexConfiguration.html.out.rst
-
 
 # Application Programming Interfaces (APIs)
 pandoc -f html -t rst ApplicationProgrammingInterfacesAPIs.html.out -o ../../../docs/rst/ApplicationProgrammingInterfacesAPIs.html.out.rst
 pandoc -f html -t rst PythonBindings.html.out -o ../../../docs/rst/PythonBindings.html.out.rst
 pandoc -f html -t rst Chirp.html.out -o ../../../docs/rst/Chirp.html.out.rst
+pandoc -f html -t rst TheHTCondorUserandJobLogReaderAPI.html.out -o ../../../docs/rst/TheHTCondorUserandJobLogReaderAPI.html.out.rst
+pandoc -f html -t rst TheCommandLineInterface.html.out -o ../../../docs/rst/TheCommandLineInterface.html.out.rst
+pandoc -f html -t rst TheDRMAAAPI.html.out -o ../../../docs/rst/TheDRMAAAPI.html.out.rst
 
 # Platform-Specific Information
 pandoc -f html -t rst PlatformSpecificInformation.html.out -o ../../../docs/rst/PlatformSpecificInformation.html.out.rst
@@ -88,80 +97,20 @@ pandoc -f html -t rst MacintoshOSX.html.out -o ../../../docs/rst/MacintoshOSX.ht
 # Frequently Asked Questions
 pandoc -f html -t rst FrequentlyAskedQuestionsFAQ.html.out -o ../../../docs/rst/FrequentlyAskedQuestionsFAQ.html.out.rst
 
-
 # Contrib and Source Modules
 pandoc -f html -t rst ContribandSourceModules.html.out -o ../../../docs/rst/ContribandSourceModules.html.out.rst
 pandoc -f html -t rst Introduction4.html.out -o ../../../docs/rst/Introduction4.html.out.rst
+pandoc -f html -t rst TheHTCondorViewClientContribModule.html.out -o ../../../docs/rst/TheHTCondorViewClientContribModule.html.out.rst
 pandoc -f html -t rst JobMonitorLogViewer.html.out -o ../../../docs/rst/JobMonitorLogViewer.html.out.rst
 
 # Version History and Release Notes
+pandoc -f html -t rst VersionHistoryandReleaseNotes.html.out -o ../../../docs/rst/VersionHistoryandReleaseNotes.html.out.rst
 pandoc -f html -t rst IntroductiontoHTCondorVersions.html.out -o ../../../docs/rst/IntroductiontoHTCondorVersions.html.out.rst
+pandoc -f html -t rst Upgradingfromthe86seriestothe88seriesofHTCondor.html.out -o ../../../docs/rst/Upgradingfromthe86seriestothe88seriesofHTCondor.html.out.rst
 pandoc -f html -t rst DevelopmentReleaseSeries89.html.out -o ../../../docs/rst/DevelopmentReleaseSeries89.html.out.rst
 pandoc -f html -t rst StableReleaseSeries88.html.out -o ../../../docs/rst/StableReleaseSeries88.html.out.rst
 pandoc -f html -t rst DevelopmentReleaseSeries87.html.out -o ../../../docs/rst/DevelopmentReleaseSeries87.html.out.rst
 pandoc -f html -t rst StableReleaseSeries86.html.out -o ../../../docs/rst/StableReleaseSeries86.html.out.rst
-
-
-# ClassAd Attributes
-pandoc -f html -t rst ClassAdAttributes.html.out -o ../../../docs/rst/ClassAdAttributes.html.out.rst
-pandoc -f html -t rst ClassAdTypes.html.out -o ../../../docs/rst/ClassAdTypes.html.out.rst
-pandoc -f html -t rst JobClassAdAttributes.html.out -o ../../../docs/rst/JobClassAdAttributes.html.out.rst
-pandoc -f html -t rst MachineClassAdAttributes.html.out -o ../../../docs/rst/MachineClassAdAttributes.html.out.rst
-pandoc -f html -t rst DaemonMasterClassAdAttributes.html.out -o ../../../docs/rst/DaemonMasterClassAdAttributes.html.out.rst
-pandoc -f html -t rst SchedulerClassAdAttributes.html.out -o ../../../docs/rst/SchedulerClassAdAttributes.html.out.rst
-pandoc -f html -t rst NegotiatorClassAdAttributes.html.out -o ../../../docs/rst/NegotiatorClassAdAttributes.html.out.rst
-pandoc -f html -t rst ClassAdAttributesAddedbytheCondorcollector.html.out -o ../../../docs/rst/ClassAdAttributesAddedbytheCondorcollector.html.out.rst
-pandoc -f html -t rst DefragClassAdAttributes.html.out -o ../../../docs/rst/DefragClassAdAttributes.html.out.rst
-pandoc -f html -t rst CollectorClassAdAttributes.html.out -o ../../../docs/rst/CollectorClassAdAttributes.html.out.rst
-pandoc -f html -t rst DaemonCoreStatisticsAttributes.html.out -o ../../../docs/rst/DaemonCoreStatisticsAttributes.html.out.rst
-
-
-# Codes and Other Needed Values
-pandoc -f html -t rst CodesandOtherNeededValues.html.out -o ../../../docs/rst/CodesandOtherNeededValues.html.out.rst
-pandoc -f html -t rst JobEventLogCodes.html.out -o ../../../docs/rst/JobEventLogCodes.html.out.rst
-pandoc -f html -t rst DaemonCoreCommandNumbers.html.out -o ../../../docs/rst/DaemonCoreCommandNumbers.html.out.rst
-pandoc -f html -t rst DaemonCoreDaemonExitCodes.html.out -o ../../../docs/rst/DaemonCoreDaemonExitCodes.html.out.rst
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-pandoc -f html -t rst SubmitterClassAdAttributes.html.out -o ../../../docs/rst/SubmitterClassAdAttributes.html.out.rst
-pandoc -f html -t rst SubmittingaJob.html.out -o ../../../docs/rst/SubmittingaJob.html.out.rst
-pandoc -f html -t rst TheCheckpointServer.html.out -o ../../../docs/rst/TheCheckpointServer.html.out.rst
-pandoc -f html -t rst TheCommandLineInterface.html.out -o ../../../docs/rst/TheCommandLineInterface.html.out.rst
-pandoc -f html -t rst TheDRMAAAPI.html.out -o ../../../docs/rst/TheDRMAAAPI.html.out.rst
-pandoc -f html -t rst TheGridUniverse.html.out -o ../../../docs/rst/TheGridUniverse.html.out.rst
-pandoc -f html -t rst TheHighAvailabilityofDaemons.html.out -o ../../../docs/rst/TheHighAvailabilityofDaemons.html.out.rst
-pandoc -f html -t rst TheHTCondorJobRouter.html.out -o ../../../docs/rst/TheHTCondorJobRouter.html.out.rst
-pandoc -f html -t rst TheHTCondorUserandJobLogReaderAPI.html.out -o ../../../docs/rst/TheHTCondorUserandJobLogReaderAPI.html.out.rst
-pandoc -f html -t rst TheHTCondorViewClientContribModule.html.out -o ../../../docs/rst/TheHTCondorViewClientContribModule.html.out.rst
-pandoc -f html -t rst TimeSchedulingforJobExecution.html.out -o ../../../docs/rst/TimeSchedulingforJobExecution.html.out.rst
-pandoc -f html -t rst Upgradingfromthe86seriestothe88seriesofHTCondor.html.out -o ../../../docs/rst/Upgradingfromthe86seriestothe88seriesofHTCondor.html.out.rst
-pandoc -f html -t rst UserPrioritiesandNegotiation.html.out -o ../../../docs/rst/UserPrioritiesandNegotiation.html.out.rst
-pandoc -f html -t rst UsingCondorannexfortheFirstTime.html.out -o ../../../docs/rst/UsingCondorannexfortheFirstTime.html.out.rst
-pandoc -f html -t rst VersionHistoryandReleaseNotes.html.out -o ../../../docs/rst/VersionHistoryandReleaseNotes.html.out.rst
-pandoc -f html -t rst VirtualMachineApplications.html.out -o ../../../docs/rst/VirtualMachineApplications.html.out.rst
-pandoc -f html -t rst WelcometoHTCondor.html.out -o ../../../docs/rst/WelcometoHTCondor.html.out.rst
-pandoc -f html -t rst WellknownPortNumbers.html.out -o ../../../docs/rst/WellknownPortNumbers.html.out.rst
 
 # Command Reference Manual (man-pages)
 pandoc -f html -t rst CommandReferenceManualmanpages.html.out -o ../../../docs/rst/CommandReferenceManualmanpages.html.out.rst
@@ -243,5 +192,26 @@ pandoc -f html -t rst Condorwait.html.out -o ../../../docs/rst/Condorwait.html.o
 pandoc -f html -t rst Condorwho.html.out -o ../../../docs/rst/Condorwho.html.out.rst
 pandoc -f html -t rst giddalloc.html.out -o ../../../docs/rst/giddalloc.html.out.rst
 pandoc -f html -t rst procdctl.html.out -o ../../../docs/rst/procdctl.html.out.rst
+
+# ClassAd Attributes
+pandoc -f html -t rst ClassAdAttributes.html.out -o ../../../docs/rst/ClassAdAttributes.html.out.rst
+pandoc -f html -t rst ClassAdTypes.html.out -o ../../../docs/rst/ClassAdTypes.html.out.rst
+pandoc -f html -t rst JobClassAdAttributes.html.out -o ../../../docs/rst/JobClassAdAttributes.html.out.rst
+pandoc -f html -t rst MachineClassAdAttributes.html.out -o ../../../docs/rst/MachineClassAdAttributes.html.out.rst
+pandoc -f html -t rst DaemonMasterClassAdAttributes.html.out -o ../../../docs/rst/DaemonMasterClassAdAttributes.html.out.rst
+pandoc -f html -t rst SchedulerClassAdAttributes.html.out -o ../../../docs/rst/SchedulerClassAdAttributes.html.out.rst
+pandoc -f html -t rst NegotiatorClassAdAttributes.html.out -o ../../../docs/rst/NegotiatorClassAdAttributes.html.out.rst
+pandoc -f html -t rst SubmitterClassAdAttributes.html.out -o ../../../docs/rst/SubmitterClassAdAttributes.html.out.rst
+pandoc -f html -t rst DefragClassAdAttributes.html.out -o ../../../docs/rst/DefragClassAdAttributes.html.out.rst
+pandoc -f html -t rst CollectorClassAdAttributes.html.out -o ../../../docs/rst/CollectorClassAdAttributes.html.out.rst
+pandoc -f html -t rst ClassAdAttributesAddedbytheCondorcollector.html.out -o ../../../docs/rst/ClassAdAttributesAddedbytheCondorcollector.html.out.rst
+pandoc -f html -t rst DaemonCoreStatisticsAttributes.html.out -o ../../../docs/rst/DaemonCoreStatisticsAttributes.html.out.rst
+
+# Codes and Other Needed Values
+pandoc -f html -t rst CodesandOtherNeededValues.html.out -o ../../../docs/rst/CodesandOtherNeededValues.html.out.rst
+pandoc -f html -t rst JobEventLogCodes.html.out -o ../../../docs/rst/JobEventLogCodes.html.out.rst
+pandoc -f html -t rst WellknownPortNumbers.html.out -o ../../../docs/rst/WellknownPortNumbers.html.out.rst
+pandoc -f html -t rst DaemonCoreCommandNumbers.html.out -o ../../../docs/rst/DaemonCoreCommandNumbers.html.out.rst
+pandoc -f html -t rst DaemonCoreDaemonExitCodes.html.out -o ../../../docs/rst/DaemonCoreDaemonExitCodes.html.out.rst
 
 cd ..
