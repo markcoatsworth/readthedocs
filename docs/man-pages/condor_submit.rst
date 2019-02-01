@@ -1,7 +1,7 @@
       
 
-*condor\_submit*
-~~~~~~~~~~~~~~~~
+condor\_submit
+==============
 
 Queue jobs for execution under HTCondor
 
@@ -45,13 +45,13 @@ a single cluster because:
 Multiple clusters may be specified within a single submit description.
 Each cluster must specify a single executable.
 
-The job ClassAd attribute ``ClusterId`` identifies a cluster.
+The job ClassAd attribute ClusterId identifies a cluster.
 
 The *submit description file* argument is the path and file name of the
 submit description file. If this optional argument is the dash character
-(``-``), then the commands are taken from standard input. If ``-`` is
-specified for the *submit description file*, **-verbose** is implied;
-this can be overridden by specifying **-terse**.
+(-), then the commands are taken from standard input. If - is specified
+for the *submit description file*, **-verbose** is implied; this can be
+overridden by specifying **-terse**.
 
 If no *submit discription file* argument is given, and no *-queue*
 argument is given, commands are taken automatically from standard input.
@@ -78,8 +78,8 @@ Options
     As a default, causes no warnings to be issued about user-defined
     macros not being used within the submit description file. The
     meaning reverses (toggles) when the configuration variable
-    ``WARN_ON_UNUSED_SUBMIT_FILE_MACROS`` is set to the non default
-    value of ``False``. Printing the warnings can help identify spelling
+    WARN\_ON\_UNUSED\_SUBMIT\_FILE\_MACROS is set to the non default
+    value of False. Printing the warnings can help identify spelling
     errors of submit description file commands. The warnings are sent to
     stderr.
  **-file **\ *submit\_file*
@@ -89,12 +89,12 @@ Options
  **-name **\ *schedd\_name*
     Submit to the specified *condor\_schedd*. Use this option to submit
     to a *condor\_schedd* other than the default local one.
-    *schedd\_name* is the value of the ``Name`` ClassAd attribute on the
+    *schedd\_name* is the value of the Name ClassAd attribute on the
     machine where the *condor\_schedd* daemon runs.
  **-remote **\ *schedd\_name*
     Submit to the specified *condor\_schedd*, spooling all required
     input files over the network connection. *schedd\_name* is the value
-    of the ``Name`` ClassAd attribute on the machine where the
+    of the Name ClassAd attribute on the machine where the
     *condor\_schedd* daemon runs. This option is equivalent to using
     both **-name** and **-spool**.
  **-addr **\ *<ip:port>*
@@ -113,8 +113,8 @@ Options
  **-password **\ *passphrase*
     Specify a password to the *MyProxy* server.
  **-debug**
-    Cause debugging information to be sent to ``stderr``, based on the
-    value of the configuration variable ``TOOL_DEBUG``.
+    Cause debugging information to be sent to stderr, based on the value
+    of the configuration variable TOOL\_DEBUG.
  **-append **\ *command*
     Augment the commands in the submit description file with the given
     *command*. This command will be considered to immediately precede
@@ -122,12 +122,12 @@ Options
     after all other previous commands. If the *command* specifies a
     **queue** command, as in the example
 
-    ``condor_submit mysubmitfile -append "queue input in A, B, C"``
+    condor\_submit mysubmitfile -append "queue input in A, B, C"
 
     then the entire **-append** command line option and its arguments
     are converted to
 
-    ``condor_submit mysubmitfile -queue input in A, B, C``
+    condor\_submit mysubmitfile -queue input in A, B, C
 
     | The submit description file is not modified. Multiple commands are
     specified by using the **-append** option multiple times. Each new
@@ -163,22 +163,22 @@ Options
     Note that all policy expressions specified in the submit description
     file are honored, but any **executable** or **universe** commands
     are overwritten to be sleep and vanilla. The job ClassAd attribute
-    ``InteractiveJob`` is set to ``True`` to identify interactive jobs
-    for *condor\_startd* policy usage.
+    InteractiveJob is set to True to identify interactive jobs for
+    *condor\_startd* policy usage.
  **-allow-crlf-script**
     Changes the check for an invalid line ending on the executable
-    script’s ``#!`` line from an ERROR to a WARNING. The ``#!`` line
-    will be ignored by Windows, so it won’t matter if it is invalid; but
-    Unix and Linux will not run a script that has a Windows/DOS line
-    ending on the first line of the script. So *condor\_submit* will not
-    allow such a script to be submitted as the job’s executable unless
-    this option is supplied.
+    script’s #! line from an ERROR to a WARNING. The #! line will be
+    ignored by Windows, so it won’t matter if it is invalid; but Unix
+    and Linux will not run a script that has a Windows/DOS line ending
+    on the first line of the script. So *condor\_submit* will not allow
+    such a script to be submitted as the job’s executable unless this
+    option is supplied.
  **-dry-run **\ *file*
     Parse the submit description file, sending the resulting job ClassAd
     to the file given by *file*, but do not submit the job(s). This
     permits observation of the job specification, and it facilitates
     debugging the submit description file contents. If *file* is **-**,
-    the output is written to ``stdout``.
+    the output is written to stdout.
  **-maxjobs **\ *number-of-jobs*
     If the total number of jobs specified by the submit description file
     is more than the integer value given by *number-of-jobs*, then no
@@ -197,17 +197,16 @@ Options
     it as if it was placed at the beginning of the submit description
     file. The submit description file is not changed. To correctly parse
     the *condor\_submit* command line, this option must be specified
-    without white space characters before and after the equals sign
-    (``=``), or the entire option must be surrounded by double quote
-    marks.
+    without white space characters before and after the equals sign (=),
+    or the entire option must be surrounded by double quote marks.
  **-queue **\ *queue\_arguments*
     A command line specification of how many jobs to queue, which is
     only permitted if the submit description file does not have a
     **queue** command. The *queue\_arguments* are the same as may be
     within a submit description file. The parsing of the
     *queue\_arguments* finishes at the end of the line or when a dash
-    character (``-``) is encountered. Therefore, its best placement
-    within the command line will be at the end of the command line.
+    character (-) is encountered. Therefore, its best placement within
+    the command line will be at the end of the command line.
 
     | On a Unix command line, the shell expands file globs before
     parsing occurs.
@@ -247,16 +246,16 @@ BASIC COMMANDS
     command line.
 
     In the **java** universe, the first argument must be the name of the
-    class containing ``main``.
+    class containing main.
 
     There are two permissible formats for specifying arguments,
     identified as the old syntax and the new syntax. The old syntax
     supports white space characters within arguments only in special
     circumstances; when used, the command line arguments are represented
-    in the job ClassAd attribute ``Args``. The new syntax supports
-    uniform quoting of white space characters within arguments; when
-    used, the command line arguments are represented in the job ClassAd
-    attribute ``Arguments``.
+    in the job ClassAd attribute Args. The new syntax supports uniform
+    quoting of white space characters within arguments; when used, the
+    command line arguments are represented in the job ClassAd attribute
+    Arguments.
 
     **Old Syntax**
 
@@ -434,19 +433,19 @@ BASIC COMMANDS
  error = <pathname>
     A path and file name used by HTCondor to capture any error messages
     the program would normally write to the screen (that is, this file
-    becomes ``stderr``). A path is given with respect to the file system
-    of the machine on which the job is submitted. The file is written
-    (by the job) in the remote scratch directory of the machine where
-    the job is executed. When the job exits, the resulting file is
+    becomes stderr). A path is given with respect to the file system of
+    the machine on which the job is submitted. The file is written (by
+    the job) in the remote scratch directory of the machine where the
+    job is executed. When the job exits, the resulting file is
     transferred back to the machine where the job was submitted, and the
     path is utilized for file placement. If not specified, the default
-    value of ``/dev/null`` is used for submission to a Unix machine. If
-    not specified, error messages are ignored for submission to a
-    Windows machine. More than one job should not use the same error
-    file, since this will cause one job to overwrite the errors of
-    another. If HTCondor detects that the error and output files for a
-    job are the same, it will run the job such that the output and error
-    data is merged.
+    value of /dev/null is used for submission to a Unix machine. If not
+    specified, error messages are ignored for submission to a Windows
+    machine. More than one job should not use the same error file, since
+    this will cause one job to overwrite the errors of another. If
+    HTCondor detects that the error and output files for a job are the
+    same, it will run the job such that the output and error data is
+    merged.
  executable = <pathname>
     An optional path and a required file name of the executable file for
     this job cluster. Only one **executable** command within a submit
@@ -463,14 +462,14 @@ BASIC COMMANDS
     universe (the default), then the named executable need not be
     re-linked and can be any process which can run in the background
     (shell scripts work fine as well). If submitting into the Java
-    universe, then the argument must be a compiled ``.class`` file.
+    universe, then the argument must be a compiled .class file.
 
  getenv = <True \| False>
-    If **getenv** is set to ``True``, then *condor\_submit* will copy
-    all of the user’s current shell environment variables at the time of
-    job submission into the job ClassAd. The job will therefore execute
-    with the same set of environment variables that the user had at
-    submit time. Defaults to ``False``.
+    If **getenv** is set to True, then *condor\_submit* will copy all of
+    the user’s current shell environment variables at the time of job
+    submission into the job ClassAd. The job will therefore execute with
+    the same set of environment variables that the user had at submit
+    time. Defaults to False.
 
     If the environment is set with the **environment** command and
     **getenv** is also set to true, values specified with
@@ -481,17 +480,17 @@ BASIC COMMANDS
  input = <pathname>
     HTCondor assumes that its jobs are long-running, and that the user
     will not wait at the terminal for their completion. Because of this,
-    the standard files which normally access the terminal, (``stdin``,
-    ``stdout``, and ``stderr``), must refer to files. Thus, the file
-    name specified with **input** should contain any keyboard input the
-    program requires (that is, this file becomes ``stdin``). A path is
-    given with respect to the file system of the machine on which the
-    job is submitted. The file is transferred before execution to the
-    remote scratch directory of the machine where the job is executed.
-    If not specified, the default value of ``/dev/null`` is used for
-    submission to a Unix machine. If not specified, input is ignored for
-    submission to a Windows machine. For grid universe jobs, **input**
-    may be a URL that the Globus tool *globus\_url\_copy* understands.
+    the standard files which normally access the terminal, (stdin,
+    stdout, and stderr), must refer to files. Thus, the file name
+    specified with **input** should contain any keyboard input the
+    program requires (that is, this file becomes stdin). A path is given
+    with respect to the file system of the machine on which the job is
+    submitted. The file is transferred before execution to the remote
+    scratch directory of the machine where the job is executed. If not
+    specified, the default value of /dev/null is used for submission to
+    a Unix machine. If not specified, input is ignored for submission to
+    a Windows machine. For grid universe jobs, **input** may be a URL
+    that the Globus tool *globus\_url\_copy* understands.
 
     Note that this command does not refer to the command-line arguments
     of the program. The command-line arguments are specified by the
@@ -510,24 +509,24 @@ BASIC COMMANDS
     job is submitted or the directory specified by submit command
     **initialdir** on the submit machine.
  log\_xml = <True \| False>
-    If **log\_xml** is ``True``, then the job event log file will be
-    written in ClassAd XML. If not specified, XML is not used. Note that
-    the file is an XML fragment; it is missing the file header and
-    footer. Do not mix XML and non-XML within a single file. If multiple
-    jobs write to a single job event log file, ensure that all of the
-    jobs specify this option in the same way.
+    If **log\_xml** is True, then the job event log file will be written
+    in ClassAd XML. If not specified, XML is not used. Note that the
+    file is an XML fragment; it is missing the file header and footer.
+    Do not mix XML and non-XML within a single file. If multiple jobs
+    write to a single job event log file, ensure that all of the jobs
+    specify this option in the same way.
  notification = <Always \| Complete \| Error \| Never>
     Owners of HTCondor jobs are notified by e-mail when certain events
     occur. If defined by *Always*, the owner will be notified whenever
     the job produces a checkpoint, as well as when the job completes. If
     defined by *Complete*, the owner will be notified when the job
     terminates. If defined by *Error*, the owner will only be notified
-    if the job terminates abnormally, (as defined by
-    ``JobSuccessExitCode``, if defined) or if the job is placed on hold
-    because of a failure, and not by user request. If defined by *Never*
-    (the default), the owner will not receive e-mail, regardless to what
-    happens to the job. The HTCondor User’s manual documents statistics
-    included in the e-mail.
+    if the job terminates abnormally, (as defined by JobSuccessExitCode,
+    if defined) or if the job is placed on hold because of a failure,
+    and not by user request. If defined by *Never* (the default), the
+    owner will not receive e-mail, regardless to what happens to the
+    job. The HTCondor User’s manual documents statistics included in the
+    e-mail.
  notify\_user = <email-address>
     Used to specify the e-mail address to use when HTCondor sends e-mail
     about a job. If not specified, HTCondor defaults to using the e-mail
@@ -537,9 +536,9 @@ BASIC COMMANDS
 
         job-owner@UID_DOMAIN
 
-    where the configuration variable ``UID_DOMAIN`` is specified by the
-    HTCondor site administrator. If ``UID_DOMAIN`` has not been
-    specified, HTCondor sends the e-mail to:
+    where the configuration variable UID\_DOMAIN is specified by the
+    HTCondor site administrator. If UID\_DOMAIN has not been specified,
+    HTCondor sends the e-mail to:
 
     ::
 
@@ -547,19 +546,19 @@ BASIC COMMANDS
 
  output = <pathname>
     The **output** file captures any information the program would
-    ordinarily write to the screen (that is, this file becomes
-    ``stdout``). A path is given with respect to the file system of the
-    machine on which the job is submitted. The file is written (by the
-    job) in the remote scratch directory of the machine where the job is
-    executed. When the job exits, the resulting file is transferred back
-    to the machine where the job was submitted, and the path is utilized
-    for file placement. If not specified, the default value of
-    ``/dev/null`` is used for submission to a Unix machine. If not
-    specified, output is ignored for submission to a Windows machine.
-    Multiple jobs should not use the same output file, since this will
-    cause one job to overwrite the output of another. If HTCondor
-    detects that the error and output files for a job are the same, it
-    will run the job such that the output and error data is merged.
+    ordinarily write to the screen (that is, this file becomes stdout).
+    A path is given with respect to the file system of the machine on
+    which the job is submitted. The file is written (by the job) in the
+    remote scratch directory of the machine where the job is executed.
+    When the job exits, the resulting file is transferred back to the
+    machine where the job was submitted, and the path is utilized for
+    file placement. If not specified, the default value of /dev/null is
+    used for submission to a Unix machine. If not specified, output is
+    ignored for submission to a Windows machine. Multiple jobs should
+    not use the same output file, since this will cause one job to
+    overwrite the output of another. If HTCondor detects that the error
+    and output files for a job are the same, it will run the job such
+    that the output and error data is merged.
 
     Note that if a program explicitly opens and writes to a file, that
     file should not be specified as the **output** file.
@@ -628,7 +627,7 @@ BASIC COMMANDS
        paren, and lines beginning with pound sign (’#’) will be skipped.
        When using the **<file name>** form, if the **<file name>** ends
        with \|, then it will be executed as a script whatever the script
-       writes to ``stdout`` will be the list of items.
+       writes to stdout will be the list of items.
 
     The optional argument *<varname>* or *<list of varnames>* is the
     name or names of of variables that will be set to the value of the
@@ -651,8 +650,8 @@ BASIC COMMANDS
     HTCondor universe specifies an HTCondor execution environment.
 
     The **vanilla** universe is the default (except where the
-    configuration variable ``DEFAULT_UNIVERSE`` defines it otherwise),
-    and is an execution environment for jobs which do not use HTCondor’s
+    configuration variable DEFAULT\_UNIVERSE defines it otherwise), and
+    is an execution environment for jobs which do not use HTCondor’s
     mechanisms for taking checkpoints; these are ones that have not been
     linked with the HTCondor libraries. Use the **vanilla** universe to
     submit shell scripts to HTCondor.
@@ -709,7 +708,7 @@ COMMANDS FOR MATCHMAKING
 
     ::
 
-          && (RequestCpus#x00A0;<= Target.Cpus)
+          && (RequestCpus <= Target.Cpus)
 
     is appended to the **requirements** expression for the job.
 
@@ -720,7 +719,7 @@ COMMANDS FOR MATCHMAKING
  request\_disk = <quantity>
     The requested amount of disk space in KiB requested for this job. If
     not specified, it will be set to the job ClassAd attribute
-    ``DiskUsage``. The expression
+    DiskUsage. The expression
 
     ::
 
@@ -731,11 +730,11 @@ COMMANDS FOR MATCHMAKING
     For pools that enable dynamic *condor\_startd* provisioning, a
     dynamic slot will be created with at least this much disk space.
 
-    Characters may be appended to a numerical value to indicate units.
-    ``K`` or ``KB`` indicates KiB, 2\ :sup:`10` numbers of bytes. ``M``
-    or ``MB`` indicates MiB, 2\ :sup:`20` numbers of bytes. ``G`` or
-    ``GB`` indicates GiB, 2\ :sup:`30` numbers of bytes. ``T`` or ``TB``
-    indicates TiB, 2\ :sup:`40` numbers of bytes.
+    Characters may be appended to a numerical value to indicate units. K
+    or KB indicates KiB, 2\ :sup:`10` numbers of bytes. M or MB
+    indicates MiB, 2\ :sup:`20` numbers of bytes. G or GB indicates GiB,
+    2\ :sup:`30` numbers of bytes. T or TB indicates TiB, 2\ :sup:`40`
+    numbers of bytes.
 
  request\_memory = <quantity>
     The required amount of memory in MiB that this job needs to avoid
@@ -743,9 +742,9 @@ COMMANDS FOR MATCHMAKING
     **vm\_memory** is specified, then the value specified for
     **vm\_memory** defines **request\_memory**. If neither
     **request\_memory** nor **vm\_memory** is specified, the value is
-    set by the configuration variable ``JOB_DEFAULT_REQUESTMEMORY`` .
-    The actual amount of memory used by a job is represented by the job
-    ClassAd attribute ``MemoryUsage``.
+    set by the configuration variable JOB\_DEFAULT\_REQUESTMEMORY . The
+    actual amount of memory used by a job is represented by the job
+    ClassAd attribute MemoryUsage.
 
     For pools that enable dynamic *condor\_startd* provisioning, a
     dynamic slot will be created with at least this much RAM.
@@ -758,17 +757,17 @@ COMMANDS FOR MATCHMAKING
 
     is appended to the **requirements** expression for the job.
 
-    Characters may be appended to a numerical value to indicate units.
-    ``K`` or ``KB`` indicates KiB, 2\ :sup:`10` numbers of bytes. ``M``
-    or ``MB`` indicates MiB, 2\ :sup:`20` numbers of bytes. ``G`` or
-    ``GB`` indicates GiB, 2\ :sup:`30` numbers of bytes. ``T`` or ``TB``
-    indicates TiB, 2\ :sup:`40` numbers of bytes.
+    Characters may be appended to a numerical value to indicate units. K
+    or KB indicates KiB, 2\ :sup:`10` numbers of bytes. M or MB
+    indicates MiB, 2\ :sup:`20` numbers of bytes. G or GB indicates GiB,
+    2\ :sup:`30` numbers of bytes. T or TB indicates TiB, 2\ :sup:`40`
+    numbers of bytes.
 
  request\_<name> = <quantity>
     The required amount of the custom machine resource identified by
-    ``<name>`` that this job needs. The custom machine resource is
-    defined in the machine’s configuration. Machines that have available
-    GPUs will define ``<name>`` to be ``GPUs``.
+    <name> that this job needs. The custom machine resource is defined
+    in the machine’s configuration. Machines that have available GPUs
+    will define <name> to be GPUs.
  requirements = <ClassAd Boolean Expression>
     The requirements command is a boolean ClassAd expression which uses
     C-like operators. In order for any job in this cluster to run on a
@@ -776,40 +775,40 @@ COMMANDS FOR MATCHMAKING
     the given machine.
 
     For scheduler and local universe jobs, the requirements expression
-    is evaluated against the ``Scheduler`` ClassAd which represents the
-    the *condor\_schedd* daemon running on the submit machine, rather
-    than a remote machine. Like all commands in the submit description
-    file, if multiple requirements commands are present, all but the
-    last one are ignored. By default, *condor\_submit* appends the
-    following clauses to the requirements expression:
+    is evaluated against the Scheduler ClassAd which represents the the
+    *condor\_schedd* daemon running on the submit machine, rather than a
+    remote machine. Like all commands in the submit description file, if
+    multiple requirements commands are present, all but the last one are
+    ignored. By default, *condor\_submit* appends the following clauses
+    to the requirements expression:
 
     #. Arch and OpSys are set equal to the Arch and OpSys of the submit
        machine. In other words: unless you request otherwise, HTCondor
        will give your job machines with the same architecture and
        operating system version as the machine running *condor\_submit*.
-    #. Cpus >= RequestCpus, if the job ClassAd attribute ``RequestCpus``
-       is defined.
-    #. Disk >= RequestDisk, if the job ClassAd attribute ``RequestDisk``
-       is defined. Otherwise, Disk >= DiskUsage is appended to the
-       requirements. The ``DiskUsage`` attribute is initialized to the
-       size of the executable plus the size of any files specified in a
+    #. Cpus >= RequestCpus, if the job ClassAd attribute RequestCpus is
+       defined.
+    #. Disk >= RequestDisk, if the job ClassAd attribute RequestDisk is
+       defined. Otherwise, Disk >= DiskUsage is appended to the
+       requirements. The DiskUsage attribute is initialized to the size
+       of the executable plus the size of any files specified in a
        **transfer\_input\_files** command. It exists to ensure there is
        enough disk space on the target machine for HTCondor to copy over
-       both the executable and needed input files. The ``DiskUsage``
+       both the executable and needed input files. The DiskUsage
        attribute represents the maximum amount of total disk space
        required by the job in kilobytes. HTCondor automatically updates
-       the ``DiskUsage`` attribute approximately every 20 minutes while
-       the job runs with the amount of space being used by the job on
-       the execute machine.
+       the DiskUsage attribute approximately every 20 minutes while the
+       job runs with the amount of space being used by the job on the
+       execute machine.
     #. Memory >= RequestMemory, if the job ClassAd attribute
-       ``RequestMemory`` is defined.
+       RequestMemory is defined.
     #. If Universe is set to Vanilla, FileSystemDomain is set equal to
        the submit machine’s FileSystemDomain.
 
     View the requirements of a job which has already been submitted
     (along with everything else about the job ClassAd) with the command
     *condor\_q -l*; see the command reference for *condor\_q* on
-    page \ `1984 <Condorq.html#x129-91700012>`__. Also, see the HTCondor
+    page \ `1984 <Condorq.html#x130-92000012>`__. Also, see the HTCondor
     Users Manual for complete information on the syntax and available
     attributes that can be used in the ClassAd expression.
 
@@ -822,8 +821,8 @@ FILE TRANSFER COMMANDS
     configuration that would use encryption. Each input file must also
     be in the list given by **transfer\_input\_files**. When a path to
     an input file or directory is specified, this specifies the path to
-    the file on the submit side. A single wild card character (``*``)
-    may be used in each file name.
+    the file on the submit side. A single wild card character (\*) may
+    be used in each file name.
  dont\_encrypt\_output\_files = < file1,file2,file... >
     A comma and/or space separated list of output files that are not to
     be network encrypted when transferred back with the file transfer
@@ -833,9 +832,9 @@ FILE TRANSFER COMMANDS
     be discovered and to be transferred back with the file transfer
     mechanism. When a path to an output file or directory is specified,
     this specifies the path to the file on the execute side. A single
-    wild card character (``*``) may be used in each file name.
+    wild card character (\*) may be used in each file name.
  encrypt\_execute\_directory = <True \| False>
-    Defaults to ``False``. If set to ``True``, HTCondor will encrypt the
+    Defaults to False. If set to True, HTCondor will encrypt the
     contents of the remote scratch directory of the machine where the
     job is executed. This encryption is transparent to the job itself,
     but ensures that files left behind on the local disk of the execute
@@ -859,11 +858,10 @@ FILE TRANSFER COMMANDS
     would not use encryption. Each input file must also be in the list
     given by **transfer\_input\_files**. When a path to an input file or
     directory is specified, this specifies the path to the file on the
-    submit side. A single wild card character (``*``) may be used in
-    each file name. The method of encryption utilized will be as agreed
-    upon in security negotiation; if that negotiation failed, then the
-    file transfer mechanism must also fail for files to be network
-    encrypted.
+    submit side. A single wild card character (\*) may be used in each
+    file name. The method of encryption utilized will be as agreed upon
+    in security negotiation; if that negotiation failed, then the file
+    transfer mechanism must also fail for files to be network encrypted.
  encrypt\_output\_files = < file1,file2,file... >
     A comma and/or space separated list of output files that are to be
     network encrypted when transferred back with the file transfer
@@ -873,8 +871,8 @@ FILE TRANSFER COMMANDS
     be discovered and to be transferred back with the file transfer
     mechanism. When a path to an output file or directory is specified,
     this specifies the path to the file on the execute side. A single
-    wild card character (``*``) may be used in each file name. The
-    method of encryption utilized will be as agreed upon in security
+    wild card character (\*) may be used in each file name. The method
+    of encryption utilized will be as agreed upon in security
     negotiation; if that negotiation failed, then the file transfer
     mechanism must also fail for files to be network encrypted.
  max\_transfer\_input\_mb = <ClassAd Integer Expression>
@@ -884,10 +882,10 @@ FILE TRANSFER COMMANDS
     files transferred via file transfer plug-ins. The expression may
     refer to attributes of the job. The special value -1 indicates no
     limit. If not defined, the value set by configuration variable
-    ``MAX_TRANSFER_INPUT_MB`` is used. If the observed size of all input
+    MAX\_TRANSFER\_INPUT\_MB is used. If the observed size of all input
     files at submit time is larger than the limit, the job will be
-    immediately placed on hold with a ``HoldReasonCode`` value of 32. If
-    the job passes this initial test, but the size of the input files
+    immediately placed on hold with a HoldReasonCode value of 32. If the
+    job passes this initial test, but the size of the input files
     increases or the limit decreases so that the limit is violated, the
     job will be placed on hold at the time when the file transfer is
     attempted.
@@ -898,12 +896,11 @@ FILE TRANSFER COMMANDS
     files transferred via file transfer plug-ins. The expression may
     refer to attributes of the job. The special value -1 indicates no
     limit. If not set, the value set by configuration variable
-    ``MAX_TRANSFER_OUTPUT_MB`` is used. If the total size of the job’s
+    MAX\_TRANSFER\_OUTPUT\_MB is used. If the total size of the job’s
     output files to be transferred is larger than the limit, the job
-    will be placed on hold with a ``HoldReasonCode`` value of 33. The
-    output will be transferred up to the point when the limit is hit, so
-    some files may be fully transferred, some partially, and some not at
-    all.
+    will be placed on hold with a HoldReasonCode value of 33. The output
+    will be transferred up to the point when the limit is hit, so some
+    files may be fully transferred, some partially, and some not at all.
  output\_destination = <destination-URL>
     When present, defines a URL that specifies both a plug-in and a
     destination for the transfer of the entire output sandbox or a
@@ -921,10 +918,10 @@ FILE TRANSFER COMMANDS
     equal to *YES* will cause HTCondor to always transfer files for the
     job. *NO* disables HTCondor’s file transfer mechanism. *IF\_NEEDED*
     will not transfer files for the job if it is matched with a resource
-    in the same ``FileSystemDomain`` as the submit machine (and
-    therefore, on a machine with the same shared file system). If the
-    job is matched with a remote resource in a different
-    ``FileSystemDomain``, HTCondor will transfer the necessary files.
+    in the same FileSystemDomain as the submit machine (and therefore,
+    on a machine with the same shared file system). If the job is
+    matched with a remote resource in a different FileSystemDomain,
+    HTCondor will transfer the necessary files.
 
     For more information about this and other settings related to
     transferring files, see the HTCondor User’s manual section on the
@@ -934,8 +931,8 @@ FILE TRANSFER COMMANDS
     submitted to the grid universe.
 
  skip\_filechecks = <True \| False>
-    When ``True``, file permission checks for the submitted job are
-    disabled. When ``False``, file permissions are checked; this is the
+    When True, file permission checks for the submitted job are
+    disabled. When False, file permissions are checked; this is the
     behavior when this command is not present in the submit description
     file. File permissions are checked for read permissions on all input
     files, such as those defined by commands **input** and
@@ -943,53 +940,53 @@ FILE TRANSFER COMMANDS
     files, such as a log file defined by **log** and output files
     defined with **output** or **transfer\_output\_files**.
  stream\_error = <True \| False>
-    If ``True``, then ``stderr`` is streamed back to the machine from
-    which the job was submitted. If ``False``, ``stderr`` is stored
-    locally and transferred back when the job completes. This command is
-    ignored if the job ClassAd attribute ``TransferErr`` is ``False``.
-    The default value is ``False``. This command must be used in
-    conjunction with **error**, otherwise ``stderr`` will sent to
-    ``/dev/null`` on Unix machines and ignored on Windows machines.
+    If True, then stderr is streamed back to the machine from which the
+    job was submitted. If False, stderr is stored locally and
+    transferred back when the job completes. This command is ignored if
+    the job ClassAd attribute TransferErr is False. The default value is
+    False. This command must be used in conjunction with **error**,
+    otherwise stderr will sent to /dev/null on Unix machines and ignored
+    on Windows machines.
  stream\_input = <True \| False>
-    If ``True``, then ``stdin`` is streamed from the machine on which
-    the job was submitted. The default value is ``False``. The command
-    is only relevant for jobs submitted to the vanilla or java
-    universes, and it is ignored by the grid universe. This command must
-    be used in conjunction with **input**, otherwise ``stdin`` will be
-    ``/dev/null`` on Unix machines and ignored on Windows machines.
+    If True, then stdin is streamed from the machine on which the job
+    was submitted. The default value is False. The command is only
+    relevant for jobs submitted to the vanilla or java universes, and it
+    is ignored by the grid universe. This command must be used in
+    conjunction with **input**, otherwise stdin will be /dev/null on
+    Unix machines and ignored on Windows machines.
  stream\_output = <True \| False>
-    If ``True``, then ``stdout`` is streamed back to the machine from
-    which the job was submitted. If ``False``, ``stdout`` is stored
-    locally and transferred back when the job completes. This command is
-    ignored if the job ClassAd attribute ``TransferOut`` is ``False``.
-    The default value is ``False``. This command must be used in
-    conjunction with **output**, otherwise ``stdout`` will sent to
-    ``/dev/null`` on Unix machines and ignored on Windows machines.
+    If True, then stdout is streamed back to the machine from which the
+    job was submitted. If False, stdout is stored locally and
+    transferred back when the job completes. This command is ignored if
+    the job ClassAd attribute TransferOut is False. The default value is
+    False. This command must be used in conjunction with **output**,
+    otherwise stdout will sent to /dev/null on Unix machines and ignored
+    on Windows machines.
  transfer\_executable = <True \| False>
     This command is applicable to jobs submitted to the grid and vanilla
-    universes. If **transfer\_executable** is set to ``False``, then
+    universes. If **transfer\_executable** is set to False, then
     HTCondor looks for the executable on the remote machine, and does
     not transfer the executable over. This is useful for an already
     pre-staged executable; HTCondor behaves more like rsh. The default
-    value is ``True``.
+    value is True.
  transfer\_input\_files = < file1,file2,file... >
     A comma-delimited list of all the files and directories to be
     transferred into the working directory for the job, before the job
     is started. By default, the file specified in the **executable**
     command and any file specified in the **input** command (for
-    example, ``stdin``) are transferred.
+    example, stdin) are transferred.
 
     When a path to an input file or directory is specified, this
     specifies the path to the file on the submit side. The file is
     placed in the job’s temporary scratch directory on the execute side,
     and it is named using the base name of the original path. For
-    example, ``/path/to/input_file`` becomes ``input_file`` in the job’s
+    example, /path/to/input\_file becomes input\_file in the job’s
     scratch directory.
 
     A directory may be specified by appending the forward slash
     character (/) as a trailing path separator. This syntax is used for
     both Windows and Linux submit hosts. A directory example using a
-    trailing path separator is ``input_data/``. When a directory is
+    trailing path separator is input\_data/. When a directory is
     specified with the trailing path separator, the contents of the
     directory are transferred, but the directory itself is not
     transferred. It is as if each of the items within the directory were
@@ -1039,16 +1036,16 @@ FILE TRANSFER COMMANDS
     specifies the path to the file on the execute side. As a destination
     on the submit side, the file is placed in the job’s initial working
     directory, and it is named using the base name of the original path.
-    For example, ``path/to/output_file`` becomes ``output_file`` in the
-    job’s initial working directory. The name and path of the file that
-    is written on the submit side may be modified by using
+    For example, path/to/output\_file becomes output\_file in the job’s
+    initial working directory. The name and path of the file that is
+    written on the submit side may be modified by using
     **transfer\_output\_remaps**. Note that this remap function only
     works with files but not with directories.
 
     A directory may be specified using a trailing path separator. An
     example of a trailing path separator is the slash character on Unix
     platforms; a directory example using a trailing path separator is
-    ``input_data/``. When a directory is specified with a trailing path
+    input\_data/. When a directory is specified with a trailing path
     separator, the contents of the directory are transferred, but the
     directory itself is not transferred. It is as if each of the items
     within the directory were listed in the transfer list. When there is
@@ -1090,10 +1087,9 @@ FILE TRANSFER COMMANDS
     time the job leaves a remote site, either because it exited on its
     own, or was evicted by the HTCondor system for any reason prior to
     job completion. The files spooled back are placed in a directory
-    defined by the value of the ``SPOOL`` configuration variable. Any
-    output files transferred back to the submit machine are
-    automatically sent back out again as input files if the job
-    restarts.
+    defined by the value of the SPOOL configuration variable. Any output
+    files transferred back to the submit machine are automatically sent
+    back out again as input files if the job restarts.
 
 POLICY COMMANDS
 
@@ -1104,24 +1100,23 @@ POLICY COMMANDS
     **max\_retries** times (unless retries are ceased because of the
     **retry\_until** command). If **max\_retries** is not defined, and
     either **retry\_until** or **success\_exit\_code** is, the value of
-    ``DEFAULT_JOB_MAX_RETRIES`` will be used for the maximum number of
+    DEFAULT\_JOB\_MAX\_RETRIES will be used for the maximum number of
     retries.
 
     The combination of the **max\_retries**, **retry\_until**, and
-    **success\_exit\_code** commands causes an appropriate
-    ``OnExitRemove`` expression to be automatically generated. If retry
-    command(s) and **on\_exit\_remove** are both defined, the
-    ``OnExitRemove`` expression will be generated by OR’ing the
-    expression specified in ``OnExitRemove`` and the expression
-    generated by the retry commands.
+    **success\_exit\_code** commands causes an appropriate OnExitRemove
+    expression to be automatically generated. If retry command(s) and
+    **on\_exit\_remove** are both defined, the OnExitRemove expression
+    will be generated by OR’ing the expression specified in OnExitRemove
+    and the expression generated by the retry commands.
 
  retry\_until <Integer \| ClassAd Boolean Expression>
     An integer value or boolean expression that prevents further retries
     from taking place, even if **max\_retries** have not been exhausted.
     If **retry\_until** is an integer, the job exiting with that exit
     code will cause retries to cease. If **retry\_until** is a ClassAd
-    expression, the expression evaluating to ``True`` will cause retries
-    to cease.
+    expression, the expression evaluating to True will cause retries to
+    cease.
  success\_exit\_code = <integer>
     The exit code that is considered successful for this job. Defaults
     to 0 if not defined.
@@ -1136,9 +1131,9 @@ POLICY COMMANDS
     there is currently no way to overcome this limitation.
 
  hold = <True \| False>
-    If **hold** is set to ``True``, then the submitted job will be
-    placed into the Hold state. Jobs in the Hold state will not run
-    until released by *condor\_release*. Defaults to ``False``.
+    If **hold** is set to True, then the submitted job will be placed
+    into the Hold state. Jobs in the Hold state will not run until
+    released by *condor\_release*. Defaults to False.
  keep\_claim\_idle = <integer>
     An integer number of seconds that a job requests the
     *condor\_schedd* to wait before releasing its claim after the job
@@ -1164,14 +1159,14 @@ POLICY COMMANDS
     of priority) for the time in this state.
 
  leave\_in\_queue = <ClassAd Boolean Expression>
-    When the ClassAd Expression evaluates to ``True``, the job is not
+    When the ClassAd Expression evaluates to True, the job is not
     removed from the queue upon completion. This allows the user of a
     remotely spooled job to retrieve output files in cases where
     HTCondor would have removed them as part of the cleanup associated
     with completion. The job will only exit the queue once it has been
     marked for removal (via *condor\_rm*, for example) and the
-    **leave\_in\_queue** expression has become ``False``.
-    **leave\_in\_queue** defaults to ``False``.
+    **leave\_in\_queue** expression has become False.
+    **leave\_in\_queue** defaults to False.
 
     As an example, if the job is to be removed once the output is
     retrieved with *condor\_transfer\_data*, then use
@@ -1185,7 +1180,7 @@ POLICY COMMANDS
     This expression specifies the number of seconds to delay after
     starting up this job before the next job is started. The maximum
     allowed delay is specified by the HTCondor configuration variable
-    ``MAX_NEXT_JOB_START_DELAY`` , which defaults to 10 minutes. This
+    MAX\_NEXT\_JOB\_START\_DELAY , which defaults to 10 minutes. This
     command does not apply to **scheduler** or **local** universe jobs.
 
     This command has been historically used to implement a form of job
@@ -1197,11 +1192,10 @@ POLICY COMMANDS
     *condor\_schedd* daemon.
 
  on\_exit\_hold = <ClassAd Boolean Expression>
-    The ClassAd expression is checked when the job exits, and if
-    ``True``, places the job into the Hold state. If ``False`` (the
-    default value when not defined), then nothing happens and the
-    ``on_exit_remove`` expression is checked to determine if that needs
-    to be applied.
+    The ClassAd expression is checked when the job exits, and if True,
+    places the job into the Hold state. If False (the default value when
+    not defined), then nothing happens and the on\_exit\_remove
+    expression is checked to determine if that needs to be applied.
 
     For example: Suppose a job is known to run for a minimum of an hour.
     If the job exits after less than an hour, the job should be placed
@@ -1215,11 +1209,11 @@ POLICY COMMANDS
     This expression places the job on hold if it exits for any reason
     before running for an hour. An e-mail will be sent to the user
     explaining that the job was placed on hold because this expression
-    became ``True``.
+    became True.
 
-    ``periodic_*`` expressions take precedence over ``on_exit_*``
-    expressions, and ``*_hold`` expressions take precedence over a
-    ``*_remove`` expressions.
+    periodic\_\* expressions take precedence over on\_exit\_\*
+    expressions, and \*\_hold expressions take precedence over a
+    \*\_remove expressions.
 
     Only job ClassAd attributes will be defined for use by this ClassAd
     expression. This expression is available for the vanilla, java,
@@ -1229,24 +1223,24 @@ POLICY COMMANDS
 
  on\_exit\_hold\_reason = <ClassAd String Expression>
     When the job is placed on hold due to the **on\_exit\_hold**
-    expression becoming ``True``, this expression is evaluated to set
-    the value of ``HoldReason`` in the job ClassAd. If this expression
-    is ``UNDEFINED`` or produces an empty or invalid string, a default
+    expression becoming True, this expression is evaluated to set the
+    value of HoldReason in the job ClassAd. If this expression is
+    UNDEFINED or produces an empty or invalid string, a default
     description is used.
  on\_exit\_hold\_subcode = <ClassAd Integer Expression>
     When the job is placed on hold due to the **on\_exit\_hold**
-    expression becoming ``True``, this expression is evaluated to set
-    the value of ``HoldReasonSubCode`` in the job ClassAd. The default
-    subcode is 0. The ``HoldReasonCode`` will be set to 3, which
-    indicates that the job went on hold due to a job policy expression.
+    expression becoming True, this expression is evaluated to set the
+    value of HoldReasonSubCode in the job ClassAd. The default subcode
+    is 0. The HoldReasonCode will be set to 3, which indicates that the
+    job went on hold due to a job policy expression.
  on\_exit\_remove = <ClassAd Boolean Expression>
-    The ClassAd expression is checked when the job exits, and if
-    ``True`` (the default value when undefined), then it allows the job
-    to leave the queue normally. If ``False``, then the job is placed
-    back into the Idle state. If the user job runs under the vanilla
-    universe, then the job restarts from the beginning. If the user job
-    runs under the standard universe, then it continues from where it
-    left off, using the last checkpoint.
+    The ClassAd expression is checked when the job exits, and if True
+    (the default value when undefined), then it allows the job to leave
+    the queue normally. If False, then the job is placed back into the
+    Idle state. If the user job runs under the vanilla universe, then
+    the job restarts from the beginning. If the user job runs under the
+    standard universe, then it continues from where it left off, using
+    the last checkpoint.
 
     For example, suppose a job occasionally segfaults, but chances are
     that the job will finish successfully if the job is run again with
@@ -1277,71 +1271,71 @@ POLICY COMMANDS
     If the job was killed by a signal or exited with a non-zero exit
     status, HTCondor would leave the job in the queue to run again.
 
-    ``periodic_*`` expressions take precedence over ``on_exit_*``
-    expressions, and ``*_hold`` expressions take precedence over a
-    ``*_remove`` expressions.
+    periodic\_\* expressions take precedence over on\_exit\_\*
+    expressions, and \*\_hold expressions take precedence over a
+    \*\_remove expressions.
 
     Only job ClassAd attributes will be defined for use by this ClassAd
     expression.
 
  periodic\_hold = <ClassAd Boolean Expression>
     This expression is checked periodically when the job is not in the
-    Held state. If it becomes ``True``, the job will be placed on hold.
-    If unspecified, the default value is ``False``.
+    Held state. If it becomes True, the job will be placed on hold. If
+    unspecified, the default value is False.
 
-    ``periodic_*`` expressions take precedence over ``on_exit_*``
-    expressions, and ``*_hold`` expressions take precedence over a
-    ``*_remove`` expressions.
+    periodic\_\* expressions take precedence over on\_exit\_\*
+    expressions, and \*\_hold expressions take precedence over a
+    \*\_remove expressions.
 
     Only job ClassAd attributes will be defined for use by this ClassAd
     expression. Note that, by default, this expression is only checked
     once every 60 seconds. The period of these evaluations can be
-    adjusted by setting the ``PERIODIC_EXPR_INTERVAL``,
-    ``MAX_PERIODIC_EXPR_INTERVAL``, and ``PERIODIC_EXPR_TIMESLICE``
+    adjusted by setting the PERIODIC\_EXPR\_INTERVAL,
+    MAX\_PERIODIC\_EXPR\_INTERVAL, and PERIODIC\_EXPR\_TIMESLICE
     configuration macros.
 
  periodic\_hold\_reason = <ClassAd String Expression>
     When the job is placed on hold due to the **periodic\_hold**
-    expression becoming ``True``, this expression is evaluated to set
-    the value of ``HoldReason`` in the job ClassAd. If this expression
-    is ``UNDEFINED`` or produces an empty or invalid string, a default
+    expression becoming True, this expression is evaluated to set the
+    value of HoldReason in the job ClassAd. If this expression is
+    UNDEFINED or produces an empty or invalid string, a default
     description is used.
  periodic\_hold\_subcode = <ClassAd Integer Expression>
     When the job is placed on hold due to the **periodic\_hold**
     expression becoming true, this expression is evaluated to set the
-    value of ``HoldReasonSubCode`` in the job ClassAd. The default
-    subcode is 0. The ``HoldReasonCode`` will be set to 3, which
-    indicates that the job went on hold due to a job policy expression.
+    value of HoldReasonSubCode in the job ClassAd. The default subcode
+    is 0. The HoldReasonCode will be set to 3, which indicates that the
+    job went on hold due to a job policy expression.
  periodic\_release = <ClassAd Boolean Expression>
     This expression is checked periodically when the job is in the Held
-    state. If the expression becomes ``True``, the job will be released.
+    state. If the expression becomes True, the job will be released.
 
     Only job ClassAd attributes will be defined for use by this ClassAd
     expression. Note that, by default, this expression is only checked
     once every 60 seconds. The period of these evaluations can be
-    adjusted by setting the ``PERIODIC_EXPR_INTERVAL``,
-    ``MAX_PERIODIC_EXPR_INTERVAL``, and ``PERIODIC_EXPR_TIMESLICE``
+    adjusted by setting the PERIODIC\_EXPR\_INTERVAL,
+    MAX\_PERIODIC\_EXPR\_INTERVAL, and PERIODIC\_EXPR\_TIMESLICE
     configuration macros.
 
  periodic\_remove = <ClassAd Boolean Expression>
-    This expression is checked periodically. If it becomes ``True``, the
-    job is removed from the queue. If unspecified, the default value is
-    ``False``.
+    This expression is checked periodically. If it becomes True, the job
+    is removed from the queue. If unspecified, the default value is
+    False.
 
     See the Examples section of this manual page for an example of a
     **periodic\_remove** expression.
 
-    ``periodic_*`` expressions take precedence over ``on_exit_*``
-    expressions, and ``*_hold`` expressions take precedence over a
-    ``*_remove`` expressions. So, the ``periodic_remove`` expression
-    takes precedent over the ``on_exit_remove`` expression, if the two
-    describe conflicting actions.
+    periodic\_\* expressions take precedence over on\_exit\_\*
+    expressions, and \*\_hold expressions take precedence over a
+    \*\_remove expressions. So, the periodic\_remove expression takes
+    precedent over the on\_exit\_remove expression, if the two describe
+    conflicting actions.
 
     Only job ClassAd attributes will be defined for use by this ClassAd
     expression. Note that, by default, this expression is only checked
     once every 60 seconds. The period of these evaluations can be
-    adjusted by setting the ``PERIODIC_EXPR_INTERVAL``,
-    ``MAX_PERIODIC_EXPR_INTERVAL``, and ``PERIODIC_EXPR_TIMESLICE``
+    adjusted by setting the PERIODIC\_EXPR\_INTERVAL,
+    MAX\_PERIODIC\_EXPR\_INTERVAL, and PERIODIC\_EXPR\_TIMESLICE
     configuration macros.
 
 COMMANDS SPECIFIC TO THE STANDARD UNIVERSE
@@ -1404,8 +1398,8 @@ COMMANDS SPECIFIC TO THE STANDARD UNIVERSE
 
     If needed, you may set the buffer controls individually for each
     file using the buffer\_files option. For example, to set the buffer
-    size to 1 MiB and the block size to 256 KiB for the file
-    ``input.data``, use this command:
+    size to 1 MiB and the block size to 256 KiB for the file input.data,
+    use this command:
 
     ::
 
@@ -1481,9 +1475,9 @@ COMMANDS SPECIFIC TO THE STANDARD UNIVERSE
     backslash.
 
      Example One:
-        Suppose that your job reads a file named ``dataset.1``. To
-        instruct HTCondor to force your job to read ``other.dataset``
-        instead, add this to the submit file:
+        Suppose that your job reads a file named dataset.1. To instruct
+        HTCondor to force your job to read other.dataset instead, add
+        this to the submit file:
 
         ::
 
@@ -1491,12 +1485,12 @@ COMMANDS SPECIFIC TO THE STANDARD UNIVERSE
 
      Example Two:
         Suppose that your run many jobs which all read in the same large
-        file, called ``very.big``. If this file can be found in the same
+        file, called very.big. If this file can be found in the same
         place on a local disk in every machine in the pool, (say
-        ``/bigdisk/bigfile``,) you can instruct HTCondor of this fact by
-        remapping ``very.big`` to ``/bigdisk/bigfile`` and specifying
-        that the file is to be read locally, which will be much faster
-        than reading over the network.
+        /bigdisk/bigfile,) you can instruct HTCondor of this fact by
+        remapping very.big to /bigdisk/bigfile and specifying that the
+        file is to be read locally, which will be much faster than
+        reading over the network.
 
         ::
 
@@ -1529,20 +1523,19 @@ COMMANDS SPECIFIC TO THE STANDARD UNIVERSE
     then the *condor\_shadow* makes all decisions about how each and
     every file should be opened by the executing job. This entails a
     network round trip (or more) from the job to the *condor\_shadow*
-    and back again for every single ``open()`` in addition to other
-    needed information about the file. If set to false, then when the
-    job queries the *condor\_shadow* for the first time about how to
-    open a file, the *condor\_shadow* will inform the job to
-    automatically perform all of its file manipulation on the local file
-    system on the execute machine and any file remapping will be
-    ignored. This means that there **must** be a shared file system
-    (such as NFS or AFS) between the execute machine and the submit
-    machine and that **ALL** paths that the job could open on the
-    execute machine must be valid. The ability of the standard universe
-    job to checkpoint, possibly to a checkpoint server, is not affected
-    by this attribute. However, when the job resumes it will be
-    expecting the same file system conditions that were present when the
-    job checkpointed.
+    and back again for every single open() in addition to other needed
+    information about the file. If set to false, then when the job
+    queries the *condor\_shadow* for the first time about how to open a
+    file, the *condor\_shadow* will inform the job to automatically
+    perform all of its file manipulation on the local file system on the
+    execute machine and any file remapping will be ignored. This means
+    that there **must** be a shared file system (such as NFS or AFS)
+    between the execute machine and the submit machine and that **ALL**
+    paths that the job could open on the execute machine must be valid.
+    The ability of the standard universe job to checkpoint, possibly to
+    a checkpoint server, is not affected by this attribute. However,
+    when the job resumes it will be expecting the same file system
+    conditions that were present when the job checkpointed.
 
 COMMANDS FOR THE GRID
 
@@ -1566,7 +1559,7 @@ COMMANDS FOR THE GRID
  azure\_location = <image id>
     For grid type **azure** jobs, identifies the location within Azure
     where the instance should be run. As an example, one current
-    location is ``centralus``.
+    location is centralus.
  azure\_size = <machine type>
     For grid type **azure** jobs, the hardware configuration that the
     virtual machine instance is to run on.
@@ -1587,28 +1580,28 @@ COMMANDS FOR THE GRID
     Specifies the maximum number of seconds for which delegated proxies
     should be valid. The default behavior when this command is not
     specified is determined by the configuration variable
-    ``DELEGATE_JOB_GSI_CREDENTIALS_LIFETIME`` , which defaults to one
+    DELEGATE\_JOB\_GSI\_CREDENTIALS\_LIFETIME , which defaults to one
     day. A value of 0 indicates that the delegated proxy should be valid
     for as long as allowed by the credential used to create the proxy.
     This setting currently only applies to proxies delegated for
     non-grid jobs and for HTCondor-C jobs. It does not currently apply
     to globus grid jobs, which always behave as though this setting were
     0. This variable has no effect if the configuration variable
-    ``DELEGATE_JOB_GSI_CREDENTIALS`` is ``False``, because in that case
-    the job proxy is copied rather than delegated.
+    DELEGATE\_JOB\_GSI\_CREDENTIALS is False, because in that case the
+    job proxy is copied rather than delegated.
  ec2\_access\_key\_id = <pathname>
     For grid type **ec2** jobs, identifies the file containing the
     access key.
  ec2\_ami\_id = <EC2 xMI ID>
     For grid type **ec2** jobs, identifies the machine image. Services
     compatible with the EC2 Query API may refer to these with
-    abbreviations other than ``AMI``, for example ``EMI`` is valid for
+    abbreviations other than AMI, for example EMI is valid for
     Eucalyptus.
  ec2\_availability\_zone = <zone name>
     For grid type **ec2** jobs, specifies the Availability Zone that the
     instance should be run in. This command is optional, unless
     **ec2\_ebs\_volumes** is set. As an example, one current zone is
-    ``us-east-1b``.
+    us-east-1b.
  ec2\_block\_device\_mapping =
 <block-device>:<kernel-device>,<block-device>:<kernel-device>, …
     For grid type **ec2** jobs, specifies the block device to kernel
@@ -1738,11 +1731,11 @@ COMMANDS FOR THE GRID
  globus\_rematch = <ClassAd Boolean Expression>
     This expression is evaluated by the *condor\_gridmanager* whenever:
 
-    #. the **globus\_resubmit** expression evaluates to ``True``
+    #. the **globus\_resubmit** expression evaluates to True
     #. the *condor\_gridmanager* decides it needs to retry a submission
        (as when a previous submission failed to commit)
 
-    If **globus\_rematch** evaluates to ``True``, then before the job is
+    If **globus\_rematch** evaluates to True, then before the job is
     submitted again to globus, the *condor\_gridmanager* will request
     that the *condor\_schedd* daemon renegotiate with the matchmaker
     (the *condor\_negotiator*). The result is this job will be matched
@@ -1758,12 +1751,12 @@ COMMANDS FOR THE GRID
     #. when HTCondor-G is restarted (specifically, whenever the
        *condor\_gridmanager* is restarted)
 
-    If the expression evaluates to ``True``, then any previous
-    submission to the grid universe will be forgotten and this job will
-    be submitted again as a fresh submission to the grid universe. This
-    may be useful if there is a desire to give up on a previous
-    submission and try again. Note that this may result in the same job
-    running more than once. Do not treat this operation lightly.
+    If the expression evaluates to True, then any previous submission to
+    the grid universe will be forgotten and this job will be submitted
+    again as a fresh submission to the grid universe. This may be useful
+    if there is a desire to give up on a previous submission and try
+    again. Note that this may result in the same job running more than
+    once. Do not treat this operation lightly.
 
  globus\_rsl = <RSL-string>
     Used to provide any additional Globus RSL string attributes which
@@ -1780,8 +1773,7 @@ COMMANDS FOR THE GRID
     details the variety of grid types.
 
     For a **grid-type-string** of **batch**, the single parameter is the
-    name of the local batch system, and will be one of ``pbs``, ``lsf``,
-    or ``sge``.
+    name of the local batch system, and will be one of pbs, lsf, or sge.
 
     For a **grid-type-string** of **condor**, the first parameter is the
     name of the remote *condor\_schedd* daemon. The second parameter is
@@ -1837,8 +1829,8 @@ COMMANDS FOR THE GRID
  MyProxyHost = <host>:<port>
     The Internet address of the host that is the *MyProxy* server. The
     **host** may be specified by either a host name (as in
-    ``head.example.com``) or an IP address (of the form 123.456.7.8).
-    The **port** number is an integer.
+    head.example.com) or an IP address (of the form 123.456.7.8). The
+    **port** number is an integer.
  MyProxyNewProxyLifetime = <number-of-minutes>
     The new lifetime (in minutes) of the proxy after it is refreshed.
  MyProxyPassword = <password>
@@ -1865,51 +1857,51 @@ COMMANDS FOR THE GRID
     **universe** is **grid**, and the type of grid system is
     **nordugrid**.
  transfer\_error = <True \| False>
-    For jobs submitted to the grid universe only. If ``True``, then the
-    error output (from ``stderr``) from the job is transferred from the
+    For jobs submitted to the grid universe only. If True, then the
+    error output (from stderr) from the job is transferred from the
     remote machine back to the submit machine. The name of the file
-    after transfer is given by the **error** command. If ``False``, no
+    after transfer is given by the **error** command. If False, no
     transfer takes place (from the remote machine to submit machine),
     and the name of the file is given by the **error** command. The
-    default value is ``True``.
+    default value is True.
  transfer\_input = <True \| False>
-    For jobs submitted to the grid universe only. If ``True``, then the
-    job input (``stdin``) is transferred from the machine where the job
-    was submitted to the remote machine. The name of the file that is
-    transferred is given by the **input** command. If ``False``, then
-    the job’s input is taken from a pre-staged file on the remote
-    machine, and the name of the file is given by the **input** command.
-    The default value is ``True``.
+    For jobs submitted to the grid universe only. If True, then the job
+    input (stdin) is transferred from the machine where the job was
+    submitted to the remote machine. The name of the file that is
+    transferred is given by the **input** command. If False, then the
+    job’s input is taken from a pre-staged file on the remote machine,
+    and the name of the file is given by the **input** command. The
+    default value is True.
 
-    For transferring files other than ``stdin``, see
+    For transferring files other than stdin, see
     **transfer\_input\_files**.
 
  transfer\_output = <True \| False>
-    For jobs submitted to the grid universe only. If ``True``, then the
-    output (from ``stdout``) from the job is transferred from the remote
+    For jobs submitted to the grid universe only. If True, then the
+    output (from stdout) from the job is transferred from the remote
     machine back to the submit machine. The name of the file after
-    transfer is given by the **output** command. If ``False``, no
-    transfer takes place (from the remote machine to submit machine),
-    and the name of the file is given by the **output** command. The
-    default value is ``True``.
+    transfer is given by the **output** command. If False, no transfer
+    takes place (from the remote machine to submit machine), and the
+    name of the file is given by the **output** command. The default
+    value is True.
 
-    For transferring files other than ``stdout``, see
+    For transferring files other than stdout, see
     **transfer\_output\_files**.
 
  use\_x509userproxy = <True \| False>
-    Set this command to ``True`` to indicate that the job requires an
-    X.509 user proxy. If **x509userproxy** is set, then that file is
-    used for the proxy. Otherwise, the proxy is looked for in the
-    standard locations. If **x509userproxy** is set or if the job is a
-    grid universe job of grid type **gt2**, **gt5**, **cream**, or
+    Set this command to True to indicate that the job requires an X.509
+    user proxy. If **x509userproxy** is set, then that file is used for
+    the proxy. Otherwise, the proxy is looked for in the standard
+    locations. If **x509userproxy** is set or if the job is a grid
+    universe job of grid type **gt2**, **gt5**, **cream**, or
     **nordugrid**, then the value of **use\_x509userproxy** is forced to
-    ``True``. Defaults to ``False``.
+    True. Defaults to False.
  x509userproxy = <full-pathname>
     Used to override the default path name for X.509 user certificates.
-    The default location for X.509 proxies is the ``/tmp`` directory,
-    which is generally a local file system. Setting this value would
-    allow HTCondor to access the proxy in a shared file system (for
-    example, AFS). HTCondor will use the proxy specified in the submit
+    The default location for X.509 proxies is the /tmp directory, which
+    is generally a local file system. Setting this value would allow
+    HTCondor to access the proxy in a shared file system (for example,
+    AFS). HTCondor will use the proxy specified in the submit
     description file first. If nothing is specified in the submit
     description file, it will use the environment variable
     X509\_USER\_PROXY. If that variable is not present, it will search
@@ -1984,9 +1976,9 @@ file2:device2:permission2:format2, …
 
  vm\_checkpoint = <True \| False>
     A boolean value specifying whether or not to take checkpoints. If
-    not specified, the default value is ``False``. In the current
+    not specified, the default value is False. In the current
     implementation, setting both **vm\_checkpoint** and
-    **vm\_networking** to ``True`` does not yet work in all cases.
+    **vm\_networking** to True does not yet work in all cases.
     Networking cannot be used if a vm universe job uses a checkpoint in
     order to continue execution after migration to another machine.
  vm\_macaddr = <MACAddr>
@@ -1998,17 +1990,17 @@ file2:device2:permission2:format2, …
  vm\_networking = <True \| False>
     Specifies whether to use networking or not. In the current
     implementation, setting both **vm\_checkpoint** and
-    **vm\_networking** to ``True`` does not yet work in all cases.
+    **vm\_networking** to True does not yet work in all cases.
     Networking cannot be used if a vm universe job uses a checkpoint in
     order to continue execution after migration to another machine.
  vm\_networking\_type = <nat \| bridge >
-    When **vm\_networking** is ``True``, this definition augments the
-    job’s requirements to match only machines with the specified
-    networking. If not specified, then either networking type matches.
+    When **vm\_networking** is True, this definition augments the job’s
+    requirements to match only machines with the specified networking.
+    If not specified, then either networking type matches.
  vm\_no\_output\_vm = <True \| False>
-    When ``True``, prevents HTCondor from transferring output files back
-    to the machine from which the vm universe job was submitted. If not
-    specified, the default value is ``False``.
+    When True, prevents HTCondor from transferring output files back to
+    the machine from which the vm universe job was submitted. If not
+    specified, the default value is False.
  vm\_type = <vmware \| xen \| kvm>
     Specifies the underlying virtual machine software that this job
     expects.
@@ -2021,19 +2013,18 @@ file2:device2:permission2:format2, …
  vmware\_should\_transfer\_files = <True \| False>
     Specifies whether HTCondor will transfer VMware-specific files
     located as specified by **vmware\_dir** to the execute machine
-    (``True``) or rely on access through a shared file system
-    (``False``). Omission of this required command (for VMware vm
-    universe jobs) results in an error message from *condor\_submit*,
-    and the job will not be submitted.
+    (True) or rely on access through a shared file system (False).
+    Omission of this required command (for VMware vm universe jobs)
+    results in an error message from *condor\_submit*, and the job will
+    not be submitted.
  vmware\_snapshot\_disk = <True \| False>
-    When ``True``, causes HTCondor to utilize a VMware snapshot disk for
-    new or modified files. If not specified, the default value is
-    ``True``.
+    When True, causes HTCondor to utilize a VMware snapshot disk for new
+    or modified files. If not specified, the default value is True.
  xen\_initrd = <image-file>
     When **xen\_kernel** gives a file name for the kernel image to use,
-    this optional command may specify a path to a ramdisk (``initrd``)
-    image file. If the image file will be transferred by HTCondor, then
-    the value should just be the simple file name (no path information).
+    this optional command may specify a path to a ramdisk (initrd) image
+    file. If the image file will be transferred by HTCondor, then the
+    value should just be the simple file name (no path information).
  xen\_kernel = <included \| path-to-kernel>
     A value of **included** specifies that the kernel is included in the
     disk file. If not one of these values, then the value is a path and
@@ -2058,16 +2049,16 @@ ADVANCED COMMANDS
 
  accounting\_group = <accounting-group-name>
     Causes jobs to negotiate under the given accounting group. This
-    value is advertised in the job ClassAd as ``AcctGroup``. The
-    HTCondor Administrator’s manual contains more information about
-    accounting groups.
+    value is advertised in the job ClassAd as AcctGroup. The HTCondor
+    Administrator’s manual contains more information about accounting
+    groups.
  accounting\_group\_user = <accounting-group-user-name>
     Sets the user name associated with the accounting group name for
     resource usage accounting purposes. If not set, defaults to the
-    value of the job ClassAd attribute ``Owner``. This value is
-    advertised in the job ClassAd as ``AcctGroupUser``. If an accounting
-    group has not been set with the **accounting\_group** command, this
-    command is ignored.
+    value of the job ClassAd attribute Owner. This value is advertised
+    in the job ClassAd as AcctGroupUser. If an accounting group has not
+    been set with the **accounting\_group** command, this command is
+    ignored.
  concurrency\_limits = <string-list>
     A list of resources that this job needs. The resources are presumed
     to have concurrency limits placed upon them, thereby limiting the
@@ -2087,28 +2078,28 @@ ADVANCED COMMANDS
     machine ClassAd attributes that are evaluated against a matched
     machine. After evaluation, the list sets **concurrency\_limits**.
  copy\_to\_spool = <True \| False>
-    If **copy\_to\_spool** is ``True``, then *condor\_submit* copies the
+    If **copy\_to\_spool** is True, then *condor\_submit* copies the
     executable to the local spool directory before running it on a
     remote host. As copying can be quite time consuming and unnecessary,
-    the default value is ``False`` for all job universes other than the
-    standard universe. When ``False``, *condor\_submit* does not copy
-    the executable to a local spool directory. The default is ``True``
-    in standard universe, because resuming execution from a checkpoint
-    can only be guaranteed to work using precisely the same executable
-    that created the checkpoint.
+    the default value is False for all job universes other than the
+    standard universe. When False, *condor\_submit* does not copy the
+    executable to a local spool directory. The default is True in
+    standard universe, because resuming execution from a checkpoint can
+    only be guaranteed to work using precisely the same executable that
+    created the checkpoint.
  coresize = <size>
     Should the user’s program abort and produce a core file,
     **coresize** specifies the maximum size in bytes of the core file
     which the user wishes to keep. If **coresize** is not specified in
-    the command file, the system’s user resource limit ``coredumpsize``
-    is used (note that ``coredumpsize`` is not an HTCondor parameter –
-    it is an operating system parameter that can be viewed with the
-    *limit* or *ulimit* command on Unix and in the Registry on Windows).
-    A value of -1 results in no limits being applied to the core file
-    size. If HTCondor is running as root, a **coresize** setting greater
-    than the system ``coredumpsize`` limit will override the system
-    setting; if HTCondor is not running as root, the system
-    ``coredumpsize`` limit will override **coresize**.
+    the command file, the system’s user resource limit coredumpsize is
+    used (note that coredumpsize is not an HTCondor parameter – it is an
+    operating system parameter that can be viewed with the *limit* or
+    *ulimit* command on Unix and in the Registry on Windows). A value of
+    -1 results in no limits being applied to the core file size. If
+    HTCondor is running as root, a **coresize** setting greater than the
+    system coredumpsize limit will override the system setting; if
+    HTCondor is not running as root, the system coredumpsize limit will
+    override **coresize**.
  cron\_day\_of\_month = <Cron-evaluated Day>
     The set of days of the month for which a deferral time applies. The
     HTCondor User’s manual section on Time Scheduling for Job Execution
@@ -2181,8 +2172,8 @@ ADVANCED COMMANDS
 
  description = <string>
     A string that sets the value of the job ClassAd attribute
-    ``JobDescription``. When set, tools which display the executable
-    such as *condor\_q* will instead use this string.
+    JobDescription. When set, tools which display the executable such as
+    *condor\_q* will instead use this string.
  email\_attributes = <list-of-job-ad-attributes>
     A comma-separated list of attributes from the job ClassAd. These
     attributes and their values will be included in the e-mail
@@ -2233,7 +2224,7 @@ ADVANCED COMMANDS
     attributes and their values are written to the job event log
     whenever any event is being written to the log. This implements the
     same thing as the configuration variable
-    ``EVENT_LOG_INFORMATION_ATTRS`` (see
+    EVENT\_LOG\_INFORMATION\_ATTRS (see
     page \ `617 <ConfigurationMacros.html#x33-1890003.5.2>`__), but it
     applies to the job event log, instead of the system event log.
  JobBatchName = <batch\_name>
@@ -2255,27 +2246,25 @@ ADVANCED COMMANDS
     A comma and/or space separated list of machine attribute names that
     should be recorded in the job ClassAd in addition to the ones
     specified by the *condor\_schedd* daemon’s system configuration
-    variable ``SYSTEM_JOB_MACHINE_ATTRS`` . When there are multiple run
+    variable SYSTEM\_JOB\_MACHINE\_ATTRS . When there are multiple run
     attempts, history of machine attributes from previous run attempts
     may be kept. The number of run attempts to store may be extended
     beyond the system-specified history length by using the submit file
     command **job\_machine\_attrs\_history\_length**. A machine
-    attribute named ``X`` will be inserted into the job ClassAd as an
-    attribute named ``MachineAttrX0``. The previous value of this
-    attribute will be named ``MachineAttrX1``, the previous to that will
-    be named ``MachineAttrX2``, and so on, up to the specified history
-    length. A history of length 1 means that only ``MachineAttrX0`` will
-    be recorded. The value recorded in the job ClassAd is the evaluation
-    of the machine attribute in the context of the job ClassAd when the
+    attribute named X will be inserted into the job ClassAd as an
+    attribute named MachineAttrX0. The previous value of this attribute
+    will be named MachineAttrX1, the previous to that will be named
+    MachineAttrX2, and so on, up to the specified history length. A
+    history of length 1 means that only MachineAttrX0 will be recorded.
+    The value recorded in the job ClassAd is the evaluation of the
+    machine attribute in the context of the job ClassAd when the
     *condor\_schedd* daemon initiates the start up of the job. If the
-    evaluation results in an ``Undefined`` or ``Error`` result, the
-    value recorded in the job ad will be ``Undefined`` or ``Error``,
-    respectively.
+    evaluation results in an Undefined or Error result, the value
+    recorded in the job ad will be Undefined or Error, respectively.
  want\_graceful\_removal = <boolean expression>
-    When ``True``, this causes a graceful shutdown of the job when the
-    job is removed or put on hold, giving it time to clean up or save
-    state. Otherwise, the job is abruptly killed. The default is
-    ``false``.
+    When True, this causes a graceful shutdown of the job when the job
+    is removed or put on hold, giving it time to clean up or save state.
+    Otherwise, the job is abruptly killed. The default is false.
  kill\_sig = <signal-number>
     When HTCondor needs to kick a job off of a machine, it will send the
     job the signal specified by **signal-number**. **signal-number**
@@ -2294,10 +2283,10 @@ ADVANCED COMMANDS
     kill signal defined by **kill\_sig** and forcibly killing the job.
     The actual amount of time between sending the signal and forcibly
     killing the job is the smallest of this value and the configuration
-    variable ``KILLING_TIMEOUT`` , as defined on the execute machine.
+    variable KILLING\_TIMEOUT , as defined on the execute machine.
  load\_profile = <True \| False>
-    When ``True``, loads the account profile of the dedicated run
-    account for Windows jobs. May not be used with **run\_as\_owner**.
+    When True, loads the account profile of the dedicated run account
+    for Windows jobs. May not be used with **run\_as\_owner**.
  match\_list\_length = <integer value>
     Defaults to the value zero (0). When **match\_list\_length** is
     defined with an integer value greater than zero (0), attributes are
@@ -2311,11 +2300,11 @@ ADVANCED COMMANDS
          LastMatchName1 = "next-most-recent-Name"
 
     The value for each introduced ClassAd is given by the value of the
-    ``Name`` attribute from the machine ClassAd of a previous execution
+    Name attribute from the machine ClassAd of a previous execution
     (match). As a job is matched, the definitions for these attributes
     will roll, with LastMatchName1 becoming LastMatchName2,
     LastMatchName0 becoming LastMatchName1, and LastMatchName0 being set
-    by the most recent value of the ``Name`` attribute.
+    by the most recent value of the Name attribute.
 
     An intended use of these job attributes is in the requirements
     expression. The requirements can allow a job to prefer a match with
@@ -2333,7 +2322,7 @@ ADVANCED COMMANDS
 
     Setting this expression does not affect the job’s resource
     requirements or preferences. For a job to only run on a machine with
-    a minimum ``MachineMaxVacateTime``, or to preferentially run on such
+    a minimum MachineMaxVacateTime, or to preferentially run on such
     machines, explicitly specify this in the requirements and/or rank
     expressions.
 
@@ -2367,40 +2356,38 @@ ADVANCED COMMANDS
 
     Setting this expression does not affect the job’s resource
     requirements or preferences. For a job to only run on a machine with
-    a minimum ``MaxJobRetirementTime``, or to preferentially run on such
+    a minimum MaxJobRetirementTime, or to preferentially run on such
     machines, explicitly specify this in the requirements and/or rank
     expressions.
 
  nice\_user = <True \| False>
     Normally, when a machine becomes available to HTCondor, HTCondor
     decides which job to run based upon user and job priorities. Setting
-    **nice\_user** equal to ``True`` tells HTCondor not to use your
-    regular user priority, but that this job should have last priority
-    among all users and all jobs. So jobs submitted in this fashion run
-    only on machines which no other non-nice\_user job wants — a true
+    **nice\_user** equal to True tells HTCondor not to use your regular
+    user priority, but that this job should have last priority among all
+    users and all jobs. So jobs submitted in this fashion run only on
+    machines which no other non-nice\_user job wants — a true
     bottom-feeder job! This is very handy if a user has some jobs they
     wish to run, but do not wish to use resources that could instead be
     used to run other people’s HTCondor jobs. Jobs submitted in this
-    fashion have ``"nice-user."`` prepended to the owner name when
-    viewed from *condor\_q* or *condor\_userprio*. The default value is
-    ``False``.
+    fashion have "nice-user." prepended to the owner name when viewed
+    from *condor\_q* or *condor\_userprio*. The default value is False.
  noop\_job = <ClassAd Boolean Expression>
-    When this boolean expression is ``True``, the job is immediately
-    removed from the queue, and HTCondor makes no attempt at running the
-    job. The log file for the job will show a job submitted event and a
-    job terminated event, along with an exit code of 0, unless the user
+    When this boolean expression is True, the job is immediately removed
+    from the queue, and HTCondor makes no attempt at running the job.
+    The log file for the job will show a job submitted event and a job
+    terminated event, along with an exit code of 0, unless the user
     specifies a different signal or exit code.
  noop\_job\_exit\_code = <return value>
     When **noop\_job** is in the submit description file and evaluates
-    to ``True``, this command allows the job to specify the return value
-    as shown in the job’s log file job terminated event. If not
-    specified, the job will show as having terminated with status 0.
-    This overrides any value specified with **noop\_job\_exit\_signal**.
+    to True, this command allows the job to specify the return value as
+    shown in the job’s log file job terminated event. If not specified,
+    the job will show as having terminated with status 0. This overrides
+    any value specified with **noop\_job\_exit\_signal**.
  noop\_job\_exit\_signal = <signal number>
     When **noop\_job** is in the submit description file and evaluates
-    to ``True``, this command allows the job to specify the signal
-    number that the job’s log event will show the job having terminated
-    with.
+    to True, this command allows the job to specify the signal number
+    that the job’s log event will show the job having terminated with.
  remote\_initialdir = <directory-path>
     The path specifies the directory in which the job is to be executed
     on the remote machine. This is currently supported in all universes
@@ -2412,8 +2399,8 @@ ADVANCED COMMANDS
  run\_as\_owner = <True \| False>
     A boolean value that causes the job to be run under the login of the
     submitter, if supported by the joint configuration of the submit and
-    execute machines. On Unix platforms, this defaults to ``True``, and
-    on Windows platforms, it defaults to ``False``. May not be used with
+    execute machines. On Unix platforms, this defaults to True, and on
+    Windows platforms, it defaults to False. May not be used with
     **load\_profile**. See the HTCondor manual Platform-Specific
     Information chapter for administrative details on configuring
     Windows to support this option.
@@ -2425,7 +2412,7 @@ ADVANCED COMMANDS
     in size.
  submit\_event\_notes = <note>
     A string that is appended to the submit event in the job’s log file.
-    For DAGMan jobs, the string ``DAG Node:`` and the node’s name is
+    For DAGMan jobs, the string DAG Node: and the node’s name is
     automatically defined for **submit\_event\_notes**, causing the
     logged submit event to identify the DAG node job submitted.
  +<attribute> = <value>
@@ -2436,7 +2423,7 @@ ADVANCED COMMANDS
     above. Often, the command name does not directly correspond to an
     attribute name; furthermore, many submit commands result in actions
     more complex than simply setting an attribute or attributes. See
-     `2351 <JobClassAdAttributes.html#x169-1231000A.2>`__ for a list of
+     `2351 <JobClassAdAttributes.html#x170-1234000A.2>`__ for a list of
     HTCondor job attributes.
 
 MACROS AND COMMENTS
@@ -2445,26 +2432,25 @@ In addition to commands, the submit description file can contain macros
 and comments.
 
  Macros
-    Parameterless macros in the form of
-    ``$(macro_name:default initial value)`` may be used anywhere in
-    HTCondor submit description files to provide textual substitution at
-    submit time. Macros can be defined by lines in the form of
+    Parameterless macros in the form of $(macro\_name:default initial
+    value) may be used anywhere in HTCondor submit description files to
+    provide textual substitution at submit time. Macros can be defined
+    by lines in the form of
 
     ::
 
                 <macro_name> = <string>
 
     Two pre-defined macros are supplied by the submit description file
-    parser. The ``$(Cluster)`` or ``$(ClusterId)`` macro supplies the
-    value of the ``ClusterId`` job ClassAd attribute, and the
-    ``$(Process)`` or ``$(ProcId)`` macro supplies the value of the
-    ``ProcId`` job ClassAd attribute. These macros are intended to aid
-    in the specification of input/output files, arguments, etc., for
-    clusters with lots of jobs, and/or could be used to supply an
-    HTCondor process with its own cluster and process numbers on the
-    command line.
+    parser. The $(Cluster) or $(ClusterId) macro supplies the value of
+    the ClusterId job ClassAd attribute, and the $(Process) or $(ProcId)
+    macro supplies the value of the ProcId job ClassAd attribute. These
+    macros are intended to aid in the specification of input/output
+    files, arguments, etc., for clusters with lots of jobs, and/or could
+    be used to supply an HTCondor process with its own cluster and
+    process numbers on the command line.
 
-    The ``$(Node)`` macro is defined for parallel universe jobs, and is
+    The $(Node) macro is defined for parallel universe jobs, and is
     especially relevant for MPI applications. It is a unique value
     assigned for the duration of the job that essentially identifies the
     machine (slot) on which a program is executing. Values assigned
@@ -2479,7 +2465,7 @@ and comments.
         foo = bar
          foo =  snap $(foo)
 
-    As a result, ``foo = snap bar``.
+    As a result, foo = snap bar.
 
     Note that both left- and right- recursion works, so
 
@@ -2488,7 +2474,7 @@ and comments.
         foo = bar
          foo =  $(foo) snap
 
-    has as its result ``foo = bar snap``.
+    has as its result foo = bar snap.
 
     The construction
 
@@ -2514,7 +2500,7 @@ and comments.
 
         D = $(E:24)
 
-    Where ``E`` is not defined within the submit description file, the
+    Where E is not defined within the submit description file, the
     default value 24 is used, resulting in
 
     ::
@@ -2547,7 +2533,7 @@ and comments.
 
     As this form of the substitution macro is only evaluated within the
     context of the machine ClassAd, use of a scope resolution prefix
-    ``TARGET.`` or ``MY.`` is not allowed.
+    TARGET. or MY. is not allowed.
 
     A common use of this form of the substitution macro is for the
     heterogeneous submission of an executable:
@@ -2556,8 +2542,8 @@ and comments.
 
         executable = povray.$$(OpSys).$$(Arch)
 
-    Values for the ``OpSys`` and ``Arch`` attributes are substituted at
-    match time for any given resource. This example allows HTCondor to
+    Values for the OpSys and Arch attributes are substituted at match
+    time for any given resource. This example allows HTCondor to
     automatically choose the correct executable for the matched machine.
 
     An extension to the syntax of the substitution macro provides an
@@ -2577,15 +2563,15 @@ and comments.
 
         arguments = $$(input_file_path:/usr/foo)
 
-    On the machine, if the attribute ``input_file_path`` is not defined,
-    then the path ``/usr/foo`` is used instead.
+    On the machine, if the attribute input\_file\_path is not defined,
+    then the path /usr/foo is used instead.
 
     A further extension to the syntax of the substitution macro allows
     the evaluation of a ClassAd expression to define the value. In this
     form, the expression may refer to machine attributes by prefacing
-    them with the ``TARGET.`` scope resolution prefix. To place a
-    ClassAd expression into the substitution macro, square brackets are
-    added to delimit the expression. The syntax appears as:
+    them with the TARGET. scope resolution prefix. To place a ClassAd
+    expression into the substitution macro, square brackets are added to
+    delimit the expression. The syntax appears as:
 
     ::
 
@@ -2654,16 +2640,15 @@ variables are set by the submit file, they will not be modified during
 **queue** processing.
 
  ClusterId
-    Set to the integer value that the ``ClusterId`` attribute that the
-    job ClassAd will have when the job is submitted. All jobs in a
-    single submit will normally have the same value for the
-    ``ClusterId``. If the **-dry-run** argument is specified, The value
-    will be 1.
+    Set to the integer value that the ClusterId attribute that the job
+    ClassAd will have when the job is submitted. All jobs in a single
+    submit will normally have the same value for the ClusterId. If the
+    **-dry-run** argument is specified, The value will be 1.
  Cluster
     Alternate name for the ClusterId submit variable. Before HTCondor
     version 8.4 this was the only name.
  ProcId
-    Set to the integer value that the ``ProcId`` attribute of the job
+    Set to the integer value that the ProcId attribute of the job
     ClassAd will have when the job is submitted. The value will start at
     0 and increment by 1 for each job submitted.
  Process
@@ -2745,11 +2730,11 @@ Examples
 -  Submit Description File Example 1: This example queues three jobs for
    execution by HTCondor. The first will be given command line arguments
    of *15* and *2000*, and it will write its standard output to
-   ``foo.out1``. The second will be given command line arguments of *30*
-   and *2000*, and it will write its standard output to ``foo.out2``.
-   Similarly the third will have arguments of *45* and *6000*, and it
-   will use ``foo.out3`` for its standard output. Standard error output
-   (if any) from all three programs will appear in ``foo.error``.
+   foo.out1. The second will be given command line arguments of *30* and
+   *2000*, and it will write its standard output to foo.out2. Similarly
+   the third will have arguments of *45* and *6000*, and it will use
+   foo.out3 for its standard output. Standard error output (if any) from
+   all three programs will appear in foo.error.
 
    ::
 
@@ -2812,12 +2797,12 @@ Examples
    HTCondor will not attempt to run the processes on machines which have
    less than 32 Megabytes of physical memory, and it will run them on
    machines which have at least 64 Megabytes, if such machines are
-   available. Stdin, stdout, and stderr will refer to ``in.0``,
-   ``out.0``, and ``err.0`` for the first run of this program (process
-   0). Stdin, stdout, and stderr will refer to ``in.1``, ``out.1``, and
-   ``err.1`` for process 1, and so forth. A log file containing entries
-   about where and when HTCondor runs, takes checkpoints, and migrates
-   processes in this cluster will be written into file ``foo.log``.
+   available. Stdin, stdout, and stderr will refer to in.0, out.0, and
+   err.0 for the first run of this program (process 0). Stdin, stdout,
+   and stderr will refer to in.1, out.1, and err.1 for process 1, and so
+   forth. A log file containing entries about where and when HTCondor
+   runs, takes checkpoints, and migrates processes in this cluster will
+   be written into file foo.log.
 
    ::
 
@@ -2877,8 +2862,8 @@ Examples
    Note that each of the added commands is contained within quote marks
    because there are space characters within the command.
 
--  ``periodic_remove`` example: A job should be removed from the queue,
-   if the total suspension time of the job is more than half of the run
+-  periodic\_remove example: A job should be removed from the queue, if
+   the total suspension time of the job is more than half of the run
    time of the job.
 
    Including the command
@@ -2930,7 +2915,7 @@ Center for High Throughput Computing, University of Wisconsin–Madison
 Copyright
 ^^^^^^^^^
 
-Copyright Â© 1990-2019 Center for High Throughput Computing, Computer
+Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All
 Rights Reserved. Licensed under the Apache License, Version 2.0.
 

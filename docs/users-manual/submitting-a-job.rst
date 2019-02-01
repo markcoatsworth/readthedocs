@@ -1,7 +1,7 @@
       
 
 Submitting a Job
-~~~~~~~~~~~~~~~~
+================
 
 A job is submitted for execution to HTCondor using the *condor\_submit*
 command. *condor\_submit* takes as an argument the name of a file called
@@ -19,34 +19,31 @@ to HTCondor with a single submit description file. To run the same
 program many times on different input data sets, arrange the data files
 accordingly so that each run reads its own input, and each run writes
 its own output. Each individual run may have its own initial working
-directory, files mapped for ``stdin``, ``stdout``, ``stderr``,
-command-line arguments, and shell environment; these are all specified
-in the submit description file. A program that directly opens its own
-files will read the file names to use either from ``stdin`` or from the
-command line. A program that opens a static file, given by file name,
-every time will need to use a separate subdirectory for the output of
-each run.
+directory, files mapped for stdin, stdout, stderr, command-line
+arguments, and shell environment; these are all specified in the submit
+description file. A program that directly opens its own files will read
+the file names to use either from stdin or from the command line. A
+program that opens a static file, given by file name, every time will
+need to use a separate subdirectory for the output of each run.
 
 The *condor\_submit* manual page is on
-page \ `2135 <http://research.cs.wisc.edu/htcondor/manual/v8.8/Condorsubmit.html#x148-107700012>`__
-and contains a complete and full description of how to use
-*condor\_submit*. It also includes
-descriptions \ `2139 <http://research.cs.wisc.edu/htcondor/manual/v8.8/Condorsubmit.html#x148-108100012>`__
-of all of the many commands that may be placed into a submit description
+page \ `2135 <Condorsubmit.html#x149-108000012>`__ and contains a
+complete and full description of how to use *condor\_submit*. It also
+includes descriptions \ `2139 <Condorsubmit.html#x149-108400012>`__ of
+all of the many commands that may be placed into a submit description
 file. In addition, the index lists entries for each command under the
 heading of Submit Commands.
 
 Note that job ClassAd attributes can be set directly in a submit file
 using the **+<attribute> = <value>** syntax (see
- `2206 <http://research.cs.wisc.edu/htcondor/manual/v8.8/Condorsubmit.html#x148-108100012>`__
-for details.)
+ `2206 <Condorsubmit.html#x149-108400012>`__ for details.)
 
 Sample submit description files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In addition to the examples of submit description files given here,
 there are more in the *condor\_submit* manual page (see
- `2135 <http://research.cs.wisc.edu/htcondor/manual/v8.8/Condorsubmit.html#x148-107700012>`__).
+ `2135 <Condorsubmit.html#x149-108000012>`__).
 
  Example 1
 
@@ -61,20 +58,19 @@ its default, which is to run the job on a machine which has the same
 architecture and operating system as the machine where *condor\_submit*
 is run to submit the job.
 
-Standard input for this job will come from the file ``inputfile``, as
+Standard input for this job will come from the file inputfile, as
 specified by the **input** command, and standard output for this job
-will go to the file ``outputfile``, as specified by the **output**
-command. HTCondor expects to find ``inputfile`` in the current working
-directory when this job is submitted, and the system will take care of
-getting the input file to where it needs to be when the job is executed,
-as well as bringing back the output results (to the current working
-directory) after job execution.
+will go to the file outputfile, as specified by the **output** command.
+HTCondor expects to find inputfile in the current working directory when
+this job is submitted, and the system will take care of getting the
+input file to where it needs to be when the job is executed, as well as
+bringing back the output results (to the current working directory)
+after job execution.
 
-A log file, ``myexe.log``, will also be produced that contains events
-the job had during its lifetime inside of HTCondor. When the job
-finishes, its exit conditions will be noted in the log file. This
-fileÂ’s contents are an excellent way to figure out what happened to
-submitted jobs.
+A log file, myexe.log, will also be produced that contains events the
+job had during its lifetime inside of HTCondor. When the job finishes,
+its exit conditions will be noted in the log file. This file’s contents
+are an excellent way to figure out what happened to submitted jobs.
 
 ::
 
@@ -96,9 +92,9 @@ submitted jobs.
 Example 2 queues up one copy of the program *foo* (which had been
 created by *condor\_compile*) for execution by HTCondor. No **input**,
 **output**, or **error** commands are given in the submit description
-file, so ``stdin``, ``stdout``, and ``stderr`` will all refer to
-``/dev/null``. The program may produce output by explicitly opening a
-file and writing to it.
+file, so stdin, stdout, and stderr will all refer to /dev/null. The
+program may produce output by explicitly opening a file and writing to
+it.
 
 ::
 
@@ -117,15 +113,15 @@ file and writing to it.
  Example 3
 
 Example 3 queues two copies of the program *mathematica*. The first copy
-will run in directory ``run_1``, and the second will run in directory
-``run_2`` due to the **initialdir** command. For each copy, ``stdin``
-will be ``test.data``, ``stdout`` will be ``loop.out``, and ``stderr``
-will be ``loop.error``. Each run will read input and write output files
-within its own directory. Placing data files in separate directories is
-a convenient way to organize data when a large group of HTCondor jobs is
-to run. The example file shows program submission of *mathematica* as a
-vanilla universe job. The vanilla universe is most often the right
-choice of universe when the source and/or object code is not available.
+will run in directory run\_1, and the second will run in directory
+run\_2 due to the **initialdir** command. For each copy, stdin will be
+test.data, stdout will be loop.out, and stderr will be loop.error. Each
+run will read input and write output files within its own directory.
+Placing data files in separate directories is a convenient way to
+organize data when a large group of HTCondor jobs is to run. The example
+file shows program submission of *mathematica* as a vanilla universe
+job. The vanilla universe is most often the right choice of universe
+when the source and/or object code is not available.
 
 The **request\_memory** command is included to ensure that the
 *mathematica* jobs match with and then execute on pool machines that
@@ -164,13 +160,12 @@ machines which have greater than 32 MiB of physical memory, and the
 program on machines with more than 64 MiB. It also advises HTCondor that
 this standard universe job will use up to 28000 KiB of memory when
 running. Each of the 150 runs of the program is given its own process
-number, starting with process number 0. So, files ``stdin``, ``stdout``,
-and ``stderr`` will refer to ``in.0``, ``out.0``, and ``err.0`` for the
-first run of the program, ``in.1``, ``out.1``, and ``err.1`` for the
-second run of the program, and so forth. A log file containing entries
-about when and where HTCondor runs, checkpoints, and migrates processes
-for all the 150 queued programs will be written into the single file
-``foo.log``.
+number, starting with process number 0. So, files stdin, stdout, and
+stderr will refer to in.0, out.0, and err.0 for the first run of the
+program, in.1, out.1, and err.1 for the second run of the program, and
+so forth. A log file containing entries about when and where HTCondor
+runs, checkpoints, and migrates processes for all the 150 queued
+programs will be written into the single file foo.log.
 
 ::
 
@@ -218,14 +213,14 @@ dirs**\ ] [**slice**\ ] **<list of items with file globbing>**
 
 All optional items have defaults:
 
--  If ``<int expr>`` is not specified, it defaults to the value 1.
--  If ``<varname>`` or ``<list of varnames>`` is not specified, it
-   defaults to the single variable called ``ITEM``.
--  If ``slice`` is not specified, it defaults to all elements within the
-   list. This is the Python slice ``[::]``, with a step value of 1.
--  If neither ``files`` nor ``dirs`` is specified in a specification
-   using the **from** key word, then both files and directories are
-   considered when globbing.
+-  If <int expr> is not specified, it defaults to the value 1.
+-  If <varname> or <list of varnames> is not specified, it defaults to
+   the single variable called ITEM.
+-  If slice is not specified, it defaults to all elements within the
+   list. This is the Python slice [::], with a step value of 1.
+-  If neither files nor dirs is specified in a specification using the
+   **from** key word, then both files and directories are considered
+   when globbing.
 
 The list of items uses syntax in one of two forms. One form is a comma
 and/or space separated list; the items are placed on the same line as
@@ -236,7 +231,7 @@ closing parenthesis goes on its own line. The **queue** command
 specified with the key word **from** will always use the second form of
 this syntax. Example 3 below uses this second form of syntax.
 
-The optional ``slice`` specifies a subset of the list of items using the
+The optional slice specifies a subset of the list of items using the
 Python syntax for a slice. Negative step values are not permitted.
 
 Here are a set of examples.
@@ -251,15 +246,14 @@ Here are a set of examples.
      
 
 The use of file globbing expands the list of items to be all files in
-the current directory that end in ``.dat``. Only files, and not
-directories are considered due to the specification of ``files``. One
-job is queued for each file in the list of items. For this example,
-assume that the three files ``initial.dat``, ``middle.dat``, and
-``ending.dat`` form the list of items after expansion; macro
-``filename`` is assigned the value of one of these file names for each
-job queued. That macro value is then substituted into the **arguments**
-and **transfer\_input\_files** commands. The **queue** command expands
-to
+the current directory that end in .dat. Only files, and not directories
+are considered due to the specification of files. One job is queued for
+each file in the list of items. For this example, assume that the three
+files initial.dat, middle.dat, and ending.dat form the list of items
+after expansion; macro filename is assigned the value of one of these
+file names for each job queued. That macro value is then substituted
+into the **arguments** and **transfer\_input\_files** commands. The
+**queue** command expands to
 
 ::
 
@@ -279,9 +273,8 @@ to
 
       queue 1 input in A, B, C
 
-Variable ``input`` is set to each of the 3 items in the list, and one
-job is queued for each. For this example the **queue** command expands
-to
+Variable input is set to each of the 3 items in the list, and one job is
+queued for each. For this example the **queue** command expands to
 
 ::
 
@@ -301,9 +294,9 @@ to
          file2, -c -d 92
        )
 
-Using the ``from`` form of the options, each of the two variables
-specified is given a value from the list of items. For this example the
-**queue** command expands to
+Using the from form of the options, each of the two variables specified
+is given a value from the list of items. For this example the **queue**
+command expands to
 
 ::
 
@@ -320,35 +313,33 @@ Variables in the Submit Description File
 There are automatic variables for use within the submit description
 file.
 
- ``$(Cluster)`` or ``$(ClusterId)``
+ $(Cluster) or $(ClusterId)
     Each set of queued jobs from a specific user, submitted from a
     single submit host, sharing an executable have the same value of
-    ``$(Cluster)`` or ``$(ClusterId)``. The first cluster of jobs are
-    assigned to cluster 0, and the value is incremented by one for each
-    new cluster of jobs. ``$(Cluster)`` or ``$(ClusterId)`` will have
-    the same value as the job ClassAd attribute ``ClusterId``.
- ``$(Process)`` or ``$(ProcId)``
-    Within a cluster of jobs, each takes on its own unique
-    ``$(Process)`` or ``$(ProcId)`` value. The first job has value 0.
-    ``$(Process)`` or ``$(ProcId)`` will have the same value as the job
-    ClassAd attribute ``ProcId``.
- ``$(Item)``
-    The default name of the variable when no ``<varname>`` is provided
-    in a **queue** command.
- ``$(ItemIndex)``
+    $(Cluster) or $(ClusterId). The first cluster of jobs are assigned
+    to cluster 0, and the value is incremented by one for each new
+    cluster of jobs. $(Cluster) or $(ClusterId) will have the same value
+    as the job ClassAd attribute ClusterId.
+ $(Process) or $(ProcId)
+    Within a cluster of jobs, each takes on its own unique $(Process) or
+    $(ProcId) value. The first job has value 0. $(Process) or $(ProcId)
+    will have the same value as the job ClassAd attribute ProcId.
+ $(Item)
+    The default name of the variable when no <varname> is provided in a
+    **queue** command.
+ $(ItemIndex)
     Represents an index within a list of items. When no slice is
-    specified, the first ``$(ItemIndex)`` is 0. When a slice is
-    specified, ``$(ItemIndex)`` is the index of the item within the
-    original list.
- ``$(Step)``
-    For the ``<int expr>`` specified, ``$(Step)`` counts, starting at 0.
- ``$(Row)``
+    specified, the first $(ItemIndex) is 0. When a slice is specified,
+    $(ItemIndex) is the index of the item within the original list.
+ $(Step)
+    For the <int expr> specified, $(Step) counts, starting at 0.
+ $(Row)
     When a list of items is specified by placing each item on its own
-    line in the submit description file, ``$(Row)`` identifies which
-    line the item is on. The first item (first line of the list) is
-    ``$(Row)`` 0. The second item (second line of the list) is
-    ``$(Row)`` 1. When a list of items are specified with all items on
-    the same line, ``$(Row)`` is the same as ``$(ItemIndex)``.
+    line in the submit description file, $(Row) identifies which line
+    the item is on. The first item (first line of the list) is $(Row) 0.
+    The second item (second line of the list) is $(Row) 1. When a list
+    of items are specified with all items on the same line, $(Row) is
+    the same as $(ItemIndex).
 
 Here is an example of a **queue** command for which the values of these
 automatic variables are identified.
@@ -361,17 +352,17 @@ This example queues six jobs.
 
       queue 3 in (A, B)
 
--  ``$(Process)`` takes on the six values 0, 1, 2, 3, 4, and 5.
--  Because there is no specification for the ``<varname>`` within this
-   **queue** command, variable ``$(Item)`` is defined. It has the value
-   ``A`` for the first three jobs queued, and it has the value ``B`` for
-   the second three jobs queued.
--  ``$(Step)`` takes on the three values 0, 1, and 2 for the three jobs
-   with ``$(Item)=A``, and it takes on the same three values 0, 1, and 2
-   for the three jobs with ``$(Item)=B``.
--  ``$(ItemIndex)`` is 0 for all three jobs with ``$(Item)=A``, and it
-   is 1 for all three jobs with ``$(Item)=B``.
--  ``$(Row)`` has the same value as ``$(ItemIndex)`` for this example.
+-  $(Process) takes on the six values 0, 1, 2, 3, 4, and 5.
+-  Because there is no specification for the <varname> within this
+   **queue** command, variable $(Item) is defined. It has the value A
+   for the first three jobs queued, and it has the value B for the
+   second three jobs queued.
+-  $(Step) takes on the three values 0, 1, and 2 for the three jobs with
+   $(Item)=A, and it takes on the same three values 0, 1, and 2 for the
+   three jobs with $(Item)=B.
+-  $(ItemIndex) is 0 for all three jobs with $(Item)=A, and it is 1 for
+   all three jobs with $(Item)=B.
+-  $(Row) has the same value as $(ItemIndex) for this example.
 
 Including Submit Commands Defined Elsewhere
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -388,8 +379,8 @@ contents of the file will be incorporated into the submit description
 file at the point within the file where the **include** is. Or,
 <what-to-include> may cause a program to be executed, where the output
 of the program is incorporated into the submit description file. The
-specification of <what-to-include> has the bar character (``|``)
-following the name of the program to be executed.
+specification of <what-to-include> has the bar character (\|) following
+the name of the program to be executed.
 
 The **include** key word is case insensitive. There are no requirements
 for white space characters surrounding the colon character.
@@ -406,18 +397,17 @@ Consider the example
       include : list-infiles.sh |
 
 In this example, the bar character at the end of the line causes the
-script ``list-infiles.sh`` to be invoked, and the output of the script
-is parsed and incorporated into the submit description file. If this
-bash script contains
+script list-infiles.sh to be invoked, and the output of the script is
+parsed and incorporated into the submit description file. If this bash
+script contains
 
 ::
 
       echo "transfer_input_files = `ls -m infiles/*.dat`"
 
 then the output of this script has specified the set of input files to
-transfer to the execute host. For example, if directory ``infiles``
-contains the three files ``A.dat``, ``B.dat``, and ``C.dat``, then the
-submit command
+transfer to the execute host. For example, if directory infiles contains
+the three files A.dat, B.dat, and C.dat, then the submit command
 
 ::
 
@@ -461,8 +451,7 @@ character (!) to represent the not operation, followed by
              X = -1
           endif
 
-   results in ``X = -1``, when ``MY_UNDEFINED_VARIABLE`` is not yet
-   defined.
+   results in X = -1, when MY\_UNDEFINED\_VARIABLE is not yet defined.
 
 -  the version keyword, representing the version number of of the daemon
    or tool currently reading this conditional. This keyword is followed
@@ -488,9 +477,9 @@ character (!) to represent the not operation, followed by
              DO_Y = True
           endif
 
-   results in defining ``DO_X`` as ``True`` if the current version of
-   the daemon or tool reading this if statement is 8.1.6 or a more
-   recent version.
+   results in defining DO\_X as True if the current version of the
+   daemon or tool reading this if statement is 8.1.6 or a more recent
+   version.
 
 -  True or yes or the value 1. The statement(s) are incorporated.
 -  False or no or the value 0 The statement(s) are not incorporated.
@@ -530,7 +519,7 @@ is the same as syntax
        endif
 
 Here is an example use of a conditional in the submit description file.
-A portion of the ``sample.sub`` submit description file uses the if/else
+A portion of the sample.sub submit description file uses the if/else
 syntax to define command line arguments in one of two ways:
 
 ::
@@ -541,14 +530,13 @@ syntax to define command line arguments in one of two ways:
          arguments = -n 1 -debug
        endif
 
-Submit variable ``X`` is defined on the *condor\_submit* command line
-with
+Submit variable X is defined on the *condor\_submit* command line with
 
 ::
 
       condor_submit  X=3  sample.sub
 
-This command line incorporates the submit command ``X = 3`` into the
+This command line incorporates the submit command X = 3 into the
 submission before parsing the submit description file. For this
 submission, the command line arguments of the submitted job become
 
@@ -576,76 +564,73 @@ description files and configuration files are read using the same
 parser, so these functions may be used in both submit description files
 and configuration files.
 
-Case is significant in the functionÂ’s name, so use the same letter case
+Case is significant in the function’s name, so use the same letter case
 as given in these definitions.
 
- ``$CHOICE(index, listname)`` or ``$CHOICE(index, item1, item2, Â…)``
+ $CHOICE(index, listname) or $CHOICE(index, item1, item2, …)
     An item within the list is returned. The list is represented by a
-    parameter name, or the list items are the parameters. The ``index``
+    parameter name, or the list items are the parameters. The index
     parameter determines which item. The first item in the list is at
     index 0. If the index is out of bounds for the list contents, an
     error occurs.
- ``$ENV(environment-variable-name[:default-value])``
+ $ENV(environment-variable-name[:default-value])
     Evaluates to the value of environment variable
-    ``environment-variable-name``. If there is no environment variable
-    with that name, Evaluates to UNDEFINED unless the optional
-    :default-value is used; in which case it evaluates to default-value.
-    For example,
+    environment-variable-name. If there is no environment variable with
+    that name, Evaluates to UNDEFINED unless the optional :default-value
+    is used; in which case it evaluates to default-value. For example,
 
     ::
 
           A = $ENV(HOME)
 
-    binds ``A`` to the value of the ``HOME`` environment variable.
+    binds A to the value of the HOME environment variable.
 
- ``$F[fpduwnxbqa](filename)``
+ $F[fpduwnxbqa](filename)
     One or more of the lower case letters may be combined to form the
     function name and thus, its functionality. Each letter operates on
-    the ``filename`` in its own way.
+    the filename in its own way.
 
-    -  ``f`` convert relative path to full path by prefixing the current
+    -  f convert relative path to full path by prefixing the current
        working directory to it. This option works only in
        *condor\_submit* files.
-    -  ``p`` refers to the entire directory portion of ``filename``,
-       with a trailing slash or backslash character. Whether a slash or
+    -  p refers to the entire directory portion of filename, with a
+       trailing slash or backslash character. Whether a slash or
        backslash is used depends on the platform of the machine. The
        slash will be recognized on Linux platforms; either a slash or
        backslash will be recognized on Windows platforms, and the parser
        will use the same character specified.
-    -  ``d`` refers to the last portion of the directory within the
-       path, if specified. It will have a trailing slash or backslash,
-       as appropriate to the platform of the machine. The slash will be
+    -  d refers to the last portion of the directory within the path, if
+       specified. It will have a trailing slash or backslash, as
+       appropriate to the platform of the machine. The slash will be
        recognized on Linux platforms; either a slash or backslash will
        be recognized on Windows platforms, and the parser will use the
        same character specified unless u or w is used. if b is used the
        trailing slash or backslash will be omitted.
-    -  ``u`` convert path separators to Unix style slash characters
-    -  ``w`` convert path separators to Windows style backslash
-       characters
-    -  ``n`` refers to the file name at the end of any path, but without
-       any file name extension. As an example, the return value from
-       ``$Fn(/tmp/simulate.exe)`` will be ``simulate`` (without the
-       ``.exe`` extension).
-    -  ``x`` refers to a file name extension, with the associated period
-       (``.``). As an example, the return value from
-       ``$Fn(/tmp/simulate.exe)`` will be ``.exe``.
-    -  ``b`` when combined with the d option, causes the trailing slash
-       or backslash to be omitted. When combined with the x option,
-       causes the leading period (``.``) to be omitted.
-    -  ``q`` causes the return value to be enclosed within quotes.
-       Double quote marks are used unless a is also specified.
-    -  ``a`` When combined with the q option, causes the return value to
-       be enclosed within single quotes.
+    -  u convert path separators to Unix style slash characters
+    -  w convert path separators to Windows style backslash characters
+    -  n refers to the file name at the end of any path, but without any
+       file name extension. As an example, the return value from
+       $Fn(/tmp/simulate.exe) will be simulate (without the .exe
+       extension).
+    -  x refers to a file name extension, with the associated period
+       (.). As an example, the return value from $Fn(/tmp/simulate.exe)
+       will be .exe.
+    -  b when combined with the d option, causes the trailing slash or
+       backslash to be omitted. When combined with the x option, causes
+       the leading period (.) to be omitted.
+    -  q causes the return value to be enclosed within quotes. Double
+       quote marks are used unless a is also specified.
+    -  a When combined with the q option, causes the return value to be
+       enclosed within single quotes.
 
- ``$DIRNAME(filename)`` is the same as ``$Fp(filename)``
- ``$BASENAME(filename)`` is the same as ``$Fnx(filename)``
- ``$INT(item-to-convert)`` or
-``$INT(item-to-convert, format-specifier)``
-    Expands, evaluates, and returns a string version of
-    ``item-to-convert``. The ``format-specifier`` has the same syntax as
-    a C language or Perl format specifier. If no ``format-specifier`` is
-    specified, "%d" is used as the format specifier.
- ``$RANDOM_CHOICE(choice1, choice2, choice3, Â…)``
+ $DIRNAME(filename) is the same as $Fp(filename)
+ $BASENAME(filename) is the same as $Fnx(filename)
+ $INT(item-to-convert) or $INT(item-to-convert, format-specifier)
+    Expands, evaluates, and returns a string version of item-to-convert.
+    The format-specifier has the same syntax as a C language or Perl
+    format specifier. If no format-specifier is specified, "%d" is used
+    as the format specifier.
+ $RANDOM\_CHOICE(choice1, choice2, choice3, …)
     A random choice of one of the parameters in the list of parameters
     is made. For example, if one of the integers 0-8 (inclusive) should
     be randomly chosen:
@@ -654,7 +639,7 @@ as given in these definitions.
 
           $RANDOM_CHOICE(0,1,2,3,4,5,6,7,8)
 
- ``$RANDOM_INTEGER(min, max [, step])``
+ $RANDOM\_INTEGER(min, max [, step])
     A random integer within the range min and max, inclusive, is
     selected. The optional step parameter controls the stride within the
     range, and it defaults to the value 1. For example, to randomly
@@ -664,15 +649,12 @@ as given in these definitions.
 
           $RANDOM_INTEGER(0, 8, 2)
 
- ``$REAL(item-to-convert)`` or
-``$REAL(item-to-convert, format-specifier)``
-    Expands, evaluates, and returns a string version of
-    ``item-to-convert`` for a floating point type. The
-    ``format-specifier`` is a C language or Perl format specifier. If no
-    ``format-specifier`` is specified, "%16G" is used as a format
-    specifier.
- ``$SUBSTR(name, start-index)`` or
-``$SUBSTR(name, start-index, length)``
+ $REAL(item-to-convert) or $REAL(item-to-convert, format-specifier)
+    Expands, evaluates, and returns a string version of item-to-convert
+    for a floating point type. The format-specifier is a C language or
+    Perl format specifier. If no format-specifier is specified, "%16G"
+    is used as a format specifier.
+ $SUBSTR(name, start-index) or $SUBSTR(name, start-index, length)
     Expands name and returns a substring of it. The first character of
     the string is at index 0. The first character of the substring is at
     index start-index. If the optional length is not specified, then the
@@ -685,11 +667,11 @@ as given in these definitions.
 
           Name = abcdef
 
-    -  ``$SUBSTR(Name, 2)`` is ``cdef``.
-    -  ``$SUBSTR(Name, 0, -2)`` is ``abcd``.
-    -  ``$SUBSTR(Name, 1, 3)`` is ``bcd``.
-    -  ``$SUBSTR(Name, -1)`` is ``f``.
-    -  ``$SUBSTR(Name, 4, -3)`` is the empty string, as there are no
+    -  $SUBSTR(Name, 2) is cdef.
+    -  $SUBSTR(Name, 0, -2) is abcd.
+    -  $SUBSTR(Name, 1, 3) is bcd.
+    -  $SUBSTR(Name, -1) is f.
+    -  $SUBSTR(Name, 4, -3) is the empty string, as there are no
        characters in the substring for this request.
 
 Here are example uses of the function macros in a submit description
@@ -708,8 +690,8 @@ other than those given by $(Process) are desired.
        initial_dir = run-$INT(MyIndex, %04d)
 
 Assuming that there are three jobs queued, such that $(Process) becomes
-0, 1, and 2, ``initial_dir`` will evaluate to the directories
-``run-0001``, ``run-0002``, and ``run-0003``.
+0, 1, and 2, initial\_dir will evaluate to the directories run-0001,
+run-0002, and run-0003.
 
  Example 2
 
@@ -723,9 +705,9 @@ This variation on Example 1 generates a file name extension which is a
        input      = X.$(Extension)
 
 Assuming that there are four jobs queued, such that $(Process) becomes
-0, 1, 2, and 3, ``Extension`` will evaluate to 000, 010, 020, and 030,
-leading to files defined for **input** of ``X.000``, ``X.010``,
-``X.020``, and ``X.030``.
+0, 1, 2, and 3, Extension will evaluate to 000, 010, 020, and 030,
+leading to files defined for **input** of X.000, X.010, X.020, and
+X.030.
 
  Example 3
 
@@ -742,34 +724,32 @@ the execute host.
             samplerun/*.dat
             )
 
-Assume that two files that end in ``.dat``, ``A.dat`` and ``B.dat``, are
-within the directory ``samplerun``. Macro ``FILE`` expands to
-``samplerun/A.dat`` and ``samplerun/B.dat`` for the two jobs queued. The
-input files transferred are ``samplerun/A.dat`` and ``samplerun/B.dat``
-on the submit host. The ``$Fnx()`` function macro expands to the
-complete file name with any leading directory specification stripped,
-such that the command line argument for one of the jobs will be
-``A.dat`` and the command line argument for the other job will be
-``B.dat``.
+Assume that two files that end in .dat, A.dat and B.dat, are within the
+directory samplerun. Macro FILE expands to samplerun/A.dat and
+samplerun/B.dat for the two jobs queued. The input files transferred are
+samplerun/A.dat and samplerun/B.dat on the submit host. The $Fnx()
+function macro expands to the complete file name with any leading
+directory specification stripped, such that the command line argument
+for one of the jobs will be A.dat and the command line argument for the
+other job will be B.dat.
 
 About Requirements and Rank
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The ``requirements`` and ``rank`` commands in the submit description
-file are powerful and flexible. Using them effectively requires care,
-and this section presents those details.
+The requirements and rank commands in the submit description file are
+powerful and flexible. Using them effectively requires care, and this
+section presents those details.
 
-Both ``requirements`` and ``rank`` need to be specified as valid
-HTCondor ClassAd expressions, however, default values are set by the
+Both requirements and rank need to be specified as valid HTCondor
+ClassAd expressions, however, default values are set by the
 *condor\_submit* program if these are not defined in the submit
 description file. From the *condor\_submit* manual page and the above
 examples, you see that writing ClassAd expressions is intuitive,
 especially if you are familiar with the programming language C. There
 are some pretty nifty expressions you can write with ClassAds. A
 complete description of ClassAds and their expressions can be found in
-section \ `4.1 <http://research.cs.wisc.edu/htcondor/manual/v8.8/HTCondorsClassAdMechanism.html#x48-3980004.1>`__
-on
-page \ `1277 <http://research.cs.wisc.edu/htcondor/manual/v8.8/HTCondorsClassAdMechanism.html#x48-3980004.1>`__.
+section \ `4.1 <HTCondorsClassAdMechanism.html#x48-3980004.1>`__ on
+page \ `1277 <HTCondorsClassAdMechanism.html#x48-3980004.1>`__.
 
 All of the commands in the submit description file are case insensitive,
 except for the ClassAd attribute string values. ClassAd attribute names
@@ -794,35 +774,33 @@ all the defined attributes for current jobs in the queue.
 
 A list of defined ClassAd attributes for job ClassAds is given in the
 unnumbered Appendix on
-page \ `2351 <http://research.cs.wisc.edu/htcondor/manual/v8.8/JobClassAdAttributes.html#x169-1231000A.2>`__.
-A list of defined ClassAd attributes for machine ClassAds is given in
-the unnumbered Appendix on
-page \ `2397 <http://research.cs.wisc.edu/htcondor/manual/v8.8/MachineClassAdAttributes.html#x170-1232000A.3>`__.
+page \ `2351 <JobClassAdAttributes.html#x170-1234000A.2>`__. A list of
+defined ClassAd attributes for machine ClassAds is given in the
+unnumbered Appendix on
+page \ `2397 <MachineClassAdAttributes.html#x171-1235000A.3>`__.
 
 Rank Expression Examples
 ''''''''''''''''''''''''
 
 When considering the match between a job and a machine, rank is used to
-choose a match from among all machines that satisfy the jobÂ’s
+choose a match from among all machines that satisfy the job’s
 requirements and are available to the user, after accounting for the
-userÂ’s priority and the machineÂ’s rank of the job. The rank
-expressions, simple or complex, define a numerical value that expresses
-preferences.
+user’s priority and the machine’s rank of the job. The rank expressions,
+simple or complex, define a numerical value that expresses preferences.
 
-The jobÂ’s ``Rank`` expression evaluates to one of three values. It can
-be UNDEFINED, ERROR, or a floating point value. If ``Rank`` evaluates to
-a floating point value, the best match will be the one with the largest,
-positive value. If no ``Rank`` is given in the submit description file,
-then HTCondor substitutes a default value of 0.0 when considering
-machines to match. If the jobÂ’s ``Rank`` of a given machine evaluates
-to UNDEFINED or ERROR, this same value of 0.0 is used. Therefore, the
-machine is still considered for a match, but has no ranking above any
-other.
+The job’s Rank expression evaluates to one of three values. It can be
+UNDEFINED, ERROR, or a floating point value. If Rank evaluates to a
+floating point value, the best match will be the one with the largest,
+positive value. If no Rank is given in the submit description file, then
+HTCondor substitutes a default value of 0.0 when considering machines to
+match. If the job’s Rank of a given machine evaluates to UNDEFINED or
+ERROR, this same value of 0.0 is used. Therefore, the machine is still
+considered for a match, but has no ranking above any other.
 
 A boolean expression evaluates to the numerical value of 1.0 if true,
 and 0.0 if false.
 
-The following ``Rank`` expressions provide examples to follow.
+The following Rank expressions provide examples to follow.
 
 For a job that desires the machine with the most available memory:
 
@@ -830,7 +808,7 @@ For a job that desires the machine with the most available memory:
 
        Rank = memory
 
-For a job that prefers to run on a friendÂ’s machine on Saturdays and
+For a job that prefers to run on a friend’s machine on Saturdays and
 Sundays:
 
 ::
@@ -853,28 +831,28 @@ performance (on Linpack benchmarks):
 
        Rank = kflops
 
-This particular example highlights a difficulty with ``Rank`` expression
+This particular example highlights a difficulty with Rank expression
 evaluation as currently defined. While all machines have floating point
-processing ability, not all machines will have the ``kflops`` attribute
-defined. For machines where this attribute is not defined, ``Rank`` will
+processing ability, not all machines will have the kflops attribute
+defined. For machines where this attribute is not defined, Rank will
 evaluate to the value UNDEFINED, and HTCondor will use a default rank of
-the machine of 0.0. The ``Rank`` attribute will only rank machines where
-the attribute is defined. Therefore, the machine with the highest
-floating point performance may not be the one given the highest rank.
+the machine of 0.0. The Rank attribute will only rank machines where the
+attribute is defined. Therefore, the machine with the highest floating
+point performance may not be the one given the highest rank.
 
-So, it is wise when writing a ``Rank`` expression to check if the
-expressionÂ’s evaluation will lead to the expected resulting ranking of
+So, it is wise when writing a Rank expression to check if the
+expression’s evaluation will lead to the expected resulting ranking of
 machines. This can be accomplished using the *condor\_status* command
 with the *-constraint* argument. This allows the user to see a list of
 machines that fit a constraint. To see which machines in the pool have
-``kflops`` defined, use
+kflops defined, use
 
 ::
 
     condor_status -constraint kflops
 
-Alternatively, to see a list of machines where ``kflops`` is not
-defined, use
+Alternatively, to see a list of machines where kflops is not defined,
+use
 
 ::
 
@@ -888,8 +866,7 @@ For a job that prefers specific machines in a specific order:
                ((machine == "friend2.cs.wisc.edu")*2) +
                 (machine == "friend3.cs.wisc.edu")
 
-If the machine being ranked is ``friend1.cs.wisc.edu``, then the
-expression
+If the machine being ranked is friend1.cs.wisc.edu, then the expression
 
 ::
 
@@ -907,11 +884,11 @@ and
 
        (machine == "friend3.cs.wisc.edu")
 
-are false, and give the value 0.0. Therefore, ``Rank`` evaluates to the
-value 3.0. In this way, machine ``friend1.cs.wisc.edu`` is ranked higher
-than machine ``friend2.cs.wisc.edu``, machine ``friend2.cs.wisc.edu`` is
-ranked higher than machine ``friend3.cs.wisc.edu``, and all three of
-these machines are ranked higher than others.
+are false, and give the value 0.0. Therefore, Rank evaluates to the
+value 3.0. In this way, machine friend1.cs.wisc.edu is ranked higher
+than machine friend2.cs.wisc.edu, machine friend2.cs.wisc.edu is ranked
+higher than machine friend3.cs.wisc.edu, and all three of these machines
+are ranked higher than others.
 
 Submitting Jobs Using a Shared File System
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -924,14 +901,14 @@ run.
 
 As an example, suppose a job is submitted from blackbird.cs.wisc.edu,
 and the job requires a particular data file called
-``/u/p/s/psilord/data.txt``. If the job were to run on
-cardinal.cs.wisc.edu, the file ``/u/p/s/psilord/data.txt`` must be
-available through either NFS or AFS for the job to run correctly.
+/u/p/s/psilord/data.txt. If the job were to run on cardinal.cs.wisc.edu,
+the file /u/p/s/psilord/data.txt must be available through either NFS or
+AFS for the job to run correctly.
 
 HTCondor allows users to ensure their jobs have access to the right
-shared files by using the ``FileSystemDomain`` and ``UidDomain`` machine
-ClassAd attributes. These attributes specify which machines have access
-to the same shared file systems. All machines that mount the same shared
+shared files by using the FileSystemDomain and UidDomain machine ClassAd
+attributes. These attributes specify which machines have access to the
+same shared file systems. All machines that mount the same shared
 directories in the same locations are considered to belong to the same
 file system domain. Similarly, all machines that share the same user
 information (in particular, the same UID, which is important for file
@@ -942,27 +919,27 @@ UID domain and file system domain, using the full host name of the
 machine as the name of the domains. So, if a pool does have access to a
 shared file system, the pool administrator must correctly configure
 HTCondor such that all the machines mounting the same files have the
-same ``FileSystemDomain`` configuration. Similarly, all machines that
-share common user information must be configured to have the same
-``UidDomain`` configuration.
+same FileSystemDomain configuration. Similarly, all machines that share
+common user information must be configured to have the same UidDomain
+configuration.
 
 When a job relies on a shared file system, HTCondor uses the
-``requirements`` expression to ensure that the job runs on a machine in
-the correct ``UidDomain`` and ``FileSystemDomain``. In this case, the
-default ``requirements`` expression specifies that the job must run on a
-machine with the same ``UidDomain`` and ``FileSystemDomain`` as the
-machine from which the job is submitted. This default is almost always
-correct. However, in a pool spanning multiple ``UidDomain``\ s and/or
-``FileSystemDomain``\ s, the user may need to specify a different
-``requirements`` expression to have the job run on the correct machines.
+requirements expression to ensure that the job runs on a machine in the
+correct UidDomain and FileSystemDomain. In this case, the default
+requirements expression specifies that the job must run on a machine
+with the same UidDomain and FileSystemDomain as the machine from which
+the job is submitted. This default is almost always correct. However, in
+a pool spanning multiple UidDomains and/or FileSystemDomains, the user
+may need to specify a different requirements expression to have the job
+run on the correct machines.
 
 For example, imagine a pool made up of both desktop workstations and a
 dedicated compute cluster. Most of the pool, including the compute
 cluster, has access to a shared file system, but some of the desktop
 machines do not. In this case, the administrators would probably define
-the ``FileSystemDomain`` to be ``cs.wisc.edu`` for all the machines that
-mounted the shared files, and to the full host name for each machine
-that did not. An example is ``jimi.cs.wisc.edu``.
+the FileSystemDomain to be cs.wisc.edu for all the machines that mounted
+the shared files, and to the full host name for each machine that did
+not. An example is jimi.cs.wisc.edu.
 
 In this example, a user wants to submit vanilla universe jobs from her
 own desktop machine (jimi.cs.wisc.edu) which does not mount the shared
@@ -971,8 +948,8 @@ world). But, she wants the jobs to be able to run on more than just her
 own machine (in particular, the compute cluster), so she puts the
 program and input files onto the shared file system. When she submits
 the jobs, she needs to tell HTCondor to send them to machines that have
-access to that shared data, so she specifies a different
-``requirements`` expression than the default:
+access to that shared data, so she specifies a different requirements
+expression than the default:
 
 ::
 
@@ -980,15 +957,15 @@ access to that shared data, so she specifies a different
                        TARGET.FileSystemDomain == "cs.wisc.edu"
 
 WARNING: If there is no shared file system, or the HTCondor pool
-administrator does not configure the ``FileSystemDomain`` setting
-correctly (the default is that each machine in a pool is in its own file
-system and UID domain), a user submits a job that cannot use remote
-system calls (for example, a vanilla universe job), and the user does
-not enable HTCondorÂ’s File Transfer mechanism, the job will only run on
-the machine from which it was submitted.
+administrator does not configure the FileSystemDomain setting correctly
+(the default is that each machine in a pool is in its own file system
+and UID domain), a user submits a job that cannot use remote system
+calls (for example, a vanilla universe job), and the user does not
+enable HTCondor’s File Transfer mechanism, the job will only run on the
+machine from which it was submitted.
 
-Submitting Jobs Without a Shared File System: HTCondorÂ’s File Transfer Mechanism
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Submitting Jobs Without a Shared File System: HTCondor’s File Transfer Mechanism
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 HTCondor works well without a shared file system. The HTCondor file
 transfer mechanism permits the user to select which files are
@@ -998,13 +975,13 @@ a remote scratch directory on the machine where the job is to be
 executed. HTCondor executes the job and transfers output back to the
 submitting machine. The user specifies which files and directories to
 transfer, and at what point the output files should be copied back to
-the submitting machine. This specification is done within the jobÂ’s
+the submitting machine. This specification is done within the job’s
 submit description file.
 
 Specifying If and When to Transfer Files
 ''''''''''''''''''''''''''''''''''''''''
 
-To enable the file transfer mechanism, place two commands in the jobÂ’s
+To enable the file transfer mechanism, place two commands in the job’s
 submit description file: **should\_transfer\_files** and
 **when\_to\_transfer\_output**. By default, they will be:
 
@@ -1026,12 +1003,12 @@ possible values:
    location of the files is determined by the command
    **when\_to\_transfer\_output**.
 #. IF\_NEEDED: HTCondor transfers files if the job is matched with and
-   to be executed on a machine in a different ``FileSystemDomain`` than
-   the one the submit machine belongs to, the same as if
+   to be executed on a machine in a different FileSystemDomain than the
+   one the submit machine belongs to, the same as if
    should\_transfer\_files = YES. If the job is matched with a machine
-   in the local ``FileSystemDomain``, HTCondor will not transfer files
-   and relies on the shared file system.
-#. NO: HTCondorÂ’s file transfer mechanism is disabled.
+   in the local FileSystemDomain, HTCondor will not transfer files and
+   relies on the shared file system.
+#. NO: HTCondor’s file transfer mechanism is disabled.
 
 The **when\_to\_transfer\_output** command tells HTCondor when output
 files are to be transferred back to the submit machine. The command
@@ -1049,7 +1026,7 @@ takes on one of two possible values:
    of the job. When **transfer\_output\_files** is specified, its list
    governs which are transferred back at eviction time. Before the job
    starts running again, all of the files that were stored when the job
-   was last evicted are copied to the jobÂ’s new remote scratch
+   was last evicted are copied to the job’s new remote scratch
    directory.
 
    The purpose of saving files at eviction time is to allow the job to
@@ -1060,22 +1037,21 @@ takes on one of two possible values:
    restore its state using the files that are saved at eviction time.
 
    The files that are transferred back at eviction time are not stored
-   in the location where the jobÂ’s final output will be written when
-   the job exits. HTCondor manages these files automatically, so usually
-   the only reason for a user to worry about them is to make sure that
-   there is enough space to store them. The files are stored on the
-   submit machine in a temporary directory within the directory defined
-   by the configuration variable ``SPOOL``. The directory is named using
-   the ``ClusterId`` and ``ProcId`` job ClassAd attributes. The
-   directory name takes the form:
+   in the location where the job’s final output will be written when the
+   job exits. HTCondor manages these files automatically, so usually the
+   only reason for a user to worry about them is to make sure that there
+   is enough space to store them. The files are stored on the submit
+   machine in a temporary directory within the directory defined by the
+   configuration variable SPOOL. The directory is named using the
+   ClusterId and ProcId job ClassAd attributes. The directory name takes
+   the form:
 
    ::
 
           <X mod 10000>/<Y mod 10000>/cluster<X>.proc<Y>.subproc0
 
-   where <X> is the value of ``ClusterId``, and <Y> is the value of
-   ``ProcId``. As an example, if job 735.0 is evicted, it will produce
-   the directory
+   where <X> is the value of ClusterId, and <Y> is the value of ProcId.
+   As an example, if job 735.0 is evicted, it will produce the directory
 
    ::
 
@@ -1083,11 +1059,11 @@ takes on one of two possible values:
 
 The default values for these two submit commands make sense as used
 together. If only **should\_transfer\_files** is set, and set to the
-value ``NO``, then no output files will be transferred, and the value of
+value NO, then no output files will be transferred, and the value of
 **when\_to\_transfer\_output** is irrelevant. If only
 **when\_to\_transfer\_output** is set, and set to the value
-``ON_EXIT_OR_EVICT``, then the default value for an unspecified
-**should\_transfer\_files** will be ``YES``.
+ON\_EXIT\_OR\_EVICT, then the default value for an unspecified
+**should\_transfer\_files** will be YES.
 
 Note that the combination of
 
@@ -1115,7 +1091,7 @@ should utilize the **transfer\_input\_files** command. This
 comma-separated list specifies any other files or directories that
 HTCondor is to transfer to the remote scratch directory, to set up the
 execution environment for the job before it is run. These files are
-placed in the same directory as the jobÂ’s executable. For example:
+placed in the same directory as the job’s executable. For example:
 
 ::
 
@@ -1125,8 +1101,8 @@ placed in the same directory as the jobÂ’s executable. For example:
 
 This example explicitly enables the file transfer mechanism, and it
 transfers the executable, the file specified by the **input** command,
-any jar files specified by the **jar\_files** command, and files
-``file1`` and ``file2``.
+any jar files specified by the **jar\_files** command, and files file1
+and file2.
 
 If the file transfer mechanism is enabled, HTCondor will transfer the
 following files from the execute machine back to the submit machine
@@ -1159,9 +1135,9 @@ job on hold. Setting **transfer\_output\_files** to the empty string
 automatic detection of output files created by the job is disabled.
 Paths specified in this list refer to locations on the execute machine.
 The naming and placement of files and directories relies on the term
-base name. By example, the path ``a/b/c`` has the base name ``c``. It is
-the file name or directory name with all directories leading up to that
-name stripped off. On the submit machine, the transferred files or
+base name. By example, the path a/b/c has the base name c. It is the
+file name or directory name with all directories leading up to that name
+stripped off. On the submit machine, the transferred files or
 directories are named using only the base name. Therefore, each output
 file or directory must have a different name, even if they originate
 from different paths.
@@ -1201,9 +1177,9 @@ then transferred back to the submit machine will be
                o3
                o4
 
-Note that the directory ``d1`` and all its contents are specified, and
-therefore transferred. If the directory ``d1`` is not created by the job
-before exit, then the job is placed on hold. If the directory ``d1`` is
+Note that the directory d1 and all its contents are specified, and
+therefore transferred. If the directory d1 is not created by the job
+before exit, then the job is placed on hold. If the directory d1 is
 created by the job before exit, but is empty, this is not an error.
 
 If, instead, the submit description file sets
@@ -1221,7 +1197,7 @@ then transferred back to the submit machine will be
            o3
 
 Note that only the base name is used in the naming and placement of the
-file specified with ``d1/o3``.
+file specified with d1/o3.
 
 File Paths for File Transfer
 ''''''''''''''''''''''''''''
@@ -1256,25 +1232,24 @@ transferred. A collision causes the last file in the list to overwrite
 the earlier one.
 
 Both relative and absolute paths may be used in
-**transfer\_output\_files**. Relative paths are relative to the jobÂ’s
+**transfer\_output\_files**. Relative paths are relative to the job’s
 remote scratch directory on the execute machine. When the files and
 directories are copied back to the submit machine, they are placed in
-the jobÂ’s initial working directory as the base name of the original
+the job’s initial working directory as the base name of the original
 path. An alternate name or path may be specified by using
 **transfer\_output\_remaps**.
 
 A job may create files outside the remote scratch directory but within
-the file system of the execute machine, in a directory such as ``/tmp``,
-if this directory is guaranteed to exist and be accessible on all
-possible execute machines. However, HTCondor will not automatically
-transfer such files back after execution completes, nor will it clean up
-these files.
+the file system of the execute machine, in a directory such as /tmp, if
+this directory is guaranteed to exist and be accessible on all possible
+execute machines. However, HTCondor will not automatically transfer such
+files back after execution completes, nor will it clean up these files.
 
 Here are several examples to illustrate the use of file transfer. The
 program executable is called *my\_program*, and it uses three
 command-line arguments as it executes: two input file names and an
 output file name. The program executable and the submit description file
-for this job are located in directory ``/scratch/test``.
+for this job are located in directory /scratch/test.
 
 Here is the directory tree as it exists on the submit machine, for all
 the examples:
@@ -1294,9 +1269,8 @@ the examples:
     This first example explicitly transfers input files. These input
     files to be transferred are specified relative to the directory
     where the job is submitted. An output file specified in the
-    **arguments** command, ``out1``, is created when the job is
-    executed. It will be transferred back into the directory
-    ``/scratch/test``.
+    **arguments** command, out1, is created when the job is executed. It
+    will be transferred back into the directory /scratch/test.
 
     ::
 
@@ -1348,9 +1322,8 @@ the examples:
     **output**, **error**, **transfer\_input\_files**, as well as files
     modified or created by the job and automatically transferred back)
     are located relative to the specified **initialdir**. Therefore, the
-    output file, ``out1``, will be placed in the files directory. Note
-    that the ``logs2`` directory exists to make this example work
-    correctly.
+    output file, out1, will be placed in the files directory. Note that
+    the logs2 directory exists to make this example work correctly.
 
     ::
 
@@ -1371,7 +1344,7 @@ the examples:
          Arguments       = in1 in2 out1
          Queue
 
- Example 4 Â– Illustrates an Error
+ Example 4 – Illustrates an Error
     This example illustrates a job that will fail. The files specified
     using the **transfer\_input\_files** command work correctly (see
     Example 1). However, relative paths to files in the **arguments**
@@ -1403,9 +1376,9 @@ the examples:
 
         err: files/out1: No such file or directory.
 
- Example 5 Â– Illustrates an Error
+ Example 5 – Illustrates an Error
     As with Example 4, this example illustrates a job that will fail.
-    The executing programÂ’s use of absolute paths cannot work.
+    The executing program’s use of absolute paths cannot work.
 
     ::
 
@@ -1437,8 +1410,8 @@ the examples:
     may not cause an error, depending on the existence and permissions
     of the directories on the remote file system.
 
-    The output file ``/tmp/out1`` is transferred back to the jobÂ’s
-    initial working directory as ``/scratch/test/out1``.
+    The output file /tmp/out1 is transferred back to the job’s initial
+    working directory as /scratch/test/out1.
 
     ::
 
@@ -1461,7 +1434,7 @@ the examples:
 Public Input Files
 ''''''''''''''''''
 
-There are some cases where HTCondorÂ’s file transfer mechanism is
+There are some cases where HTCondor’s file transfer mechanism is
 inefficient. For jobs that need to run a large number of times, the
 input files need to get transferred for every job, even if those files
 are identical. This wastes resources on both the submit machine and the
@@ -1499,7 +1472,7 @@ sensitive data.
 Behavior for Error Cases
 ''''''''''''''''''''''''
 
-This section describes HTCondorÂ’s behavior for some error cases in
+This section describes HTCondor’s behavior for some error cases in
 dealing with the transfer of files.
 
  Disk Full on Execute Machine
@@ -1513,7 +1486,7 @@ dealing with the transfer of files.
     submission fails.
 
     This job submission failure avoids having the job run to completion,
-    only to be unable to transfer the jobÂ’s output due to permission
+    only to be unable to transfer the job’s output due to permission
     errors.
 
  Error When Transferring Files from Execute Machine to Submit Machine
@@ -1536,13 +1509,13 @@ File Transfer Using a URL
 
 Instead of file transfer that goes only between the submit machine and
 the execute machine, HTCondor has the ability to transfer files from a
-location specified by a URL for a jobÂ’s input file, or from the execute
-machine to a location specified by a URL for a jobÂ’s output file(s).
+location specified by a URL for a job’s input file, or from the execute
+machine to a location specified by a URL for a job’s output file(s).
 This capability requires administrative set up, as described in
-section \ `3.14.2 <http://research.cs.wisc.edu/htcondor/manual/v8.8/SettingUpforSpecialEnvironments.html#x42-3480003.14.2>`__.
+section \ `3.14.2 <SettingUpforSpecialEnvironments.html#x42-3480003.14.2>`__.
 
 The transfer of an input file is restricted to vanilla and vm universe
-jobs only. HTCondorÂ’s file transfer mechanism must be enabled.
+jobs only. HTCondor’s file transfer mechanism must be enabled.
 Therefore, the submit description file for the job will define both
 **should\_transfer\_files** and **when\_to\_transfer\_output**. In
 addition, the URL for any files specified with a URL are given in the
@@ -1558,7 +1531,7 @@ description file for a job that has a single file specified with a URL:
 The destination file is given by the file name within the URL.
 
 For the transfer of the entire contents of the output sandbox, which are
-all files that the job creates or modifies, HTCondorÂ’s file transfer
+all files that the job creates or modifies, HTCondor’s file transfer
 mechanism must be enabled. In this sample portion of the submit
 description file, the first two commands explicitly enable file
 transfer, and the added **output\_destination** command provides both
@@ -1583,16 +1556,16 @@ is specified by further adding a submit command of the form:
 Requirements and Rank for File Transfer
 '''''''''''''''''''''''''''''''''''''''
 
-The ``requirements`` expression for a job must depend on the
+The requirements expression for a job must depend on the
 should\_transfer\_files command. The job must specify the correct logic
 to ensure that the job is matched with a resource that meets the file
-transfer needs. If no ``requirements`` expression is in the submit
+transfer needs. If no requirements expression is in the submit
 description file, or if the expression specified does not refer to the
 attributes listed below, *condor\_submit* adds an appropriate clause to
-the ``requirements`` expression for the job. *condor\_submit* appends
-these clauses with a logical AND, &&, to ensure that the proper
-conditions are met. Here are the default clauses corresponding to the
-different values of should\_transfer\_files:
+the requirements expression for the job. *condor\_submit* appends these
+clauses with a logical AND, &&, to ensure that the proper conditions are
+met. Here are the default clauses corresponding to the different values
+of should\_transfer\_files:
 
 #. should\_transfer\_files = YES
 
@@ -1604,12 +1577,12 @@ different values of should\_transfer\_files:
 
    results in the addition of
    (TARGET.FileSystemDomain == MY.FileSystemDomain). In addition,
-   HTCondor automatically adds the ``FileSystemDomain`` attribute to the
-   job ClassAd, with whatever string is defined for the *condor\_schedd*
-   to which the job is submitted. If the job is not using the file
-   transfer mechanism, HTCondor assumes it will need a shared file
-   system, and therefore, a machine in the same ``FileSystemDomain`` as
-   the submit machine.
+   HTCondor automatically adds the FileSystemDomain attribute to the job
+   ClassAd, with whatever string is defined for the *condor\_schedd* to
+   which the job is submitted. If the job is not using the file transfer
+   mechanism, HTCondor assumes it will need a shared file system, and
+   therefore, a machine in the same FileSystemDomain as the submit
+   machine.
 
 #. should\_transfer\_files = IF\_NEEDED results in the addition of
 
@@ -1623,11 +1596,11 @@ different values of should\_transfer\_files:
 
 To ensure that the job is matched to a machine with enough local disk
 space to hold all the transferred files, HTCondor automatically adds the
-``DiskUsage`` job attribute. This attribute includes the total size of
-the jobÂ’s executable and all input files to be transferred. HTCondor
-then adds an additional clause to the ``Requirements`` expression that
-states that the remote machine must have at least enough available disk
-space to hold all these files:
+DiskUsage job attribute. This attribute includes the total size of the
+job’s executable and all input files to be transferred. HTCondor then
+adds an additional clause to the Requirements expression that states
+that the remote machine must have at least enough available disk space
+to hold all these files:
 
 ::
 
@@ -1636,13 +1609,13 @@ space to hold all these files:
 If should\_transfer\_files = IF\_NEEDED and the job prefers to run on a
 machine in the local file system domain over transferring files, but is
 still willing to allow the job to run remotely and transfer files, the
-``Rank`` expression works well. Use:
+Rank expression works well. Use:
 
 ::
 
     rank = (TARGET.FileSystemDomain == MY.FileSystemDomain)
 
-The ``Rank`` expression is a floating point value, so if other items are
+The Rank expression is a floating point value, so if other items are
 considered in ranking the possible machines this job may run on, add the
 items:
 
@@ -1650,7 +1623,7 @@ items:
 
     Rank = kflops + (TARGET.FileSystemDomain == MY.FileSystemDomain)
 
-The value of ``kflops`` can vary widely among machines, so this ``Rank``
+The value of kflops can vary widely among machines, so this Rank
 expression will likely not do as it intends. To place emphasis on the
 job running in the same file system domain, but still consider floating
 point speed among the machines in the file system domain, weight the
@@ -1669,19 +1642,19 @@ that is potentially useful to the job. HTCondor allows a user to both
 set and reference environment variables for a job or job cluster.
 
 Within a submit description file, the user may define environment
-variables for the jobÂ’s environment by using the **environment**
+variables for the job’s environment by using the **environment**
 command. See within the *condor\_submit* manual page at
-section \ `12 <http://research.cs.wisc.edu/htcondor/manual/v8.8/Condorsubmit.html#x148-108100012>`__
-for more details about this command.
+section \ `12 <Condorsubmit.html#x149-108400012>`__ for more details
+about this command.
 
-The submitterÂ’s entire environment can be copied into the job ClassAd
+The submitter’s entire environment can be copied into the job ClassAd
 for the job at job submission. The **getenv** command within the submit
 description file does this, as described at
-section \ `12 <http://research.cs.wisc.edu/htcondor/manual/v8.8/Condorsubmit.html#x148-108100012>`__.
+section \ `12 <Condorsubmit.html#x149-108400012>`__.
 
 If the environment is set with the **environment** command and
 **getenv** is also set to true, values specified with **environment**
-override values in the submitterÂ’s environment, regardless of the order
+override values in the submitter’s environment, regardless of the order
 of the **environment** and **getenv** commands.
 
 Commands within the submit description file may reference the
@@ -1692,26 +1665,21 @@ the value of an environment variable.
 HTCondor sets several additional environment variables for each
 executing job that may be useful for the job to reference.
 
--  ``_CONDOR_SCRATCH_DIR`` gives the directory where the job may place
+-  \_CONDOR\_SCRATCH\_DIR gives the directory where the job may place
    temporary data files. This directory is unique for every job that is
    run, and its contents are deleted by HTCondor when the job stops
    running on a machine, no matter how the job completes.
--  ``_CONDOR_SLOT`` gives the name of the slot (for SMP machines), on
+-  \_CONDOR\_SLOT gives the name of the slot (for SMP machines), on
    which the job is run. On machines with only a single slot, the value
-   of this variable will be 1, just like the ``SlotID`` attribute in the
-   machineÂ’s ClassAd. This setting is available in all universes. See
-   section \ `3.7.1 <http://research.cs.wisc.edu/htcondor/manual/v8.8/PolicyConfigurationforExecuteHostsandforSubmitHosts.html#x35-2530003.7.1>`__
+   of this variable will be 1, just like the SlotID attribute in the
+   machine’s ClassAd. This setting is available in all universes. See
+   section \ `3.7.1 <PolicyConfigurationforExecuteHostsandforSubmitHosts.html#x35-2530003.7.1>`__
    for more details about SMP machines and their configuration.
--  ``CONDOR_VM`` equivalent to ``_CONDOR_SLOT`` described above, except
-   that it is only available in the standard universe. NOTE: As of
-   HTCondor version 6.9.3, this environment variable is no longer used.
-   It will only be defined if the ``ALLOW_VM_CRUFT`` configuration
-   variable is set to ``True``.
--  ``X509_USER_PROXY`` gives the full path to the X.509 user proxy file
-   if one is associated with the job. Typically, a user will specify
+-  X509\_USER\_PROXY gives the full path to the X.509 user proxy file if
+   one is associated with the job. Typically, a user will specify
    **x509userproxy** in the submit description file. This setting is
    currently available in the local, java, and vanilla universes.
--  ``_CONDOR_JOB_AD`` is the path to a file in the jobÂ’s scratch
+-  \_CONDOR\_JOB\_AD is the path to a file in the job’s scratch
    directory which contains the job ad for the currently running job.
    The job ad is current as of the start of the job, but is not updated
    during the running of the job. The job may read attributes and their
@@ -1719,21 +1687,21 @@ executing job that may be useful for the job to reference.
    on in any way by HTCondor. The format is the same as the output of
    the *condor\_q* **-l** command. This environment variable may be
    particularly useful in a USER\_JOB\_WRAPPER.
--  ``_CONDOR_MACHINE_AD`` is the path to a file in the jobÂ’s scratch
+-  \_CONDOR\_MACHINE\_AD is the path to a file in the job’s scratch
    directory which contains the machine ad for the slot the currently
    running job is using. The machine ad is current as of the start of
    the job, but is not updated during the running of the job. The format
    is the same as the output of the *condor\_status* **-l** command.
--  ``_CONDOR_JOB_IWD`` is the path to the initial working directory the
+-  \_CONDOR\_JOB\_IWD is the path to the initial working directory the
    job was born with.
--  ``_CONDOR_WRAPPER_ERROR_FILE`` is only set when the administrator has
+-  \_CONDOR\_WRAPPER\_ERROR\_FILE is only set when the administrator has
    installed a USER\_JOB\_WRAPPER. If this file exists, HTCondor assumes
    that the job wrapper has failed and copies the contents of the file
    to the StarterLog for the administrator to debug the problem.
--  ``CONDOR_IDS`` overrides the value of configuration variable
-   ``CONDOR_IDS``, when set in the environment.
--  ``CONDOR_ID`` is set for scheduler universe jobs to be the same as
-   the ``ClusterId`` attribute.
+-  CONDOR\_IDS overrides the value of configuration variable
+   CONDOR\_IDS, when set in the environment.
+-  CONDOR\_ID is set for scheduler universe jobs to be the same as the
+   ClusterId attribute.
 
 Heterogeneous Submit: Execution on Differing Architectures
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1745,25 +1713,24 @@ submit description file allow this choice of platforms.
 
 A simplified example is a cross submission. An executable is available
 for one platform, but the submission is done from a different platform.
-Given the correct executable, the ``requirements`` command in the submit
+Given the correct executable, the requirements command in the submit
 description file specifies the target architecture. For example, an
 executable compiled for a 32-bit Intel processor running Windows Vista,
 submitted from an Intel architecture running Linux would add the
-``requirement``
+requirement
 
 ::
 
       requirements = Arch == "INTEL" && OpSys == "WINDOWS"
 
-Without this ``requirement``, *condor\_submit* will assume that the
-program is to be executed on a machine with the same platform as the
-machine where the job is submitted.
+Without this requirement, *condor\_submit* will assume that the program
+is to be executed on a machine with the same platform as the machine
+where the job is submitted.
 
-Cross submission works for all universes except ``scheduler`` and
-``local``. See
-section \ `5.3.11 <http://research.cs.wisc.edu/htcondor/manual/v8.8/TheGridUniverse.html#x56-4870005.3.11>`__
-for how matchmaking works in the ``grid`` universe. The burden is on the
-user to both obtain and specify the correct executable for the target
+Cross submission works for all universes except scheduler and local. See
+section \ `5.3.11 <TheGridUniverse.html#x56-4870005.3.11>`__ for how
+matchmaking works in the grid universe. The burden is on the user to
+both obtain and specify the correct executable for the target
 architecture. To list the architecture and operating systems of the
 machines in a pool, run *condor\_status*.
 
@@ -1784,8 +1751,8 @@ attributes in the submit description file. The macro has the form
 
       $$(MachineAdAttribute)
 
-The $$() informs HTCondor to substitute the requested
-``MachineAdAttribute`` from the machine where the job will be executed.
+The $$() informs HTCondor to substitute the requested MachineAdAttribute
+from the machine where the job will be executed.
 
 An example of the heterogeneous job submission has executables available
 for two platforms: RHEL 3 on both 32-bit and 64-bit Intel processors.
@@ -1844,8 +1811,8 @@ platform. Switching platforms in the middle of job execution cannot work
 correctly.
 
 There are two common errors made with the substitution macro. The first
-is the use of a non-existent ``MachineAdAttribute``. If the specified
-``MachineAdAttribute`` does not exist in the machineÂ’s ClassAd, then
+is the use of a non-existent MachineAdAttribute. If the specified
+MachineAdAttribute does not exist in the machine’s ClassAd, then
 HTCondor will place the job in the held state until the problem is
 resolved.
 
@@ -1867,17 +1834,17 @@ same.
 
 In previous versions of HTCondor, the author of the heterogeneous
 submission file would need to write extra policy expressions in the
-``requirements`` expression to force HTCondor to choose the same type of
+requirements expression to force HTCondor to choose the same type of
 platform when continuing a checkpointed job. However, since it is needed
 in the common case, this additional policy is now automatically added to
-the ``requirements`` expression. The additional expression is added
-provided the user does not use ``CkptArch`` in the ``requirements``
-expression. HTCondor will remain backward compatible for those users who
-have explicitly specified ``CkptRequirements``\ Â–implying use of
-``CkptArch``, in their ``requirements`` expression.
+the requirements expression. The additional expression is added provided
+the user does not use CkptArch in the requirements expression. HTCondor
+will remain backward compatible for those users who have explicitly
+specified CkptRequirements–implying use of CkptArch, in their
+requirements expression.
 
-The expression added when the attribute ``CkptArch`` is not specified
-will default to
+The expression added when the attribute CkptArch is not specified will
+default to
 
 ::
 
@@ -1887,17 +1854,17 @@ will default to
      
        Requirements = (<user specified policy>) && $(CkptRequirements)
 
-The behavior of the ``CkptRequirements`` expressions and its addition to
-``requirements`` is as follows. The ``CkptRequirements`` expression
-guarantees correct operation in the two possible cases for a job. In the
-first case, the job has not produced a checkpoint. The ClassAd
-attributes ``CkptArch`` and ``CkptOpSys`` will be undefined, and
-therefore the meta operator (=?=) evaluates to true. In the second case,
-the job has produced a checkpoint. The Machine ClassAd is restricted to
-require further execution only on a machine of the same platform. The
-attributes ``CkptArch`` and ``CkptOpSys`` will be defined, ensuring that
-the platform chosen for further execution will be the same as the one
-used just before the checkpoint.
+The behavior of the CkptRequirements expressions and its addition to
+requirements is as follows. The CkptRequirements expression guarantees
+correct operation in the two possible cases for a job. In the first
+case, the job has not produced a checkpoint. The ClassAd attributes
+CkptArch and CkptOpSys will be undefined, and therefore the meta
+operator (=?=) evaluates to true. In the second case, the job has
+produced a checkpoint. The Machine ClassAd is restricted to require
+further execution only on a machine of the same platform. The attributes
+CkptArch and CkptOpSys will be defined, ensuring that the platform
+chosen for further execution will be the same as the one used just
+before the checkpoint.
 
 Note that this restriction of platforms also applies to platforms where
 the executables are binary compatible.
@@ -2004,8 +1971,8 @@ submit description file by adding the submit command
 
       request_GPUs = <n>
 
-where ``<n>`` is replaced by the integer quantity of GPUs required for
-the job. For example, a job that needs 1 GPU uses
+where <n> is replaced by the integer quantity of GPUs required for the
+job. For example, a job that needs 1 GPU uses
 
 ::
 
@@ -2026,7 +1993,7 @@ description file, place
 Access to GPU resources by an HTCondor job needs special configuration
 of the machines that offer GPUs. Details of how to set up the
 configuration are in
-section \ `3.7.1 <http://research.cs.wisc.edu/htcondor/manual/v8.8/PolicyConfigurationforExecuteHostsandforSubmitHosts.html#x35-2580003.7.1>`__.
+section \ `3.7.1 <PolicyConfigurationforExecuteHostsandforSubmitHosts.html#x35-2580003.7.1>`__.
 
 Interactive Jobs
 ^^^^^^^^^^^^^^^^
@@ -2042,7 +2009,7 @@ correct, or it might provide information on the RAM or disk space
 needed. This job (shell) continues until the user logs out or any other
 policy implementation causes the job to stop running. A useful feature
 of the interactive job is that the users and jobs are accounted for
-within CondorÂ’s scheduling and priority system.
+within Condor’s scheduling and priority system.
 
 Neither the submit nor the execute host for interactive jobs may be on
 Windows platforms.
@@ -2077,7 +2044,7 @@ interactive job, such as files to transfer.
 
 If no submit description file is specified for the job, a default one is
 utilized as identified by the value of the configuration variable
-``INTERACTIVE_SUBMIT_FILE`` .
+INTERACTIVE\_SUBMIT\_FILE .
 
 Here are examples of situations where interactive jobs may be of
 benefit.
@@ -2096,6 +2063,6 @@ benefit.
    identified, they can be corrected on the spot.
 -  Development may have an interactive nature, and proceed more quickly
    when done on a pool machine. It may also be that the development
-   platforms required reside within CondorÂ’s purview as execute hosts.
+   platforms required reside within Condor’s purview as execute hosts.
 
       
