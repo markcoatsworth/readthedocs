@@ -9,10 +9,20 @@ Contents:
    :maxdepth: 2
    :glob:
 
-.. getting-started
-.. users-manual/index
+   overview/index
+   users-manual/index
+   admin-manual/index
+   misc-concepts/index
+   grid-computing/index
+   cloud-computing/index
+   apis/index
+   platform-specific/index
+   faq/index
+   contrib-source-modules/index
+   version-history/index
    man-pages/index
-.. reference-index
+   classad-attributes/index
+   codes-other-values/index
 
 Indices and tables
 ------------------
