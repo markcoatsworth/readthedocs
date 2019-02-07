@@ -13,7 +13,7 @@ running the *condor\_schedd* daemon (maintaining the job queue) becomes
 unavailable.
 
 High Availability of the Job Queue
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------
 
 For a pool where all jobs are submitted through a single machine in the
 pool, and there are lots of jobs, this machine becoming nonfunctional
@@ -54,21 +54,21 @@ point):
 
 ::
 
-    MASTER_HA_LIST = SCHEDD
-     SPOOL = /share/spool
-     HA_LOCK_URL = file:/share/spool
-     VALID_SPOOL_FILES = $(VALID_SPOOL_FILES) SCHEDD.lock
+    MASTER_HA_LIST = SCHEDD 
+    SPOOL = /share/spool 
+    HA_LOCK_URL = file:/share/spool 
+    VALID_SPOOL_FILES = $(VALID_SPOOL_FILES) SCHEDD.lock
 
-Configuration macro MASTER\_HA\_LIST identifies the *condor\_schedd*
+Configuration macro ``MASTER_HA_LIST`` identifies the *condor\_schedd*
 daemon as the daemon that is to be watched to make sure that it is
 running. Each machine with this configuration must have access to the
 lock (the job queue) which synchronizes which single machine does run
 the *condor\_schedd* daemon. This lock and the job queue must both be
 located in a shared file space, and is currently specified only with a
-file URL. The configuration specifies the shared space (SPOOL), and the
-URL of the lock. *condor\_preen* is not currently aware of the lock file
-and will delete it if it is placed in the SPOOL directory, so be sure to
-add file SCHEDD.lock to VALID\_SPOOL\_FILES .
+file URL. The configuration specifies the shared space (``SPOOL``), and
+the URL of the lock. *condor\_preen* is not currently aware of the lock
+file and will delete it if it is placed in the ``SPOOL`` directory, so
+be sure to add file ``SCHEDD.lock`` to ``VALID_SPOOL_FILES`` .
 
 As HTCondor starts on machines that are configured to run the single
 *condor\_schedd* daemon, the *condor\_master* daemon of the first
@@ -98,7 +98,7 @@ relating to the configuration variables used to set timing and polling
 intervals.
 
 Working with Remote Job Submission
-''''''''''''''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Remote job submission requires identification of the job queue,
 submitting with a command similar to:
@@ -112,15 +112,15 @@ running on a single machine. With the high availability of the job
 queue, there are multiple *condor\_schedd* daemons, of which only one at
 a time is acting as the single submission point. To make remote
 submission of jobs work properly, set the configuration variable
-SCHEDD\_NAME in the local configuration to have the same value for each
-potentially running *condor\_schedd* daemon. In addition, the value
-chosen for the variable SCHEDD\_NAME will need to include the at symbol
-(@), such that HTCondor will not modify the value set for this variable.
-See the description of MASTER\_NAME in
+``SCHEDD_NAME`` in the local configuration to have the same value for
+each potentially running *condor\_schedd* daemon. In addition, the value
+chosen for the variable ``SCHEDD_NAME`` will need to include the at
+symbol (@), such that HTCondor will not modify the value set for this
+variable. See the description of ``MASTER_NAME`` in
 section \ `3.5.7 <ConfigurationMacros.html#x33-1940003.5.7>`__ on
 page \ `646 <ConfigurationMacros.html#x33-1940003.5.7>`__ for defaults
-and composition of valid values for SCHEDD\_NAME. As an example, include
-in each local configuration a value similar to:
+and composition of valid values for ``SCHEDD_NAME``. As an example,
+include in each local configuration a value similar to:
 
 ::
 
@@ -133,10 +133,10 @@ Then, with this sample configuration, the submit command appears as:
       % condor_submit -remote had-schedd@  myjob.submit
 
 High Availability of the Central Manager
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------
 
 Interaction with Flocking
-'''''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The HTCondor high availability mechanisms discussed in this section
 currently do not work well in configurations involving flocking. The
@@ -158,7 +158,7 @@ to pools with high availability mechanisms enabled.
    *condor\_schedd*.
 
 Introduction
-''''''''''''
+~~~~~~~~~~~~
 
 The *condor\_negotiator* and *condor\_collector* daemons are the heart
 of the HTCondor matchmaking system. The availability of these daemons is
@@ -238,12 +238,12 @@ the *condor\_replication* daemon must transfer state files. When it
 needs to transfer a file, the *condor\_replication* daemons at both the
 sending and receiving ends of the transfer invoke the
 *condor\_transferer* daemon. These short lived daemons do the task of
-file transfer and then exit. Do not place TRANSFERER into DAEMON\_LIST,
-as it is not a daemon that the *condor\_master* should invoke or watch
-over.
+file transfer and then exit. Do not place ``TRANSFERER`` into
+``DAEMON_LIST``, as it is not a daemon that the *condor\_master* should
+invoke or watch over.
 
 Configuration
-'''''''''''''
+~~~~~~~~~~~~~
 
 The high availability of central manager machines is enabled through
 configuration. It is disabled by default. All machines in a pool must be
@@ -256,10 +256,10 @@ The *condor\_had* and *condor\_replication* daemons use the
 *condor\_shared\_port* daemon by default. If you want to use more than
 one *condor\_had* or *condor\_replication* daemon with the
 *condor\_shared\_port* daemon under the same master, you must configure
-those additional daemons to use nondefault socket names. (Set the -sock
-option in <NAME>\_ARGS.) Because the *condor\_had* daemon must know the
-*condor\_replication* daemon’s address a priori, you will also need to
-set <NAME>.REPLICATION\_SOCKET\_NAME appropriately.
+those additional daemons to use nondefault socket names. (Set the
+``-sock`` option in ``<NAME>_ARGS``.) Because the *condor\_had* daemon
+must know the *condor\_replication* daemon’s address a priori, you will
+also need to set ``<NAME>.REPLICATION_SOCKET_NAME`` appropriately.
 
 The stabilization period is the time it takes for the *condor\_had*
 daemons to detect a change in the pool state such as an active central
@@ -268,13 +268,13 @@ may be computed using the following formula:
 
 ::
 
-    stabilization period = 12 * (number of central managers) *
-                               $(HAD_CONNECTION_TIMEOUT)
+    stabilization period = 12 * (number of central managers) * 
+                              $(HAD_CONNECTION_TIMEOUT)
 
 To disable the high availability of central managers mechanism, it is
-sufficient to remove HAD, REPLICATION, and NEGOTIATOR from the
-DAEMON\_LIST configuration variable on all machines, leaving only one
-*condor\_negotiator* in the pool.
+sufficient to remove ``HAD``, ``REPLICATION``, and ``NEGOTIATOR`` from
+the ``DAEMON_LIST`` configuration variable on all machines, leaving only
+one *condor\_negotiator* in the pool.
 
 To shut down a currently operating high availability mechanism, follow
 the given steps. All commands must be invoked from a host which has
@@ -299,19 +299,19 @@ secondary *condor\_negotiator* will be killed, and the primary will be
 restarted, only to exit again. If this happens too quickly, neither
 *condor\_negotiator* will run long enough to complete a negotiation
 cycle, resulting in no jobs getting started. Increasing this value via
-MASTER\_HAD\_BACKOFF\_CONSTANT to be larger than a typical negotiation
+``MASTER_HAD_BACKOFF_CONSTANT`` to be larger than a typical negotiation
 cycle can help solve this problem.
 
 To run a high availability pool without the replication feature, do the
 following operations:
 
-#. Set the HAD\_USE\_REPLICATION configuration variable to False, and
-   thus disable the replication on configuration level.
-#. Remove REPLICATION from both DAEMON\_LIST and DC\_DAEMON\_LIST in the
-   configuration file.
+#. Set the ``HAD_USE_REPLICATION`` configuration variable to ``False``,
+   and thus disable the replication on configuration level.
+#. Remove ``REPLICATION`` from both ``DAEMON_LIST`` and
+   ``DC_DAEMON_LIST`` in the configuration file.
 
 Sample Configuration
-''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~
 
 This section provides sample configurations for high availability.
 
@@ -328,184 +328,184 @@ machines.
 
 ::
 
-    ## THE FOLLOWING MUST BE IDENTICAL ON ALL CENTRAL MANAGERS
+    ## THE FOLLOWING MUST BE IDENTICAL ON ALL CENTRAL MANAGERS 
      
-     CENTRAL_MANAGER1 = cm1.domain.name
-     CENTRAL_MANAGER2 = cm2.domain.name
-     CONDOR_HOST = $(CENTRAL_MANAGER1), $(CENTRAL_MANAGER2)
+    CENTRAL_MANAGER1 = cm1.domain.name 
+    CENTRAL_MANAGER2 = cm2.domain.name 
+    CONDOR_HOST = $(CENTRAL_MANAGER1), $(CENTRAL_MANAGER2) 
      
-     # Since we're using shared port, we set the port number to the shared
-     # port daemon's port number.  NOTE: this assumes that each machine in
-     # the list is using the same port number for shared port.  While this
-     # will be true by default, if you've changed it in configuration any-
-     # where, you need to reflect that change here.
+    # Since we're using shared port, we set the port number to the shared 
+    # port daemon's port number.  NOTE: this assumes that each machine in 
+    # the list is using the same port number for shared port.  While this 
+    # will be true by default, if you've changed it in configuration any- 
+    # where, you need to reflect that change here. 
      
-     HAD_USE_SHARED_PORT = TRUE
-     HAD_LIST = \
-     $(CENTRAL_MANAGER1):$(SHARED_PORT_PORT), \
-     $(CENTRAL_MANAGER2):$(SHARED_PORT_PORT)
+    HAD_USE_SHARED_PORT = TRUE 
+    HAD_LIST = \ 
+    $(CENTRAL_MANAGER1):$(SHARED_PORT_PORT), \ 
+    $(CENTRAL_MANAGER2):$(SHARED_PORT_PORT) 
      
-     REPLICATION_USE_SHARED_PORT = TRUE
-     REPLICATION_LIST = \
-     $(CENTRAL_MANAGER1):$(SHARED_PORT_PORT), \
-     $(CENTRAL_MANAGER2):$(SHARED_PORT_PORT)
+    REPLICATION_USE_SHARED_PORT = TRUE 
+    REPLICATION_LIST = \ 
+    $(CENTRAL_MANAGER1):$(SHARED_PORT_PORT), \ 
+    $(CENTRAL_MANAGER2):$(SHARED_PORT_PORT) 
      
-     # The recommended setting.
-     HAD_USE_PRIMARY = TRUE
+    # The recommended setting. 
+    HAD_USE_PRIMARY = TRUE 
      
-     # If you change which daemon(s) you're making highly-available, you must
-     # change both of these values.
-     HAD_CONTROLLEE = NEGOTIATOR
-     MASTER_NEGOTIATOR_CONTROLLER = HAD
+    # If you change which daemon(s) you're making highly-available, you must 
+    # change both of these values. 
+    HAD_CONTROLLEE = NEGOTIATOR 
+    MASTER_NEGOTIATOR_CONTROLLER = HAD 
      
-     ## THE FOLLOWING MAY DIFFER BETWEEN CENTRAL MANAGERS
+    ## THE FOLLOWING MAY DIFFER BETWEEN CENTRAL MANAGERS 
      
-     # The daemon list may contain additional entries.
-     DAEMON_LIST = MASTER, COLLECTOR, NEGOTIATOR, HAD, REPLICATION
+    # The daemon list may contain additional entries. 
+    DAEMON_LIST = MASTER, COLLECTOR, NEGOTIATOR, HAD, REPLICATION 
      
-     # Using replication is optional.
-     HAD_USE_REPLICATION = TRUE
+    # Using replication is optional. 
+    HAD_USE_REPLICATION = TRUE 
      
-     # This is the default location for the state file.
-     STATE_FILE = $(SPOOL)/Accountantnew.log
+    # This is the default location for the state file. 
+    STATE_FILE = $(SPOOL)/Accountantnew.log 
      
-     # See note above the length of the negotiation cycle.
-     MASTER_HAD_BACKOFF_CONSTANT = 360
+    # See note above the length of the negotiation cycle. 
+    MASTER_HAD_BACKOFF_CONSTANT = 360
 
 The following shared-port configuration is for the machines which that
 will not be central managers.
 
 ::
 
-    CENTRAL_MANAGER1 = cm1.domain.name
-     CENTRAL_MANAGER2 = cm2.domain.name
-     CONDOR_HOST = $(CENTRAL_MANAGER1), $(CENTRAL_MANAGER2)
+    CENTRAL_MANAGER1 = cm1.domain.name 
+    CENTRAL_MANAGER2 = cm2.domain.name 
+    CONDOR_HOST = $(CENTRAL_MANAGER1), $(CENTRAL_MANAGER2)
 
 The following configuration sets fixed port numbers for the central
 manager machines.
 
 ::
 
-    ##########################################################################
-     # A sample configuration file for central managers, to enable the        #
-     # the high availability  mechanism.                                      #
-     ##########################################################################
+    ########################################################################## 
+    # A sample configuration file for central managers, to enable the        # 
+    # the high availability  mechanism.                                      # 
+    ########################################################################## 
      
-     #########################################################################
-     ## THE FOLLOWING MUST BE IDENTICAL ON ALL POTENTIAL CENTRAL MANAGERS.   #
-     #########################################################################
-     ## For simplicity in writing other expressions, define a variable
-     ## for each potential central manager in the pool.
-     ## These are samples.
-     CENTRAL_MANAGER1 = cm1.domain.name
-     CENTRAL_MANAGER2 = cm2.domain.name
-     ## A list of all potential central managers in the pool.
-     CONDOR_HOST = $(CENTRAL_MANAGER1),$(CENTRAL_MANAGER2)
+    ######################################################################### 
+    ## THE FOLLOWING MUST BE IDENTICAL ON ALL POTENTIAL CENTRAL MANAGERS.   # 
+    ######################################################################### 
+    ## For simplicity in writing other expressions, define a variable 
+    ## for each potential central manager in the pool. 
+    ## These are samples. 
+    CENTRAL_MANAGER1 = cm1.domain.name 
+    CENTRAL_MANAGER2 = cm2.domain.name 
+    ## A list of all potential central managers in the pool. 
+    CONDOR_HOST = $(CENTRAL_MANAGER1),$(CENTRAL_MANAGER2) 
      
-     ## Define the port number on which the condor_had daemon will
-     ## listen.  The port must match the port number used
-     ## for when defining HAD_LIST.  This port number is
-     ## arbitrary; make sure that there is no port number collision
-     ## with other applications.
-     HAD_PORT = 51450
-     HAD_ARGS = -f -p $(HAD_PORT)
+    ## Define the port number on which the condor_had daemon will 
+    ## listen.  The port must match the port number used 
+    ## for when defining HAD_LIST.  This port number is 
+    ## arbitrary; make sure that there is no port number collision 
+    ## with other applications. 
+    HAD_PORT = 51450 
+    HAD_ARGS = -f -p $(HAD_PORT) 
      
-     ## The following macro defines the port number condor_replication will listen
-     ## on on this machine. This port should match the port number specified
-     ## for that replication daemon in the REPLICATION_LIST
-     ## Port number is arbitrary (make sure no collision with other applications)
-     ## This is a sample port number
-     REPLICATION_PORT = 41450
-     REPLICATION_ARGS = -p $(REPLICATION_PORT)
+    ## The following macro defines the port number condor_replication will listen 
+    ## on on this machine. This port should match the port number specified 
+    ## for that replication daemon in the REPLICATION_LIST 
+    ## Port number is arbitrary (make sure no collision with other applications) 
+    ## This is a sample port number 
+    REPLICATION_PORT = 41450 
+    REPLICATION_ARGS = -p $(REPLICATION_PORT) 
      
-     ## The following list must contain the same addresses in the same order
-     ## as CONDOR_HOST. In addition, for each hostname, it should specify
-     ## the port number of condor_had daemon running on that host.
-     ## The first machine in the list will be the PRIMARY central manager
-     ## machine, in case HAD_USE_PRIMARY is set to true.
-     HAD_LIST = \
-     $(CENTRAL_MANAGER1):$(HAD_PORT), \
-     $(CENTRAL_MANAGER2):$(HAD_PORT)
+    ## The following list must contain the same addresses in the same order 
+    ## as CONDOR_HOST. In addition, for each hostname, it should specify 
+    ## the port number of condor_had daemon running on that host. 
+    ## The first machine in the list will be the PRIMARY central manager 
+    ## machine, in case HAD_USE_PRIMARY is set to true. 
+    HAD_LIST = \ 
+    $(CENTRAL_MANAGER1):$(HAD_PORT), \ 
+    $(CENTRAL_MANAGER2):$(HAD_PORT) 
      
-     ## The following list must contain the same addresses
-     ## as HAD_LIST. In addition, for each hostname, it should specify
-     ## the port number of condor_replication daemon running on that host.
-     ## This parameter is mandatory and has no default value
-     REPLICATION_LIST = \
-     $(CENTRAL_MANAGER1):$(REPLICATION_PORT), \
-     $(CENTRAL_MANAGER2):$(REPLICATION_PORT)
+    ## The following list must contain the same addresses 
+    ## as HAD_LIST. In addition, for each hostname, it should specify 
+    ## the port number of condor_replication daemon running on that host. 
+    ## This parameter is mandatory and has no default value 
+    REPLICATION_LIST = \ 
+    $(CENTRAL_MANAGER1):$(REPLICATION_PORT), \ 
+    $(CENTRAL_MANAGER2):$(REPLICATION_PORT) 
      
-     ## The following is the name of the daemon that the HAD controls.
-     ## This must match the name of a daemon in the master's DAEMON_LIST.
-     ## The default is NEGOTIATOR, but can be any daemon that the master
-     ## controls.
-     HAD_CONTROLLEE = NEGOTIATOR
+    ## The following is the name of the daemon that the HAD controls. 
+    ## This must match the name of a daemon in the master's DAEMON_LIST. 
+    ## The default is NEGOTIATOR, but can be any daemon that the master 
+    ## controls. 
+    HAD_CONTROLLEE = NEGOTIATOR 
      
-     ## HAD connection time.
-     ## Recommended value is 2 if the central managers are on the same subnet.
-     ## Recommended value is 5 if Condor security is enabled.
-     ## Recommended value is 10 if the network is very slow, or
-     ## to reduce the sensitivity of HA daemons to network failures.
-     HAD_CONNECTION_TIMEOUT = 2
+    ## HAD connection time. 
+    ## Recommended value is 2 if the central managers are on the same subnet. 
+    ## Recommended value is 5 if Condor security is enabled. 
+    ## Recommended value is 10 if the network is very slow, or 
+    ## to reduce the sensitivity of HA daemons to network failures. 
+    HAD_CONNECTION_TIMEOUT = 2 
      
-     ##If true, the first central manager in HAD_LIST is a primary.
-     HAD_USE_PRIMARY = true
-     
-     
-     ###################################################################
-     ## THE PARAMETERS BELOW ARE ALLOWED TO BE DIFFERENT ON EACH       #
-     ## CENTRAL MANAGER                                                #
-     ## THESE ARE MASTER SPECIFIC PARAMETERS
-     ###################################################################
+    ##If true, the first central manager in HAD_LIST is a primary. 
+    HAD_USE_PRIMARY = true 
      
      
-     ## the master should start at least these four daemons
-     DAEMON_LIST = MASTER, COLLECTOR, NEGOTIATOR, HAD, REPLICATION
+    ################################################################### 
+    ## THE PARAMETERS BELOW ARE ALLOWED TO BE DIFFERENT ON EACH       # 
+    ## CENTRAL MANAGER                                                # 
+    ## THESE ARE MASTER SPECIFIC PARAMETERS 
+    ################################################################### 
      
      
-     ## Enables/disables the replication feature of HAD daemon
-     ## Default: false
-     HAD_USE_REPLICATION    = true
-     
-     ## Name of the file from the SPOOL directory that will be replicated
-     ## Default: $(SPOOL)/Accountantnew.log
-     STATE_FILE = $(SPOOL)/Accountantnew.log
-     
-     ## Period of time between two successive awakenings of the replication daemon
-     ## Default: 300
-     REPLICATION_INTERVAL                 = 300
-     
-     ## Period of time, in which transferer daemons have to accomplish the
-     ## downloading/uploading process
-     ## Default: 300
-     MAX_TRANSFER_LIFETIME                = 300
+    ## the master should start at least these four daemons 
+    DAEMON_LIST = MASTER, COLLECTOR, NEGOTIATOR, HAD, REPLICATION 
      
      
-     ## Period of time between two successive sends of classads to the collector by HAD
-     ## Default: 300
-     HAD_UPDATE_INTERVAL = 300
+    ## Enables/disables the replication feature of HAD daemon 
+    ## Default: false 
+    HAD_USE_REPLICATION    = true 
+     
+    ## Name of the file from the SPOOL directory that will be replicated 
+    ## Default: $(SPOOL)/Accountantnew.log 
+    STATE_FILE = $(SPOOL)/Accountantnew.log 
+     
+    ## Period of time between two successive awakenings of the replication daemon 
+    ## Default: 300 
+    REPLICATION_INTERVAL                 = 300 
+     
+    ## Period of time, in which transferer daemons have to accomplish the 
+    ## downloading/uploading process 
+    ## Default: 300 
+    MAX_TRANSFER_LIFETIME                = 300 
      
      
-     ## The HAD controls the negotiator, and should have a larger
-     ## backoff constant
-     MASTER_NEGOTIATOR_CONTROLLER = HAD
-     MASTER_HAD_BACKOFF_CONSTANT = 360
+    ## Period of time between two successive sends of classads to the collector by HAD 
+    ## Default: 300 
+    HAD_UPDATE_INTERVAL = 300 
+     
+     
+    ## The HAD controls the negotiator, and should have a larger 
+    ## backoff constant 
+    MASTER_NEGOTIATOR_CONTROLLER = HAD 
+    MASTER_HAD_BACKOFF_CONSTANT = 360
 
 The configuration for machines that will not be central managers is
 identical for the fixed- and shared- port cases.
 
 ::
 
-    ##########################################################################
-     # Sample configuration relating to high availability for machines        #
-     # that DO NOT run the condor_had daemon.                                 #
-     ##########################################################################
+    ########################################################################## 
+    # Sample configuration relating to high availability for machines        # 
+    # that DO NOT run the condor_had daemon.                                 # 
+    ########################################################################## 
      
-     ## For simplicity define a variable for each potential central manager
-     ## in the pool.
-     CENTRAL_MANAGER1 = cm1.domain.name
-     CENTRAL_MANAGER2 = cm2.domain.name
-     ## List of all potential central managers in the pool
-     CONDOR_HOST = $(CENTRAL_MANAGER1),$(CENTRAL_MANAGER2)
+    ## For simplicity define a variable for each potential central manager 
+    ## in the pool. 
+    CENTRAL_MANAGER1 = cm1.domain.name 
+    CENTRAL_MANAGER2 = cm2.domain.name 
+    ## List of all potential central managers in the pool 
+    CONDOR_HOST = $(CENTRAL_MANAGER1),$(CENTRAL_MANAGER2)
 
       

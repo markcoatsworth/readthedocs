@@ -6,14 +6,14 @@ condor\_userlog
 Display and summarize job statistics from job log files.
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_userlog** [**-help**\ ] [**-total \| -raw**\ ] [**-debug**\ ]
 [**-evict**\ ] [**-j  **\ *cluster \| cluster.proc*] [**-all**\ ]
 [**-hostname**\ ] *logfile …*
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_userlog* parses the information in job log files and displays
 summaries for each workstation allocation and for each job. See the
@@ -107,7 +107,7 @@ Finally, *condor\_userlog* will display a summary for all hosts and
 jobs.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Get a brief description of the supported options
@@ -127,7 +127,7 @@ Options
     Display host name instead of IP address
 
 General Remarks
-^^^^^^^^^^^^^^^
+---------------
 
 Since the HTCondor job log file format does not contain a year field in
 the timestamp, all entries are assumed to occur in the current year.
@@ -135,18 +135,18 @@ Allocations which begin in one year and end in the next will be silently
 ignored.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_userlog* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

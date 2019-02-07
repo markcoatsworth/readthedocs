@@ -6,13 +6,13 @@ condor\_status
 Display status of the HTCondor pool
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_status** [**-debug**\ ] [*help options*\ ] [*query options*\ ]
 [*display options*\ ] [*custom options*\ ] [*name …*\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_status* is a versatile tool that may be used to monitor and
 query the HTCondor pool. The *condor\_status* tool can be used to query
@@ -37,11 +37,11 @@ option* may be specified. Any number of *custom options* and *host
 options* may be specified.
 
 Options
-^^^^^^^
+-------
 
  **-debug**
-    Causes debugging information to be sent to stderr, based on the
-    value of the configuration variable TOOL\_DEBUG.
+    Causes debugging information to be sent to ``stderr``, based on the
+    value of the configuration variable ``TOOL_DEBUG``.
  **-help**
     (Help option) Display usage information.
  **-diagnose**
@@ -93,7 +93,7 @@ Options
  **-pool **\ *centralmanagerhostname[:portnumber]*
     (Query option) Query the specified central manager using an optional
     port number. *condor\_status* queries the machine specified by the
-    configuration variable COLLECTOR\_HOST by default.
+    configuration variable ``COLLECTOR_HOST`` by default.
  **-run**
     (Query option) Display information about machines currently running
     jobs.
@@ -112,8 +112,8 @@ Options
     (Query option) Can only be used if the **-direct** option has been
     specified. Identifies which Statistics attributes to include in the
     ClassAd. *WhichStatistics* is specified using the same syntax as
-    defined for STATISTICS\_TO\_PUBLISH. A definition is in the HTCondor
-    Administrator’s manual section on configuration
+    defined for ``STATISTICS_TO_PUBLISH``. A definition is in the
+    HTCondor Administrator’s manual section on configuration
     (section `3.5.1 <ConfigurationMacros.html#x33-1880003.5.1>`__).
  **-storage**
     (Query option) Display attributes of machines with network storage
@@ -159,9 +159,10 @@ Options
     second expression, and it is numbered 1. For informational or
     debugging purposes, the ClassAd output to be displayed will appear
     as if the ClassAd had two additional attributes.
-    CondorStatusSortKeyExpr<N> is the expression, where <N> is replaced
-    by the number of the sort. CondorStatusSortKey<N> gives the result
-    of evaluating the sort expression that is numbered <N>.
+    ``CondorStatusSortKeyExpr<N>`` is the expression, where ``<N>`` is
+    replaced by the number of the sort. ``CondorStatusSortKey<N>`` gives
+    the result of evaluating the sort expression that is numbered
+    ``<N>``.
  **-total**
     (Display option) Display totals only.
  **-xml**
@@ -179,25 +180,26 @@ Options
  **-format **\ *fmt attr*
     (Custom option) Display attribute or expression *attr* in format
     *fmt*. To display the attribute or expression the format must
-    contain a single printf(3)-style conversion specifier. Attributes
-    must be from the resource ClassAd. Expressions are ClassAd
-    expressions and may refer to attributes in the resource ClassAd. If
-    the attribute is not present in a given ClassAd and cannot be parsed
-    as an expression, then the format option will be silently skipped.
-    %r prints the unevaluated, or raw values. The conversion specifier
-    must match the type of the attribute or expression. %s is suitable
-    for strings such as Name, %d for integers such as LastHeardFrom, and
-    %f for floating point numbers such as LoadAvg. %v identifies the
-    type of the attribute, and then prints the value in an appropriate
-    format. %V identifies the type of the attribute, and then prints the
-    value in an appropriate format as it would appear in the **-long**
-    format. As an example, strings used with %V will have quote marks.
-    An incorrect format will result in undefined behavior. Do not use
-    more than one conversion specifier in a given format. More than one
-    conversion specifier will result in undefined behavior. To output
-    multiple attributes repeat the **-format** option once for each
-    desired attribute. Like printf(3)-style formats, one may include
-    other text that will be reproduced directly. A format without any
+    contain a single ``printf(3)``-style conversion specifier.
+    Attributes must be from the resource ClassAd. Expressions are
+    ClassAd expressions and may refer to attributes in the resource
+    ClassAd. If the attribute is not present in a given ClassAd and
+    cannot be parsed as an expression, then the format option will be
+    silently skipped. %r prints the unevaluated, or raw values. The
+    conversion specifier must match the type of the attribute or
+    expression. %s is suitable for strings such as ``Name``, %d for
+    integers such as ``LastHeardFrom``, and %f for floating point
+    numbers such as ``LoadAvg``. %v identifies the type of the
+    attribute, and then prints the value in an appropriate format. %V
+    identifies the type of the attribute, and then prints the value in
+    an appropriate format as it would appear in the **-long** format. As
+    an example, strings used with %V will have quote marks. An incorrect
+    format will result in undefined behavior. Do not use more than one
+    conversion specifier in a given format. More than one conversion
+    specifier will result in undefined behavior. To output multiple
+    attributes repeat the **-format** option once for each desired
+    attribute. Like ``printf(3)``-style formats, one may include other
+    text that will be reproduced directly. A format without any
     conversion specifiers may be specified, but an attribute is still
     required. Include a backslash followed by an ‘n’ to specify a line
     break.
@@ -247,9 +249,9 @@ Options
     (Custom option) Where evaluation requires a target ClassAd to
     evaluate against, file *filename* contains the target ClassAd.
  **-merge **\ *filename*
-    (Custom option) Ads will be read from *filename*, which may be - to
-    indicate standard in, and compared to the ads selected by the query
-    specified by the remainder of the command line. Ads will be
+    (Custom option) Ads will be read from *filename*, which may be ``-``
+    to indicate standard in, and compared to the ads selected by the
+    query specified by the remainder of the command line. Ads will be
     considered the same if their sort keys match; sort keys may be
     specified with [**-sort  **\ *<key>*]. This option will cause up to
     three tables to print, in the following order, depending on where a
@@ -270,7 +272,7 @@ Options
     the ads in the query, so many others will behave strangely.
 
 General Remarks
-^^^^^^^^^^^^^^^
+---------------
 
 -  The default output from *condor\_status* is formatted to be human
    readable, not script readable. In an effort to make the output fit
@@ -284,8 +286,8 @@ General Remarks
    *condor\_startd* and *condor\_schedd* daemons update the HTCondor
    manager at different rates, and since there is a delay as information
    propagates through the network and the system.
--  Note that the ActivityTime in the Idle state is not the amount of
-   time that the machine has been idle. See the section on
+-  Note that the ``ActivityTime`` in the ``Idle`` state is not the
+   amount of time that the machine has been idle. See the section on
    *condor\_startd* states in the Administrator’s Manual for more
    information
    (section `3.2 <PolicyConfigurationforExecuteHostsandforSubmitHosts.html#x35-2490162>`__).
@@ -317,51 +319,51 @@ General Remarks
    the daemon you specified as the argument to **-direct**.
 
 Examples
-^^^^^^^^
+--------
 
 Example 1 To view information from all nodes of an SMP machine, use only
 the host name. For example, if you had a 4-CPU machine, named
-vulture.cs.wisc.edu, you might see
+``vulture.cs.wisc.edu``, you might see
 
 ::
 
-    % condor_status vulture
+    % condor_status vulture 
      
-     Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
+    Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime 
      
-     slot1@vulture.cs.w LINUX      INTEL  Claimed   Busy     1.050   512  0+01:47:42
-     slot2@vulture.cs.w LINUX      INTEL  Claimed   Busy     1.000   512  0+01:48:19
-     slot3@vulture.cs.w LINUX      INTEL  Unclaimed Idle     0.070   512  1+11:05:32
-     slot4@vulture.cs.w LINUX      INTEL  Unclaimed Idle     0.000   512  1+11:05:34
+    slot1@vulture.cs.w LINUX      INTEL  Claimed   Busy     1.050   512  0+01:47:42 
+    slot2@vulture.cs.w LINUX      INTEL  Claimed   Busy     1.000   512  0+01:48:19 
+    slot3@vulture.cs.w LINUX      INTEL  Unclaimed Idle     0.070   512  1+11:05:32 
+    slot4@vulture.cs.w LINUX      INTEL  Unclaimed Idle     0.000   512  1+11:05:34 
      
-                          Total Owner Claimed Unclaimed Matched Preempting Backfill
+                         Total Owner Claimed Unclaimed Matched Preempting Backfill 
      
-              INTEL/LINUX     4     0       2         2       0          0        0
+             INTEL/LINUX     4     0       2         2       0          0        0 
      
-                    Total     4     0       2         2       0          0        0
+                   Total     4     0       2         2       0          0        0
 
 Example 2 To view information from a specific nodes of an SMP machine,
 specify the node directly. You do this by providing the name of the
-slot. This has the form slot#@hostname. For example:
+slot. This has the form ``slot#@hostname``. For example:
 
 ::
 
-    % condor_status slot3@vulture
+    % condor_status slot3@vulture 
      
-     Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
+    Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime 
      
-     slot3@vulture.cs.w LINUX      INTEL  Unclaimed Idle     0.070   512  1+11:10:32
+    slot3@vulture.cs.w LINUX      INTEL  Unclaimed Idle     0.070   512  1+11:10:32 
      
-                          Total Owner Claimed Unclaimed Matched Preempting Backfill
+                         Total Owner Claimed Unclaimed Matched Preempting Backfill 
      
-              INTEL/LINUX     1     0       0         1       0          0        0
+             INTEL/LINUX     1     0       0         1       0          0        0 
      
-                    Total     1     0       0         1       0          0        0
+                   Total     1     0       0         1       0          0        0
 
 Constraint option examples
 
 The Unix command to use the constraint option to see all machines with
-the OpSys of "LINUX":
+the ``OpSys`` of ``"LINUX"``:
 
 ::
 
@@ -402,14 +404,14 @@ HTCondor pool.
 
 ::
 
-    Name        ID   ClaimState TimeInState RemoteUser JobId Keyword
-     astro.cs.wi COD1 Idle        0+00:00:04 wright
-     chopin.cs.w COD1 Running     0+00:02:05 wright     3.0   fractgen
-     chopin.cs.w COD2 Suspended   0+00:10:21 wright     4.0   fractgen
+    Name        ID   ClaimState TimeInState RemoteUser JobId Keyword 
+    astro.cs.wi COD1 Idle        0+00:00:04 wright 
+    chopin.cs.w COD1 Running     0+00:02:05 wright     3.0   fractgen 
+    chopin.cs.w COD2 Suspended   0+00:10:21 wright     4.0   fractgen 
      
-                    Total  Idle  Running  Suspended  Vacating  Killing
-      INTEL/LINUX       3     1        1          1         0        0
-            Total       3     1        1          1         0        0
+                   Total  Idle  Running  Suspended  Vacating  Killing 
+     INTEL/LINUX       3     1        1          1         0        0 
+           Total       3     1        1          1         0        0
 
 -format option example To display the name and memory attributes of each
 job ClassAd in a format that is easily parsable by other tools:
@@ -425,18 +427,18 @@ To do the same with the **autoformat** option, run
     % condor_status -autoformat Name Memory
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_status* will exit with a status value of 0 (zero) upon success,
 and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

@@ -6,7 +6,7 @@ condor\_ssh\_to\_job
 create an ssh session to a running job
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_ssh\_to\_job** [**-help**\ ]
 
@@ -18,7 +18,7 @@ Synopsis
 cluster.process.node* [*remote-command*\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_ssh\_to\_job* creates an *ssh* session to a running job. The
 job is specified with the argument. If only the job *cluster* id is
@@ -42,7 +42,7 @@ job, and it is initialized with the same working directory. The
 environment is initialized to be the same as that of the job, plus any
 changes made by the shell setup scripts and any environment variables
 passed by the *ssh* client. In addition, the environment variable
-\_CONDOR\_JOB\_PIDS is defined. It is a space-separated list of PIDs
+``_CONDOR_JOB_PIDS`` is defined. It is a space-separated list of PIDs
 associated with the job. At a minimum, the list will contain the PID of
 the process started when the job was launched, and it will be the first
 item in the list. It may contain additional PIDs of other processes that
@@ -57,15 +57,15 @@ job processes have exited until all *ssh* sessions are closed. Multiple
 *ssh* sessions may be created to the same job at the same time. Resource
 consumption of the *sshd* process and all processes spawned by it are
 monitored by the *condor\_starter* as though these processes belong to
-the job, so any policies such as PREEMPT that enforce a limit on
+the job, so any policies such as ``PREEMPT`` that enforce a limit on
 resource consumption also take into account resources consumed by the
 *ssh* session.
 
 *condor\_ssh\_to\_job* stores ssh keys in temporary files within a newly
 created and uniquely named directory. The newly created directory will
-be within the directory defined by the environment variable TMPDIR. When
-the ssh session is finished, this directory and the ssh keys contained
-within it are removed.
+be within the directory defined by the environment variable ``TMPDIR``.
+When the ssh session is finished, this directory and the ssh keys
+contained within it are removed.
 
 See the HTCondor administrator’s manual section on configuration for
 details of the configuration variables related to
@@ -120,13 +120,13 @@ Although the **-X** option does not apply to EC2 jobs, adding **-X** or
 **-Y** to the *remote-command* argument can duplicate the effect.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display brief usage information and exit.
  **-debug**
-    Causes debugging information to be sent to stderr, based on the
-    value of the configuration variable TOOL\_DEBUG.
+    Causes debugging information to be sent to ``stderr``, based on the
+    value of the configuration variable ``TOOL_DEBUG``.
  **-name **\ *schedd-name*
     Specify an alternate *condor\_schedd*, if the default (local) one is
     not desired.
@@ -151,9 +151,9 @@ Options
     the first shell does not exist on the remote machine, then the
     following ones in the list will be tried. If none of the specified
     shells can be found, */bin/sh* is used by default. If this option is
-    not specified, it defaults to the environment variable SHELL from
-    within the *condor\_ssh\_to\_job* environment. Does not apply to EC2
-    jobs.
+    not specified, it defaults to the environment variable ``SHELL``
+    from within the *condor\_ssh\_to\_job* environment. Does not apply
+    to EC2 jobs.
  **-auto-retry**
     Specifies that if the job is not yet running, *condor\_ssh\_to\_job*
     should keep trying periodically until it succeeds or encounters some
@@ -168,28 +168,28 @@ Options
     Disable X11 forwarding.
 
 Examples
-^^^^^^^^
+--------
 
 ::
 
-    % condor_ssh_to_job 32.0
-     Welcome to slot2@tonic.cs.wisc.edu!
-     Your condor job is running with pid(s) 65881.
-     % gdb -p 65881
-     (gdb) where
-     ...
-     % logout
-     Connection to condor-job.tonic.cs.wisc.edu closed.
+    % condor_ssh_to_job 32.0 
+    Welcome to slot2@tonic.cs.wisc.edu! 
+    Your condor job is running with pid(s) 65881. 
+    % gdb -p 65881 
+    (gdb) where 
+    ... 
+    % logout 
+    Connection to condor-job.tonic.cs.wisc.edu closed.
 
 To upload or download files interactively with *sftp*:
 
 ::
 
-    % condor_ssh_to_job -ssh sftp 32.0
-     Connecting to condor-job.tonic.cs.wisc.edu...
-     sftp> ls
-     ...
-     sftp> get outputfile.dat
+    % condor_ssh_to_job -ssh sftp 32.0 
+    Connecting to condor-job.tonic.cs.wisc.edu... 
+    sftp> ls 
+    ... 
+    sftp> get outputfile.dat
 
 This example shows downloading a file from the job with *scp*. The
 string "remote" is used in place of a host name in this example. It is
@@ -221,19 +221,19 @@ command will fail with the error message
     Failed to send CREATE_JOB_OWNER_SEC_SESSION to starter
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_ssh\_to\_job* will exit with a non-zero status value if it
 fails to set up an ssh session. If it succeeds, it will exit with the
 status value of the remote command or shell.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

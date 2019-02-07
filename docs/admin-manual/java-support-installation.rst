@@ -9,12 +9,12 @@ informed of some details of the JVM installation.
 
 Begin by installing a Java distribution according to the vendor’s
 instructions. Your machine may have been delivered with a JVM already
-installed – installed code is frequently found in /usr/bin/java.
+installed – installed code is frequently found in ``/usr/bin/java``.
 
 HTCondor’s configuration includes the location of the installed JVM.
-Edit the configuration file. Modify the JAVA entry to point to the JVM
-binary, typically /usr/bin/java. Restart the *condor\_startd* daemon on
-that host. For example,
+Edit the configuration file. Modify the ``JAVA`` entry to point to the
+JVM binary, typically ``/usr/bin/java``. Restart the *condor\_startd*
+daemon on that host. For example,
 
 ::
 
@@ -64,20 +64,20 @@ This command will display a short list of cryptic properties, such as:
 
 ::
 
-    IsDaemonCore = True
-     HasFileTransfer = True
-     HasMPI = True
-     CondorVersion = "$CondorVersion: 7.1.0 Mar 26 2008 BuildID: 80210 $"
+    IsDaemonCore = True 
+    HasFileTransfer = True 
+    HasMPI = True 
+    CondorVersion = "$CondorVersion: 7.1.0 Mar 26 2008 BuildID: 80210 $"
 
 If the Java configuration is correct, there will also be a short list of
 Java properties, such as:
 
 ::
 
-    JavaVendor = "Sun Microsystems Inc."
-     JavaVersion = "1.2.2"
-     JavaMFlops = 9.279696
-     HasJava = True
+    JavaVendor = "Sun Microsystems Inc." 
+    JavaVersion = "1.2.2" 
+    JavaMFlops = 9.279696 
+    HasJava = True
 
 If the Java installation is incorrect, then any error messages from the
 shell or Java will be printed on the error stream instead.
@@ -85,7 +85,7 @@ shell or Java will be printed on the error stream instead.
 Many implementations of the JVM set a value of the Java maximum heap
 size that is too small for particular applications. HTCondor uses this
 value. The administrator can change this value through configuration by
-setting a different value for JAVA\_EXTRA\_ARGUMENTS .
+setting a different value for ``JAVA_EXTRA_ARGUMENTS`` .
 
 ::
 

@@ -6,7 +6,7 @@ condor\_router\_history
 Display the history for routed jobs
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_router\_history** [--**h**]
 
@@ -15,7 +15,7 @@ Synopsis
 HH:MM"*]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_router\_history* summarizes statistics for routed jobs over the
 previous 24 hours. With no command line options, statistics for run
@@ -23,7 +23,7 @@ time, number of jobs completed, and number of jobs aborted are listed
 per route (site).
 
 Options
-^^^^^^^
+-------
 
  **—h**
     Display usage information and exit.
@@ -39,18 +39,18 @@ Options
     Set the start time of the summary.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_router\_history* will exit with a status of 0 (zero) upon
 success, and non-zero otherwise.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

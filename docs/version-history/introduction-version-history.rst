@@ -11,7 +11,7 @@ specific release series, and all the HTCondor versions found in that
 series.
 
 HTCondor Version Number Scheme
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
 Starting with version 6.0.1, HTCondor adopted a new, hopefully easy to
 understand version numbering scheme. It reflects the fact that HTCondor
@@ -34,7 +34,7 @@ separated by “.”
    particular version in a given release series.
 
 The Stable Release Series
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 People expecting the stable, production HTCondor system should download
 the stable version, denoted with an even number in the second digit of
@@ -50,7 +50,7 @@ about. Hopefully, there will not be many minor version releases for any
 given stable series.
 
 The Development Release Series
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
 Only people who are interested in the latest research, new features that
 haven’t been fully tested, etc, should download the development version,

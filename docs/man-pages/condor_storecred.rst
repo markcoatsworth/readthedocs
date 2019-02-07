@@ -6,7 +6,7 @@ condor\_store\_cred
 securely stash a password
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_store\_cred** [**-help**\ ]
 
@@ -21,20 +21,20 @@ Synopsis
 ][\ **-n  **\ *machinename*]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_store\_cred* stores passwords in a secure manner. There are two
 separate uses of *condor\_store\_cred*:
 
-#. A shared pool password is needed in order to implement the PASSWORD
-   authentication method. *condor\_store\_cred* using the **-c** option
-   deals with the password for the implied condor\_pool@$(UID\_DOMAIN)
-   user name.
+#. A shared pool password is needed in order to implement the
+   ``PASSWORD`` authentication method. *condor\_store\_cred* using the
+   **-c** option deals with the password for the implied
+   condor\_pool@$(UID\_DOMAIN) user name.
 
    On a Unix machine, *condor\_store\_cred* with the **-f** option is
-   used to set the pool password, as needed when used with the PASSWORD
-   authentication method. The pool password is placed in a file
-   specified by the SEC\_PASSWORD\_FILE configuration variable.
+   used to set the pool password, as needed when used with the
+   ``PASSWORD`` authentication method. The pool password is placed in a
+   file specified by the ``SEC_PASSWORD_FILE`` configuration variable.
 
 #. In order to submit a job from a Windows platform machine, or to
    execute a job on a Windows platform machine utilizing the
@@ -60,14 +60,15 @@ The *delete* argument deletes the current password, if it exists.
 The *query* reports whether the password is stored or not.
 
 Options
-^^^^^^^
+-------
 
  **-c**
-    Operations refer to the pool password, as used in the PASSWORD
+    Operations refer to the pool password, as used in the ``PASSWORD``
     authentication method.
  **-f **\ *filename*
     For Unix machines only, generates a pool password file named
-    *filename* that may be used with the PASSWORD authentication method.
+    *filename* that may be used with the ``PASSWORD`` authentication
+    method.
  **-help**
     Displays a brief summary of command options.
  **-n **\ *machinename*
@@ -79,18 +80,18 @@ Options
     Specify the user name.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_store\_cred* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

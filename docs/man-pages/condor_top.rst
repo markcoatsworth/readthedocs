@@ -6,7 +6,7 @@ condor\_top
 Display status and runtime statistics of a HTCondor daemon
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_top** [**-h**\ ]
 
@@ -19,7 +19,7 @@ Synopsis
 [--**attrs=<attr1,attr2,...>**] [*classad-filename classad-filename*\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_top* displays the status (e.g. memory usage and duty cycle) of
 a HTCondor daemon and calculates and displays runtime statistics for the
@@ -27,17 +27,17 @@ daemon’s subprocesses.
 
 When no arguments are specified, *condor\_top* displays the status for
 the primary daemon based on the role of the current machine by scanning
-the DAEMON\_LIST configuration setting. If multiple daemons are listed,
-*condor\_top* will monitor one of (in decreasing priority):
+the ``DAEMON_LIST`` configuration setting. If multiple daemons are
+listed, *condor\_top* will monitor one of (in decreasing priority):
 *condor\_schedd*, *condor\_startd*, *condor\_collector*,
 *condor\_negotiator*, *condor\_master*.
 
 If the *condor\_collector* returns multiple ClassAds for the chosen
 daemon type, *condor\_top* will display stats from the first ClassAd
-returned. Results can be constrained by passing the NAME of a specific
-daemon with **-n**.
+returned. Results can be constrained by passing the ``NAME`` of a
+specific daemon with **-n**.
 
-The default *delay* is STATISTICS\_WINDOW\_QUANTUM, which is 4 minutes
+The default *delay* is ``STATISTICS_WINDOW_QUANTUM``, which is 4 minutes
 (240 seconds) in a default HTCondor configuration. Setting the delay
 smaller can be helpful for finding spikes of activity, but setting the
 delay too small will lead to poor measurements of the duty cycle and of
@@ -93,7 +93,7 @@ The following subprocess stat columns may be displayed (\*default):
     expressed as a percentage.
 
 Options
-^^^^^^^
+-------
 
  **-h**
     Displays the list of options.
@@ -101,14 +101,14 @@ Options
     Puts *condor\_top* in to a live, continually updating mode.
  **-p **\ *centralmanagerhostname[:portname]*
     Query the daemon via the specified central manager. If omitted, the
-    value of the configuration variable COLLECTOR\_HOST is used.
+    value of the configuration variable ``COLLECTOR_HOST`` is used.
  **-n **\ *name*
     Query the daemon named *name*. If omitted, the value used will
     depend on the type of daemon queried (see Daemon Options).
  **-d **\ *delay*
     Specifies the *delay* between ClassAd updates, in integer seconds.
     If omitted, the value of the configuration variable
-    STATISTICS\_WINDOW\_QUANTUM is used.
+    ``STATISTICS_WINDOW_QUANTUM`` is used.
  **-c **\ *columnset*
     Display *columnset* set of columns. Valid *columnset*\ s are:
     default, runtime, count, all.
@@ -121,31 +121,31 @@ Options
 
  **—collector**
     Monitor *condor\_collector* ClassAds. If -n is not set, the
-    constraint “Machine == COLLECTOR\_HOST” will be used.
+    constraint “Machine == ``COLLECTOR_HOST``\ ” will be used.
  **—negotiator**
     Monitor *condor\_negotiator* ClassAds. If -n is not set, the
-    constraint “Machine == COLLECTOR\_HOST” will be used.
+    constraint “Machine == ``COLLECTOR_HOST``\ ” will be used.
  **—master**
     Monitor *condor\_master* ClassAds. If -n is not set, the constraint
-    “Machine == COLLECTOR\_HOST” will be used.
+    “Machine == ``COLLECTOR_HOST``\ ” will be used.
  **—schedd**
     Monitor *condor\_schedd* ClassAds. If -n is not set, the constraint
-    “Machine == FULL\_HOSTNAME” will be tried, otherwise the first
+    “Machine == ``FULL_HOSTNAME``\ ” will be tried, otherwise the first
     *condor\_schedd* ClassAd returned from the *condor\_collector* will
     be used.
  **—startd**
     Monitor *condor\_startd* ClassAds. If -n is not set, the constraint
-    “Machine == FULL\_HOSTNAME” will be tried, otherwise the first
+    “Machine == ``FULL_HOSTNAME``\ ” will be tried, otherwise the first
     *condor\_startd* ClassAd returned from the *condor\_collector* will
     be used.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

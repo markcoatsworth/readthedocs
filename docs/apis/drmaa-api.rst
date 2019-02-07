@@ -29,7 +29,7 @@ See the DRMAA site (`http://www.drmaa.org <http://www.drmaa.org>`__) to
 find the API specification for DRMA 1.0 for further details on the API.
 
 Implementation Details
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 The library was developed from the DRMA API Specification 1.0 of January
 2004 and the DRMAA C Bindings v0.9 of September 2003. It is a static C
@@ -38,16 +38,17 @@ thread model on Windows systems. Unix systems that do not support POSIX
 threads are not guaranteed thread safety when calling the library’s
 functions.
 
-The object library file is called libcondordrmaa.a, and it is located
-within the $(LIB) directory. Its header file is $(INCLUDE)/drmaa.h, and
-file $(INCLUDE)/README gives further details on the implementation.
+The object library file is called ``libcondordrmaa.a``, and it is
+located within the ``$(LIB)`` directory. Its header file is
+``$(INCLUDE)/drmaa.h``, and file ``$(INCLUDE)/README`` gives further
+details on the implementation.
 
 Use of the library requires that a local *condor\_schedd* daemon must be
 running, and the program linked to the library must have sufficient
-spool space. This space should be in /tmp or specified by the
-environment variables TEMP, TMP, or SPOOL. The program linked to the
-library and the local *condor\_schedd* daemon must have read, write, and
-traverse rights to the spool space.
+spool space. This space should be in ``/tmp`` or specified by the
+environment variables ``TEMP``, ``TMP``, or ``SPOOL``. The program
+linked to the library and the local *condor\_schedd* daemon must have
+read, write, and traverse rights to the spool space.
 
 The library currently supports the following specification-defined job
 attributes:
@@ -63,7 +64,7 @@ attributes:
     DRMAA\_V\_ENV
     DRMAA\_V\_EMAIL
 
-The attribute DRMAA\_NATIVE\_SPECIFICATION can be used to direct all
+The attribute ``DRMAA_NATIVE_SPECIFICATION`` can be used to direct all
 commands supported within submit description files. See the
 *condor\_submit* manual page at
 section \ `12 <Condorsubmit.html#x149-108000012>`__ for a complete list.
@@ -81,9 +82,8 @@ would set AttrDRMAA\_NATIVE\_SPECIFICATION to the C string:
 
 ::
 
-      drmaa_set_attribute(jobtemplate, DRMAA_NATIVE_SPECIFICATION,
-           "image_size=65536\nrank=Memory\n+department=\"chemistry\"",
-           err_buf, sizeof(err_buf)-1);
-     
+      drmaa_set_attribute(jobtemplate, DRMAA_NATIVE_SPECIFICATION, 
+          "image_size=65536\nrank=Memory\n+department=\"chemistry\"", 
+          err_buf, sizeof(err_buf)-1); 
 
       

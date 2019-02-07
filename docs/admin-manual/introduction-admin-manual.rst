@@ -33,7 +33,7 @@ satisfied. The purpose of this manual is to relate the mechanisms that
 HTCondor provides to enable the administrator to find this happy medium.
 
 The Different Roles a Machine Can Play
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------
 
 Every machine in an HTCondor pool can serve a variety of roles. Most
 machines serve more than one role simultaneously. Certain roles can only
@@ -91,7 +91,7 @@ machine that is providing that service:
     the pool, as the traffic can be quite heavy.
 
 The HTCondor Daemons
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 The following list describes all the daemons and programs that could be
 started under HTCondor and what they do:

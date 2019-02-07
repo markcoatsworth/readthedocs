@@ -33,7 +33,7 @@ sections describe the details of HTCondor’s support for the currently
 available versions of Red Hat Linux on x86 architecture machines.
 
 Linux Address Space Randomization
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------
 
 Modern versions of Red Hat and Fedora do address space randomization,
 which randomizes the memory layout of a process to reduce the

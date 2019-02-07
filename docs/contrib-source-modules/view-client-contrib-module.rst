@@ -31,7 +31,7 @@ allows the HTCondorView Client to be easily installed; no Web server CGI
 interface is needed.
 
 Step-by-Step Installation of the HTCondorView Client
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------------------
 
 #. Make certain that the HTCondorView Server is configured. Section
     `3.14.7 <SettingUpforSpecialEnvironments.html#x42-3600003.14.7>`__
@@ -45,19 +45,19 @@ Step-by-Step Installation of the HTCondorView Client
 
    ::
 
-           POOL_HISTORY_DIR = /full/path/to/directory/to/store/historical/data
-            KEEP_POOL_HISTORY = True
+           POOL_HISTORY_DIR = /full/path/to/directory/to/store/historical/data 
+           KEEP_POOL_HISTORY = True
 
 #. Create a directory where HTCondorView is to place the HTML files.
    This directory should be one published by a web server, so that HTML
    files which exist in this directory can be accessed using a web
-   browser. This directory is referred to as the VIEWDIR directory.
+   browser. This directory is referred to as the ``VIEWDIR`` directory.
 #. Download the *view\_client* contrib module. Follow links for contrib
    modules from the wiki at
    `https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki <https://htcondor-wiki.cs.wisc.edu/index.cgi/wiki>`__.
-#. Unpack or untar this contrib module into the directory VIEWDIR. This
-   creates several files and subdirectories. Further unpack the jar file
-   within the VIEWDIR directory with:
+#. Unpack or untar this contrib module into the directory ``VIEWDIR``.
+   This creates several files and subdirectories. Further unpack the jar
+   file within the ``VIEWDIR`` directory with:
 
    ::
 
@@ -66,24 +66,24 @@ Step-by-Step Installation of the HTCondorView Client
 #. Edit the *make\_stats* script. At the beginning of the file are six
    parameters to customize. The parameters are
 
-    ORGNAME
+    ``ORGNAME``
        A brief name that identifies an organization. An example is “Univ
        of Wisconsin”. Do not use any slashes in the name or other
        special regular-expression characters. Avoid the characters \\ |ˆ
        |\ and $.
-    CONDORADMIN
+    ``CONDORADMIN``
        The e-mail address of the HTCondor administrator at your site.
        This e-mail address will appear at the bottom of the web pages.
-    VIEWDIR
-       The full path name (not a relative path) to the VIEWDIR directory
-       set by installation step 2. It is the directory that contains the
-       *make\_stats* script.
-    STATSDIR
+    ``VIEWDIR``
+       The full path name (not a relative path) to the ``VIEWDIR``
+       directory set by installation step 2. It is the directory that
+       contains the *make\_stats* script.
+    ``STATSDIR``
        The full path name of the directory which contains the
        *condor\_stats* binary. The *condor\_stats* program is included
-       in the <release\_dir>/bin directory. The value for STATSDIR is
-       added to the PATH parameter by default.
-    PATH
+       in the ``<release_dir>/bin`` directory. The value for
+       ``STATSDIR`` is added to the ``PATH`` parameter by default.
+    ``PATH``
        A list of subdirectories, separated by colons, where the
        *make\_stats* script can find the *awk*, *bc*, *sed*, *date*, and
        *condor\_stats* programs. If *perl* is installed, the path should
@@ -92,8 +92,8 @@ Step-by-Step Installation of the HTCondorView Client
 
        ::
 
-                   PATH=/bin:/usr/bin:$STATSDIR:/usr/local/bin
-                    
+                   PATH=/bin:/usr/bin:$STATSDIR:/usr/local/bin 
+                   
 
 #. To create all of the initial HTML files, run
 
@@ -101,21 +101,22 @@ Step-by-Step Installation of the HTCondorView Client
 
                ./make_stats setup
 
-   Open the file index.html to verify that things look good.
+   Open the file ``index.html`` to verify that things look good.
 
 #. Add the *make\_stats* program to *cron*. Running *make\_stats* in
-   step 6 created a cronentries file. This cronentries file is ready to
-   be processed by the Unix *crontab* command. The *crontab* manual page
-   contains details about the *crontab* command and the *cron* daemon.
-   Look at the cronentries file; by default, it will run *make\_stats*
-   *hour* every 15 minutes, *make\_stats* *day* once an hour,
-   *make\_stats* *week* twice per day, and *make\_stats* *month* once
-   per day. These are reasonable defaults. Add these commands to cron on
-   any system that can access the VIEWDIR and STATSDIR directories, even
-   on a system that does not have HTCondor installed. The commands do
-   not need to run as root user; in fact, they should probably not run
-   as root. These commands can run as any user that has read/write
-   access to the VIEWDIR directory. The command
+   step 6 created a ``cronentries`` file. This ``cronentries`` file is
+   ready to be processed by the Unix *crontab* command. The *crontab*
+   manual page contains details about the *crontab* command and the
+   *cron* daemon. Look at the ``cronentries`` file; by default, it will
+   run *make\_stats* *hour* every 15 minutes, *make\_stats* *day* once
+   an hour, *make\_stats* *week* twice per day, and *make\_stats*
+   *month* once per day. These are reasonable defaults. Add these
+   commands to cron on any system that can access the ``VIEWDIR`` and
+   ``STATSDIR`` directories, even on a system that does not have
+   HTCondor installed. The commands do not need to run as root user; in
+   fact, they should probably not run as root. These commands can run as
+   any user that has read/write access to the ``VIEWDIR`` directory. The
+   command
 
    ::
 
@@ -123,9 +124,9 @@ Step-by-Step Installation of the HTCondorView Client
 
    can set the crontab file; note that this command overwrites the
    current, existing crontab file with the entries from the file
-   cronentries.
+   ``cronentries``.
 
-#. Point the web browser at the VIEWDIR directory to complete the
+#. Point the web browser at the ``VIEWDIR`` directory to complete the
    installation.
 
       

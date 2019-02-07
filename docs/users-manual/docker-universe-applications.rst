@@ -76,19 +76,19 @@ job:
 
 ::
 
-      universe                = docker
-       docker_image            = debian
-       executable              = /bin/cat
-       arguments               = /etc/hosts
-       should_transfer_files   = YES
-       when_to_transfer_output = ON_EXIT
-       output                  = out.$(Process)
-       error                   = err.$(Process)
-       log                     = log.$(Process)
-       request_memory          = 100M
-       queue 1
+      universe                = docker 
+      docker_image            = debian 
+      executable              = /bin/cat 
+      arguments               = /etc/hosts 
+      should_transfer_files   = YES 
+      when_to_transfer_output = ON_EXIT 
+      output                  = out.$(Process) 
+      error                   = err.$(Process) 
+      log                     = log.$(Process) 
+      request_memory          = 100M 
+      queue 1
 
 A debian container is the HTCondor job, and it runs the */bin/cat*
-program on the /etc/hosts file before exiting.
+program on the ``/etc/hosts`` file before exiting.
 
       

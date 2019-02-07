@@ -6,7 +6,7 @@ condor\_history
 View log of HTCondor jobs completed to date
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_history** [**-help**\ ]
 
@@ -19,14 +19,14 @@ AttributeName*] [**-autoformat[:jlhVr,tng]  **\ *attr1 [attr2 ...]*]
 [**cluster \| cluster.process \| owner**\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_history* displays a summary of all HTCondor jobs listed in the
 specified history files. If no history files are specified with the
 **-file** option, the local history file as specified in HTCondor’s
-configuration file ($(SPOOL)/history by default) is read. The default
-listing summarizes in reverse chronological order each job on a single
-line, and contains the following items:
+configuration file (``$(SPOOL)``/history by default) is read. The
+default listing summarizes in reverse chronological order each job on a
+single line, and contains the following items:
 
  ID
     The cluster/process id of the job.
@@ -37,7 +37,7 @@ line, and contains the following items:
  RUN\_TIME
     Remote wall clock time accumulated by the job to date in days,
     hours, minutes, and seconds, given as the job ClassAd attribute
-    RemoteWallClockTime.
+    ``RemoteWallClockTime``.
  ST
     Completion status of the job (C = completed and X = removed).
  COMPLETED
@@ -62,7 +62,7 @@ page \ `1866 <Condorconverthistory.html#x108-75500012>`__ for details on
 converting history files to the new format.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information and exit.
@@ -70,7 +70,7 @@ Options
     Query the named *condor\_schedd* daemon.
  **-pool **\ *centralmanagerhostname[:portnumber]*
     Use the *centralmanagerhostname* as the central manager to locate
-    *condor\_schedd* daemons. The default is the COLLECTOR\_HOST, as
+    *condor\_schedd* daemons. The default is the ``COLLECTOR_HOST``, as
     specified in the configuration.
  **-backwards**
     List jobs in reverse chronological order. The job most recently
@@ -160,18 +160,18 @@ Options
     Display job ClassAds in JSON format.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_history* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

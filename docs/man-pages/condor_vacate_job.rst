@@ -6,7 +6,7 @@ condor\_vacate\_job
 vacate jobs in the HTCondor queue from the hosts where they are running
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_vacate\_job** [**-help \| -version**\ ]
 
@@ -22,7 +22,7 @@ Synopsis
 [**-fast**\ ] **-all**
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_vacate\_job* finds one or more jobs from the HTCondor job queue
 and vacates them from the host(s) where they are currently running. The
@@ -33,8 +33,8 @@ checkpoint and then the job will be killed. HTCondor will then restart
 the job somewhere else, using the checkpoint to continue from where it
 left off. A job running under any other universe will be sent a soft
 kill signal (SIGTERM by default, or whatever is defined as the
-SoftKillSig in the job ClassAd), and HTCondor will restart the job from
-the beginning somewhere else.
+``SoftKillSig`` in the job ClassAd), and HTCondor will restart the job
+from the beginning somewhere else.
 
 If the **-fast** option is used, the job(s) will be immediately killed,
 meaning that standard universe jobs will not be allowed to checkpoint,
@@ -47,14 +47,14 @@ targeted for processing. If the **-addr** option is used, the
 Otherwise, the local *condor\_schedd* is targeted. The jobs to be
 vacated are identified by one or more job identifiers, as described
 below. For any given job, only the owner of the job or one of the queue
-super users (defined by the QUEUE\_SUPER\_USERS macro) can vacate the
+super users (defined by the ``QUEUE_SUPER_USERS`` macro) can vacate the
 job.
 
 Using *condor\_vacate\_job* on jobs which are not currently running has
 no effect.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information
@@ -81,7 +81,7 @@ Options
     Perform a fast vacate and hard kill the jobs
 
 General Remarks
-^^^^^^^^^^^^^^^
+---------------
 
 Do not confuse *condor\_vacate\_job* with *condor\_vacate*.
 *condor\_vacate* is given a list of hosts to vacate, regardless of what
@@ -93,7 +93,7 @@ owner of the jobs or queue super users have permission to use
 *condor\_vacate\_job*.
 
 Examples
-^^^^^^^^
+--------
 
 To vacate job 23.0:
 
@@ -117,18 +117,18 @@ Note that the entire constraint, including the quotation marks, must be
 enclosed in single quote marks for most shells.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_vacate\_job* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

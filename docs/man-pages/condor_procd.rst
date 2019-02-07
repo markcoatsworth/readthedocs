@@ -6,14 +6,14 @@ condor\_procd
 Track and manage process families
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_procd** **-h**
 
 **condor\_procd** **-A **\ *address-file* [**options**\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_procd* tracks and manages process families on behalf of the
 HTCondor daemons. It may track families of PIDs via relationships such
@@ -34,7 +34,7 @@ name of the address file which is the named pipe that clients must use
 to speak with the *condor\_procd*.
 
 Options
-^^^^^^^
+-------
 
  **-h**
     Print out usage information and exit.
@@ -85,7 +85,7 @@ Options
     *glexec-kill-path* under the right privileges to send the signal.
 
 General Remarks
-^^^^^^^^^^^^^^^
+---------------
 
 This program may be used in a stand alone mode, independent of HTCondor,
 to track process families. The programs *procd\_ctl* and *gidd\_alloc*
@@ -94,18 +94,18 @@ the daemon and to inquire about certain state of running processes on
 the machine, respectively.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_procd* will exit with a status value of 0 (zero) upon success,
 and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

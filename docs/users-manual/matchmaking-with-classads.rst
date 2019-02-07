@@ -48,7 +48,7 @@ with machine ads. HTCondor makes certain that all requirements in both
 ClassAds are satisfied.
 
 Inspecting Machine ClassAds with condor\_status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------------------
 
 Once HTCondor is installed, you will get a feel for what a machine
 ClassAd does by trying the *condor\_status* command. Try the
@@ -58,16 +58,16 @@ hit enter to see a summary similar to the following:
 
 ::
 
-    Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
+    Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime 
      
-     amul.cs.wisc.edu   LINUX      INTEL  Claimed   Busy     0.990  1896  0+00:07:04
-     slot1@amundsen.cs. LINUX      INTEL  Owner     Idle     0.000  1456  0+00:21:58
-     slot2@amundsen.cs. LINUX      INTEL  Owner     Idle     0.110  1456  0+00:21:59
-     angus.cs.wisc.edu  LINUX      INTEL  Claimed   Busy     0.940   873  0+00:02:54
-     anhai.cs.wisc.edu  LINUX      INTEL  Claimed   Busy     1.400  1896  0+00:03:03
-     apollo.cs.wisc.edu LINUX      INTEL  Unclaimed Idle     1.000  3032  0+00:00:04
-     arragon.cs.wisc.ed LINUX      INTEL  Claimed   Busy     0.980   873  0+00:04:29
-     bamba.cs.wisc.edu  LINUX      INTEL  Owner     Idle     0.040  3032 15+20:10:19
+    amul.cs.wisc.edu   LINUX      INTEL  Claimed   Busy     0.990  1896  0+00:07:04 
+    slot1@amundsen.cs. LINUX      INTEL  Owner     Idle     0.000  1456  0+00:21:58 
+    slot2@amundsen.cs. LINUX      INTEL  Owner     Idle     0.110  1456  0+00:21:59 
+    angus.cs.wisc.edu  LINUX      INTEL  Claimed   Busy     0.940   873  0+00:02:54 
+    anhai.cs.wisc.edu  LINUX      INTEL  Claimed   Busy     1.400  1896  0+00:03:03 
+    apollo.cs.wisc.edu LINUX      INTEL  Unclaimed Idle     1.000  3032  0+00:00:04 
+    arragon.cs.wisc.ed LINUX      INTEL  Claimed   Busy     0.980   873  0+00:04:29 
+    bamba.cs.wisc.edu  LINUX      INTEL  Owner     Idle     0.040  3032 15+20:10:19
 
 …
 
@@ -96,36 +96,36 @@ to your machine ClassAds.
 
 ::
 
-    Machine = "turunmaa.cs.wisc.edu"
-     FileSystemDomain = "cs.wisc.edu"
-     Name = "turunmaa.cs.wisc.edu"
-     CondorPlatform = "$CondorPlatform: x86_rhap_5 $"
-     Cpus = 1
-     IsValidCheckpointPlatform = ( ( ( TARGET.JobUniverse == 1 ) == false ) ||
-      ( ( MY.CheckpointPlatform =!= undefined ) &&
-      ( ( TARGET.LastCheckpointPlatform =?= MY.CheckpointPlatform ) ||
-      ( TARGET.NumCkpts == 0 ) ) ) )
-     CondorVersion = "$CondorVersion: 7.6.3 Aug 18 2011 BuildID: 361356 $"
-     Requirements = ( START ) && ( IsValidCheckpointPlatform )
-     EnteredCurrentActivity = 1316094896
-     MyAddress = "<128.105.175.125:58026>"
-     EnteredCurrentState = 1316094896
-     Memory = 1897
-     CkptServer = "pitcher.cs.wisc.edu"
-     OpSys = "LINUX"
-     State = "Owner"
-     START = true
-     Arch = "INTEL"
-     Mips = 2634
-     Activity = "Idle"
-     StartdIpAddr = "<128.105.175.125:58026>"
-     TargetType = "Job"
-     LoadAvg = 0.210000
-     CheckpointPlatform = "LINUX INTEL 2.6.x normal 0x40000000"
-     Disk = 92309744
-     VirtualMemory = 2069476
-     TotalSlots = 1
-     UidDomain = "cs.wisc.edu"
-     MyType = "Machine"
+    Machine = "turunmaa.cs.wisc.edu" 
+    FileSystemDomain = "cs.wisc.edu" 
+    Name = "turunmaa.cs.wisc.edu" 
+    CondorPlatform = "$CondorPlatform: x86_rhap_5 $" 
+    Cpus = 1 
+    IsValidCheckpointPlatform = ( ( ( TARGET.JobUniverse == 1 ) == false ) || 
+     ( ( MY.CheckpointPlatform =!= undefined ) && 
+     ( ( TARGET.LastCheckpointPlatform =?= MY.CheckpointPlatform ) || 
+     ( TARGET.NumCkpts == 0 ) ) ) ) 
+    CondorVersion = "$CondorVersion: 7.6.3 Aug 18 2011 BuildID: 361356 $" 
+    Requirements = ( START ) && ( IsValidCheckpointPlatform ) 
+    EnteredCurrentActivity = 1316094896 
+    MyAddress = "<128.105.175.125:58026>" 
+    EnteredCurrentState = 1316094896 
+    Memory = 1897 
+    CkptServer = "pitcher.cs.wisc.edu" 
+    OpSys = "LINUX" 
+    State = "Owner" 
+    START = true 
+    Arch = "INTEL" 
+    Mips = 2634 
+    Activity = "Idle" 
+    StartdIpAddr = "<128.105.175.125:58026>" 
+    TargetType = "Job" 
+    LoadAvg = 0.210000 
+    CheckpointPlatform = "LINUX INTEL 2.6.x normal 0x40000000" 
+    Disk = 92309744 
+    VirtualMemory = 2069476 
+    TotalSlots = 1 
+    UidDomain = "cs.wisc.edu" 
+    MyType = "Machine"
 
       

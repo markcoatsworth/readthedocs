@@ -29,9 +29,10 @@ history: \ `11.5 <DevelopmentReleaseSeries87.html#x88-61200011.5>`__):
    must be running. If you’re a queue super-user, the jobs must have the
    same owner, but that owner doesn’t have to be you. `(Ticket
    #6659). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6659>`__
--  Provides a new package, minicondor on Red Hat based systems and
-   minihtcondor on Debian and Ubuntu based systems. This mini-HTCondor
-   package configures HTCondor to work on a single machine. `(Ticket
+-  Provides a new package, ``minicondor`` on Red Hat based systems and
+   ``minihtcondor`` on Debian and Ubuntu based systems. This
+   mini-HTCondor package configures HTCondor to work on a single
+   machine. `(Ticket
    #6823). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6823>`__
 -  HTCondor now tracks and reports GPU Usage and GPU memory usage.
    `(Ticket
@@ -56,14 +57,14 @@ is a list of items that administrators should be aware of.
    first route is now always selected. The old behavior of spreading
    jobs across all matching routes round-robin style can be enabled by
    setting the new configuration parameter
-   JOB\_ROUTER\_ROUND\_ROBIN\_SELECTION to True. `(Ticket
+   ``JOB_ROUTER_ROUND_ROBIN_SELECTION`` to ``True``. `(Ticket
    #6190). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6190>`__
--  PREEMPTION\_REQUIREMENTS in the negotiator no longer has a hard-coded
-   check that the preempting user has a better fair-share user priority
-   than the running user. `(Ticket
+-  ``PREEMPTION_REQUIREMENTS`` in the negotiator no longer has a
+   hard-coded check that the preempting user has a better fair-share
+   user priority than the running user. `(Ticket
    #4699). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=4699>`__
 
-   Overly-lax expressions (True being the worst) will lead to slots
+   Overly-lax expressions (``True`` being the worst) will lead to slots
    being preempted every negotiation cycle. One of the following clauses
    should be in the expression:
 

@@ -6,12 +6,12 @@ condor\_chirp
 Access files or job ClassAd from an executing job
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_chirp** **<Chirp-Command>**
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_chirp* is not intended for use as a command-line tool. It is
 most often invoked by an HTCondor job, while the job is executing. It
@@ -29,8 +29,8 @@ If the input file name for **put** or **write** is a dash,
 name for **fetch** is a dash, *condor\_chirp* writes to standard output
 instead of a local file.
 
-Jobs that use *condor\_chirp* must have the attribute WantIOProxy set to
-True in the job ClassAd. To do this, place
+Jobs that use *condor\_chirp* must have the attribute ``WantIOProxy``
+set to ``True`` in the job ClassAd. To do this, place
 
 ::
 
@@ -42,7 +42,7 @@ in the submit description file of the job.
 java universes.
 
 Chirp Commands
-^^^^^^^^^^^^^^
+--------------
 
  **fetch **\ *RemoteFileName LocalFileName*
     Copy the *RemoteFileName* from the submit machine to the execute
@@ -55,10 +55,10 @@ Chirp Commands
     permissions in a Unix format; 660 is an example Unix format.
 
     | The optional **-mode **\ *mode* argument is one or more of the
-    following characters describing the *RemoteFileName* file: w, open
-    for writing; a, force all writes to append; t, truncate before use;
-    c, create the file, if it does not exist; x, fail if c is given and
-    the file already exists.
+    following characters describing the *RemoteFileName* file: ``w``,
+    open for writing; ``a``, force all writes to append; ``t``, truncate
+    before use; ``c``, create the file, if it does not exist; ``x``,
+    fail if ``c`` is given and the file already exists.
 
  **remove **\ *RemoteFileName*
     Remove the *RemoteFileName* file from the submit machine.
@@ -75,9 +75,9 @@ Chirp Commands
     but does not immediately synchronize the value with the submit side.
     It can take 15 minutes before the synchronization occurs. This has
     much less overhead than the non delayed version. With this option,
-    jobs do not need ClassAd attribute WantIOProxy set. With this
+    jobs do not need ClassAd attribute ``WantIOProxy`` set. With this
     option, job attribute names are restricted to begin with the case
-    sensitive substring Chirp.
+    sensitive substring ``Chirp``.
  **ulog **\ *Message*
     Appends *Message* to the job event log.
  **read** [**-offset  **\ *offset*] [**-stride  **\ *length skip*]
@@ -119,8 +119,8 @@ Chirp Commands
     Get file system metadata for *RemotePath*.
  **access **\ *RemotePath Mode*
     Check access permissions for *RemotePath*. *Mode* is one or more of
-    the characters r, w, x, or f, representing read, write, execute, and
-    existence, respectively.
+    the characters ``r``, ``w``, ``x``, or ``f``, representing read,
+    write, execute, and existence, respectively.
  **chmod **\ *RemotePath UnixPerm*
     Change the permissions of *RemotePath* to *UnixPerm*. *UnixPerm*
     describes the file access permissions in a Unix format; 660 is an
@@ -138,7 +138,7 @@ Chirp Commands
     *ModifyTime* of *RemotePath*.
 
 Examples
-^^^^^^^^
+--------
 
 To copy a file from the submit machine to the execute machine while the
 user job is running, run
@@ -147,7 +147,7 @@ user job is running, run
 
       condor_chirp fetch remotefile localfile
 
-To print to standard output the value of the Requirements expression
+To print to standard output the value of the ``Requirements`` expression
 from within a running job, run
 
 ::
@@ -158,7 +158,7 @@ Note that the remote (submit-side) directory path is relative to the
 submit directory, and the local (execute-side) directory is relative to
 the current directory of the running program.
 
-To append the word "foo" to a file called RemoteFile on the submit
+To append the word "foo" to a file called ``RemoteFile`` on the submit
 machine, run
 
 ::
@@ -172,18 +172,18 @@ To append the message "Hello World" to the job event log, run
       condor_chirp ulog "Hello World"
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_chirp* will exit with a status value of 0 (zero) upon success,
 and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

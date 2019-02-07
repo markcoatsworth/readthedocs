@@ -13,10 +13,10 @@ Here are all the steps needed to run a job using HTCondor.
     job. HTCondor runs the program unattended and in the background. A
     program that runs in the background will not be able to do
     interactive input and output. HTCondor can redirect console output
-    (stdout and stderr) and keyboard input (stdin) to and from files for
-    the program. Create any needed files that contain the proper
-    keystrokes needed for program input. Make certain the program will
-    run correctly with the files.
+    (``stdout`` and ``stderr``) and keyboard input (``stdin``) to and
+    from files for the program. Create any needed files that contain the
+    proper keystrokes needed for program input. Make certain the program
+    will run correctly with the files.
  The HTCondor Universe.
     HTCondor has several runtime environments (called a universe) from
     which to choose. Of the universes, two are likely choices when
@@ -43,10 +43,10 @@ Here are all the steps needed to run a job using HTCondor.
  Submit description file.
     Controlling the details of a job submission is a submit description
     file. The file contains information about the job such as what
-    executable to run, the files to use in place of stdin and stdout,
-    and the platform type required to run the program. The number of
-    times to run a program may be included; it is simple to run the same
-    program multiple times with multiple data sets.
+    executable to run, the files to use in place of ``stdin`` and
+    ``stdout``, and the platform type required to run the program. The
+    number of times to run a program may be included; it is simple to
+    run the same program multiple times with multiple data sets.
 
     Write a submit description file to go with the job, using the
     examples provided in
@@ -70,7 +70,7 @@ be recorded in the log file. You can remove a job from the queue
 prematurely with *condor\_rm*.
 
 Choosing an HTCondor Universe
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 A universe in HTCondor defines an execution environment. HTCondor
 Version 8.9.1 supports several different universes for user jobs:
@@ -108,7 +108,7 @@ image, facilitating the execution of a virtual machine. The docker
 universe runs a Docker container as an HTCondor job.
 
 Standard Universe
-'''''''''''''''''
+~~~~~~~~~~~~~~~~~
 
 In the standard universe, HTCondor provides checkpointing and remote
 system calls. These features make a job more reliable and allow it
@@ -158,22 +158,22 @@ Then, relink the job for HTCondor with:
 There are a few restrictions on standard universe jobs:
 
 #. Multi-process jobs are not allowed. This includes system calls such
-   as fork(), exec(), and system().
+   as ``fork()``, ``exec()``, and ``system()``.
 #. Interprocess communication is not allowed. This includes pipes,
    semaphores, and shared memory.
 #. Network communication must be brief. A job may make network
-   connections using system calls such as socket(), but a network
+   connections using system calls such as ``socket()``, but a network
    connection left open for long periods will delay checkpointing and
    migration.
 #. Sending or receiving the SIGUSR2 or SIGTSTP signals is not allowed.
    HTCondor reserves these signals for its own use. Sending or receiving
    all other signals is allowed.
 #. Alarms, timers, and sleeping are not allowed. This includes system
-   calls such as alarm(), getitimer(), and sleep().
+   calls such as ``alarm()``, ``getitimer()``, and ``sleep()``.
 #. Multiple kernel-level threads are not allowed. However, multiple
    user-level threads are allowed.
 #. Memory mapped files are not allowed. This includes system calls such
-   as mmap() and munmap().
+   as ``mmap()`` and ``munmap()``.
 #. File locks are allowed, but not retained between checkpoints.
 #. All files must be opened read-only or write-only. A file opened for
    both reading and writing will cause trouble if a job must be rolled
@@ -192,7 +192,7 @@ There are a few restrictions on standard universe jobs:
    universe user job application itself are both 64-bit executables.
 
 Vanilla Universe
-''''''''''''''''
+~~~~~~~~~~~~~~~~
 
 The vanilla universe in HTCondor is intended for programs which cannot
 be successfully re-linked. Shell scripts are another case where the
@@ -224,7 +224,7 @@ section \ `2.5.9 <SubmittingaJob.html#x17-380002.5.9>`__ on
 page \ `91 <SubmittingaJob.html#x17-380002.5.9>`__.
 
 Grid Universe
-'''''''''''''
+~~~~~~~~~~~~~
 
 The Grid universe in HTCondor is intended to provide the standard
 HTCondor interface to users who wish to start jobs intended for remote
@@ -236,7 +236,7 @@ page \ `2135 <Condorsubmit.html#x149-108000012>`__ has detailed
 descriptions of the grid-related attributes.
 
 Java Universe
-'''''''''''''
+~~~~~~~~~~~~~
 
 A program submitted to the Java universe may run on any sort of machine
 with a JVM regardless of its location, owner, or JVM version. HTCondor
@@ -244,7 +244,7 @@ will take care of all the details such as finding the JVM binary and
 setting the classpath.
 
 Scheduler Universe
-''''''''''''''''''
+~~~~~~~~~~~~~~~~~~
 
 The scheduler universe allows users to submit lightweight jobs to be run
 immediately, alongside the *condor\_schedd* daemon on the submit host
@@ -265,7 +265,7 @@ such as the vanilla universe. The scheduler universe may be retired in
 the future, in favor of the newer local universe.
 
 Local Universe
-''''''''''''''
+~~~~~~~~~~~~~~
 
 The local universe allows an HTCondor job to be submitted and executed
 with different assumptions for the execution conditions of the job. The
@@ -275,7 +275,7 @@ never be preempted. The job’s requirements expression is evaluated
 against the *condor\_schedd*\ ’s ClassAd.
 
 Parallel Universe
-'''''''''''''''''
+~~~~~~~~~~~~~~~~~
 
 The parallel universe allows parallel programs, such as MPI jobs, to be
 run within the opportunistic HTCondor environment. Please see
@@ -283,7 +283,7 @@ section \ `2.9 <ParallelApplicationsIncludingMPIApplications.html#x21-700002.9>
 for more details.
 
 VM Universe
-'''''''''''
+~~~~~~~~~~~
 
 HTCondor facilitates the execution of VMware and Xen virtual machines
 with the vm universe.
@@ -293,7 +293,7 @@ section \ `2.11 <VirtualMachineApplications.html#x23-1160002.11>`__ for
 details.
 
 Docker Universe
-'''''''''''''''
+~~~~~~~~~~~~~~~
 
 The docker universe runs a docker container on an execute host as a job.
 Please see

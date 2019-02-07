@@ -4,7 +4,7 @@ Special Environment Considerations
 ==================================
 
 AFS
-^^^
+---
 
 The HTCondor daemons do not run authenticated to AFS; they do not
 possess AFS tokens. Therefore, no child process of HTCondor will be AFS
@@ -35,7 +35,7 @@ section \ `3.14.1 <SettingUpforSpecialEnvironments.html#x42-3450003.14.1>`__
 for further discussion of this problem.
 
 NFS
-^^^
+---
 
 If the current working directory when a job is submitted is accessed via
 an NFS automounter, HTCondor may have problems if the automounter later
@@ -47,8 +47,8 @@ become automatically unmounted by the automounter.
 There is a simple work around. When submitting the job, use the submit
 command **initialdir** to point to the stable access point. For example,
 suppose the NFS automounter is configured to mount a volume at mount
-point /a/myserver.company.com/vol1/johndoe whenever the directory
-/home/johndoe is accessed. Adding the following line to the submit
+point ``/a/myserver.company.com/vol1/johndoe`` whenever the directory
+``/home/johndoe`` is accessed. Adding the following line to the submit
 description file solves the problem.
 
 ::
@@ -71,7 +71,7 @@ page \ `2370 <JobClassAdAttributes.html#x170-1234000A.2>`__ for a
 definition of the job ClassAd attribute.
 
 HTCondor Daemons That Do Not Run as root
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------
 
 HTCondor is normally installed such that the HTCondor daemons have root
 permission. This allows HTCondor to run the *condor\_shadow* daemon and
@@ -89,10 +89,10 @@ HTCondor is running as root on a specific machine, use the command
       condor_status -master -l <machine-name>
 
 where <machine-name> is the name of the specified machine. This command
-displays the full condor\_master ClassAd; if the attribute RealUid
+displays the full condor\_master ClassAd; if the attribute ``RealUid``
 equals zero, then the HTCondor daemons are indeed running with root
-access. If the RealUid attribute is not zero, then the HTCondor daemons
-do not have root access.
+access. If the ``RealUid`` attribute is not zero, then the HTCondor
+daemons do not have root access.
 
 NOTE: The Unix program *ps* is not an effective method of determining if
 HTCondor is running with root access. When using *ps*, it may often
@@ -107,12 +107,12 @@ perform a privileged operation.
 
 If daemons are not running with root access, make any and all files
 and/or directories that the job will touch readable and/or writable by
-the UID (user id) specified by the RealUid attribute. Often this may
+the UID (user id) specified by the ``RealUid`` attribute. Often this may
 mean using the Unix command chmod 777 on the directory from which the
 HTCondor job is submitted.
 
 Job Leases
-^^^^^^^^^^
+----------
 
 A job lease specifies how long a given job will attempt to run on a
 remote resource, even if that resource loses contact with the submitting
@@ -136,17 +136,17 @@ files. Should the lease expire, the *condor\_startd* daemon kills off
 the *condor\_starter* daemon and user job.
 
 A default value equal to 40 minutes exists for a job’s ClassAd attribute
-JobLeaseDuration, or this attribute may be set in the submit description
-file, using **job\_lease\_duration**, to keep a job running in the case
-that the submit side no longer renews the lease. There is a trade off in
-setting the value of **job\_lease\_duration**. Too small a value, and
-the job might get killed before the submitting machine has a chance to
-recover. Forward progress on the job will be lost. Too large a value,
-and an execute resource will be tied up waiting for the job lease to
-expire. The value should be chosen based on how long the user is willing
-to tie up the execute machines, how quickly submit machines come back
-up, and how much work would be lost if the lease expires, the job is
-killed, and the job must start over from its beginning.
+``JobLeaseDuration``, or this attribute may be set in the submit
+description file, using **job\_lease\_duration**, to keep a job running
+in the case that the submit side no longer renews the lease. There is a
+trade off in setting the value of **job\_lease\_duration**. Too small a
+value, and the job might get killed before the submitting machine has a
+chance to recover. Forward progress on the job will be lost. Too large a
+value, and an execute resource will be tied up waiting for the job lease
+to expire. The value should be chosen based on how long the user is
+willing to tie up the execute machines, how quickly submit machines come
+back up, and how much work would be lost if the lease expires, the job
+is killed, and the job must start over from its beginning.
 
 As a special case, a submit description file setting of
 
@@ -155,10 +155,10 @@ As a special case, a submit description file setting of
      job_lease_duration = 0
 
 as well as utilizing submission other than *condor\_submit* that do not
-set JobLeaseDuration (such as using the web services interface) results
-in the corresponding job ClassAd attribute to be explicitly undefined.
-This has the further effect of changing the duration of a claim lease,
-the amount of time that the execution machine waits before dropping a
-claim due to missing keep alive messages.
+set ``JobLeaseDuration`` (such as using the web services interface)
+results in the corresponding job ClassAd attribute to be explicitly
+undefined. This has the further effect of changing the duration of a
+claim lease, the amount of time that the execution machine waits before
+dropping a claim due to missing keep alive messages.
 
       

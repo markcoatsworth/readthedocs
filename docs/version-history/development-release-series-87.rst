@@ -7,7 +7,7 @@ This is the development release series of HTCondor. The details of each
 version are described below.
 
 Version 8.7.10
-^^^^^^^^^^^^^^
+--------------
 
 Release Notes:
 
@@ -17,7 +17,7 @@ New Features:
 
 -  One can now submit an interactive Docker job. `(Ticket
    #6710). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6710>`__
--  Added the SINGULARITY\_EXTRA\_ARGUMENTS configuration parameter.
+-  Added the ``SINGULARITY_EXTRA_ARGUMENTS`` configuration parameter.
    Administrators can now append arguments to the Singularity command
    line. `(Ticket
    #6731). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6731>`__
@@ -36,12 +36,12 @@ New Features:
    input data, which will allow us to pass in more complex input than
    the existing curl\_plugin. `(Ticket
    #6499). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6499>`__
--  Added two new policies, PREEMPT\_IF\_RUNTIME\_EXCEEDS and
-   HOLD\_IF\_RUNTIME\_EXCEEDS. The former is (intended to be) identical
-   to the policy LIMIT\_JOB\_RUNTIMES, except without ordering
-   constraints with respect to other policy macros. (ALWAYS\_RUN\_JOBS
+-  Added two new policies, ``PREEMPT_IF_RUNTIME_EXCEEDS`` and
+   ``HOLD_IF_RUNTIME_EXCEEDS``. The former is (intended to be) identical
+   to the policy ``LIMIT_JOB_RUNTIMES``, except without ordering
+   constraints with respect to other policy macros. (``ALWAYS_RUN_JOBS``
    must still come before any other policy macro, but unlike
-   LIMIT\_JOB\_RUNTIMES, PREEMPT\_IF\_RUNTIME\_EXCEEDS may come after
+   ``LIMIT_JOB_RUNTIMES``, ``PREEMPT_IF_RUNTIME_EXCEEDS`` may come after
    other policy macros.) Additionally, both of the new policies function
    while the machine is draining. `(Ticket
    #6701). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6701>`__
@@ -49,7 +49,7 @@ New Features:
    standard input when there is no submit file if a queue statement and
    at least one submit command is provided on the command line. `(Ticket
    #6581). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6581>`__
--  If the first line of the job’s executable starts with #!
+-  If the first line of the job’s executable starts with ``#!``
    *condor\_submit* will now check that line for a Windows/DOS line
    ending, and if it finds one, it will not submit the job because such
    a script will not be able to start on Unix or Linux platforms. This
@@ -71,17 +71,18 @@ New Features:
    #6768). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6768>`__
    `(Ticket
    #6787). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6787>`__
--  Added new configuration parameter TRUST\_LOCAL\_UID\_DOMAIN. It works
-   like TRUST\_UID\_DOMAIN, but only applies when the *condor\_shadow*
-   and *condor\_starter* are on the same machine. `(Ticket
+-  Added new configuration parameter ``TRUST_LOCAL_UID_DOMAIN``. It
+   works like ``TRUST_UID_DOMAIN``, but only applies when the
+   *condor\_shadow* and *condor\_starter* are on the same machine.
+   `(Ticket
    #6785). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6785>`__
 -  Added a new configuration parameter
-   SUBMIT\_DEFAULT\_SHOULD\_TRANSFER\_FILES. It determines whether file
+   ``SUBMIT_DEFAULT_SHOULD_TRANSFER_FILES``. It determines whether file
    transfer should default to YES, NO, or AUTO when when the submit file
-   does not supply a value for should\_transfer\_files and file transfer
-   is not forced on or off by some other parameter in the submit file.
-   Prior to this addition, *condor\_submit* would always default to
-   AUTO. `(Ticket
+   does not supply a value for ``should_transfer_files`` and file
+   transfer is not forced on or off by some other parameter in the
+   submit file. Prior to this addition, *condor\_submit* would always
+   default to AUTO. `(Ticket
    #6784). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6784>`__
 -  Added new statistics attributes about the lifetime of the
    *condor\_starter* to the *condor\_startd* Ad. This attributes are
@@ -89,36 +90,37 @@ New Features:
    from matching jobs when the node has frequently failed to start jobs.
    `(Ticket
    #6698). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6698>`__
--  For grid-type boinc jobs, the following job ad attributes can be used
-   to to set the BOINC job template parameters of the same name:
-   rsc\_fpops\_est, rsc\_fpops\_bound, rsc\_memory\_bound,
-   rsc\_disk\_bound, delay\_bound, and app\_version\_num. `(Ticket
+-  For grid-type ``boinc`` jobs, the following job ad attributes can be
+   used to to set the BOINC job template parameters of the same name:
+   ``rsc_fpops_est``, ``rsc_fpops_bound``, ``rsc_memory_bound``,
+   ``rsc_disk_bound``, ``delay_bound``, and ``app_version_num``.
+   `(Ticket
    #6760). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6760>`__
--  Daemons now advertise DaemonLastReconfigTime in all of their ads.
+-  Daemons now advertise ``DaemonLastReconfigTime`` in all of their ads.
    This is either the boot time of the time, or the last time
    *condor\_reconfig* was run on that daemon. `(Ticket
    #6758). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6758>`__
 
 Bugs Fixed:
 
--  Fixed a bug where PREEMPT was not be evaluated if the machine was
-   draining. This prevent the HOLD\_IF series of policies from
+-  Fixed a bug where ``PREEMPT`` was not be evaluated if the machine was
+   draining. This prevent the ``HOLD_IF`` series of policies from
    functioning properly in that situation. `(Ticket
    #6697). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6697>`__
 -  Fixed a bug that occurred when starting Docker Universe jobs that
    would cause the *condor\_starter* to crash and the jobs to cycle
-   between running and idle status. `(Ticket
+   between ``running`` and ``idle`` status. `(Ticket
    #6725). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6725>`__
 -  Fixed a bug that could cause a job to go into a rapid cycle between
-   running and idle status if a policy expression evaluated to Undefined
-   during input file transfer. `(Ticket
+   ``running`` and ``idle`` status if a policy expression evaluated to
+   ``Undefined`` during input file transfer. `(Ticket
    #6728). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6728>`__
 -  Fixed bugs where small jobs would not match partitionable slots when
    Group Quotas were enabled. `(Ticket
    #6714). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6714>`__
    `(Ticket
    #6750). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6750>`__
--  Fixed a bug that prevented *condor\_tail* -stderr from working.
+-  Fixed a bug that prevented *condor\_tail* ``-stderr`` from working.
    `(Ticket
    #6755). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6755>`__
 -  *condor\_who* now works properly on macOS. `(Ticket
@@ -133,7 +135,7 @@ Bugs Fixed:
    bindings AdTypes enumeration. `(Ticket
    #6737). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6737>`__
 -  Fixed a bug that caused late materialization jobs to handle the
-   getenv submit command incorrectly. `(Ticket
+   ``getenv`` submit command incorrectly. `(Ticket
    #6723). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6723>`__
 -  Fixed an inefficiency in the SetAttribute remote procedure call that
    could sometimes result in noticeable performance reduction of the
@@ -148,14 +150,14 @@ Bugs Fixed:
    address. This avoids problems when IPv6 is present but not enabled.
    `(Ticket
    #6711). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6711>`__
--  Fixed a bug where the JobSuccessExitCode was not set. `(Ticket
+-  Fixed a bug where the ``JobSuccessExitCode`` was not set. `(Ticket
    #6786). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6786>`__
 -  Fixed a problem with the EC2 configuration file was present in the
    tarballs. `(Ticket
    #6797). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6797>`__
 
 Version 8.7.9
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -173,19 +175,20 @@ Known Issues:
    `(Ticket
    #6665). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6665>`__
 -  Policies implemented by the startd may not function as desired while
-   the machine is draining. Specifically, if the PREEMPT expression
+   the machine is draining. Specifically, if the ``PREEMPT`` expression
    becomes true for a particular slot while a machine is draining, the
    corresponding job will not vacate the slot until draining completes.
-   For example, this renders the policy macro HOLD\_IF\_MEMORY\_EXCEEDED
-   ineffective. This has been a problem since v8.6. `(Ticket
+   For example, this renders the policy macro
+   ``HOLD_IF_MEMORY_EXCEEDED`` ineffective. This has been a problem
+   since v8.6. `(Ticket
    #6697). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6697>`__
 -  Policies implemented by the startd may not function as desired while
-   the startd is shutting down peacefully. Specifically, if the PREEMPT
-   expression becomes true for a particular slot while the startd is
-   shutting down peacefully, the corresponding job will never be
-   vacated. For example, this renders renders the policy macro
-   HOLD\_IF\_MEMORY\_EXCEEDED ineffective. This has been a problem since
-   v8.6. `(Ticket
+   the startd is shutting down peacefully. Specifically, if the
+   ``PREEMPT`` expression becomes true for a particular slot while the
+   startd is shutting down peacefully, the corresponding job will never
+   be vacated. For example, this renders renders the policy macro
+   ``HOLD_IF_MEMORY_EXCEEDED`` ineffective. This has been a problem
+   since v8.6. `(Ticket
    #6701). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6701>`__
 
 New Features:
@@ -198,7 +201,7 @@ New Features:
 -  VM universe jobs are now given time to shutdown after a power-off
    signal when they are evicted gracefully. `(Ticket
    #6705). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6705>`__
--  The NETWORK\_HOSTNAME configuration parameter can now be set to a
+-  The ``NETWORK_HOSTNAME`` configuration parameter can now be set to a
    fully-qualified hostname that’s an alias of one of the machine’s
    interfaces. `(Ticket
    #6702). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6702>`__
@@ -214,12 +217,12 @@ New Features:
    #6659). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6659>`__
 -  HTCondor now supports backfill while draining. You may now use the
    *condor\_drain* command, or configure the *condor\_defrag* daemon, to
-   set a different START expression for the duration of the draining.
-   See the definition of DEFRAG\_DRAINING\_START\_EXPR (
+   set a different ``START`` expression for the duration of the
+   draining. See the definition of ``DEFRAG_DRAINING_START_EXPR`` (
    `3.5.33 <ConfigurationMacros.html#x33-2290003.5.33>`__) and the
    *condor\_drain* manual ( `12 <Condordrain.html#x111-77600012>`__) for
    details. See also the known issues above for information which may
-   influence your choice of START expressions. `(Ticket
+   influence your choice of ``START`` expressions. `(Ticket
    #6664). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6664>`__
 -  Docker universe jobs now run with the supplemental group ids of the
    running user, not just the primary group. `(Ticket
@@ -227,10 +230,10 @@ New Features:
 -  Added proxy delegation for vanilla universe jobs that define a X509
    proxy but do not use the file transfer mechanism. `(Ticket
    #6587). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6587>`__
--  Added configuration parameters GAHP\_SSL\_CADIR and GAHP\_SSL\_CAFILE
-   to specify trusted CAs when authenticating EC2 and GCE servers. This
-   used by be controlled by SOAP\_SSL\_CA\_DIR and SOAP\_SSL\_CAFILE,
-   which have been removed. `(Ticket
+-  Added configuration parameters ``GAHP_SSL_CADIR`` and
+   ``GAHP_SSL_CAFILE`` to specify trusted CAs when authenticating EC2
+   and GCE servers. This used by be controlled by ``SOAP_SSL_CA_DIR``
+   and ``SOAP_SSL_CAFILE``, which have been removed. `(Ticket
    #6684). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6684>`__
 -  HTCondor can now read the new credentials file format used by the
    Goggle Cloud Platform command-line tools. `(Ticket
@@ -259,7 +262,7 @@ Bugs Fixed:
    #6247). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6247>`__
 
 Version 8.7.8
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -271,19 +274,20 @@ New Features:
    Use the **-aws-region** flag with **-setup** to add new regions. Use
    the **-aws-region** flag with other *condor\_annex* commands to
    choose which region to operate in. You may change the default region
-   by setting ANNEX\_DEFAULT\_AWS\_REGION. `(Ticket
+   by setting ``ANNEX_DEFAULT_AWS_REGION``. `(Ticket
    #6632). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6632>`__
 -  Added default AMIs for all four US regions to simplify using
    *condor\_annex* in those regions. `(Ticket
    #6633). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6633>`__
--  HTCondor will no longer mangle CUDA\_VISIBLE\_DEVICES or
-   GPU\_DEVICE\_ORDINAL if those environment variables are set when it
+-  HTCondor will no longer mangle ``CUDA_VISIBLE_DEVICES`` or
+   ``GPU_DEVICE_ORDINAL`` if those environment variables are set when it
    starts up. As a result, HTCondor will report GPU usage with the
    original device index (rather than starting over at 0). `(Ticket
    #6584). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6584>`__
--  When reporting GPUsUsage, HTCondor now also reports GPUsMemoryUsage.
-   This is like MemoryUsage, except it is the peak amount of GPU memory
-   used by the job. This feature only works for nVidia GPUs. `(Ticket
+-  When reporting ``GPUsUsage``, HTCondor now also reports
+   ``GPUsMemoryUsage``. This is like ``MemoryUsage``, except it is the
+   peak amount of GPU memory used by the job. This feature only works
+   for nVidia GPUs. `(Ticket
    #6544). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6544>`__
 -  Improved error messages when delegation of an X.509 proxy fails.
    `(Ticket
@@ -308,7 +312,7 @@ Bugs Fixed:
    join the pool nor terminate themselves. `(Ticket
    #6638). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6638>`__
 -  When running in a HAD setup, there is a configuration parameter,
-   COLLECTOR\_HOST\_FOR\_NEGOTIATOR which tells the active negotiator
+   ``COLLECTOR_HOST_FOR_NEGOTIATOR`` which tells the active negotiator
    which collector to prefer. Previously, this parameter had no default,
    so the negotiator might arbitrarily chose a far-away collector. Now
    this knob defaults to the local collector in a HAD setup. `(Ticket
@@ -321,7 +325,7 @@ Bugs Fixed:
    #6615). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6615>`__
 -  Fixed a bug where *condor\_annex* would fail with a malformed
    authorization header when using AWS resources in a region other than
-   us-east-1. `(Ticket
+   ``us-east-1``. `(Ticket
    #6629). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6629>`__
 -  Fixed a bug that prevented Docker universe jobs with no executable
    listed in the submit file from running. `(Ticket
@@ -340,7 +344,7 @@ Bugs Fixed:
    #6597). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6597>`__
 
 Version 8.7.7
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -363,22 +367,22 @@ New Features:
    machine resources were assigned to the slot in which the job ran.
    `(Ticket
    #6549). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6549>`__
--  HTCondor now reports CPUsUsage for each job. This attribute is like
-   MemoryUsage and DiskUsage, except it is the average number of CPUs
-   used by the job. `(Ticket
+-  HTCondor now reports ``CPUsUsage`` for each job. This attribute is
+   like ``MemoryUsage`` and ``DiskUsage``, except it is the average
+   number of CPUs used by the job. `(Ticket
    #6477). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6477>`__
--  The use feature: GPUs metaknob now causes HTCondor to report
-   GPUsUsage for each job. This is like CPUsUsage, except it is the
-   average number of GPUs used by the job. This feature only works for
-   nVIDIA GPUs. `(Ticket
+-  The ``use feature: GPUs`` metaknob now causes HTCondor to report
+   ``GPUsUsage`` for each job. This is like ``CPUsUsage``, except it is
+   the average number of GPUs used by the job. This feature only works
+   for nVIDIA GPUs. `(Ticket
    #6477). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6477>`__
 -  Administrators may now, for each custom machine resource, define a
    custom resource monitor. Such a script reports the usage(s) of each
    instance of the corresponding machine resource since the last time it
    reported; HTCondor aggregates these reports between resource
-   instances and over time to produce a <Resource>Usage attribute, which
-   is like GPUsUsage, except for the custom machine resource in
-   question. `(Ticket
+   instances and over time to produce a ``<Resource>Usage`` attribute,
+   which is like ``GPUsUsage``, except for the custom machine resource
+   in question. `(Ticket
    #6477). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6477>`__
 -  The *condor\_startd* now periodically writes a file to each job’s
    sandbox named “.update.ad”. This file is a copy of the slot’s machine
@@ -389,8 +393,8 @@ New Features:
    *condor\_q* to show only jobs that will not match any of the
    available slots. `(Ticket
    #6529). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6529>`__
--  OpenMPI jobs launched in the parallel universe via openmpiscript now
-   work with shared file systems (again). `(Ticket
+-  OpenMPI jobs launched in the parallel universe via ``openmpiscript``
+   now work with shared file systems (again). `(Ticket
    #6556). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6556>`__
 -  Allow a parallel universe job with parallel scheduling group to
    select a new parallel scheduling group when held and released.
@@ -416,14 +420,14 @@ New Features:
    #5697). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=5697>`__
 -  Improved support for IPv6 link-local addresses, in particular using
    the correct scope id. Using a wild card or device name in
-   NETWORK\_INTERFACE now works properly when NO\_DNS is set to True.
-   `(Ticket
+   ``NETWORK_INTERFACE`` now works properly when ``NO_DNS`` is set to
+   ``True``. `(Ticket
    #6518). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6518>`__
 -  Python bindings installed via pip on a system without a HTCondor
-   install (i.e. without a condor\_config present) will use a “null”
+   install (i.e. without a ``condor_config`` present) will use a “null”
    config and print a warning. `(Ticket
    #6515). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6515>`__
--  The new configuration parameter NEGOTIATOR\_JOB\_CONSTRAINT defines
+-  The new configuration parameter ``NEGOTIATOR_JOB_CONSTRAINT`` defines
    an expression which constrains which job ads are considered for
    matchmaking by the *condor\_negotiator*. `(Ticket
    #6250). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6250>`__
@@ -452,8 +456,8 @@ New Features:
    #6565). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6565>`__
    `(Ticket
    #6566). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6566>`__
--  Removed configuration parameters ENABLE\_ADDRESS\_REWRITING and
-   SHARED\_PORT\_ADDRESS\_REWRITING. `(Ticket
+-  Removed configuration parameters ``ENABLE_ADDRESS_REWRITING`` and
+   ``SHARED_PORT_ADDRESS_REWRITING``. `(Ticket
    #6525). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6525>`__
 -  Removed the deprecated AvailStats attribute from the machine ad. This
    was being computing incorrectly, and apparently never used. `(Ticket
@@ -474,7 +478,7 @@ Bugs Fixed:
    `(Ticket
    #6549). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6549>`__
 -  IPv4 addresses are now ignored when resolving a hostname and
-   ENABLE\_IPV4 is set to False. `(Ticket
+   ``ENABLE_IPV4`` is set to ``False``. `(Ticket
    #4881). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=4881>`__
 -  Fixed a race condition in the *condor\_startd* that could result in
    skipping the code that makes sure that a job sandbox was deleted in
@@ -489,7 +493,7 @@ Bugs Fixed:
    #6560). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6560>`__
 
 Version 8.7.6
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -497,17 +501,17 @@ Release Notes:
 
 New Features:
 
--  Changed the default value of configuration parameter IS\_OWNER to
-   False. The previous default value is now set as part of the use
-   POLICY : Desktop configuration template. `(Ticket
+-  Changed the default value of configuration parameter ``IS_OWNER`` to
+   ``False``. The previous default value is now set as part of the
+   ``use POLICY : Desktop`` configuration template. `(Ticket
    #6463). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6463>`__
 -  You may now use SCHEDD and JOB instead of MY and TARGET in
-   SUBMIT\_REQUIREMENTS expressions. `(Ticket
+   ``SUBMIT_REQUIREMENTS`` expressions. `(Ticket
    #4818). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=4818>`__
--  Added cmake build option WANT\_PYTHON\_WHEELS and make target
-   pypi\_staging to build the framework for Python wheels. This option
-   and target are not enabled by default and are not likely to work
-   outside of Linux environments with a single Python installation.
+-  Added cmake build option ``WANT_PYTHON_WHEELS`` and make target
+   ``pypi_staging`` to build the framework for Python wheels. This
+   option and target are not enabled by default and are not likely to
+   work outside of Linux environments with a single Python installation.
    `(Ticket
    #6486). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6486>`__
 -  Added new job attributes BatchProject and BatchRuntime for grid-type
@@ -515,7 +519,7 @@ New Features:
    runtime in seconds for the job that’s submited to the underlying
    batch system. `(Ticket
    #6451). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6451>`__
--  HTCondor now respects ATTR\_JOB\_SUCCESS\_EXIT\_CODE when sending job
+-  HTCondor now respects ``ATTR_JOB_SUCCESS_EXIT_CODE`` when sending job
    notifications. `(Ticket
    #6432). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6432>`__
 -  Added some graph metrics (height, width, etc.) to DAGMan’s metrics
@@ -534,30 +538,30 @@ Bugs Fixed:
 -  DAGMan previously connected to *condor\_schedd* every time it
    detected an update in its internal state. This is too aggressive for
    rapidly changing DAGs, so we’ve changed the connection to happen in
-   time intervals defined by DAGMAN\_QUEUE\_UPDATE\_INTERVAL, by default
-   once every five minutes. `(Ticket
+   time intervals defined by ``DAGMAN_QUEUE_UPDATE_INTERVAL``, by
+   default once every five minutes. `(Ticket
    #6464). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6464>`__
--  DAGMan now enforces the DAGMAN\_MAX\_JOB\_HOLDS limit by the number
+-  DAGMan now enforces the ``DAGMAN_MAX_JOB_HOLDS`` limit by the number
    of held jobs in a cluster at the same time. Previously it counted all
    holds over the lifetime of a cluster, even if only a small number of
    them are active at the same time. `(Ticket
    #6492). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6492>`__
--  Fixed a bug where on rare occasions the ShadowLog would become owned
-   by root. `(Ticket
+-  Fixed a bug where on rare occasions the ``ShadowLog`` would become
+   owned by root. `(Ticket
    #6485). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6485>`__
 -  Fixed a bug where using *condor\_qedit* to change any of the
    concurrency limits of a job would have no effect. `(Ticket
    #6448). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6448>`__
--  When copy\_to\_spool is set to True, *condor\_submit* now attempts to
-   transfer the job exectuable only once per job cluster, instead of
-   once per job. `(Ticket
+-  When ``copy_to_spool`` is set to ``True``, *condor\_submit* now
+   attempts to transfer the job exectuable only once per job cluster,
+   instead of once per job. `(Ticket
    #6459). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6459>`__
 -  Fixed a bug that could result in an incorrect total reported by
    condor\_rm when the **-totals** option is used. `(Ticket
    #6450). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6450>`__
 
 Version 8.7.5
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -576,7 +580,7 @@ Bugs Fixed:
    #6455). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6455>`__
 
 Version 8.7.4
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -595,9 +599,9 @@ New Features:
    statistics currently get dumped into the .dagman.out file at the end
    of a DAGs execution. `(Ticket
    #6411). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6411>`__
--  Added a new knob to *condor\_dagman*, DAGMAN\_AGGRESSIVE\_SUBMIT.
+-  Added a new knob to *condor\_dagman*, ``DAGMAN_AGGRESSIVE_SUBMIT``.
    When set to True, this tells DAGMan to ignore the interval time limit
-   for submitting jobs (defined by DAGMAN\_USER\_LOG\_SCAN\_INTERVAL)
+   for submitting jobs (defined by ``DAGMAN_USER_LOG_SCAN_INTERVAL``)
    and to continuously submit jobs until no more are ready, or until it
    hits a different limit. `(Ticket
    #6386). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6386>`__
@@ -614,14 +618,14 @@ New Features:
    #6321). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6321>`__
 -  Added a “merge” mode to *condor\_status*. When invoked with the
    [**-merge  **\ *<file>*] option, ads will be read from *file*, which
-   can be - to indicate standard in, and compared to the ads selected by
-   the query specified as usual by the remainder of the command-line.
-   Ads will be compared on the basis of the sort key (which you can
-   change with [**-sort  **\ *<key>*]). *condor\_status* will print
-   three tables based on that comparison: the first table will be
-   generated from those ads whose key was in the query but not in
-   *file*; the second table will be generated from those ads whose key
-   was appeared in both the query and in *file*, and the third table
+   can be ``-`` to indicate standard in, and compared to the ads
+   selected by the query specified as usual by the remainder of the
+   command-line. Ads will be compared on the basis of the sort key
+   (which you can change with [**-sort  **\ *<key>*]). *condor\_status*
+   will print three tables based on that comparison: the first table
+   will be generated from those ads whose key was in the query but not
+   in *file*; the second table will be generated from those ads whose
+   key was appeared in both the query and in *file*, and the third table
    will be generated from those ads whose key appeared only in *file*.
    `(Ticket
    #6321). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6321>`__
@@ -635,11 +639,12 @@ New Features:
    `3.7.2 <PolicyConfigurationforExecuteHostsandforSubmitHosts.html#x35-2670003.7.2>`__.
    `(Ticket
    #5971). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=5971>`__
--  openmpiscript now uses *condor\_chirp* to run Open MPI’s execute
+-  ``openmpiscript`` now uses *condor\_chirp* to run Open MPI’s execute
    daemons (orted) directly under the *condor\_starter* (instead of
-   using SSH). openmpiscript now also puts information about the number
-   of CPUs in the hostfile given to mpirun and now includes an option
-   for jobs that intend to use hybrid Open MPI+OpenMP. `(Ticket
+   using SSH). ``openmpiscript`` now also puts information about the
+   number of CPUs in the hostfile given to ``mpirun`` and now includes
+   an option for jobs that intend to use hybrid Open MPI+OpenMP.
+   `(Ticket
    #6403). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6403>`__
 -  The High Availability *condor\_replication* daemon now works on
    machines using mixed IPV6/IPV4 addressing or using the
@@ -649,9 +654,9 @@ New Features:
    command line to do so. Now, it first creates a container with docker
    create, then starts it with docker start. This allows HTCondor to
    better isolate errors at container creation time, but should not
-   result in any user visible changes at run time. The StarterLog will
-   now always print the docker command line for the start and create,
-   and not the run that it used to. `(Ticket
+   result in any user visible changes at run time. The ``StarterLog``
+   will now always print the docker command line for the start and
+   create, and not the run that it used to. `(Ticket
    #6377). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6377>`__
 -  When docker universe reports memory usage, it now reports the RSS
    (Resident Set Size) of the container, previously it reported RSS +
@@ -662,8 +667,8 @@ New Features:
    #6404). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6404>`__
 -  Added a new **-macro** argument to *condor\_config\_val*. This
    argument causes *condor\_config\_val* to show the results of doing
-   $() expansion of its arguments as if they were the result of a look
-   up rather than the names of configuration variables to look up.
+   ``$()`` expansion of its arguments as if they were the result of a
+   look up rather than the names of configuration variables to look up.
    `(Ticket
    #6416). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6416>`__
 -  CErequirements for the BLAHP can now be expressed in a simple form
@@ -687,7 +692,7 @@ Bugs Fixed:
    #6405). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6405>`__
 
 Version 8.7.3
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -708,10 +713,10 @@ New Features:
    format output when redirected or piped, and to optionally take input
    of two ClassAd files. `(Ticket
    #6352). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6352>`__
--  Changed how auto works for ENABLE\_IPV4 and ENABLE\_IPV6. HTCondor
-   now ignores addresses that are likely to be useless (loopback or
-   link-local) unless no address is likely to be useful (private or
-   public). `(Ticket
+-  Changed how ``auto`` works for ``ENABLE_IPV4`` and ``ENABLE_IPV6``.
+   HTCondor now ignores addresses that are likely to be useless
+   (loopback or link-local) unless no address is likely to be useful
+   (private or public). `(Ticket
    #6348). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6348>`__
 -  Added support for Public Input Files in HTCondor jobs. This allows
    users to transfer input files over a publicly-available HTTP web
@@ -739,7 +744,7 @@ Bugs Fixed:
    #6370). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6370>`__
 
 Version 8.7.2
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -756,11 +761,11 @@ Known Issues:
 New Features:
 
 -  Improved the performance of the *condor\_schedd* by setting the
-   default for the knob SUBMIT\_SKIP\_FILECHECKS to true. This prevents
-   the *condor\_schedd* from checking the readability of all input
-   files, and skips the creation of the output files on the submit side
-   at submit time. Output files are now created either at transfer time,
-   when file transfer is on, or by the job itself, if a shared
+   default for the knob ``SUBMIT_SKIP_FILECHECKS`` to true. This
+   prevents the *condor\_schedd* from checking the readability of all
+   input files, and skips the creation of the output files on the submit
+   side at submit time. Output files are now created either at transfer
+   time, when file transfer is on, or by the job itself, if a shared
    filesystem is used. As a result of this change, it is possible that a
    job will run to completion, and only then is put on hold because the
    output file on the submit machine cannot be written. `(Ticket
@@ -769,23 +774,24 @@ New Features:
    before submitting jobs by default. This caused confusion for users,
    and slowed down the submission process. The older behavior, where
    *condor\_submit* would fail if it could not create this files, is
-   available when the parameter SUBMIT\_SKIP\_FILECHECKS is set to
+   available when the parameter ``SUBMIT_SKIP_FILECHECKS`` is set to
    false. The default is now true. `(Ticket
    #6220). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6220>`__
 -  *condor\_q* will now show expanded totals when querying a
    *condor\_schedd* that is version 8.7.1 or later. The totals for the
    current user and for all users are provided by the *condor\_schedd*.
    To get the old totals display set the configuration parameter
-   CONDOR\_Q\_SHOW\_OLD\_SUMMARY to true. `(Ticket
+   ``CONDOR_Q_SHOW_OLD_SUMMARY`` to true. `(Ticket
    #6254). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6254>`__
 -  The *condor\_annex* tool now logs to the user configuration
    directory. Added an audit log of *condor\_annex* commands and their
    results. `(Ticket
    #6267). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6267>`__
--  Changed *condor\_off* so that the -annex flag implies the -master
-   flag, since this is more likely to be the right thing. `(Ticket
+-  Changed *condor\_off* so that the ``-annex`` flag implies the
+   ``-master`` flag, since this is more likely to be the right thing.
+   `(Ticket
    #6266). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6266>`__
--  Added -status flag to *condor\_annex*, which reports on instances
+-  Added ``-status`` flag to *condor\_annex*, which reports on instances
    which are running but not in the pool. `(Ticket
    #6257). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6257>`__
 -  If invoked with an annex name and duration (but not an instance or
@@ -813,10 +819,10 @@ New Features:
    it to be used directly as an executable of a *condor\_startd* cron
    job. `(Ticket
    #6012). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6012>`__
--  The configuration variable MAX\_RUNNING\_SCHEDULER\_JOBS\_PER\_OWNER
+-  The configuration variable ``MAX_RUNNING_SCHEDULER_JOBS_PER_OWNER``
    was set to default to 100. It formerly had no default value. `(Ticket
    #6260). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6260>`__
--  Added a parameter DEDICATED\_SCHEDULER\_USE\_SERIAL\_CLAIMS which
+-  Added a parameter ``DEDICATED_SCHEDULER_USE_SERIAL_CLAIMS`` which
    defaults to false. When true, allows the dedicated schedule to use
    claimed/idle slots that the serial scheduler has claimed. `(Ticket
    #6276). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6276>`__
@@ -825,7 +831,7 @@ New Features:
    command by inspecting the first ad to be advertised. `(Ticket
    #6296). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6296>`__
 -  Improved support for running several *condor\_negotiator*\ s in a
-   single pool. NEGOTIATOR\_NAME now works like MASTER\_NAME.
+   single pool. ``NEGOTIATOR_NAME`` now works like ``MASTER_NAME``.
    *condor\_userprio* has a -name option to select a specific
    *condor\_negotiator*. Accounting ads from multiple
    *condor\_negotiator*\ s can co-exist in the *condor\_collector*.
@@ -834,7 +840,7 @@ New Features:
 -  Package EC2 Annex components in the condor-annex-ec2 sub RPM.
    `(Ticket
    #6202). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6202>`__
--  Added configuration parameter ALTERNATE\_JOB\_SPOOL, an expression
+-  Added configuration parameter ``ALTERNATE_JOB_SPOOL``, an expression
    evaluated against the job ad, which specifies an alternate spool
    directory to use for files related to that job. `(Ticket
    #6221). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6221>`__
@@ -842,13 +848,13 @@ New Features:
 Bugs Fixed:
 
 -  With an empty configuration file, HTCondor would behave as if
-   ALLOW\_ADMINISTRATOR were \*. Changed the default to $(CONDOR\_HOST),
-   which is much less insecure. `(Ticket
+   ``ALLOW_ADMINISTRATOR`` were ``*``. Changed the default to
+   ``$(CONDOR_HOST)``, which is much less insecure. `(Ticket
    #6230). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6230>`__
 -  Fixed a bug in the *condor\_schedd* where it did not account for the
    initial state of late materialize jobs when calculating the running
    totals of jobs by state. This bug resulted in *condor\_q* displaying
-   incorrect totals when CONDOR\_Q\_SHOW\_OLD\_SUMMARY was set to false.
+   incorrect totals when ``CONDOR_Q_SHOW_OLD_SUMMARY`` was set to false.
    `(Ticket
    #6272). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6272>`__
 -  Fixed a bug where the *condor\_schedd* would incorrectly try to check
@@ -874,7 +880,7 @@ Bugs Fixed:
    #6259). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6259>`__
 
 Version 8.7.1
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -884,34 +890,36 @@ New Features:
 
 -  Previously, when the number of forked children processing Collector
    queries surpassed the maximum set by the configuration knob
-   COLLECTOR\_QUERY\_WORKERS, the Collector handled all new incoming
+   ``COLLECTOR_QUERY_WORKERS``, the Collector handled all new incoming
    queries in-processes (i.e. without forking). As processing a query
    and sending out the result to the network could take a long time, the
    result of servicing such queries in-process in the Collector is
    likely to drop a lot of updates. So now in v8.7.1, instead of
    servicing such queries in-process, they are queued up for servicing
    as soon as query worker child processes become available. The
-   configuration knob COLLECTOR\_QUERY\_WORKERS\_PENDING was introduced;
-   see section\ |˜r |\ efparam:CollectorQueryWorkersPending. `(Ticket
+   configuration knob ``COLLECTOR_QUERY_WORKERS_PENDING`` was
+   introduced; see section\ |˜r |\ efparam:CollectorQueryWorkersPending.
+   `(Ticket
    #6192). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6192>`__
--  Default value for COLLECTOR\_QUERY\_WORKERS changed from 2 to 4.
+-  Default value for ``COLLECTOR_QUERY_WORKERS`` changed from 2 to 4.
    `(Ticket
    #6192). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6192>`__
 -  Introduced configuration macro
-   COLLECTOR\_QUERY\_WORKERS\_RESERVE\_FOR\_HIGH\_PRIO so that the
+   ``COLLECTOR_QUERY_WORKERS_RESERVE_FOR_HIGH_PRIO`` so that the
    collector prioritizes queries that are important for the operation of
    the pool (such as queries from the negotiator) ahead of servicing
    user invocations of *condor\_status*. `(Ticket
    #6192). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6192>`__
--  Introduced configuration macro COLLECTOR\_QUERY\_MAX\_WORKTIME to
+-  Introduced configuration macro ``COLLECTOR_QUERY_MAX_WORKTIME`` to
    define the maximum amount of time the collector may service a query
    from a client like condor\_status. See section\ |˜r
    |\ efparam:CollectorQueryMaxWorktime. `(Ticket
    #6192). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6192>`__
 -  Added several new statistics on collector query performance into the
-   Collector ClassAd, including ActiveQueryWorkers,
-   ActiveQueryWorkersPeak, PendingQueries, PendingQueriesPeak,
-   DroppedQueries, and RecentDroppedQueries. See section\ |˜r
+   Collector ClassAd, including ``ActiveQueryWorkers``,
+   ``ActiveQueryWorkersPeak``, ``PendingQueries``,
+   ``PendingQueriesPeak``, ``DroppedQueries``, and
+   ``RecentDroppedQueries``. See section\ |˜r
    |\ efsec:Collector-ClassAd-Attributes. `(Ticket
    #6192). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6192>`__
 -  Further refinement and initial documentation of the HTCondor Annex.
@@ -940,12 +948,12 @@ New Features:
    first route is now always selected. The old behavior of spreading
    jobs across all matching routes round-robin style can be enabled by
    setting the new configuration parameter
-   JOB\_ROUTER\_ROUND\_ROBIN\_SELECTION to True. `(Ticket
+   ``JOB_ROUTER_ROUND_ROBIN_SELECTION`` to ``True``. `(Ticket
    #6190). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6190>`__
 -  The *condor\_schedd* now keeps a count of jobs by state for each
    owner and submitter and will report them to *condor\_q*. Condorq will
    display these totals unless the new configuration parameter
-   CONDOR\_Q\_SHOW\_OLD\_SUMMARY is set to true. In 8.7.1 this parameter
+   ``CONDOR_Q_SHOW_OLD_SUMMARY`` is set to true. In 8.7.1 this parameter
    defaults to true. `(Ticket
    #6160). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6160>`__
 -  Milestone 1 for late materialization in the *condor\_schedd* was
@@ -953,10 +961,10 @@ New Features:
    to *condor\_q* that can be used to submit a late materializing job
    cluster to the *condor\_schedd*. The *condor\_schedd* will refuse the
    submission unless the configuration parameter
-   SCHEDD\_ALLOW\_LATE\_MATERIALIZATION is set to true. `(Ticket
+   ``SCHEDD_ALLOW_LATE_MATERIALIZATION`` is set to true. `(Ticket
    #6212). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6212>`__
 -  Increased the default value for configuration parameter
-   NEGOTIATOR\_SOCKET\_CACHE\_SIZE to 500. `(Ticket
+   ``NEGOTIATOR_SOCKET_CACHE_SIZE`` to 500. `(Ticket
    #6165). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6165>`__
 -  Added new DaemonCore statistics UdpQueueDepth to measure the number
    of bytes in the UDP receive queue for daemons with a UDP command
@@ -969,7 +977,7 @@ New Features:
    and some by forking a child process. This allows it to avoid the
    overhead of forking to handle queries that will take little time. The
    policy for deciding which queries to handle in process is controlled
-   by a new configuration parameter HANDLE\_QUERY\_IN\_PROC\_POLICY.
+   by a new configuration parameter ``HANDLE_QUERY_IN_PROC_POLICY``.
    `(Ticket
    #6191). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6191>`__
 -  Added **-limit** option to *condor\_status* and changed the
@@ -986,7 +994,7 @@ Bugs Fixed:
 -  None.
 
 Version 8.7.0
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -1029,7 +1037,7 @@ New Features:
    #6121). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6121>`__
 -  Added **-annex** option to *condor\_status* and *condor\_off*.
    Requires an argument; the request is constrained to match machines
-   whose AnnexName ClassAd attribute matches the argument. `(Ticket
+   whose ``AnnexName`` ClassAd attribute matches the argument. `(Ticket
    #6116). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6116>`__
    `(Ticket
    #6117). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6117>`__

@@ -33,11 +33,13 @@ def cleanup_pre_contents(data):
 def cleanup_table(data):
 
     for index, token in enumerate(data):
-        
-        # Remove all the <tr class="hline">...</tr> tags
         if type(token) is bs4.element.Tag:
+            #print("token.name = " + str(token.name))
+            # Remove all the <tr class="hline">...</tr> tags
             if token.name == "tr" and "class" in token.attrs.keys():
-                    data.remove(token)
+                data.remove(token)
+            #for child in token.children:
+            #    print("child = " + str(child))
                     
     return data
 

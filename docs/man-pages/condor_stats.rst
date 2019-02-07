@@ -6,14 +6,14 @@ condor\_stats
 Display historical information about the HTCondor pool
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_stats** [**-f  **\ *filename*] [**-orgformat**\ ]
 [**-pool  **\ *centralmanagerhostname[:portnumber]*] [**time-range**\ ]
 *query-type*
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_stats* displays historic information about an HTCondor pool.
 Based on the type of information requested, a query is sent to the
@@ -43,7 +43,7 @@ One query type is required. If multiple queries are specified, only the
 last one takes effect.
 
 Time Range Options
-^^^^^^^^^^^^^^^^^^
+------------------
 
  **-lastday**
     Get information for the last day.
@@ -63,7 +63,7 @@ Time Range Options
     *condor\_stats* to print its usage information and quit.
 
 Query Type Arguments
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 The query types that do not list all of a category require further
 specification as given by an argument.
@@ -80,8 +80,9 @@ specification as given by an argument.
     A query of a specified group to provide information about a group of
     machines based on their platform (operating system and
     architecture). The architecture is defined by the machine ClassAd
-    Arch, and the operating system is defined by the machine ClassAd
-    OpSys. The string “Total” ask for information about all platforms.
+    ``Arch``, and the operating system is defined by the machine ClassAd
+    ``OpSys``. The string “Total” ask for information about all
+    platforms.
 
     | The columns displayed are the number of machines that are
     unclaimed, matched, claimed, preempting, owner, shutdown, delete,
@@ -123,7 +124,7 @@ specification as given by an argument.
     range.
 
 Options
-^^^^^^^
+-------
 
  **-f **\ *filename*
     Write the information to a file instead of the standard output.
@@ -136,18 +137,18 @@ Options
     *usergroupquery*, and *ckptquery*.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_stats* will exit with a status value of 0 (zero) upon success,
 and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

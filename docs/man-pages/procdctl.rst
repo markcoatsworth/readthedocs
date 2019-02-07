@@ -6,14 +6,14 @@ procd\_ctl
 command line interface to the *condor\_procd*
 
 Synopsis
-^^^^^^^^
+--------
 
 **procd\_ctl** **-h**
 
 **procd\_ctl** **-A **\ *address-file* [**command**\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 This is a programmatic interface to the *condor\_procd* daemon. It may
 be used to cause the *condor\_procd* to do anything that the
@@ -31,7 +31,7 @@ One command is given to the *condor\_procd*. The choices for the command
 are defined by the Options.
 
 Options
-^^^^^^^
+-------
 
  **TRACK\_BY\_ASSOCIATED\_GID** *GID* [*PID*\ ]
     Use the specified *GID* to track the specified family rooted at
@@ -68,7 +68,7 @@ Options
     Disconnect from the *condor\_procd* and exit.
 
 General Remarks
-^^^^^^^^^^^^^^^
+---------------
 
 This program may be used in a standalone mode, independent of HTCondor,
 to track process families. The programs *procd\_ctl* and *gidd\_alloc*
@@ -77,18 +77,18 @@ the daemon and inquire about certain state of running processes on the
 machine, respectively.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *procd\_ctl* will exit with a status value of 0 (zero) upon success, and
 it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

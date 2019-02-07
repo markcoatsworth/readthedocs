@@ -6,7 +6,7 @@ condor\_userprio
 Manage user priorities
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_userprio** **-help**
 
@@ -15,17 +15,18 @@ Synopsis
 \| [**Display options**\ ] [**-inputfile  **\ *filename*]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_userprio* either modifies priority-related information or
 displays priority-related information. Displayed information comes from
 the accountant log, where the *condor\_negotiator* daemon stores
-historical usage information in the file at $(SPOOL)/Accountantnew.log.
-Which fields are displayed changes based on command line arguments.
-*condor\_userprio* with no arguments, lists the active users along with
-their priorities, in increasing priority order. The **-all** option can
-be used to display more detailed information about each user, resulting
-in a rather wide display, and includes the following columns:
+historical usage information in the file at
+``$(SPOOL)``/Accountantnew.log. Which fields are displayed changes based
+on command line arguments. *condor\_userprio* with no arguments, lists
+the active users along with their priorities, in increasing priority
+order. The **-all** option can be used to display more detailed
+information about each user, resulting in a rather wide display, and
+includes the following columns:
 
  Effective Priority
     The effective priority value of the user, which is used to calculate
@@ -63,7 +64,7 @@ For security purposes of authentication and authorization, specifying an
 Edit Option requires the ADMINISTRATOR level of access.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information and exit.
@@ -81,7 +82,8 @@ Options
  **-inputfile **\ *filename*
     Introduced for debugging purposes, read priority information from
     *filename*. The contents of *filename* are expected to be the same
-    as captured output from running a condor\_userprio -long command.
+    as captured output from running a ``condor_userprio      -long``
+    command.
  **-delete **\ *username*
     (Edit option) Remove the specified *username* from HTCondor’s
     accounting.
@@ -163,13 +165,13 @@ Options
  **-constraint **\ *<expr>*
     (Display option) To be used in conjunction with the **-long**
     **-modular** or the **-autoformat** options. Displays users and
-    groups that match the <expr>.
+    groups that match the ``<expr>``.
  **-debug[:<opts>]**
     (Display option) Without **:<opts>** specified, use configured debug
-    level to send debugging output to stderr. With **:<opts>**
+    level to send debugging output to ``stderr``. With **:<opts>**
     specified, these options are debug levels that override any
     configured debug levels for this command’s execution to send
-    debugging output to stderr.
+    debugging output to ``stderr``.
  **-flat**
     (Display option) Display information such that users within
     hierarchical groups are not listed with their group.
@@ -207,7 +209,7 @@ Options
     (Display option) Display usage information for each group or user.
 
 Examples
-^^^^^^^^
+--------
 
 Example 1 Since the output varies due to command line arguments, here is
 an example of the default output for a pool that does not use
@@ -216,31 +218,31 @@ the **-most** Display option.
 
 ::
 
-    Last Priority Update:  1/19 13:14
-                             Effective   Priority   Res   Total Usage  Time Since
-     User Name                Priority    Factor   In Use (wghted-hrs) Last Usage
-     ---------------------- ------------ --------- ------ ------------ ----------
-     www-cndr@cs.wisc.edu           0.56      1.00      0    591998.44    0+16:30
-     joey@cs.wisc.edu               1.00      1.00      1       990.15 <now>
-     suzy@cs.wisc.edu               1.53      1.00      0       261.78    0+09:31
-     leon@cs.wisc.edu               1.63      1.00      2     12597.82 <now>
-     raj@cs.wisc.edu                3.34      1.00      0      8049.48    0+01:39
-     jose@cs.wisc.edu               3.62      1.00      4     58137.63 <now>
-     betsy@cs.wisc.edu             13.47      1.00      0      1475.31    0+22:46
-     petra@cs.wisc.edu            266.02    500.00      1    288082.03 <now>
-     carmen@cs.wisc.edu           329.87     10.00    634   2685305.25 <now>
-     carlos@cs.wisc.edu           687.36     10.00      0     76555.13    0+14:31
-     ali@proj1.wisc.edu          5000.00  10000.00      0      1315.56    0+03:33
-     apu@nnland.edu              5000.00  10000.00      0       482.63    0+09:56
-     pop@proj1.wisc.edu         26688.11  10000.00      1     49560.88 <now>
-     franz@cs.wisc.edu          29352.06    500.00    109    600277.88 <now>
-     martha@nnland.edu          58030.94  10000.00      0     48212.79    0+12:32
-     izzi@nnland.edu            62106.40  10000.00      0      6569.75    0+02:26
-     marta@cs.wisc.edu          62577.84    500.00     29    193706.30 <now>
-     kris@proj1.wisc.edu       100597.94  10000.00      0     20814.24    0+04:26
-     boss@proj1.wisc.edu       318229.25  10000.00      3    324680.47 <now>
-     ---------------------- ------------ --------- ------ ------------ ----------
-     Number of users: 19                              784   4969073.00    0+23:59
+    Last Priority Update:  1/19 13:14 
+                            Effective   Priority   Res   Total Usage  Time Since 
+    User Name                Priority    Factor   In Use (wghted-hrs) Last Usage 
+    ---------------------- ------------ --------- ------ ------------ ---------- 
+    www-cndr@cs.wisc.edu           0.56      1.00      0    591998.44    0+16:30 
+    joey@cs.wisc.edu               1.00      1.00      1       990.15 <now> 
+    suzy@cs.wisc.edu               1.53      1.00      0       261.78    0+09:31 
+    leon@cs.wisc.edu               1.63      1.00      2     12597.82 <now> 
+    raj@cs.wisc.edu                3.34      1.00      0      8049.48    0+01:39 
+    jose@cs.wisc.edu               3.62      1.00      4     58137.63 <now> 
+    betsy@cs.wisc.edu             13.47      1.00      0      1475.31    0+22:46 
+    petra@cs.wisc.edu            266.02    500.00      1    288082.03 <now> 
+    carmen@cs.wisc.edu           329.87     10.00    634   2685305.25 <now> 
+    carlos@cs.wisc.edu           687.36     10.00      0     76555.13    0+14:31 
+    ali@proj1.wisc.edu          5000.00  10000.00      0      1315.56    0+03:33 
+    apu@nnland.edu              5000.00  10000.00      0       482.63    0+09:56 
+    pop@proj1.wisc.edu         26688.11  10000.00      1     49560.88 <now> 
+    franz@cs.wisc.edu          29352.06    500.00    109    600277.88 <now> 
+    martha@nnland.edu          58030.94  10000.00      0     48212.79    0+12:32 
+    izzi@nnland.edu            62106.40  10000.00      0      6569.75    0+02:26 
+    marta@cs.wisc.edu          62577.84    500.00     29    193706.30 <now> 
+    kris@proj1.wisc.edu       100597.94  10000.00      0     20814.24    0+04:26 
+    boss@proj1.wisc.edu       318229.25  10000.00      3    324680.47 <now> 
+    ---------------------- ------------ --------- ------ ------------ ---------- 
+    Number of users: 19                              784   4969073.00    0+23:59
 
 Example 2 This is an example of the default output for a pool that uses
 hierarchical groups, and the groups accept surplus. This leads to a very
@@ -248,40 +250,40 @@ wide display.
 
 ::
 
-    % condor_userprio -pool crane.cs.wisc.edu -allusers
-     Last Priority Update:  1/19 13:18
-     Group                                 Config     Use    Effective   Priority   Res   Total Usage  Time Since
-       User Name                            Quota   Surplus   Priority    Factor   In Use (wghted-hrs) Last Usage
-     ------------------------------------ --------- ------- ------------ --------- ------ ------------ ----------
-     <none>                                    0.00     yes                   1.00      0         6.78    9+03:52
-       johnsm@crane.cs.wisc.edu                                     0.50      1.00      0         6.62    9+19:42
-       John.Smith@crane.cs.wisc.edu                                 0.50      1.00      0         0.02    9+03:52
-       Sedge@crane.cs.wisc.edu                                      0.50      1.00      0         0.05   13+03:03
-       Duck@crane.cs.wisc.edu                                       0.50      1.00      0         0.02   31+00:28
-       other@crane.cs.wisc.edu                                      0.50      1.00      0         0.04   16+03:42
-     Duck                                      2.00      no                   1.00      0         0.02   13+02:57
-       goose@crane.cs.wisc.edu                                      0.50      1.00      0         0.02   13+02:57
-     Sedge                                     4.00      no                   1.00      0         0.17    9+03:07
-       johnsm@crane.cs.wisc.edu                                     0.50      1.00      0         0.13    9+03:08
-       Half@crane.cs.wisc.edu                                       0.50      1.00      0         0.02   31+00:02
-       John.Smith@crane.cs.wisc.edu                                 0.50      1.00      0         0.05    9+03:07
-       other@crane.cs.wisc.edu                                      0.50      1.00      0         0.01   28+19:34
-     ------------------------------------ --------- ------- ------------ --------- ------ ------------ ----------
-     Number of users: 10                            ByQuota                             0         6.97
+    % condor_userprio -pool crane.cs.wisc.edu -allusers 
+    Last Priority Update:  1/19 13:18 
+    Group                                 Config     Use    Effective   Priority   Res   Total Usage  Time Since 
+      User Name                            Quota   Surplus   Priority    Factor   In Use (wghted-hrs) Last Usage 
+    ------------------------------------ --------- ------- ------------ --------- ------ ------------ ---------- 
+    <none>                                    0.00     yes                   1.00      0         6.78    9+03:52 
+      johnsm@crane.cs.wisc.edu                                     0.50      1.00      0         6.62    9+19:42 
+      John.Smith@crane.cs.wisc.edu                                 0.50      1.00      0         0.02    9+03:52 
+      Sedge@crane.cs.wisc.edu                                      0.50      1.00      0         0.05   13+03:03 
+      Duck@crane.cs.wisc.edu                                       0.50      1.00      0         0.02   31+00:28 
+      other@crane.cs.wisc.edu                                      0.50      1.00      0         0.04   16+03:42 
+    Duck                                      2.00      no                   1.00      0         0.02   13+02:57 
+      goose@crane.cs.wisc.edu                                      0.50      1.00      0         0.02   13+02:57 
+    Sedge                                     4.00      no                   1.00      0         0.17    9+03:07 
+      johnsm@crane.cs.wisc.edu                                     0.50      1.00      0         0.13    9+03:08 
+      Half@crane.cs.wisc.edu                                       0.50      1.00      0         0.02   31+00:02 
+      John.Smith@crane.cs.wisc.edu                                 0.50      1.00      0         0.05    9+03:07 
+      other@crane.cs.wisc.edu                                      0.50      1.00      0         0.01   28+19:34 
+    ------------------------------------ --------- ------- ------------ --------- ------ ------------ ---------- 
+    Number of users: 10                            ByQuota                             0         6.97
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_userprio* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

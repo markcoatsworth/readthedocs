@@ -6,12 +6,12 @@ condor\_router\_rm
 Remove jobs being managed by the HTCondor Job Router
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_router\_rm** [*router\_rm options*\ ] [*condor\_rm options*\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_router\_rm* is a script that provides additional features above
 those offered by *condor\_rm*, for removing jobs being managed by the
@@ -26,7 +26,7 @@ groups:
    these options.
 
 Options
-^^^^^^^
+-------
 
  **-constraint **\ *X*
     (router\_rm option) Remove jobs matching the constraint specified by
@@ -39,18 +39,18 @@ Options
     (router\_rm option) Remove only jobs on specified route
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_router\_rm* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

@@ -6,7 +6,7 @@ condor\_transfer\_data
 transfer spooled data
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_transfer\_data** [**-help \| -version**\ ]
 
@@ -21,7 +21,7 @@ Synopsis
 **-name **\ *scheddname* ] \| [**-addr  **\ *"<a.b.c.d:port>"*] **-all**
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_transfer\_data* causes HTCondor to transfer spooled data. It is
 meant to be used in conjunction with the **-spool** option of
@@ -37,12 +37,12 @@ the machine where the *condor\_schedd* daemon is running. After spooling
 these files, the machine from which the job is submitted may disconnect
 from the network or modify its local copies of the spooled files.
 
-When the job finishes, the job has JobStatus = 4, meaning that the job
-has completed. The output of the job is spooled, and
+When the job finishes, the job has ``JobStatus`` = 4, meaning that the
+job has completed. The output of the job is spooled, and
 *condor\_transfer\_data* retrieves the output of the completed job.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information
@@ -68,18 +68,18 @@ Options
     Transfer all spooled data
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_transfer\_data* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

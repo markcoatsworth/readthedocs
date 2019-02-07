@@ -6,7 +6,7 @@ condor\_checkpoint
 send a checkpoint command to jobs running on specified hosts
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_checkpoint** [**-help \| -version**\ ]
 
@@ -16,7 +16,7 @@ Synopsis
 \| *"<a.b.c.d:port>"* \| **-constraint **\ *expression* \| **-all** ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_checkpoint* sends a checkpoint command to a set of machines
 within a single pool. This causes the startd daemon on each of the
@@ -43,15 +43,15 @@ handled automatically following the policies stated in the configuration
 files.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information
  **-version**
     Display version information
  **-debug**
-    Causes debugging information to be sent to stderr, based on the
-    value of the configuration variable TOOL\_DEBUG.
+    Causes debugging information to be sent to ``stderr``, based on the
+    value of the configuration variable ``TOOL_DEBUG``.
  **-pool **\ *centralmanagerhostname[:portnumber]*
     Specify a pool by giving the central manager’s host name and an
     optional port number
@@ -70,13 +70,13 @@ Options
     Send the command to all machines in the pool
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_checkpoint* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure.
 
 Examples
-^^^^^^^^
+--------
 
 To send a *condor\_checkpoint* command to two named machines:
 
@@ -97,12 +97,12 @@ named **cae17** within the pool of machines that has
     % condor_checkpoint -pool condor.cae.wisc.edu -name cae17
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

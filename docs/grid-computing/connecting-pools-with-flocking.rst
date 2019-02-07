@@ -19,36 +19,36 @@ mechanisms is not advised. See section
 discussion of the issues.
 
 Flocking Configuration
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 The simplest flocking configuration sets a few configuration variables.
 If jobs from machine A are to flock to pool B, then in machine A’s
 configuration, set the following configuration variables:
 
- FLOCK\_TO
+ ``FLOCK_TO``
     is a comma separated list of the central manager machines of the
     pools that jobs from machine A may flock to.
- FLOCK\_COLLECTOR\_HOSTS
+ ``FLOCK_COLLECTOR_HOSTS``
     is the list of *condor\_collector* daemons within the pools that
     jobs from machine A may flock to. In most cases, it is the same as
-    FLOCK\_TO, and it would be defined with
+    ``FLOCK_TO``, and it would be defined with
 
     ::
 
-          FLOCK_COLLECTOR_HOSTS = $(FLOCK_TO)
-           
+          FLOCK_COLLECTOR_HOSTS = $(FLOCK_TO) 
+          
 
- FLOCK\_NEGOTIATOR\_HOSTS
+ ``FLOCK_NEGOTIATOR_HOSTS``
     is the list of *condor\_negotiator* daemons within the pools that
     jobs from machine A may flock to. In most cases, it is the same as
-    FLOCK\_TO, and it would be defined with
+    ``FLOCK_TO``, and it would be defined with
 
     ::
 
-          FLOCK_NEGOTIATOR_HOSTS = $(FLOCK_TO)
-           
+          FLOCK_NEGOTIATOR_HOSTS = $(FLOCK_TO) 
+          
 
- HOSTALLOW\_NEGOTIATOR\_SCHEDD
+ ``HOSTALLOW_NEGOTIATOR_SCHEDD``
     provides an access level and authorization list for the
     *condor\_schedd* daemon to allow negotiation (for security reasons)
     with the machines within the pools that jobs from machine A may
@@ -57,11 +57,11 @@ configuration, set the following configuration variables:
 
     ::
 
-          ##  Now, with flocking we need to let the SCHEDD trust the other
-           ##  negotiators we are flocking with as well.  You should normally
-           ##  not have to change this either.
-         ALLOW_NEGOTIATOR_SCHEDD = $(CONDOR_HOST), $(FLOCK_NEGOTIATOR_HOSTS), $(IP_ADDRESS)
-           
+          ##  Now, with flocking we need to let the SCHEDD trust the other 
+          ##  negotiators we are flocking with as well.  You should normally 
+          ##  not have to change this either. 
+        ALLOW_NEGOTIATOR_SCHEDD = $(CONDOR_HOST), $(FLOCK_NEGOTIATOR_HOSTS), $(IP_ADDRESS) 
+          
 
     This example configuration presumes that the *condor\_collector* and
     *condor\_negotiator* daemons are running on the same machine. See
@@ -73,18 +73,18 @@ The configuration macros that must be set in pool B are ones that
 authorize jobs from machine A to flock to pool B.
 
 The configuration variables are more easily set by introducing a list of
-machines where the jobs may flock from. FLOCK\_FROM is a comma separated
-list of machines, and it is used in the default configuration setting of
-the security macros that do authorization:
+machines where the jobs may flock from. ``FLOCK_FROM`` is a comma
+separated list of machines, and it is used in the default configuration
+setting of the security macros that do authorization:
 
 ::
 
-    ALLOW_WRITE_COLLECTOR = $(ALLOW_WRITE), $(FLOCK_FROM)
-     ALLOW_WRITE_STARTD    = $(ALLOW_WRITE), $(FLOCK_FROM)
-     ALLOW_READ_COLLECTOR  = $(ALLOW_READ), $(FLOCK_FROM)
-     ALLOW_READ_STARTD     = $(ALLOW_READ), $(FLOCK_FROM)
+    ALLOW_WRITE_COLLECTOR = $(ALLOW_WRITE), $(FLOCK_FROM) 
+    ALLOW_WRITE_STARTD    = $(ALLOW_WRITE), $(FLOCK_FROM) 
+    ALLOW_READ_COLLECTOR  = $(ALLOW_READ), $(FLOCK_FROM) 
+    ALLOW_READ_STARTD     = $(ALLOW_READ), $(FLOCK_FROM)
 
-Wild cards may be used when setting the FLOCK\_FROM configuration
+Wild cards may be used when setting the ``FLOCK_FROM`` configuration
 variable. For example, \*.cs.wisc.edu specifies all hosts from the
 cs.wisc.edu domain.
 
@@ -99,7 +99,7 @@ To enable flocking in both directions, consider each direction
 separately, following the guidelines given.
 
 Job Considerations
-^^^^^^^^^^^^^^^^^^
+------------------
 
 A particular job will only flock to another pool when it cannot
 currently run in the current pool.

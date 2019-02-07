@@ -6,12 +6,12 @@ condor\_master
 The master HTCondor Daemon
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_master**
 
 Description
-^^^^^^^^^^^
+-----------
 
 This daemon is responsible for keeping all the rest of the HTCondor
 daemons running on each machine in your pool. It spawns the other
@@ -27,28 +27,28 @@ Additionally, on Linux platforms, if you start the *condor\_master* as
 root, it will tune (but never decrease) certain kernel parameters
 important to HTCondor’s performance.
 
-The DAEMON\_LIST configuration macro is used by the *condor\_master* to
-provide a per-machine list of daemons that should be started and kept
-running. For daemons that are specified in the DC\_DAEMON\_LIST
+The ``DAEMON_LIST`` configuration macro is used by the *condor\_master*
+to provide a per-machine list of daemons that should be started and kept
+running. For daemons that are specified in the ``DC_DAEMON_LIST``
 configuration macro, the *condor\_master* daemon will spawn them
 automatically appending a *-f* argument. For those listed in
-DAEMON\_LIST, but not in DC\_DAEMON\_LIST, there will be no *-f*
+``DAEMON_LIST``, but not in ``DC_DAEMON_LIST``, there will be no *-f*
 argument.
 
 Options
-^^^^^^^
+-------
 
  **-n **\ *name*
     Provides an alternate name for the *condor\_master* to override that
-    given by the MASTER\_NAME configuration variable.
+    given by the ``MASTER_NAME`` configuration variable.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

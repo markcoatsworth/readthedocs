@@ -11,7 +11,7 @@ service to service, and that implementation determines the constraints
 on the disk image, the this section is divided by service.
 
 Amazon Web Services
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 Requirements for an Annex-compatible AMI are driven by how
 *condor\_annex* securely transports HTCondor configuration and security
@@ -20,7 +20,7 @@ help you understand the requirements, even though it will hopefully
 never matter to you.
 
 Resource Requests
-'''''''''''''''''
+~~~~~~~~~~~~~~~~~
 
 For on-demand or Spot instances, we begin by making a single resource
 request whose client token is the annex name concatenated with an
@@ -42,7 +42,7 @@ only takes a few minutes, but the default image waits for up to 50
 minutes, since you’re already paying for the first hour anyway.
 
 Secure Transport
-''''''''''''''''
+~~~~~~~~~~~~~~~~
 
 At this point, the instance knows its annex’s name. This allows the
 instance to construct the name of the tarball it should download
@@ -78,7 +78,7 @@ tokens, the last thing the script does is use the Linux kernel firewall
 to forbid any non-root process from accessing the metadata server.
 
 Image Requirements
-''''''''''''''''''
+~~~~~~~~~~~~~~~~~~
 
 Thus, to work with *condor\_annex*, an AWS AMI must:
 
@@ -92,15 +92,15 @@ unimplemented, will disable the **-idle** command-line option.
 The default disk image implements the above as follows:
 
 -  with a configuration script (/etc/condor/49ec2-instance.sh);
--  with a single configuration item (STARTD\_NOCLAIM\_SHUTDOWN );
--  with a configuration item (DEFAULT\_MASTER\_SHUTDOWN\_SCRIPT ) and
+-  with a single configuration item (``STARTD_NOCLAIM_SHUTDOWN`` );
+-  with a configuration item (``DEFAULT_MASTER_SHUTDOWN_SCRIPT`` ) and
    the corresponding script (/etc/condor/master\_shutdown.sh), which
    just turns around and runs shutdown -h now.
 
 We also strongly recommend that every *condor\_annex* disk image:
 
 -  Advertise, in the master and startd, the instance ID.
--  Use the instance’s public IP, by setting TCP\_FORWARDING\_HOST .
+-  Use the instance’s public IP, by setting ``TCP_FORWARDING_HOST`` .
 -  Turn on communications integrity and encryption.
 -  Encrypt the run directories.
 -  Restrict access to the EC2 meta-data server to root.
@@ -108,7 +108,7 @@ We also strongly recommend that every *condor\_annex* disk image:
 The default disk image is configured to do all of this.
 
 Instance Roles
-''''''''''''''
+~~~~~~~~~~~~~~
 
 To explain the last point immediately above, EC2 stores (temporary)
 credentials for the role, if any, associated with an instance on that
@@ -138,12 +138,12 @@ effective in preventing access to the instance’s credentials by normal
 users or their jobs.
 
 Azure
-^^^^^
+-----
 
 Not implemented as of v8.7.8.
 
 Google Cloud Platform
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 Not implemented as of v8.7.8.
 

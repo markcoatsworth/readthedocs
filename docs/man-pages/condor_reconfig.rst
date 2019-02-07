@@ -6,7 +6,7 @@ condor\_reconfig
 Reconfigure HTCondor daemons
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_reconfig** [**-help \| -version**\ ]
 
@@ -17,16 +17,16 @@ Synopsis
 [**-daemon  **\ *daemonname*]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_reconfig* reconfigures all of the HTCondor daemons in
 accordance with the current status of the HTCondor configuration
 file(s). Once reconfiguration is complete, the daemons will behave
 according to the policies stated in the configuration file(s). The main
-exception is with the DAEMON\_LIST variable, which will only be updated
-if the *condor\_restart* command is used. Other configuration variables
-that can only be changed if the HTCondor daemons are restarted are
-listed in the HTCondor manual in the section on configuration. In
+exception is with the ``DAEMON_LIST`` variable, which will only be
+updated if the *condor\_restart* command is used. Other configuration
+variables that can only be changed if the HTCondor daemons are restarted
+are listed in the HTCondor manual in the section on configuration. In
 general, *condor\_reconfig* should be used when making changes to the
 configuration files, since it is faster and more efficient than
 restarting the daemons.
@@ -40,15 +40,15 @@ For security reasons of authentication and authorization, this command
 requires ADMINISTRATOR level of access.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information
  **-version**
     Display version information
  **-debug**
-    Causes debugging information to be sent to stderr, based on the
-    value of the configuration variable TOOL\_DEBUG.
+    Causes debugging information to be sent to ``stderr``, based on the
+    value of the configuration variable ``TOOL_DEBUG``.
  **-pool **\ *centralmanagerhostname[:portnumber]*
     Specify a pool by giving the central manager’s host name and an
     optional port number
@@ -70,13 +70,13 @@ Options
     command is sent to the *condor\_master* daemon.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_reconfig* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure.
 
 Examples
-^^^^^^^^
+--------
 
 To reconfigure the *condor\_master* and all its children on the local
 host:
@@ -103,12 +103,12 @@ single machine named **cae17** within the pool of machines that has
     % condor_reconfig -pool condor.cae.wisc.edu -name cae17
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

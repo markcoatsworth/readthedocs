@@ -6,7 +6,7 @@ condor\_restart
 Restart a set of HTCondor daemons
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_restart** [**-help \| -version**\ ]
 
@@ -17,7 +17,7 @@ Synopsis
 [**-daemon  **\ *daemonname*]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_restart* restarts a set of HTCondor daemons on a set of
 machines. The daemons will be put into a consistent state, killed, and
@@ -25,32 +25,32 @@ then invoked anew.
 
 If, for example, the *condor\_master* needs to be restarted again with a
 fresh state, this is the command that should be used to do so. If the
-DAEMON\_LIST variable in the configuration file has been changed, this
-command is used to restart the *condor\_master* in order to see this
-change. The *condor\_reconfigure* command cannot be used in the case
-where the DAEMON\_LIST expression changes.
+``DAEMON_LIST`` variable in the configuration file has been changed,
+this command is used to restart the *condor\_master* in order to see
+this change. The *condor\_reconfigure* command cannot be used in the
+case where the ``DAEMON_LIST`` expression changes.
 
 The command *condor\_restart* with no arguments or with the
 **-daemon **\ *master* option will safely shut down all running jobs and
 all submitted jobs from the machine(s) being restarted, then shut down
 all the child daemons of the *condor\_master*, and then restart the
 *condor\_master*. This, in turn, will allow the *condor\_master* to
-start up other daemons as specified in the DAEMON\_LIST configuration
+start up other daemons as specified in the ``DAEMON_LIST`` configuration
 file entry.
 
 For security reasons of authentication and authorization, this command
 requires ADMINISTRATOR level of access.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information
  **-version**
     Display version information
  **-debug**
-    Causes debugging information to be sent to stderr, based on the
-    value of the configuration variable TOOL\_DEBUG.
+    Causes debugging information to be sent to ``stderr``, based on the
+    value of the configuration variable ``TOOL_DEBUG``.
  **-graceful**
     Gracefully shutdown daemons (the default) before restarting them
  **-fast**
@@ -79,13 +79,13 @@ Options
     command is sent to the *condor\_master* daemon.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_restart* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure.
 
 Examples
-^^^^^^^^
+--------
 
 To restart the *condor\_master* and all its children on the local host:
 
@@ -111,12 +111,12 @@ single machine named **cae17** within the pool of machines that has
     % condor_restart -pool condor.cae.wisc.edu -name cae17
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

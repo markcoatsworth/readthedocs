@@ -4,7 +4,7 @@ Potential Problems
 ==================
 
 Renaming of argv[0]
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 When HTCondor starts up your job, it renames argv[0] (which usually
 contains the name of the program) to condor\_exec. This is convenient

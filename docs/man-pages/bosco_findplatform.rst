@@ -4,7 +4,7 @@ bosco\_findplatform
 ===================
 
 Synopsis
-^^^^^^^^
+--------
 
 **bosco\_findplatform** [-**h** \|\| --**help**]
 
@@ -13,7 +13,7 @@ Synopsis
 --**install <installoptions>**]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *bosco\_findplatform* is part of the Bosco system for accessing high
 throughput computing resources from a local desktop.
@@ -24,18 +24,18 @@ For detailed information, please see the Bosco web site:
 `https://osg-bosco.github.io/docs/ <https://osg-bosco.github.io/docs/>`__
 
 Options
-^^^^^^^
+-------
 
  **—help**
     Print usage information and exit.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

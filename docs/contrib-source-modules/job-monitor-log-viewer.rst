@@ -17,7 +17,7 @@ whereas a job which appears predominantly black has received an
 inordinately small proportion of computational time.
 
 Transition States
-^^^^^^^^^^^^^^^^^
+-----------------
 
 A transition state is the state of a job at any time. It is called a
 transition, because it is defined by the two events which bookmark it.
@@ -38,13 +38,13 @@ as distinct transitions, select the appropriate option from the "View"
 menu.
 
 Events
-^^^^^^
+------
 
 There are two basic kinds of events: checkpoint events and error events.
 Plus, advanced users can ask to see more events.
 
 Selecting Jobs
-^^^^^^^^^^^^^^
+--------------
 
 To view any arbitrary selection of jobs in a job file, use the job
 selector tool. Jobs appear visually by order of appearance within the
@@ -56,7 +56,7 @@ The job selector supports double clicking; double click on any single
 job to see it drawn in isolation.
 
 Zooming
-^^^^^^^
+-------
 
 To view a small area of the log file, zoom in on the area which you
 would like to see in greater detail. You can zoom in, out and do a full
@@ -72,7 +72,7 @@ the clicked area, a box will flash after the zoom. This is called the
 "zoom finder" and it can be turned off in the zoom menu if you prefer.
 
 Keyboard and Mouse Shortcuts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 
 #. The Keyboard shortcuts:
 

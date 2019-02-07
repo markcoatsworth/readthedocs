@@ -6,7 +6,7 @@ condor\_reschedule
 Update scheduling information to the central manager
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_reschedule** [**-help \| -version**\ ]
 
@@ -16,7 +16,7 @@ Synopsis
 \| *"<a.b.c.d:port>"* \| **-constraint **\ *expression* \| **-all** ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_reschedule* updates the information about a set of machines’
 resources and jobs to the central manager. This command is used to force
@@ -34,15 +34,15 @@ seconds. Requests for new negotiation cycle within that 20 second window
 will be deferred until 20 seconds have passed since that last cycle.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information
  **-version**
     Display version information
  **-debug**
-    Causes debugging information to be sent to stderr, based on the
-    value of the configuration variable TOOL\_DEBUG.
+    Causes debugging information to be sent to ``stderr``, based on the
+    value of the configuration variable ``TOOL_DEBUG``.
  **-pool **\ *centralmanagerhostname[:portnumber]*
     Specify a pool by giving the central manager’s host name and an
     optional port number
@@ -61,13 +61,13 @@ Options
     Send the command to all machines in the pool
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_reschedule* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure.
 
 Examples
-^^^^^^^^
+--------
 
 To update the information on three named machines:
 
@@ -87,12 +87,12 @@ single machine named **cae17** within the pool of machines that has
     % condor_reschedule -pool condor.cae.wisc.edu -name cae17
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

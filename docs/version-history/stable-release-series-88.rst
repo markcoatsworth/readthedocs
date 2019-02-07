@@ -11,7 +11,7 @@ series.
 The details of each version are described below.
 
 Version 8.8.2
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -26,7 +26,7 @@ Bugs Fixed:
 -  None.
 
 Version 8.8.1
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -49,7 +49,7 @@ Bugs Fixed:
 -  None.
 
 Version 8.8.0
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -57,28 +57,29 @@ Release Notes:
 
 New Features:
 
--  Provides a new package: minicondor on Red Hat based systems and
-   minihtcondor on Debian and Ubuntu based systems. This mini-HTCondor
-   package configures HTCondor to work on a single machine. `(Ticket
+-  Provides a new package: ``minicondor`` on Red Hat based systems and
+   ``minihtcondor`` on Debian and Ubuntu based systems. This
+   mini-HTCondor package configures HTCondor to work on a single
+   machine. `(Ticket
    #6823). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6823>`__
--  Made the Python bindings’ JobEvent API more Pythonic by handling
-   optional event attributes as if the JobEvent object were a
+-  Made the Python bindings’ ``JobEvent`` API more Pythonic by handling
+   optional event attributes as if the ``JobEvent`` object were a
    dictionary, instead. See section
    `7.1.1 <PythonBindings.html#x69-5500007.1.1>`__ for details. `(Ticket
    #6820). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6820>`__
--  Added job ad attribute BlockReadKbytes and BlockWriteKybtes which
-   describe the number of kbytes read and written by the job to the
-   sandbox directory. These are only defined on Linux machines with
+-  Added job ad attribute ``BlockReadKbytes`` and ``BlockWriteKybtes``
+   which describe the number of kbytes read and written by the job to
+   the sandbox directory. These are only defined on Linux machines with
    cgroup support enabled for vanilla jobs. `(Ticket
    #6826). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6826>`__
--  The new IOWait attribute gives the I/O Wait time recorded by the
+-  The new ``IOWait`` attribute gives the I/O Wait time recorded by the
    cgroup controller. `(Ticket
    #6830). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6830>`__
 -  *condor\_ssh\_to\_job* is now configured to be more secure. In
    particular, it will only use FIPS 140-2 approved algorithms. `(Ticket
    #6822). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6822>`__
--  Added configuration parameter CRED\_SUPER\_USERS, a list of users who
-   are permitted to store credentials for any user when using the
+-  Added configuration parameter ``CRED_SUPER_USERS``, a list of users
+   who are permitted to store credentials for any user when using the
    *condor\_store\_credd* command. Normally, users can only store
    credentials for themselves. `(Ticket
    #6346). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6346>`__
@@ -97,12 +98,12 @@ Bugs Fixed:
    the effective uid of the calling process. `(Ticket
    #6817). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6817>`__
 -  Jobs in REMOVED status now properly leave the queue when evaluation
-   of their LeaveJobInQueue attribute changes from True to False.
-   `(Ticket
+   of their ``LeaveJobInQueue`` attribute changes from ``True`` to
+   ``False``. `(Ticket
    #6808). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6808>`__
 -  Fixed a rarely occurring bug where the *condor\_schedd* would crash
-   when jobs were submitted with a queue statement with multiple keys.
-   The bug was introduced in the 8.7.10 release. `(Ticket
+   when jobs were submitted with a ``queue`` statement with multiple
+   keys. The bug was introduced in the 8.7.10 release. `(Ticket
    #6827). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6827>`__
 -  Fixed a couple of bugs in the job event log reader code that were
    made visible by the new JobEventLog python object. The remote error
@@ -113,7 +114,7 @@ Bugs Fixed:
    #6836). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6836>`__
 -  On Debian and Ubuntu systems, the templates for
    *condor\_ssh\_to\_job* and interactive submits are no longer
-   installed in /etc/condor. `(Ticket
+   installed in ``/etc/condor``. `(Ticket
    #6770). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6770>`__
 
       

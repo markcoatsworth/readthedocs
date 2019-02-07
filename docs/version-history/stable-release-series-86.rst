@@ -11,7 +11,7 @@ series.
 The details of each version are described below.
 
 Version 8.6.13
-^^^^^^^^^^^^^^
+--------------
 
 Release Notes:
 
@@ -28,9 +28,9 @@ New Features:
 
 Bugs Fixed:
 
--  Fixed a bug in the Python classad module that caused the Python in
-   operator to be case sensitive when used to see if a ClassAd contains
-   a given attribute. `(Ticket
+-  Fixed a bug in the Python classad module that caused the Python
+   ``in`` operator to be case sensitive when used to see if a ClassAd
+   contains a given attribute. `(Ticket
    #6535). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6535>`__
 -  Fixed a bug in the Python bindings that would leak one or more
    ClassAds each time the submit or submitMany methods of the schedd
@@ -44,14 +44,14 @@ Bugs Fixed:
    to be transferred to the wrong directory on Windows. This would
    usually cause output file transfer to fail. `(Ticket
    #6747). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6747>`__
--  Fixed a bug that could cause grid-type condor jobs under the grid
+-  Fixed a bug that could cause grid-type ``condor`` jobs under the grid
    universe to fail if the job’s sandbox is transferred more than once.
    `(Ticket
    #6791). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6791>`__
 -  Fixed a bug where Singularity would not be usable if Docker was not
    installed. `(Ticket
    #6772). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6772>`__
--  Fixed a bug where MOUNT\_UNDER\_SCRATCH would not be interpreted as
+-  Fixed a bug where ``MOUNT_UNDER_SCRATCH`` would not be interpreted as
    an expression for Singularity jobs. `(Ticket
    #6740). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6740>`__
 -  Fixed a bug where Docker Universe jobs would not bind mount the
@@ -68,17 +68,18 @@ Bugs Fixed:
    #6801). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6801>`__
 -  Fixed a bug in how jobs are sorted in priority order in the
    *condor\_schedd* when any of these job attributes are set:
-   PreJobPrio1, PreJobPrio2, PostJobPrio1, and PostJobPrio2. `(Ticket
+   ``PreJobPrio1``, ``PreJobPrio2``, ``PostJobPrio1``, and
+   ``PostJobPrio2``. `(Ticket
    #6800). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6800>`__
 -  Fixed a bug where the negotiator would erroneously preempt some
-   dynamic slots when ALLOW\_PSLOT\_PREEMPTION is set. `(Ticket
+   dynamic slots when ``ALLOW_PSLOT_PREEMPTION`` is set. `(Ticket
    #6793). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6793>`__
 -  Updated the systemd unit file to start HTCondor daemons after NFS and
    the automounter was available. `(Ticket
    #6794). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6794>`__
 -  Fixed a bug which would cause the *condor\_negotiator* to crash if
-   the second argument of an ternary operator is omitted in a START
-   expression. (expression ?: value) `(Ticket
+   the second argument of an ternary operator is omitted in a ``START``
+   expression. ``(expression ?: value)`` `(Ticket
    #6798). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6798>`__
 -  Fixed a bug which would cause certain valid URLs not be recognized.
    This allows, for example, ‘s3’ to be used as a custom file transfer
@@ -95,7 +96,7 @@ Bugs Fixed:
    #6417). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6417>`__
 
 Version 8.6.12
-^^^^^^^^^^^^^^
+--------------
 
 Release Notes:
 
@@ -104,19 +105,20 @@ Release Notes:
 Known Issues:
 
 -  Policies implemented by the startd may not function as desired while
-   the machine is draining. Specifically, if the PREEMPT expression
+   the machine is draining. Specifically, if the ``PREEMPT`` expression
    becomes true for a particular slot while a machine is draining, the
    corresponding job will not vacate the slot until draining completes.
-   For example, this renders the policy macro HOLD\_IF\_MEMORY\_EXCEEDED
-   ineffective. This has been a problem since v8.6. `(Ticket
+   For example, this renders the policy macro
+   ``HOLD_IF_MEMORY_EXCEEDED`` ineffective. This has been a problem
+   since v8.6. `(Ticket
    #6697). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6697>`__
 -  Policies implemented by the startd may not function as desired while
-   the startd is shutting down peacefully. Specifically, if the PREEMPT
-   expression becomes true for a particular slot while the startd is
-   shutting down peacefully, the corresponding job will never be
-   vacated. For example, this renders renders the policy macro
-   HOLD\_IF\_MEMORY\_EXCEEDED ineffective. This has been a problem since
-   v8.6. `(Ticket
+   the startd is shutting down peacefully. Specifically, if the
+   ``PREEMPT`` expression becomes true for a particular slot while the
+   startd is shutting down peacefully, the corresponding job will never
+   be vacated. For example, this renders renders the policy macro
+   ``HOLD_IF_MEMORY_EXCEEDED`` ineffective. This has been a problem
+   since v8.6. `(Ticket
    #6701). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6701>`__
 
 New Features:
@@ -168,13 +170,13 @@ Bugs Fixed:
    #6677). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6677>`__
 -  Fixed a bug in *condor\_preen* where it did not clean up core dump
    files. It now erases all core files that exceed a certain size
-   (defined by PREEN\_COREFILE\_MAX\_SIZE), a certain age (defined by
-   PREEN\_COREFILE\_STALE\_AGE) or a maximum number of core files per
-   process (defined by PREEN\_COREFILES\_PER\_PROCESS). `(Ticket
+   (defined by ``PREEN_COREFILE_MAX_SIZE``), a certain age (defined by
+   ``PREEN_COREFILE_STALE_AGE``) or a maximum number of core files per
+   process (defined by ``PREEN_COREFILES_PER_PROCESS``). `(Ticket
    #6540). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6540>`__
 
 Version 8.6.11
-^^^^^^^^^^^^^^
+--------------
 
 Release Notes:
 
@@ -183,10 +185,10 @@ Release Notes:
 New Features:
 
 -  The MSI installer for Windows now appends the directory needed to use
-   the HTCondor Python bindings libraries into the PYTHONPATH
+   the HTCondor Python bindings libraries into the ``PYTHONPATH``
    environment variable. `(Ticket
    #6607). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6607>`__
--  If the user sets the environment variable OMP\_NUM\_THREADS to some
+-  If the user sets the environment variable ``OMP_NUM_THREADS`` to some
    value in the submit file, trust the user, and do not overwrite this
    environment variable to the actual number of provisioned CPUs when
    the job runs. `(Ticket
@@ -197,10 +199,10 @@ Bugs Fixed:
 -  Fixed a bug where *condor\_submit* **-i** would enter the wrong
    Singularity container. `(Ticket
    #6595). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6595>`__
--  When using configuration parameter SINGULARITY\_TARGET\_DIR to mount
-   the job scratch directory into the Singularity container, update the
-   X509\_USER\_PROXY environment variable to point to the proxy file’s
-   location inside the container. `(Ticket
+-  When using configuration parameter ``SINGULARITY_TARGET_DIR`` to
+   mount the job scratch directory into the Singularity container,
+   update the ``X509_USER_PROXY`` environment variable to point to the
+   proxy file’s location inside the container. `(Ticket
    #6625). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6625>`__
 -  Corrected a bug which could cause the shared port daemon to hang if
    it had been restarted, HTCondor had been configured with an allowable
@@ -214,7 +216,7 @@ Bugs Fixed:
    #6590). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6590>`__
 -  Fixed a bug that prevented HTCondor from running jobs if HTCondor was
    started within a Docker container, or more generally, with a root
-   user id, but without CAP\_SYSADMIN. `(Ticket
+   user id, but without ``CAP_SYSADMIN``. `(Ticket
    #6603). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6603>`__
 -  Fixed a bug that caused corruption of the XferStatsLog. `(Ticket
    #6608). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6608>`__
@@ -224,11 +226,11 @@ Bugs Fixed:
    #6634). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6634>`__
    `(Ticket
    #6641). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6641>`__
--  Fixed a bug where STARTD\_CRON\_JOBLIST was not ignoring duplicate
+-  Fixed a bug where ``STARTD_CRON_JOBLIST`` was not ignoring duplicate
    entries. `(Ticket
    #6604). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6604>`__
 -  Fixed a bug when running inside a docker container that would prevent
-   the master from started unless DISCARD\_SESSION\_KEYRING\_ON\_STARTUP
+   the master from started unless ``DISCARD_SESSION_KEYRING_ON_STARTUP``
    was set to false. `(Ticket
    #6602). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6602>`__
 -  Fixed a bug specific to the HTCondor Python bindings on Windows,
@@ -245,26 +247,26 @@ Bugs Fixed:
    #6582). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6582>`__
 -  Fixed a bug where *condor\_submit* would not add needed file transfer
    plugins to the Requirements expression when should\_transfer\_files
-   was IF\_NEEDED, which is the default. `(Ticket
+   was ``IF_NEEDED``, which is the default. `(Ticket
    #4692). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=4692>`__
 -  Fixed a bug where the configuration parameter
-   STARTD\_RECOMPUTE\_DISK\_FREE was not honored when creating a dynamic
-   slot from a partitionable slot, which would sometimes result in the
-   dynamic slot being provisioned with not enough disk space and then
-   failing to match the job. `(Ticket
+   ``STARTD_RECOMPUTE_DISK_FREE`` was not honored when creating a
+   dynamic slot from a partitionable slot, which would sometimes result
+   in the dynamic slot being provisioned with not enough disk space and
+   then failing to match the job. `(Ticket
    #6614). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6614>`__
 -  Fixed a bug that caused the job ad attribute
-   JobCurrentStartTransferOutputDate to be set incorrectly. `(Ticket
+   ``JobCurrentStartTransferOutputDate`` to be set incorrectly. `(Ticket
    #6617). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6617>`__
--  Fixed a bug that could cause RemoteWallClockTime to have the wrong
-   value in the history file. `(Ticket
+-  Fixed a bug that could cause ``RemoteWallClockTime`` to have the
+   wrong value in the history file. `(Ticket
    #6626). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6626>`__
 -  The *condor\_schedd* now considers custom machine resources when
    selecting the next job to run on an idle claimed dynamic slot.
    `(Ticket
    #6630). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6630>`__
--  The attribute SlotType is now set correctly in the slot ad when the
-   *condor\_schedd* is selecting the next job to run on a an idle
+-  The attribute ``SlotType`` is now set correctly in the slot ad when
+   the *condor\_schedd* is selecting the next job to run on a an idle
    claimed dynamic slot. `(Ticket
    #6611). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6611>`__
 -  Fixed a bug where *condor\_submit* with the **-spool** or **-remote**
@@ -279,22 +281,24 @@ Bugs Fixed:
    *condor\_q* output when the **-global** option was used. `(Ticket
    #6661). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6661>`__
 -  Fixed a bug that caused the *condor\_collector* to reject accounting
-   ads when configuration parameter COLLECTOR\_REQUIREMENTS is in use.
-   `(Ticket
+   ads when configuration parameter ``COLLECTOR_REQUIREMENTS`` is in
+   use. `(Ticket
    #6673). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6673>`__
--  Updated the systemd configuration to set the TasksMax and LimitNOFile
-   to unlimited. Under some versions of systemd, the TasksMax defaults
-   to 512, which is too small for a busy submit host. `(Ticket
+-  Updated the systemd configuration to set the ``TasksMax`` and
+   ``LimitNOFile`` to unlimited. Under some versions of systemd, the
+   ``TasksMax`` defaults to 512, which is too small for a busy submit
+   host. `(Ticket
    #6645). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6645>`__
--  Reduced the RPATH in RPM builds to just the needed directories.
-   Previously, the tarball RPATH was used. `(Ticket
+-  Reduced the ``RPATH`` in RPM builds to just the needed directories.
+   Previously, the tarball ``RPATH`` was used. `(Ticket
    #6662). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6662>`__
--  On the Windows platform, the HTCondor daemons will attempt a NETWORK
-   login to impersonate a user if the INTERACTIVE login fails. `(Ticket
+-  On the Windows platform, the HTCondor daemons will attempt a
+   ``NETWORK`` login to impersonate a user if the ``INTERACTIVE`` login
+   fails. `(Ticket
    #6640). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6640>`__
 
 Version 8.6.10
-^^^^^^^^^^^^^^
+--------------
 
 Release Notes:
 
@@ -332,23 +336,23 @@ Bugs Fixed:
 -  Fixed a bug in Python API *htcondor.Secman().ping()* method which
    would sometimes result in a RunTimeError exception. `(Ticket
    #6562). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6562>`__
--  Fixed a bug where policy: want\_hold\_if would always evict standard
-   universe jobs instead of putting them on hold. Instead, this policy
-   now ignores standard universe jobs entirely. This means that the
-   metaknobs policy: hold\_if\_memory\_exceeded and
-   policy: hold\_if\_cpus\_exceeded will also ignore standard universe
+-  Fixed a bug where ``policy: want_hold_if`` would always evict
+   standard universe jobs instead of putting them on hold. Instead, this
+   policy now ignores standard universe jobs entirely. This means that
+   the metaknobs ``policy: hold_if_memory_exceeded`` and
+   ``policy: hold_if_cpus_exceeded`` will also ignore standard universe
    jobs entirely (instead of its previous bad behavior of of letting
    standard universe jobs use more than their requested memory until the
    first time they were evicted, whereafter each restart would be
    immediately evicted). `(Ticket
    #6583). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6583>`__
--  The metaknob policy: hold\_if\_memory\_exceeded and
-   policy: preempt\_if\_memory\_exceeded now ignore VM universe jobs.
+-  The metaknob ``policy: hold_if_memory_exceeded`` and
+   ``policy: preempt_if_memory_exceeded`` now ignore VM universe jobs.
    These jobs can’t exceed their requested memory. `(Ticket
    #6583). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6583>`__
--  Fixed a bug which mischaracterized the MemoryUsage of VM universe
+-  Fixed a bug which mischaracterized the ``MemoryUsage`` of VM universe
    jobs. This should allow VM universe jobs to run when
-   feature: Hold\_If\_Memory\_Exceeded is enabled. `(Ticket
+   ``feature: Hold_If_Memory_Exceeded`` is enabled. `(Ticket
    #6577). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6577>`__
 -  Fixed a bug where the *condor\_shadow* could accidentally kill itself
    by not checking if it was attempting to change immutable attributes.
@@ -379,7 +383,7 @@ Bugs Fixed:
    #6593). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6593>`__
 
 Version 8.6.9
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -394,8 +398,8 @@ New Features:
 Bugs Fixed:
 
 -  Fixed a bug in the group quotas that would give too much surplus
-   quota to some groups when ACCEPT\_SURPLUS is on and
-   NEGOTIATOR\_ALLOW\_QUOTA\_OVERSUBSCRIPTION is true (the default)
+   quota to some groups when ``ACCEPT_SURPLUS`` is on and
+   ``NEGOTIATOR_ALLOW_QUOTA_OVERSUBSCRIPTION`` is true (the default)
    `(Ticket
    #6514). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6514>`__
 -  Fixed a bug in the Python bindings when doing queries that specify a
@@ -406,7 +410,7 @@ Bugs Fixed:
 -  Reduced the amount of time that *condor\_preen* will block the
    *condor\_schedd*. *condor\_preen* now connects only when specifically
    needed, and automatically disconnects after
-   PREEN\_MAX\_SCHEDD\_CONNECTION\_TIME seconds. `(Ticket
+   ``PREEN_MAX_SCHEDD_CONNECTION_TIME`` seconds. `(Ticket
    #6490). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6490>`__
 -  Fixed a bug on Windows that would often result in the job sandbox on
    the execute node not being deleted when the *condor\_schedd*
@@ -423,18 +427,18 @@ Bugs Fixed:
    requested the *condor\_master* to exit. `(Ticket
    #6503). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6503>`__
 -  Fixed a bug with the use of the scheduler parameter
-   MAX\_JOBS\_SUBMITTED. If this limit was ever reached by a submit with
-   more than one proc in the cluster, the limit would be reduced by the
-   difference until the *condor\_schedd* was restarted. `(Ticket
+   ``MAX_JOBS_SUBMITTED``. If this limit was ever reached by a submit
+   with more than one proc in the cluster, the limit would be reduced by
+   the difference until the *condor\_schedd* was restarted. `(Ticket
    #6460). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6460>`__
 -  Fixed a bug that caused very large RequestDisk requests to fail, and
    cause the Disk attribute in the machine ad to go negative. `(Ticket
    #6467). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6467>`__
--  Fixed a bug with the RESERVED\_DISK parameter that would not accept
-   an argument larger than 2 Gigabytes. `(Ticket
+-  Fixed a bug with the ``RESERVED_DISK`` parameter that would not
+   accept an argument larger than 2 Gigabytes. `(Ticket
    #6472). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6472>`__
--  Improved validation of the lengths of messages in PASSWORD and SSL
-   authentication methods. `(Ticket
+-  Improved validation of the lengths of messages in ``PASSWORD`` and
+   ``SSL`` authentication methods. `(Ticket
    #6493). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6493>`__
 -  Fixed a problem where the VM universe would be taken offline on the
    execute node, if the qcow2 disk image was corrupt. The offending job
@@ -449,7 +453,7 @@ Bugs Fixed:
    #6501). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6501>`__
 -  Fixed a bug in Startd Cron (see
    `4.4.3 <Hooks.html#x51-4450004.4.3>`__) where, in effect,
-   SlotMergeConstraint was ignored. `(Ticket
+   ``SlotMergeConstraint`` was ignored. `(Ticket
    #6488). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6488>`__
 -  Fixed a bug when IPv6 is enabled which could cause the
    *condor\_startd* to crash when spawning a starter. `(Ticket
@@ -459,19 +463,19 @@ Bugs Fixed:
    #6469). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6469>`__
 -  Fixed issue on newer versions of Linux where core files generated by
    a daemon were not usable by gdb. A side effect of this fix is that
-   the configuration parameter CORE\_FILE\_NAME no longer has any effect
-   on Linux. `(Ticket
+   the configuration parameter ``CORE_FILE_NAME`` no longer has any
+   effect on Linux. `(Ticket
    #6482). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6482>`__
 -  *condor\_chirp* will now no longer abort when given a command that it
    cannot successfully execute, such as fetching a file that does not
    exist. `(Ticket
    #6402). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6402>`__
--  Removed unneeded copy\_to\_spool statement from default interactive
+-  Removed unneeded ``copy_to_spool`` statement from default interactive
    submit file. `(Ticket
    #6315). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6315>`__
 
 Version 8.6.8
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -490,7 +494,7 @@ Bugs Fixed:
    #6455). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6455>`__
 
 Version 8.6.7
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -498,12 +502,12 @@ Release Notes:
 
 New Features:
 
--  Added support for HTTPS transfers in the curl\_plugin utility.
+-  Added support for HTTPS transfers in the ``curl_plugin`` utility.
    `(Ticket
    #6253). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6253>`__
 -  Job attributes that are recognized by the *batch\_gahp* but not by
    HTCondor can now be specified in the job ad without using a prefix of
-   Remote\_. `(Ticket
+   ``Remote_``. `(Ticket
    #6422). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6422>`__
 
 Bugs Fixed:
@@ -543,7 +547,7 @@ Bugs Fixed:
    even though space was allocated for 1024 open sockets. `(Ticket
    #6425). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6425>`__
 -  Fixed a bug that caused the configuration variable
-   DEFAULT\_MASTER\_SHUTDOWN\_SCRIPT to be ignored on Windows when the
+   ``DEFAULT_MASTER_SHUTDOWN_SCRIPT`` to be ignored on Windows when the
    *condor\_master* was running as a service. `(Ticket
    #6458). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6458>`__
 -  *condor\_status* will now print longer lines when its output is
@@ -554,15 +558,15 @@ Bugs Fixed:
    established with its peer. `(Ticket
    #6412). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6412>`__
 -  Fixed a bug that caused *condor\_job\_router\_info* to crash if
-   configuration parameter JOB\_ROUTER\_ENTRIES\_REFRESH was set to a
+   configuration parameter ``JOB_ROUTER_ENTRIES_REFRESH`` was set to a
    positive value. `(Ticket
    #6444). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6444>`__
 -  Fixed a bug in *condor\_history* that caused it to print invalid XML
    or JSON syntax when reading from multiple history files. `(Ticket
    #6437). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6437>`__
--  Fixed a bug in the *condor\_schedd* which resulted in the IsNoopJob
-   job attribute sometimes being ignored if the the value of this
-   attribute was changed after the job was submitted. `(Ticket
+-  Fixed a bug in the *condor\_schedd* which resulted in the
+   ``IsNoopJob`` job attribute sometimes being ignored if the the value
+   of this attribute was changed after the job was submitted. `(Ticket
    #6396). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6396>`__
 -  Fixed a bug that rarely caused slurm jobs to be held. When slurm
    reports memory utilization and it is a multiple of 1024k, Slurm uses
@@ -572,13 +576,13 @@ Bugs Fixed:
 -  The condor-bosco RPM ensures the *rsync* is installed as required by
    the Bosco scripts. `(Ticket
    #6439). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6439>`__
--  To avoid unnecessary transfers when copy\_to\_spool is set in the
+-  To avoid unnecessary transfers when ``copy_to_spool`` is set in the
    submit file, HTCondor no longer copies the executable to the local
    spool directory more than once for a cluster. `(Ticket
    #6454). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6454>`__
 
 Version 8.6.6
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -620,13 +624,13 @@ Bugs Fixed:
    `(Ticket
    #6376). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6376>`__
 -  Fixed a bug that caused a machine to stick in the Preempting/Vacating
-   state after a job was removed when a JOB\_EXIT\_HOOK was defined.
+   state after a job was removed when a ``JOB_EXIT_HOOK`` was defined.
    `(Ticket
    #6383). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6383>`__
 -  Added type enforcement rules for cgroups to HTCondor’s SELinux
    profile. `(Ticket
    #6168). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6168>`__
--  Fixed a bug where setting delegate\_job\_gsi\_credentials\_lifetime
+-  Fixed a bug where setting ``delegate_job_gsi_credentials_lifetime``
    to 0 in a submit description file was treated the same as not setting
    it at all. `(Ticket
    #6375). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6375>`__
@@ -636,7 +640,7 @@ Bugs Fixed:
    #6369). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6369>`__
 
 Version 8.6.5
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -660,8 +664,8 @@ Bugs Fixed:
    system would go into the "R" state, but never actually start running.
    `(Ticket
    #6347). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6347>`__
--  Fixed a bug where setting NETWORK\_INTERFACE to an IPv6 address could
-   cause HTCondor daemons to except. `(Ticket
+-  Fixed a bug where setting ``NETWORK_INTERFACE`` to an IPv6 address
+   could cause HTCondor daemons to except. `(Ticket
    #6339). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6339>`__
 -  Fixed a bug where a cross protocol CCB connection would cause the
    *condor\_shadow* or *condor\_schedd* to except. `(Ticket
@@ -694,13 +698,13 @@ Bugs Fixed:
    #6306). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6306>`__
 -  Fixed bugs in the *condor\_schedd* and *condor\_negotiator* that
    could cause jobs to not be negotiated for when
-   NEGOTIATOR\_PREFETCH\_REQUESTS is set to TRUE. `(Ticket
+   ``NEGOTIATOR_PREFETCH_REQUESTS`` is set to ``TRUE``. `(Ticket
    #6336). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6336>`__
    `(Ticket
    #6312). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6312>`__
 
 Version 8.6.4
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -734,7 +738,7 @@ Bugs Fixed:
 -  Fixed a bug that prevented parallel universe jobs from running that
    used $$() expansion in submit files. `(Ticket
    #6299). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6299>`__
--  Added a new knob, STARTD\_RECOMPUTE\_DISK\_FREE, which defaults to
+-  Added a new knob, ``STARTD_RECOMPUTE_DISK_FREE``, which defaults to
    true, which tells the startd to periodically recompute and advertise
    free disk space. Admins can set this to false for partitionable slots
    whose execute directory is used by HTCondor alone. `(Ticket
@@ -767,31 +771,31 @@ Bugs Fixed:
    prevents unnecessary daemon restarts due to sudden time shifts.
    `(Ticket
    #6255). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6255>`__
--  The *condor\_shadow* will now ignore updates of JobStartDate from the
-   *condor\_starter* since the *condor\_schedd* already sets this
+-  The *condor\_shadow* will now ignore updates of ``JobStartDate`` from
+   the *condor\_starter* since the *condor\_schedd* already sets this
    attribute correctly and the *condor\_starter* incorrectly tries to
    set it even if the job has already run once. A consequence of this
-   fix is that the value of JobStartDate that the *condor\_startd* uses
-   for policy expressions will be different than the value that the
+   fix is that the value of ``JobStartDate`` that the *condor\_startd*
+   uses for policy expressions will be different than the value that the
    *condor\_schedd* uses. Resolving this problem will potentially break
    existing policy expressions in the *condor\_startd*, so it will be be
    not be changed in the 8.6 series, but fixed in the 8.7 series.
    `(Ticket
    #6280). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6280>`__
--  Fixed a bug where per-instance job attributes like RemoteHost would
-   show up in the history file for completed jobs. This bug occurred if
-   a job happened to complete while the *condor\_schedd* was in the
-   process of a graceful shutdown. `(Ticket
+-  Fixed a bug where per-instance job attributes like ``RemoteHost``
+   would show up in the history file for completed jobs. This bug
+   occurred if a job happened to complete while the *condor\_schedd* was
+   in the process of a graceful shutdown. `(Ticket
    #6251). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6251>`__
 -  The *condor\_convert\_history* command is present again in this
    release. `(Ticket
    #6282). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6282>`__
--  The parameter SETTABLE\_ATTRS\_ADMINISTRATOR is now correctly appears
-   in *condor\_config\_val*. `(Ticket
+-  The parameter ``SETTABLE_ATTRS_ADMINISTRATOR`` is now correctly
+   appears in *condor\_config\_val*. `(Ticket
    #6286). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6286>`__
 
 Version 8.6.3
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -808,7 +812,7 @@ Bugs Fixed:
    #6227). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6227>`__
 
 Version 8.6.2
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -822,7 +826,7 @@ New Features:
    mapping of the owner name of the job. `(Ticket
    #6179). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6179>`__
 -  When the *condor\_credd* is polling for credentials, the timeout is
-   now configurable using CREDD\_POLLING\_TIMEOUT.
+   now configurable using ``CREDD_POLLING_TIMEOUT``.
 -  The **reverse** option for *condor\_q* was changed to
    **reverse-analyze**, and it now implies **better-analyze**. Formerly,
    the **reverse** option was ignored unless **-better-analyze** was
@@ -845,19 +849,19 @@ Bugs Fixed:
    preventing Condor from detecting that docker was properly working on
    hosts. `(Ticket
    #6185). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6185>`__
--  Fixed a bug that prevented SUBMIT\_REQUIREMENT and JOB\_TRANSFORM
-   expressions from referencing job attributes describing the job’s
-   X.509 proxy credential. `(Ticket
+-  Fixed a bug that prevented ``SUBMIT_REQUIREMENT`` and
+   ``JOB_TRANSFORM`` expressions from referencing job attributes
+   describing the job’s X.509 proxy credential. `(Ticket
    #6188). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6188>`__
 -  The Linux kernel tuning script no longer adjusts some kernel
    parameters unless a *condor\_schedd* will be started by the master.
    `(Ticket
    #6208). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6208>`__
 -  Fixed a bug that caused all but the first in a list of metaknobs to
-   be ignored unless there were commas separating the list items. So use
-   ROLE : Execute CentralManager would incorrectly add only the Execute
-   role. Previously, use ROLE : Execute, CentralManager would correctly
-   add both roles. `(Ticket
+   be ignored unless there were commas separating the list items. So
+   ``use ROLE : Execute CentralManager`` would incorrectly add only the
+   Execute role. Previously, ``use ROLE : Execute, CentralManager``
+   would correctly add both roles. `(Ticket
    #6171). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6171>`__
 -  Worked around a problem with FORTRAN programs built with
    *condor\_compile* and recent versions of gfortran (4.7.2 was OK,
@@ -867,8 +871,8 @@ Bugs Fixed:
    link FORTRAN (and other) programs calling certain math functions and
    built against up-to-date versions of glibc. `(Ticket
    #6026). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6026>`__
--  The default values for HAD\_SOCKET\_NAME and
-   REPLICATION\_SOCKET\_NAME have changed to enable the documented
+-  The default values for ``HAD_SOCKET_NAME`` and
+   ``REPLICATION_SOCKET_NAME`` have changed to enable the documented
    configuration for using these services with shared port to work.
    `(Ticket
    #6186). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6186>`__
@@ -877,25 +881,25 @@ Bugs Fixed:
    #6170). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6170>`__
 -  The configuration parameters that control when job policy expressions
    are evaluated now work as documented. Previously, the default value
-   for PERIODIC\_EXPR\_INTERVAL was 300, not 60 as intended. Also, the
-   parameters MAX\_PERIODIC\_EXPR\_INTERVAL and
-   PERIODIC\_EXPR\_TIMESLICE were ignored for grid universe jobs.
+   for ``PERIODIC_EXPR_INTERVAL`` was 300, not 60 as intended. Also, the
+   parameters ``MAX_PERIODIC_EXPR_INTERVAL`` and
+   ``PERIODIC_EXPR_TIMESLICE`` were ignored for grid universe jobs.
    `(Ticket
    #6199). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6199>`__
 -  Fixed a bug that could cause the Job Router to crash if the
-   job\_queue.log contained invalid or incomplete records. `(Ticket
+   ``job_queue.log`` contained invalid or incomplete records. `(Ticket
    #6195). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6195>`__
 -  Fixed a bug that caused updates of the job attribute
-   x509UserProxyExpiration to be ignored for job policy evaluation when
-   the job was managed by the Job Router. `(Ticket
+   ``x509UserProxyExpiration`` to be ignored for job policy evaluation
+   when the job was managed by the Job Router. `(Ticket
    #6209). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6209>`__
 -  Changed the default value of configuration parameters
-   CREAM\_GAHP\_WORKER\_THREADS to the value of
-   GRIDMANAGER\_MAX\_PENDING\_REQUESTS. This should prevent a back-log
+   ``CREAM_GAHP_WORKER_THREADS`` to the value of
+   ``GRIDMANAGER_MAX_PENDING_REQUESTS``. This should prevent a back-log
    of commands in the CREAM GAHP observed by some users. `(Ticket
    #6071). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6071>`__
--  Fixed modification of PYTHONPATH environment variable that could fail
-   in bash if *set -u* is enabled. `(Ticket
+-  Fixed modification of ``PYTHONPATH`` environment variable that could
+   fail in bash if *set -u* is enabled. `(Ticket
    #6211). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6211>`__
 -  *bosco\_quickstart* no longer assumes that submitting to a Slurm
    cluster requires the PBS emulation module. `(Ticket
@@ -913,12 +917,12 @@ Bugs Fixed:
    claim. `(Ticket
    #6172). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6172>`__.
 -  Fixed a bug which forced the administrator to restart (rather than
-   reconfigure) running daemons after adding an entry to a DENY\_\*
+   reconfigure) running daemons after adding an entry to a ``DENY_*``
    authorization list. `(Ticket
    #6172). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6172>`__.
 
 Version 8.6.1
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -930,7 +934,7 @@ New Features:
    negotiation are enabled before attempting to request only the current
    users jobs from the *condor\_schedd*. Prior to this change,
    configurations that disabled security or authentication would also
-   need to set CONDOR\_Q\_ONLY\_MY\_JOBS to false. `(Ticket
+   need to set ``CONDOR_Q_ONLY_MY_JOBS`` to false. `(Ticket
    #6125). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6125>`__
 -  The CLAIMTOBE authentication method is now in the list of methods for
    READ access if no list of authentication methods for READ or DEFAULT
@@ -949,11 +953,11 @@ Bugs Fixed:
    running containers and to remove containers when certain errors
    occurred when using Docker version 1.13. `(Ticket
    #6088). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6088>`__
--  In Docker universe, all writes to files in /tmp and /var/tmp by
-   default write inside the container. There is a limit on the file size
-   within the container, and jobs that write a lot to /tmp may hit that.
-   If a docker universe job now runs on a system with
-   MOUNT\_UNDER\_SCRATCH defined, HTCondor now adds those mounts as
+-  In Docker universe, all writes to files in ``/tmp`` and ``/var/tmp``
+   by default write inside the container. There is a limit on the file
+   size within the container, and jobs that write a lot to ``/tmp`` may
+   hit that. If a docker universe job now runs on a system with
+   ``MOUNT_UNDER_SCRATCH`` defined, HTCondor now adds those mounts as
    volume mounts, so file writes do not go to the container, but to the
    host file system. `(Ticket
    #6080). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6080>`__
@@ -964,8 +968,8 @@ Bugs Fixed:
    when the format had an explicit width. `(Ticket
    #6120). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6120>`__
 -  Fixed a bug that caused spurious shared port-related error messages
-   to appear in the dagman.out file (by adding the new
-   DAGMAN\_USE\_SHARED\_PORT configuration macro). `(Ticket
+   to appear in the ``dagman.out`` file (by adding the new
+   ``DAGMAN_USE_SHARED_PORT`` configuration macro). `(Ticket
    #6156). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6156>`__
 -  Fixed a bug that caused VM universe jobs to fail if the **vm\_disk**
    submit command contained spaces after a comma. `(Ticket
@@ -975,7 +979,7 @@ Bugs Fixed:
    requirements. `(Ticket
    #6152). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6152>`__
 -  Fixed a bug that caused the Job Router to not route any jobs if the
-   JOB\_ROUTER\_DEFAULTS configuration parameter value started with
+   ``JOB_ROUTER_DEFAULTS`` configuration parameter value started with
    white space. `(Ticket
    #6128). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6128>`__
 -  Fixed several bugs in how the Job Router writes to job event logs.
@@ -1021,7 +1025,7 @@ Bugs Fixed:
    #6115). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6115>`__
 
 Version 8.6.0
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -1029,26 +1033,27 @@ Release Notes:
 
 New Features:
 
--  Added two new job ClassAd attributes, CumulativeRemoteSysCpu and
-   CumulativeRemoteUserCpu, which keep a running total of system and
+-  Added two new job ClassAd attributes, ``CumulativeRemoteSysCpu`` and
+   ``CumulativeRemoteUserCpu``, which keep a running total of system and
    user CPU usage, respectively, across all job restarts. Also,
-   immediately clear attributes RemoteSysCpu and RemoveUserCpu on job
-   start, instead of on first update. `(Ticket
+   immediately clear attributes ``RemoteSysCpu`` and ``RemoveUserCpu``
+   on job start, instead of on first update. `(Ticket
    #6022). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6022>`__
--  Added a new configuration knob, ALWAYS\_REUSEADDR, which defaults to
-   True. When True, it tells HTCondor to set the SO\_REUSEADDR socket
-   option, so that the schedd can run large numbers of very short jobs
-   without exhausting the number of local ports needed for shadows.
-   `(Ticket
+-  Added a new configuration knob, ``ALWAYS_REUSEADDR``, which defaults
+   to ``True``. When ``True``, it tells HTCondor to set the
+   ``SO_REUSEADDR`` socket option, so that the schedd can run large
+   numbers of very short jobs without exhausting the number of local
+   ports needed for shadows. `(Ticket
    #6040). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6040>`__
--  Changed the default value of IGNORE\_LEAF\_OOM to True. `(Ticket
+-  Changed the default value of ``IGNORE_LEAF_OOM`` to ``True``.
+   `(Ticket
    #5775). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=5775>`__
 
 Bugs Fixed:
 
 -  Fixed a bug causing unnecessarily slow updates from the
    *condor\_startd*. If you depend on the old behavior, set
-   UPDATE\_SPREAD\_TIME to 8. A value of 0 enables the fix. `(Ticket
+   ``UPDATE_SPREAD_TIME`` to 8. A value of 0 enables the fix. `(Ticket
    #6062). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6062>`__
 -  Fixed a race condition when running multiple concurrent jobs on the
    same claim. When the starter exits, it notifies the shadow, which
@@ -1082,10 +1087,11 @@ Bugs Fixed:
    proxy is refreshed and the *batch\_gahp* is configured to not create
    a limited copy of the proxy. `(Ticket
    #6051). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=6051>`__
--  Fixed a bug in the virtual machine universe where RequestMemory and
-   RequestCPUs were not changing the resources assigned to the VM
-   created by HTCondor. Now, VM\_Memory defaults to RequestMemory, and
-   the number of CPUs defaults to RequestCPUs. `(Ticket
+-  Fixed a bug in the virtual machine universe where ``RequestMemory``
+   and ``RequestCPUs`` were not changing the resources assigned to the
+   VM created by HTCondor. Now, ``VM_Memory`` defaults to
+   ``RequestMemory``, and the number of CPUs defaults to
+   ``RequestCPUs``. `(Ticket
    #5998). <https://condor-wiki.cs.wisc.edu/index.cgi/tktview?tn=5998>`__
 
       

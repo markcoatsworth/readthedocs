@@ -7,7 +7,7 @@ This is the development release series of HTCondor. The details of each
 version are described below.
 
 Version 8.9.1
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 
@@ -22,7 +22,7 @@ Bugs Fixed:
 -  None.
 
 Version 8.9.0
-^^^^^^^^^^^^^
+-------------
 
 Release Notes:
 

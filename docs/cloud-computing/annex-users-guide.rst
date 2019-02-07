@@ -11,7 +11,7 @@ less interest to the submitter. Users interested in customizing
 `6.4 <HTCondorAnnexCustomizationGuide.html#x66-5340006.4>`__.
 
 Considerations and Limitations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
 When you run *condor\_annex*, you are adding (virtual) machines to an
 HTCondor pool. As a submitter, you probably don’t have permission to add
@@ -48,7 +48,7 @@ Starting in v8.7.2, *condor\_annex* requires that the AWS secret
 anyone else. This helps to ensure proper attribution.
 
 Basic Usage
-^^^^^^^^^^^
+-----------
 
 This section assumes you’re logged into a Linux machine an that you’ve
 already configured *condor\_annex*. If you haven’t, see
@@ -63,7 +63,7 @@ of the following lines. (Lines which end in a ‘\\’ continue on the
 following line; be sure to copy both lines. Don’t copy the ‘\\’ itself.)
 
 What You’ll Need to Know
-''''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 To create a HTCondor annex with on-demand instances, you’ll need to know
 two things:
@@ -73,7 +73,7 @@ two things:
    checking to make sure things work, you may only want one instance.
 
 Start an Annex
-^^^^^^^^^^^^^^
+--------------
 
 Entering the following command will start an annex named “MyFirstAnnex”
 with one instance. *condor\_annex* will print out what it’s going to do,
@@ -82,7 +82,16 @@ the prompt to start an annex; if you do not, *condor\_annex* will print
 out instructions about how to change whatever you may not like about
 what it said it was going to do, and then exit.
 
-``$ condor_annex -count 1 -annex-name MyFirstAnnex Will request 1 m4.large on-demand instance for 0.83 hours. Each instance will terminate after being idle for 0.25 hours. Is that OK? (Type ’yes’ or ’no’): yes Starting annex... Annex started. Its identity with the cloud provider is ’TestAnnex0_f2923fd1-3cad-47f3-8e19-fff9988ddacf’. It will take about three minutes for the new machines to join the pool. ``
+::
+
+    $ condor_annex -count 1 -annex-name MyFirstAnnex 
+    Will request 1 m4.large on-demand instance for 0.83 hours. Each instance will 
+    terminate after being idle for 0.25 hours. 
+    Is that OK? (Type ’yes’ or ’no’): yes 
+    Starting annex... 
+    Annex started. Its identity with the cloud provider is 
+    ’TestAnnex0_f2923fd1-3cad-47f3-8e19-fff9988ddacf’. It will take about three 
+    minutes for the new machines to join the pool. 
 
 You won’t need to know the annex’s identity with the cloud provider
 unless something goes wrong.
@@ -93,7 +102,7 @@ Contact the Linux machine’s administrator if *condor\_annex* reports a
 problem with this step.
 
 Instance Types
-''''''''''''''
+~~~~~~~~~~~~~~
 
 | Each instance type provides a different number (and/or type) of CPU
 cores, amount of RAM, local storage, and the like. We recommend starting
@@ -104,7 +113,7 @@ the complete list of instance types at the following URL:
 flag.
 
 Leases
-''''''
+~~~~~~
 
 By default, *condor\_annex* arranges for your annex’s instances to be
 terminated after 0.83 hours (50 minutes) have passed. Once it’s in
@@ -120,10 +129,13 @@ specifying an annex name and a duration, but not a count. When you do
 so, the new duration is set starting at the current time. For example,
 if you’d like “MyFirstAnnex” to expire eight hours from now:
 
-``$ condor_annex -annex-name MyFirstAnnex -duration 8 Lease updated. ``
+::
+
+    $ condor_annex -annex-name MyFirstAnnex -duration 8 
+    Lease updated. 
 
 Idle Time
-'''''''''
+~~~~~~~~~
 
 By default, *condor\_annex* will configure your annex’s instances to
 terminate themselves after being idle for 0.25 hours (fifteen minutes).
@@ -136,7 +148,7 @@ for a definition), so it won’t get tricked by jobs with long quiescent
 periods.
 
 Multiple Annexes
-''''''''''''''''
+~~~~~~~~~~~~~~~~
 
 You may have up to fifty (or fewer, depending what else you’re doing
 with your AWS account) differently-named annexes running at the same
@@ -153,12 +165,23 @@ the instance type, the count, or both with each invocation, but doing so
 does not change the instance type or count of any previous request.
 
 Monitor your Annex
-^^^^^^^^^^^^^^^^^^
+------------------
 
 You can find out if an instance has successfully joined the pool in the
 following way:
 
-``$ condor_annex status Name                               OpSys      Arch   State     Activity     Load slot1@ip-172-31-48-84.ec2.internal LINUX      X86_64 Unclaimed Benchmarking  0.0 slot2@ip-172-31-48-84.ec2.internal LINUX      X86_64 Unclaimed Idle          0.0 xxxxxxxxxxxxxxxTotal Owner Claimed Unclaimed Matched Preempting Backfill  Drain xxX86_64/LINUX     2     0       0         2       0          0        0      0 xxxxxxxxxTotal     2     0       0         2       0          0        0      0 ``
+::
+
+    $ condor_annex status 
+    Name                               OpSys      Arch   State     Activity     Load 
+
+    slot1@ip-172-31-48-84.ec2.internal LINUX      X86_64 Unclaimed Benchmarking  0.0 
+    slot2@ip-172-31-48-84.ec2.internal LINUX      X86_64 Unclaimed Idle          0.0 
+
+    Total Owner Claimed Unclaimed Matched Preempting Backfill  Drain 
+
+    X86_64/LINUX     2     0       0         2       0          0        0      0 
+    Total     2     0       0         2       0          0        0      0 
 
 This example shows that the annex instance you requested has joined your
 pool. (The default annex image configures one static slot for each CPU
@@ -166,25 +189,62 @@ it finds on start-up.)
 
 You may instead use *condor\_status*:
 
-``$ condor_status -annex MyFirstAnnex slot1@ip-172-31-48-84.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 slot2@ip-172-31-48-84.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 xxxxxxxxxxxxxx Total Owner Claimed Unclaimed Matched Preempting Backfill  Drain xxX86_64/LINUX     2     0       0         2       0          0        0      0 xxxxxxxxxTotal     2     0       0         2       0          0        0      0 ``
+::
+
+    $ condor_status -annex MyFirstAnnex 
+    slot1@ip-172-31-48-84.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 
+    slot2@ip-172-31-48-84.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 
+
+     Total Owner Claimed Unclaimed Matched Preempting Backfill  Drain 
+    X86_64/LINUX     2     0       0         2       0          0        0      0 
+    Total     2     0       0         2       0          0        0      0 
 
 You can also get a report about the instances which have not joined your
 pool:
 
-``$ condor_annex -annex MyFirstAnnex -status STATE          COUNT pending            1 TOTAL              1 Instances not in the pool, grouped by state: pending i-06928b26786dc7e6e ``
+::
+
+    $ condor_annex -annex MyFirstAnnex -status 
+    STATE          COUNT 
+    pending            1 
+    TOTAL              1 
+    Instances not in the pool, grouped by state: 
+    pending i-06928b26786dc7e6e 
 
 Multiple Annexes
-''''''''''''''''
+~~~~~~~~~~~~~~~~
 
 The following command reports on all annex instance which have joined
 the pool, regardless of which annex they’re from:
 
-``$ condor_status -annex slot1@ip-172-31-48-84.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 slot2@ip-172-31-48-84.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 slot1@ip-111-48-85-13.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 slot2@ip-111-48-85-13.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 xxxxxxxxxxxxxxxTotal Owner Claimed Unclaimed Matched Preempting Backfill  Drain xxX86_64/LINUX     4     0       0         4       0          0        0      0 xxxxxxxxxTotal     4     0       0         4       0          0        0      0 ``
+::
+
+    $ condor_status -annex 
+    slot1@ip-172-31-48-84.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 
+    slot2@ip-172-31-48-84.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 
+    slot1@ip-111-48-85-13.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 
+    slot2@ip-111-48-85-13.ec2.internal  LINUX     X86_64 Unclaimed Idle 0.640 3767 
+
+    Total Owner Claimed Unclaimed Matched Preempting Backfill  Drain 
+    X86_64/LINUX     4     0       0         4       0          0        0      0 
+    Total     4     0       0         4       0          0        0      0 
 
 The following command reports about instance which have not joined the
 pool, regardless of which annex they’re from:
 
-``$ condor_annex -status NAME                        TOTAL running NamelessTestA                   2       2 NamelessTestB                   3       3 NamelessTestC                   1       1 NAME                        STATUS  INSTANCES... NamelessTestA               running i-075af9ccb40efb162 i-0bc5e90066ed62dd8 NamelessTestB               running i-02e69e85197f249c2 i-0385f59f482ae6a2e  i-06191feb755963edd NamelessTestC               running i-09da89d40cde1f212 ``
+::
+
+    $ condor_annex -status 
+    NAME                        TOTAL running 
+    NamelessTestA                   2       2 
+    NamelessTestB                   3       3 
+    NamelessTestC                   1       1 
+
+    NAME                        STATUS  INSTANCES... 
+    NamelessTestA               running i-075af9ccb40efb162 i-0bc5e90066ed62dd8 
+    NamelessTestB               running i-02e69e85197f249c2 i-0385f59f482ae6a2e 
+     i-06191feb755963edd 
+    NamelessTestC               running i-09da89d40cde1f212 
 
 The ellipsis in the last column (INSTANCES...) is to indicate that it’s
 a very wide column and may wrap (as it has in the example), not that it
@@ -192,10 +252,29 @@ has been truncated.
 
 The following command combines these two reports:
 
-``$ condor_annex status Name                               OpSys      Arch   State     Activity     Load slot1@ip-172-31-48-84.ec2.internal LINUX      X86_64 Unclaimed Benchmarking  0.0 slot2@ip-172-31-48-84.ec2.internal LINUX      X86_64 Unclaimed Idle          0.0 xxxxxxxxxxxxxxxTotal Owner Claimed Unclaimed Matched Preempting Backfill  Drain xxX86_64/LINUX     2     0       0         2       0          0        0      0 xxxxxxxxxTotal     2     0       0         2       0          0        0      0 Instance ID         not in Annex  Status  Reason (if known) i-075af9ccb40efb162 NamelessTestA running - i-0bc5e90066ed62dd8 NamelessTestA running - i-02e69e85197f249c2 NamelessTestB running - i-0385f59f482ae6a2e NamelessTestB running - i-06191feb755963edd NamelessTestB running - i-09da89d40cde1f212 NamelessTestC running - ``
+::
+
+    $ condor_annex status 
+    Name                               OpSys      Arch   State     Activity     Load 
+
+    slot1@ip-172-31-48-84.ec2.internal LINUX      X86_64 Unclaimed Benchmarking  0.0 
+    slot2@ip-172-31-48-84.ec2.internal LINUX      X86_64 Unclaimed Idle          0.0 
+
+    Total Owner Claimed Unclaimed Matched Preempting Backfill  Drain 
+
+    X86_64/LINUX     2     0       0         2       0          0        0      0 
+    Total     2     0       0         2       0          0        0      0 
+
+    Instance ID         not in Annex  Status  Reason (if known) 
+    i-075af9ccb40efb162 NamelessTestA running - 
+    i-0bc5e90066ed62dd8 NamelessTestA running - 
+    i-02e69e85197f249c2 NamelessTestB running - 
+    i-0385f59f482ae6a2e NamelessTestB running - 
+    i-06191feb755963edd NamelessTestB running - 
+    i-09da89d40cde1f212 NamelessTestC running - 
 
 Run a Job
-^^^^^^^^^
+---------
 
 Starting in v8.7.1, the default behaviour for an annex instance is to
 run only jobs submitted by the user who ran the *condor\_annex* command.
@@ -211,28 +290,38 @@ submit file somewhere before the queue command. To allow an existing job
 to run in the annex, use condor\_q\_edit. For instance, if you’d like
 cluster 1234 to run on AWS:
 
-``$ condor_qedit 1234 "MayUseAWS = TRUE" Set attribute "MayUseAWS" for 21 matching jobs. ``
+::
+
+    $ condor_qedit 1234 "MayUseAWS = TRUE" 
+    Set attribute "MayUseAWS" for 21 matching jobs. 
 
 Stop an Annex
-^^^^^^^^^^^^^
+-------------
 
 The following command shuts HTCondor off on each instance in the annex;
 if you’re using the default annex image, doing so causes each instance
 to shut itself down. HTCondor does not provide a direct method
 terminating *condor\_annex* instances.
 
-``$ condor_off -annex MyFirstAnnex Sent "Kill-Daemon" command for "master" to master ip-172-31-48-84.ec2.internal ``
+::
+
+    $ condor_off -annex MyFirstAnnex 
+    Sent "Kill-Daemon" command for "master" to master ip-172-31-48-84.ec2.internal 
 
 Multiple Annexes
-''''''''''''''''
+~~~~~~~~~~~~~~~~
 
 The following command turns off all annex instances in your pool,
 regardless of which annex they’re from:
 
-``$ condor_off -annex Sent "Kill-Daemon" command for "master" to master ip-172-31-48-84.ec2.internal Sent "Kill-Daemon" command for "master" to master ip-111-48-85-13.ec2.internal ``
+::
+
+    $ condor_off -annex 
+    Sent "Kill-Daemon" command for "master" to master ip-172-31-48-84.ec2.internal 
+    Sent "Kill-Daemon" command for "master" to master ip-111-48-85-13.ec2.internal 
 
 Using Different or Multiple AWS Regions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------
 
 It sometimes advantageous to use multiple AWS regions, or convenient to
 use an AWS region other than the default, which is us-east-1). To change
@@ -247,7 +336,7 @@ to use on the command line with the **-aws-region** flag. Each region
 may have zero or more annexes active simultaneously.
 
 Advanced Usage
-^^^^^^^^^^^^^^
+--------------
 
 The previous section covered using what AWS calls “on-demand” instances.
 (An “instance” is “a single occurrence of something,” in this case, a
@@ -279,7 +368,7 @@ Determining an appropriate bidding strategy is outside the purview of
 this manual.
 
 Using AWS Spot Fleet
-''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~
 
 *condor\_annex* supports Spot instances via an AWS technology called
 “Spot Fleet”. Normally, when you request instances, you request a
@@ -344,7 +433,7 @@ You may use other options as normal, excepting those which begin with
 instances.
 
 Custom HTCondor Configuration
-'''''''''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When you specify a custom configuration, you specify the full path to a
 configuration directory which will be copied to the instance. The
@@ -359,7 +448,7 @@ configuration file; it is named so as to sort first and make it easier
 to over-ride with whatever configuration you see fit.
 
 AWS Instance User Data
-''''''''''''''''''''''
+~~~~~~~~~~~~~~~~~~~~~~
 
 HTCondor doesn’t interfere with this in any way, so if you’d like to set
 an instance’s user data, you may do so. However, as of v8.7.2, the
@@ -378,7 +467,7 @@ accomodate your resource request. This usually corresponds one-to-one
 with instance types, but this is not required.
 
 Expert Mode
-'''''''''''
+~~~~~~~~~~~
 
 The man page (in section `12 <Condorannex.html#x99-68500012>`__) lists
 the “expert mode” options.

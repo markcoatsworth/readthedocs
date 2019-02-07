@@ -6,7 +6,7 @@ condor\_updates\_stats
 Display output from *condor\_status*
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_updates\_stats** [--**help** \| -**h**] \| [--**version**]
 
@@ -15,7 +15,7 @@ Synopsis
 [--**time**] [--**summary** \| -**s**]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_updates\_stats* parses the output from *condor\_status*, and it
 displays the information relating to update statistics in a useful
@@ -24,10 +24,10 @@ the most recent update is numbered with the smallest value.
 
 The number of historic points that represent updates is configurable on
 a per-source basis by configuration variable
-COLLECTOR\_DAEMON\_HISTORY\_SIZE .
+``COLLECTOR_DAEMON_HISTORY_SIZE`` .
 
 Options
-^^^^^^^
+-------
 
  **—help**
     Display usage information and exit.
@@ -70,42 +70,42 @@ Options
     Same as **—summary**.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_updates\_stats* will exit with a status value of 0 (zero) upon
 success, and it will exit with a nonzero value upon failure.
 
 Examples
-^^^^^^^^
+--------
 
 Assuming the default of 128 updates kept, and assuming that the update
 interval is 5 minutes, *condor\_updates\_stats* displays:
 
 ::
 
-    $ condor_status -l host1 | condor_updates_stats --interval=300
-     (Reading from stdin)
-     *** Name/Machine = 'HOST1.cs.wisc.edu' MyType = 'Machine' ***
-      Type: Main
-        Stats: Total=2277, Seq=2276, Lost=3 (0.13%)
-          0 @ Mon Feb 16 12:55:38 2004: Ok
-       ...
-         28 @ Mon Feb 16 10:35:38 2004: Missed
-         29 @ Mon Feb 16 10:30:38 2004: Ok
-       ...
-        127 @ Mon Feb 16 02:20:38 2004: Ok
+    $ condor_status -l host1 | condor_updates_stats --interval=300 
+    (Reading from stdin) 
+    *** Name/Machine = 'HOST1.cs.wisc.edu' MyType = 'Machine' *** 
+     Type: Main 
+       Stats: Total=2277, Seq=2276, Lost=3 (0.13%) 
+         0 @ Mon Feb 16 12:55:38 2004: Ok 
+      ... 
+        28 @ Mon Feb 16 10:35:38 2004: Missed 
+        29 @ Mon Feb 16 10:30:38 2004: Ok 
+      ... 
+       127 @ Mon Feb 16 02:20:38 2004: Ok
 
 Within this display, update numbered 27, which occurs later in time than
 the missed update numbered 28, is Ok. Each change in state, in reverse
 time order, displays in this condensed version.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

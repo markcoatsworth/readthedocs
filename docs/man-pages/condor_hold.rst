@@ -6,7 +6,7 @@ condor\_hold
 put jobs in the queue into the hold state
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_hold** [**-help \| -version**\ ]
 
@@ -23,7 +23,7 @@ Synopsis
 **-name **\ *scheddname* ] \| [**-addr  **\ *"<a.b.c.d:port>"*] **-all**
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_hold* places jobs from the HTCondor job queue in the hold
 state. If the **-name** option is specified, the named *condor\_schedd*
@@ -31,7 +31,7 @@ is targeted for processing. Otherwise, the local *condor\_schedd* is
 targeted. The jobs to be held are identified by one or more job
 identifiers, as described below. For any given job, only the owner of
 the job or one of the queue super users (defined by the
-QUEUE\_SUPER\_USERS macro) can place the job on hold.
+``QUEUE_SUPER_USERS`` macro) can place the job on hold.
 
 A job in the hold state remains in the job queue, but the job will not
 run until released with *condor\_release*.
@@ -42,7 +42,7 @@ this means that the job is removed from the machine without allowing a
 checkpoint to be produced first.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information
@@ -56,14 +56,14 @@ Options
  **-addr **\ *"<a.b.c.d:port>"*
     Send the command to a machine located at *"<a.b.c.d:port>"*
  **-debug**
-    Causes debugging information to be sent to stderr, based on the
-    value of the configuration variable TOOL\_DEBUG.
+    Causes debugging information to be sent to ``stderr``, based on the
+    value of the configuration variable ``TOOL_DEBUG``.
  **-reason **\ *reasonstring*
-    Sets the job ClassAd attribute HoldReason to the value given by
+    Sets the job ClassAd attribute ``HoldReason`` to the value given by
     *reasonstring*. *reasonstring* will be delimited by double quote
     marks on the command line, if it contains space characters.
  **-subcode **\ *number*
-    Sets the job ClassAd attribute HoldReasonSubCode to the integer
+    Sets the job ClassAd attribute ``HoldReasonSubCode`` to the integer
     value given by *number*.
  *cluster*
     Hold all jobs in the specified cluster
@@ -79,12 +79,12 @@ Options
     Hold all the jobs in the queue
 
 See Also
-^^^^^^^^
+--------
 
 *condor\_release*
 
 Examples
-^^^^^^^^
+--------
 
 To place on hold all jobs (of the user that issued the *condor\_hold*
 command) that are not currently running:
@@ -108,18 +108,18 @@ jobs specified by the constraint will also be Mary’s jobs, if it is Mary
 that issues this example *condor\_hold* command.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_hold* will exit with a status value of 0 (zero) upon success,
 and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

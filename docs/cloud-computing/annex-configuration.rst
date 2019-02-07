@@ -17,110 +17,111 @@ Subsequent sections deal with logging (section
 `6.5.4 <#x67-5460006.5.4>`__).
 
 User Settings
-^^^^^^^^^^^^^
+-------------
 
- ANNEX\_DEFAULT\_AWS\_REGION
+ ``ANNEX_DEFAULT_AWS_REGION``
     The default region when using AWS. Defaults to ‘us-east-1’.
- ANNEX\_DEFAULT\_LEASE\_DURATION
+ ``ANNEX_DEFAULT_LEASE_DURATION``
     The duration of an annex if not specified on the command-line;
     specified in seconds. Defaults to 50 minutes.
- ANNEX\_DEFAULT\_UNCLAIMED\_TIMEOUT
+ ``ANNEX_DEFAULT_UNCLAIMED_TIMEOUT``
     How long an annex instances should stay idle before shutting down;
     specified in seconds. Defaults to 15 minutes.
- ANNEX\_DEFAULT\_ODI\_KEY\_NAME
+ ``ANNEX_DEFAULT_ODI_KEY_NAME``
     The name of the SSH key pair *condor\_annex* should use by default.
     No default.
- ANNEX\_DEFAULT\_ODI\_INSTANCE\_TYPE
+ ``ANNEX_DEFAULT_ODI_INSTANCE_TYPE``
     The AWS instance type to use for on-demand instances if not
     specified. No default, but the *condor\_annex* setup procedure sets
     this to ‘m4.large’.
- ANNEX\_DEFAULT\_ODI\_IMAGE\_ID
+ ``ANNEX_DEFAULT_ODI_IMAGE_ID``
     The AWS AMI to use for on-demand instance if not specified. No
     default, but the *condor\_annex* setup procedure sets this to
     ‘ami-35b13223’.
- ANNEX\_DEFAULT\_SFR\_CONFIG\_FILE
+ ``ANNEX_DEFAULT_SFR_CONFIG_FILE``
     The JSON configuration file use by *condor\_annex* when creating a
     Spot-based annex. No default.
 
 Logging
-^^^^^^^
+-------
 
 By default, running *condor\_annex* creates three logs: the
 *condor\_annex* log, the annex GAHP log, and the annex audit log. The
 default location for these logs is the same directory as the
 user-specific HTCondor configuration file (usually
-~/.condor/user\_config). *condor\_annex* sets the LOG macro to this
+~/.condor/user\_config). *condor\_annex* sets the ``LOG`` macro to this
 directory when reading its configuration.
 
 The *condor\_annex* log is a daemon-style log. It is configured as if
-*condor\_annex* were a daemon with subsystem type ANNEX; see section
+*condor\_annex* were a daemon with subsystem type ``ANNEX``; see section
 `3.5.2 <ConfigurationMacros.html#x33-1890003.5.2>`__ for details.
 
 *condor\_annex* uses special helper programs, called GAHPs, to interact
 with the different cloud services. These programs do their own logging,
 writing to the annex GAHP log. The annex GAHP log is configured as if it
-were a daemon, but with subsystem type ANNEX\_GAHP; see section
+were a daemon, but with subsystem type ``ANNEX_GAHP``; see section
 `3.5.2 <ConfigurationMacros.html#x33-1890003.5.2>`__ for details.
 
 The annex audit log records two lines for each invocation of
 *condor\_annex*: the command as issued and the results as returned. The
-location of the audit log is set by ANNEX\_AUDIT\_LOG , which is the
-AUDIT-level log for the ANNEX subsystem; see <SUBSYS>\_<LEVEL>\_LOG
+location of the audit log is set by ``ANNEX_AUDIT_LOG`` , which is the
+``AUDIT``-level log for the ``ANNEX`` subsystem; see
+``<SUBSYS>_<LEVEL>_LOG``
 (`3.5.2 <ConfigurationMacros.html#x33-1890003.5.2>`__) for details.
 Because annex creation commands typically make extensive use of values
 set in configuration, *condor\_annex* will write the configuration it
-used for annex creation commands into the audit log if ANNEX\_DEBUG
-includes D\_AUDIT:2.
+used for annex creation commands into the audit log if ``ANNEX_DEBUG``
+includes ``D_AUDIT:2``.
 
 Expert Settings
-^^^^^^^^^^^^^^^
+---------------
 
- ANNEX\_DEFAULT\_EC2\_URL
+ ``ANNEX_DEFAULT_EC2_URL``
     The AWS EC2 endpoint that *condor\_annex* should use. Defaults to
     ‘https://ec2.us-east-1.amazonaws.com’.
- ANNEX\_DEFAULT\_CWE\_URL
+ ``ANNEX_DEFAULT_CWE_URL``
     The AWS CloudWatch Events endpoint that *condor\_annex* should use.
     Defaults to ‘https://events.us-east-1.amazonaws.com’.
- ANNEX\_DEFAULT\_LAMBDA\_URL
+ ``ANNEX_DEFAULT_LAMBDA_URL``
     The AWS Lambda endpoint that *condor\_annex* should use. Defaults to
     ‘https://lambda.us-east-1.amazonaws.com’.
- ANNEX\_DEFAULT\_S3\_URL
+ ``ANNEX_DEFAULT_S3_URL``
     The AWS S3 endpoint that *condor\_annex* should use. Defaults to
     ‘https://s3.amazonaws.com’.
- ANNEX\_DEFAULT\_CF\_URL
+ ``ANNEX_DEFAULT_CF_URL``
     The AWS CloudFormation endpoint that *condor\_annex* should use.
     Defaults to ‘https://cloudformation.us-east-1.amazonaws.com’.
- ANNEX\_DEFAULT\_ACCESS\_KEY\_FILE
+ ``ANNEX_DEFAULT_ACCESS_KEY_FILE``
     The full path to the AWS access key file *condor\_annex* should use.
     No default. If “FROM INSTANCE”, *condor\_annex* will assume it’s
     running on an EC2 instance and try to use that instance’s
     credentials.
- ANNEX\_DEFAULT\_SECRET\_KEY\_FILE
+ ``ANNEX_DEFAULT_SECRET_KEY_FILE``
     The full path to the AWS secret key file *condor\_annex* should use.
     No default. If “FROM INSTANCE”, *condor\_annex* will assume it’s
     running on an EC2 instance and try to use that instance’s
     credentials.
- ANNEX\_DEFAULT\_S3\_BUCKET
-    A private S3 bucket that the ANNEX\_DEFAULT\_ACCESS\_KEY\_FILE and
-    ANNEX\_DEFAULT\_SECRET\_KEY\_FILE may write to. No default.
- ANNEX\_DEFAULT\_ODI\_SECURITY\_GROUP\_IDS
+ ``ANNEX_DEFAULT_S3_BUCKET``
+    A private S3 bucket that the ``ANNEX_DEFAULT_ACCESS_KEY_FILE`` and
+    ``ANNEX_DEFAULT_SECRET_KEY_FILE`` may write to. No default.
+ ``ANNEX_DEFAULT_ODI_SECURITY_GROUP_IDS``
     The default security group for on-demand annexes. Must permit
     inbound HTCondor (port 9618).
 
 Developer Settings
-^^^^^^^^^^^^^^^^^^
+------------------
 
- ANNEX\_DEFAULT\_CONNECTIVITY\_FUNCTION\_ARN
+ ``ANNEX_DEFAULT_CONNECTIVITY_FUNCTION_ARN``
     The name (or ARN) of the Lambda function on AWS which
     *condor\_annex* should use to check if the configured collector can
     be contacted from AWS.
- ANNEX\_DEFAULT\_ODI\_INSTANCE\_PROFILE\_ARN
+ ``ANNEX_DEFAULT_ODI_INSTANCE_PROFILE_ARN``
     The ARN of the instance profile *condor\_annex* should use. No
     default.
- ANNEX\_DEFAULT\_ODI\_LEASE\_FUNCTION\_ARN
+ ``ANNEX_DEFAULT_ODI_LEASE_FUNCTION_ARN``
     The Lambda function which implements the lease (duration) for
     on-demand instances. No default.
- ANNEX\_DEFAULT\_SFR\_LEASE\_FUNCTION\_ARN
+ ``ANNEX_DEFAULT_SFR_LEASE_FUNCTION_ARN``
     The Lambda function which implements the lease (duration) for Spot
     instances. No default.
 

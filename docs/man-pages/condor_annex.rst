@@ -6,7 +6,7 @@ condor\_annex
 Add cloud resources to the pool.
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_annex** **-help**
 
@@ -34,7 +34,7 @@ the annex>* **-slots **\ *<integer weight>* [**-aws-spot-fleet-\***\ ]
 options>
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_annex* adds clouds resources to the pool. (“The pool” is
 determined in the usual manner for HTCondor daemons and tools.) This
@@ -91,7 +91,7 @@ options specific to AWS’ spot instances, followed by options intended
 for use by experts.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Print a usage reminder.
@@ -165,7 +165,7 @@ Options
     Developers only.
 
 General Remarks
-^^^^^^^^^^^^^^^
+---------------
 
 Currently, only AWS is supported. The AMI configured by setup runs
 HTCondor v8.6.10 on Amazon Linux 2016.09, and the default instance type
@@ -173,7 +173,7 @@ is “m4.large”. The default AMI has the appropriate drivers for AWS’ GPU
 instance types.
 
 Examples
-^^^^^^^^
+--------
 
 To start an on-demand annex named ‘MyFirstAnnex’ with one core, using
 the default AMI and instance type, run
@@ -191,21 +191,21 @@ To start an on-demand annex with 100 GPUs that job owners ‘big’ and
 
 ::
 
-      condor_annex -count 100 -annex-name MySecondAnnex \
-         -aws-on-demand-instance-type p2.xlarge -owner "big, little"
+      condor_annex -count 100 -annex-name MySecondAnnex \ 
+        -aws-on-demand-instance-type p2.xlarge -owner "big, little"
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_annex* will exit with a status value of 0 (zero) on success.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

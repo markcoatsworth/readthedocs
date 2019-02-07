@@ -28,7 +28,7 @@ already submitted to that site are sitting idle or not, as well as
 whether the site has experienced recent job failures.
 
 Routing Mechanism
-^^^^^^^^^^^^^^^^^
+-----------------
 
 The *condor\_job\_router* daemon and configuration determine a policy
 for which jobs may be transformed and sent to grid sites. By default, a
@@ -41,12 +41,13 @@ Until the routed copy finishes or is removed, the original copy of the
 job passively mirrors the state of the routed job. During this time, the
 original job is not available for matchmaking, because it is tied to the
 routed copy. The original job also does not evaluate periodic
-expressions, such as PeriodicHold. Periodic expressions are evaluated
-for the routed copy. When the routed copy completes, the original job
-ClassAd is updated such that it reflects the final status of the job. If
-the routed copy is removed, the original job returns to the normal idle
-state, and is available for matchmaking or rerouting. If, instead, the
-original job is removed or goes on hold, the routed copy is removed.
+expressions, such as ``PeriodicHold``. Periodic expressions are
+evaluated for the routed copy. When the routed copy completes, the
+original job ClassAd is updated such that it reflects the final status
+of the job. If the routed copy is removed, the original job returns to
+the normal idle state, and is available for matchmaking or rerouting.
+If, instead, the original job is removed or goes on hold, the routed
+copy is removed.
 
 Although the default mode routes vanilla universe jobs to grid universe
 jobs, the routing rules may be configured to do some other
@@ -71,12 +72,12 @@ after each assignment statement. This is done in the examples.
 Unfortunately, this makes the insertion of comments into the
 configuration file awkward, because of the interaction between comments
 and line continuation characters in configuration files. An alternative
-is to use C-style comments (/\* …\*/). Another alternative is to read in
-the routing table entries from a separate file, rather than embedding
+is to use C-style comments (``/* …*/``). Another alternative is to read
+in the routing table entries from a separate file, rather than embedding
 them in the HTCondor configuration file.
 
 Job Submission with Job Routing Capability
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------
 
 If Job Routing is set up, then the following items ought to be
 considered for jobs to have the necessary prerequisites to be considered
@@ -91,10 +92,10 @@ for routing.
 
    ::
 
-       should_transfer_files = YES
-        when_to_transfer_output = ON_EXIT
-        transfer_input_files = input1, input2
-        transfer_output_files = output1, output2
+       should_transfer_files = YES 
+       when_to_transfer_output = ON_EXIT 
+       transfer_input_files = input1, input2 
+       transfer_output_files = output1, output2
 
    Vanilla universe jobs and most types of grid universe jobs differ in
    the set of files transferred back when the job completes. Vanilla
@@ -118,8 +119,8 @@ for routing.
    inventing a ClassAd attribute that the configuration utilizes in
    setting the policy for job identification, and the job defines this
    attribute to identify itself. If the invented attribute is called
-   WantJobRouter, then the job identifies itself as a job that may be
-   routed by placing in the submit description file:
+   ``WantJobRouter``, then the job identifies itself as a job that may
+   be routed by placing in the submit description file:
 
    ::
 
@@ -149,20 +150,20 @@ Job submission does not change for jobs that may be routed.
 
       $ condor_submit job1.sub
 
-where job1.sub might contain:
+where ``job1.sub`` might contain:
 
 ::
 
-    universe = vanilla
-     executable = my_executable
-     output = job1.stdout
-     error = job1.stderr
-     log = job1.ulog
-     should_transfer_files = YES
-     when_to_transfer_output = ON_EXIT
-     +WantJobRouter = LastRejMatchTime =!= UNDEFINED
-     x509userproxy = /tmp/x509up_u275
-     queue
+    universe = vanilla 
+    executable = my_executable 
+    output = job1.stdout 
+    error = job1.stderr 
+    log = job1.ulog 
+    should_transfer_files = YES 
+    when_to_transfer_output = ON_EXIT 
+    +WantJobRouter = LastRejMatchTime =!= UNDEFINED 
+    x509userproxy = /tmp/x509up_u275 
+    queue
 
 The status of the job may be observed as with any other HTCondor job,
 for example by looking in the job’s log file. Before the job completes,
@@ -173,31 +174,31 @@ view of routed jobs, as this example shows:
 
 ::
 
-    $ condor_router_q -S
-        JOBS ST Route      GridResource
-          40  I Site1      site1.edu/jobmanager-condor
-          10  I Site2      site2.edu/jobmanager-pbs
-           2  R Site3      condor submit.site3.edu condor.site3.edu
+    $ condor_router_q -S 
+       JOBS ST Route      GridResource 
+         40  I Site1      site1.edu/jobmanager-condor 
+         10  I Site2      site2.edu/jobmanager-pbs 
+          2  R Site3      condor submit.site3.edu condor.site3.edu
 
 *condor\_router\_history* summarizes the history of routed jobs, as this
 example shows:
 
 ::
 
-    $ condor_router_history
-     Routed job history from 2007-06-27 23:38 to 2007-06-28 23:38
+    $ condor_router_history 
+    Routed job history from 2007-06-27 23:38 to 2007-06-28 23:38 
      
-     Site            Hours    Jobs    Runs
-                           Completed Aborted
-     -------------------------------------------------------
-     Site1              10       2     0
-     Site2               8       2     1
-     Site3              40       6     0
-     -------------------------------------------------------
-     TOTAL              58      10     1
+    Site            Hours    Jobs    Runs 
+                          Completed Aborted 
+    ------------------------------------------------------- 
+    Site1              10       2     0 
+    Site2               8       2     1 
+    Site3              40       6     0 
+    ------------------------------------------------------- 
+    TOTAL              58      10     1
 
 An Example Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 The following sample configuration sets up potential job routing to
 three routes (grid sites). Definitions of the configuration variables
@@ -216,7 +217,7 @@ successfully submit grid jobs before setting up and using the Job
 Router. Typically, the single required element that needs to be added
 for GSI authentication is an X.509 trusted certification authority
 directory, in a place recognized by HTCondor (for example,
-/etc/grid-security/certificates). The VDT
+``/etc/grid-security/certificates``). The VDT
 (`http://vdt.cs.wisc.edu <http://vdt.cs.wisc.edu>`__) project provides a
 convenient way to set up and install a trusted CA, if needed.
 
@@ -227,55 +228,56 @@ details).
 
 ::
 
-     # These settings become the default settings for all routes
-     JOB_ROUTER_DEFAULTS @=jrd
-       [
-         requirements=target.WantJobRouter is True;
-         MaxIdleJobs = 10;
-         MaxJobs = 200;
      
-         /* now modify routed job attributes */
-         /* remove routed job if it goes on hold or stays idle for over 6 hours */
-         set_PeriodicRemove = JobStatus == 5 ||
-                             (JobStatus == 1 && (time() - QDate) > 3600*6);
-         delete_WantJobRouter = true;
-         set_requirements = true;
-       ]
-       @jrd
+    # These settings become the default settings for all routes 
+    JOB_ROUTER_DEFAULTS @=jrd 
+      [ 
+        requirements=target.WantJobRouter is True; 
+        MaxIdleJobs = 10; 
+        MaxJobs = 200; 
      
-     # This could be made an attribute of the job, rather than being hard-coded
-     ROUTED_JOB_MAX_TIME = 1440
+        /* now modify routed job attributes */ 
+        /* remove routed job if it goes on hold or stays idle for over 6 hours */ 
+        set_PeriodicRemove = JobStatus == 5 || 
+                            (JobStatus == 1 && (time() - QDate) > 3600*6); 
+        delete_WantJobRouter = true; 
+        set_requirements = true; 
+      ] 
+      @jrd 
      
-     # Now we define each of the routes to send jobs on
-     JOB_ROUTER_ENTRIES @=jre
-       [ GridResource = "gt2 site1.edu/jobmanager-condor";
-         name = "Site 1";
-       ]
-       [ GridResource = "gt2 site2.edu/jobmanager-pbs";
-         name = "Site 2";
-         set_GlobusRSL = "(maxwalltime=$(ROUTED_JOB_MAX_TIME))(jobType=single)";
-       ]
-       [ GridResource = "condor submit.site3.edu condor.site3.edu";
-         name = "Site 3";
-         set_remote_jobuniverse = 5;
-       ]
-       @jre
+    # This could be made an attribute of the job, rather than being hard-coded 
+    ROUTED_JOB_MAX_TIME = 1440 
+     
+    # Now we define each of the routes to send jobs on 
+    JOB_ROUTER_ENTRIES @=jre 
+      [ GridResource = "gt2 site1.edu/jobmanager-condor"; 
+        name = "Site 1"; 
+      ] 
+      [ GridResource = "gt2 site2.edu/jobmanager-pbs"; 
+        name = "Site 2"; 
+        set_GlobusRSL = "(maxwalltime=$(ROUTED_JOB_MAX_TIME))(jobType=single)"; 
+      ] 
+      [ GridResource = "condor submit.site3.edu condor.site3.edu"; 
+        name = "Site 3"; 
+        set_remote_jobuniverse = 5; 
+      ] 
+      @jre 
      
      
-     # Reminder: you must restart HTCondor for changes to DAEMON_LIST to take effect.
-     DAEMON_LIST = $(DAEMON_LIST) JOB_ROUTER
+    # Reminder: you must restart HTCondor for changes to DAEMON_LIST to take effect. 
+    DAEMON_LIST = $(DAEMON_LIST) JOB_ROUTER 
      
-     # For testing, set this to a small value to speed things up.
-     # Once you are running at large scale, set it to a higher value
-     # to prevent the JobRouter from using too much cpu.
-     JOB_ROUTER_POLLING_PERIOD = 10
+    # For testing, set this to a small value to speed things up. 
+    # Once you are running at large scale, set it to a higher value 
+    # to prevent the JobRouter from using too much cpu. 
+    JOB_ROUTER_POLLING_PERIOD = 10 
      
-     #It is good to save lots of schedd queue history
-     #for use with the router_history command.
-     MAX_HISTORY_ROTATIONS = 20
+    #It is good to save lots of schedd queue history 
+    #for use with the router_history command. 
+    MAX_HISTORY_ROTATIONS = 20
 
 Routing Table Entry ClassAd Attributes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------
 
 The conversion of a job to a routed copy may require the job ClassAd to
 be modified. The Routing Table specifies attributes of the different
@@ -289,20 +291,20 @@ The following attributes and instructions for modifying job attributes
 may appear in a Routing Table entry.
 
  GridResource
-    Specifies the value for the GridResource attribute that will be
+    Specifies the value for the ``GridResource`` attribute that will be
     inserted into the routed copy of the job’s ClassAd.
  Name
     An optional identifier that will be used in log messages concerning
     this route. If no name is specified, the default used will be the
-    value of GridResource. The *condor\_job\_router* distinguishes
+    value of ``GridResource``. The *condor\_job\_router* distinguishes
     routes and advertises statistics based on this attribute’s value.
  Requirements
-    A Requirements expression that identifies jobs that may be matched
-    to the route. Note that, as with all settings, requirements
-    specified in the configuration variable JOB\_ROUTER\_ENTRIES
-    override the setting of JOB\_ROUTER\_DEFAULTS. To specify global
-    requirements that are not overridden by JOB\_ROUTER\_ENTRIES, use
-    JOB\_ROUTER\_SOURCE\_JOB\_CONSTRAINT.
+    A ``Requirements`` expression that identifies jobs that may be
+    matched to the route. Note that, as with all settings, requirements
+    specified in the configuration variable ``JOB_ROUTER_ENTRIES``
+    override the setting of ``JOB_ROUTER_DEFAULTS``. To specify global
+    requirements that are not overridden by ``JOB_ROUTER_ENTRIES``, use
+    ``JOB_ROUTER_SOURCE_JOB_CONSTRAINT``.
  MaxJobs
     An integer maximum number of jobs permitted on the route at one
     time. The default is 100.
@@ -319,11 +321,11 @@ may appear in a Routing Table entry.
     hours or days. The default value is 50.
  FailureRateThreshold
     A maximum tolerated rate of job failures. Failure is determined by
-    the expression sets for the attribute JobFailureTest expression. The
-    default threshold is 0.03 jobs/second. If the threshold is exceeded,
-    submission of new jobs is throttled until jobs begin succeeding,
-    such that the failure rate is less than the threshold. This
-    attribute implements black hole throttling, such that a site at
+    the expression sets for the attribute ``JobFailureTest`` expression.
+    The default threshold is 0.03 jobs/second. If the threshold is
+    exceeded, submission of new jobs is throttled until jobs begin
+    succeeding, such that the failure rate is less than the threshold.
+    This attribute implements black hole throttling, such that a site at
     which jobs are sent only to fail (a black hole) receives fewer jobs.
  JobFailureTest
     An expression evaluated for each job that finishes, to determine
@@ -331,111 +333,111 @@ may appear in a Routing Table entry.
     defined assumes all jobs are successful. Routed jobs that are
     removed are considered to be failures. An example expression to
     treat all jobs running for less than 30 minutes as failures is
-    target.RemoteWallClockTime < 1800. A more flexible expression might
-    reference a property or expression of the job that specifies a
+    ``target.RemoteWallClockTime < 1800``. A more flexible expression
+    might reference a property or expression of the job that specifies a
     failure condition specific to the type of job.
  TargetUniverse
     An integer value specifying the desired universe for the routed copy
     of the job. The default value is 9, which is the **grid** universe.
  UseSharedX509UserProxy
-    A boolean expression that when True causes the value of
-    SharedX509UserProxy to be the X.509 user proxy for the routed job.
-    Note that if the *condor\_job\_router* daemon is running as root,
-    the copy of this file that is given to the job will have its
+    A boolean expression that when ``True`` causes the value of
+    ``SharedX509UserProxy`` to be the X.509 user proxy for the routed
+    job. Note that if the *condor\_job\_router* daemon is running as
+    root, the copy of this file that is given to the job will have its
     ownership set to that of the user running the job. This requires the
     trust of the user. It is therefore recommended to avoid this
     mechanism when possible. Instead, require users to submit jobs with
-    X509UserProxy set in the submit description file. If this feature is
-    needed, use the boolean expression to only allow specific values of
-    target.Owner to use this shared proxy file. The shared proxy file
-    should be owned by the condor user. Currently, to use a shared
-    proxy, the job must also turn on sandboxing by having the attribute
-    JobShouldBeSandboxed.
+    ``X509UserProxy`` set in the submit description file. If this
+    feature is needed, use the boolean expression to only allow specific
+    values of ``target.Owner`` to use this shared proxy file. The shared
+    proxy file should be owned by the condor user. Currently, to use a
+    shared proxy, the job must also turn on sandboxing by having the
+    attribute ``JobShouldBeSandboxed``.
  SharedX509UserProxy
     A string representing file containing the X.509 user proxy for the
     routed job.
  JobShouldBeSandboxed
-    A boolean expression that when True causes the created copy of the
-    job to be sandboxed. A copy of the input files will be placed in the
-    *condor\_schedd* daemon’s spool area for the target job, and when
-    the job runs, the output will be staged back into the spool area.
-    Once all of the output has been successfully staged back, it will be
-    copied again, this time from the spool area of the sandboxed job
-    back to the original job’s output locations. By default, sandboxing
-    is turned off. Only to turn it on if using a shared X.509 user proxy
-    or if direct staging of remote output files back to the final output
-    locations is not desired.
+    A boolean expression that when ``True`` causes the created copy of
+    the job to be sandboxed. A copy of the input files will be placed in
+    the *condor\_schedd* daemon’s spool area for the target job, and
+    when the job runs, the output will be staged back into the spool
+    area. Once all of the output has been successfully staged back, it
+    will be copied again, this time from the spool area of the sandboxed
+    job back to the original job’s output locations. By default,
+    sandboxing is turned off. Only to turn it on if using a shared X.509
+    user proxy or if direct staging of remote output files back to the
+    final output locations is not desired.
  OverrideRoutingEntry
-    A boolean value that when True, indicates that this entry in the
+    A boolean value that when ``True``, indicates that this entry in the
     routing table replaces any previous entry in the table with the same
-    name. When False, it indicates that if there is a previous entry by
-    the same name, the previous entry should be retained and this entry
-    should be ignored. The default value is True.
+    name. When ``False``, it indicates that if there is a previous entry
+    by the same name, the previous entry should be retained and this
+    entry should be ignored. The default value is ``True``.
  Set\_<ATTR>
-    Sets the value of <ATTR> in the routed copy’s job ClassAd to the
+    Sets the value of ``<ATTR>`` in the routed copy’s job ClassAd to the
     specified value. An example of an attribute that might be set is
-    PeriodicRemove. For example, if the routed job goes on hold or stays
-    idle for too long, remove it and return the original copy of the job
-    to a normal state.
+    ``PeriodicRemove``. For example, if the routed job goes on hold or
+    stays idle for too long, remove it and return the original copy of
+    the job to a normal state.
  Eval\_Set\_<ATTR>
     Defines an expression. The expression is evaluated, and the
     resulting value sets the value of the routed copy’s job ClassAd
-    attribute <ATTR>. Use this attribute to set a custom or local value,
-    especially for modifying an attribute which may have been already
-    specified in a default routing table.
+    attribute ``<ATTR>``. Use this attribute to set a custom or local
+    value, especially for modifying an attribute which may have been
+    already specified in a default routing table.
  Copy\_<ATTR>
     Defined with the name of a routed copy ClassAd attribute. Copies the
-    value of <ATTR> from the original job ClassAd into the specified
+    value of ``<ATTR>`` from the original job ClassAd into the specified
     attribute named of the routed copy. Useful to save the value of an
     expression, before replacing it with something else that references
     the original expression.
  Delete\_<ATTR>
-    Deletes <ATTR> from the routed copy ClassAd. A value assigned to
+    Deletes ``<ATTR>`` from the routed copy ClassAd. A value assigned to
     this attribute in the routing table entry is ignored.
  EditJobInPlace
-    A boolean expression that, when True, causes the original job to be
-    transformed in place rather than creating a new transformed version
-    (a routed copy) of the job. In this mode, the Job Router Hook
-    <Keyword>\_HOOK\_TRANSLATE\_JOB and transformation rules in the
-    routing table are applied during the job transformation. The routing
-    table attribute GridResource is ignored, and there is no default
-    transformation of the job from a vanilla job to a grid universe job
-    as there is otherwise. Once transformed, the job is still a
-    candidate for matching routing rules, so it is up to the routing
-    logic to control whether the job may be transformed multiple times
-    or not. For example, to transform the job only once, an attribute
-    could be set in the job ClassAd to prevent it from matching the same
-    routing rule in the future. To transform the job multiple times with
-    limited frequency, a timestamp could be inserted into the job
-    ClassAd marking the time of the last transformation, and the routing
-    entry could require that this timestamp either be undefined or older
-    than some limit.
+    A boolean expression that, when ``True``, causes the original job to
+    be transformed in place rather than creating a new transformed
+    version (a routed copy) of the job. In this mode, the Job Router
+    Hook ``<Keyword>_HOOK_TRANSLATE_JOB`` and transformation rules in
+    the routing table are applied during the job transformation. The
+    routing table attribute ``GridResource`` is ignored, and there is no
+    default transformation of the job from a vanilla job to a grid
+    universe job as there is otherwise. Once transformed, the job is
+    still a candidate for matching routing rules, so it is up to the
+    routing logic to control whether the job may be transformed multiple
+    times or not. For example, to transform the job only once, an
+    attribute could be set in the job ClassAd to prevent it from
+    matching the same routing rule in the future. To transform the job
+    multiple times with limited frequency, a timestamp could be inserted
+    into the job ClassAd marking the time of the last transformation,
+    and the routing entry could require that this timestamp either be
+    undefined or older than some limit.
 
 Example: constructing the routing table from ReSS
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------------
 
 The Open Science Grid has a service called ReSS (Resource Selection
 Service). It presents grid sites as ClassAds in an HTCondor collector.
 This example builds a routing table from the site ClassAds in the ReSS
 collector.
 
-Using JOB\_ROUTER\_ENTRIES\_CMD , we tell the *condor\_job\_router*
+Using ``JOB_ROUTER_ENTRIES_CMD`` , we tell the *condor\_job\_router*
 daemon to call a simple script which queries the collector and outputs a
 routing table. The script, called osg\_ress\_routing\_table.sh, is just
 this:
 
 ::
 
-    #!/bin/sh
+    #!/bin/sh 
      
-     # you _MUST_ change this:
-     export condor_status=/path/to/condor_status
-     # if no command line arguments specify -pool, use this:
-     export _CONDOR_COLLECTOR_HOST=osg-ress-1.fnal.gov
+    # you _MUST_ change this: 
+    export condor_status=/path/to/condor_status 
+    # if no command line arguments specify -pool, use this: 
+    export _CONDOR_COLLECTOR_HOST=osg-ress-1.fnal.gov 
      
-     $condor_status -format '[ ' BeginAd \
-                   -format 'GridResource = "gt2 %s"; ' GlueCEInfoContactString \
-           -format ']\n' EndAd "$@" | uniq
+    $condor_status -format '[ ' BeginAd \ 
+                  -format 'GridResource = "gt2 %s"; ' GlueCEInfoContactString \ 
+          -format ']\n' EndAd "$@" | uniq
 
 Save this script to a file and make sure the permissions on the file
 mark it as executable. Test this script by calling it by hand before
@@ -448,17 +450,17 @@ is what you want, configure the *condor\_job\_router* daemon to use it:
 
 ::
 
-    # command to build the routing table
-     JOB_ROUTER_ENTRIES_CMD = /path/to/osg_ress_routing_table.sh <extra arguments>
+    # command to build the routing table 
+    JOB_ROUTER_ENTRIES_CMD = /path/to/osg_ress_routing_table.sh <extra arguments> 
      
-     # how often to rebuild the routing table:
-     JOB_ROUTER_ENTRIES_REFRESH = 3600
+    # how often to rebuild the routing table: 
+    JOB_ROUTER_ENTRIES_REFRESH = 3600
 
 Using the example configuration, use the above settings to replace
-JOB\_ROUTER\_ENTRIES . Or, leave JOB\_ROUTER\_ENTRIES there and have a
-routing table containing entries from both sources. When you restart or
-reconfigure the *condor\_job\_router* daemon, you should see messages in
-the Job Router’s log indicating that it is adding more routes to the
+``JOB_ROUTER_ENTRIES`` . Or, leave ``JOB_ROUTER_ENTRIES`` there and have
+a routing table containing entries from both sources. When you restart
+or reconfigure the *condor\_job\_router* daemon, you should see messages
+in the Job Router’s log indicating that it is adding more routes to the
 table.
 
       

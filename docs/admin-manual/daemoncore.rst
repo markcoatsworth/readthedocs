@@ -40,7 +40,7 @@ various Unix signals, and provides a common set of command-line options
 that can be used to start up each daemon.
 
 DaemonCore and Unix signals
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------
 
 One of the most visible features that DaemonCore provides for
 administrators is that all daemons which use it behave the same way on
@@ -57,23 +57,23 @@ are listed below:
 Exactly what gracefully and quickly means varies from daemon to daemon.
 For daemons with little or no state (the *condor\_kbdd*,
 *condor\_collector* and *condor\_negotiator*) there is no difference,
-and both SIGTERM and SIGQUIT signals result in the daemon shutting
-itself down quickly. For the *condor\_master*, a graceful shutdown
-causes the *condor\_master* to ask all of its children to perform their
-own graceful shutdown methods. The quick shutdown causes the
-*condor\_master* to ask all of its children to perform their own quick
-shutdown methods. In both cases, the *condor\_master* exits after all
-its children have exited. In the *condor\_startd*, if the machine is not
-claimed and running a job, both the SIGTERM and SIGQUIT signals result
-in an immediate exit. However, if the *condor\_startd* is running a job,
-a graceful shutdown results in that job writing a checkpoint, while a
-fast shutdown does not. In the *condor\_schedd*, if there are no jobs
-currently running, there will be no *condor\_shadow* processes, and both
-signals result in an immediate exit. However, with jobs running, a
-graceful shutdown causes the *condor\_schedd* to ask each
-*condor\_shadow* to gracefully vacate the job it is serving, while a
-quick shutdown results in a hard kill of every *condor\_shadow*, with no
-chance to write a checkpoint.
+and both ``SIGTERM`` and ``SIGQUIT`` signals result in the daemon
+shutting itself down quickly. For the *condor\_master*, a graceful
+shutdown causes the *condor\_master* to ask all of its children to
+perform their own graceful shutdown methods. The quick shutdown causes
+the *condor\_master* to ask all of its children to perform their own
+quick shutdown methods. In both cases, the *condor\_master* exits after
+all its children have exited. In the *condor\_startd*, if the machine is
+not claimed and running a job, both the ``SIGTERM`` and ``SIGQUIT``
+signals result in an immediate exit. However, if the *condor\_startd* is
+running a job, a graceful shutdown results in that job writing a
+checkpoint, while a fast shutdown does not. In the *condor\_schedd*, if
+there are no jobs currently running, there will be no *condor\_shadow*
+processes, and both signals result in an immediate exit. However, with
+jobs running, a graceful shutdown causes the *condor\_schedd* to ask
+each *condor\_shadow* to gracefully vacate the job it is serving, while
+a quick shutdown results in a hard kill of every *condor\_shadow*, with
+no chance to write a checkpoint.
 
 For all daemons, a reconfigure results in the daemon re-reading its
 configuration file(s), causing any settings that have changed to take
@@ -84,7 +84,7 @@ Configuring HTCondor for full details on what settings are in the
 configuration files and what they do.
 
 DaemonCore and Command-line Arguments
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------
 
 The second visible feature that DaemonCore provides to administrators is
 a common set of command-line arguments that all daemons understand.
@@ -102,16 +102,16 @@ These arguments and what they do are described below:
  -c filename
     Causes the daemon to use the specified **filename** as a full path
     and file name as its global configuration file. This overrides the
-    CONDOR\_CONFIG environment variable and the regular locations that
-    HTCondor checks for its configuration file.
+    ``CONDOR_CONFIG`` environment variable and the regular locations
+    that HTCondor checks for its configuration file.
  -d
-    Use dynamic directories. The $(LOG), $(SPOOL), and $(EXECUTE)
-    directories are all created by the daemon at run time, and they are
-    named by appending the parent’s IP address and PID to the value in
-    the configuration file. These values are then inherited by all
-    children of the daemon invoked with this **-d** argument. For the
-    *condor\_master*, all HTCondor processes will use the new
-    directories. If a *condor\_schedd* is invoked with the *-d*
+    Use dynamic directories. The ``$(LOG)``, ``$(SPOOL)``, and
+    ``$(EXECUTE)`` directories are all created by the daemon at run
+    time, and they are named by appending the parent’s IP address and
+    PID to the value in the configuration file. These values are then
+    inherited by all children of the daemon invoked with this **-d**
+    argument. For the *condor\_master*, all HTCondor processes will use
+    the new directories. If a *condor\_schedd* is invoked with the *-d*
     argument, then only the *condor\_schedd* daemon and any
     *condor\_shadow* daemons it spawns will use the dynamic directories
     (named with the *condor\_schedd* daemon’s PID).
@@ -121,7 +121,7 @@ These arguments and what they do are described below:
     the original *condor\_schedd* daemon that were stored in the old
     spool directory will not be noticed by the new *condor\_schedd*
     daemon, unless you manually specify the old, dynamically-generated
-    SPOOL directory path in the configuration of the new
+    ``SPOOL`` directory path in the configuration of the new
     *condor\_schedd* daemon.
 
  -f
@@ -139,13 +139,14 @@ These arguments and what they do are described below:
     process. The daemon started with this optional argument waits until
     the daemon it is attempting to kill has exited.
  -l directory
-    Overrides the value of LOG as specified in the configuration files.
-    Primarily, this option is used with the *condor\_kbdd* when it needs
-    to run as the individual user logged into the machine, instead of
-    running as root. Regular users would not normally have permission to
-    write files into HTCondor’s log directory. Using this option, they
-    can override the value of LOG and have the *condor\_kbdd* write its
-    log file into a directory that the user has permission to write to.
+    Overrides the value of ``LOG`` as specified in the configuration
+    files. Primarily, this option is used with the *condor\_kbdd* when
+    it needs to run as the individual user logged into the machine,
+    instead of running as root. Regular users would not normally have
+    permission to write files into HTCondor’s log directory. Using this
+    option, they can override the value of ``LOG`` and have the
+    *condor\_kbdd* write its log file into a directory that the user has
+    permission to write to.
  -local-name name
     Specify a local name for this instance of the daemon. This local
     name will be used to look up configuration parameters.
@@ -164,19 +165,20 @@ These arguments and what they do are described below:
     command.
 
     Since daemons run with their current working directory set to the
-    value of LOG, if a full path (one that begins with a slash
-    character, /) is not specified, the file will be placed in the LOG
-    directory.
+    value of ``LOG``, if a full path (one that begins with a slash
+    character, ``/``) is not specified, the file will be placed in the
+    ``LOG`` directory.
 
  -q
-    Quiet output; write less verbose error messages to stderr when
+    Quiet output; write less verbose error messages to ``stderr`` when
     something goes wrong, and before regular logging can be initialized.
  -r minutes
     Causes the daemon to set a timer, upon expiration of which, it sends
     itself a SIGTERM for graceful shutdown.
  -t
-    Causes the daemon to print out its error message to stderr instead
-    of its specified log file. This option forces the **-f** option.
+    Causes the daemon to print out its error message to ``stderr``
+    instead of its specified log file. This option forces the **-f**
+    option.
  -v
     Causes the daemon to print out version information and exit.
 

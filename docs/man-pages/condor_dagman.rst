@@ -6,7 +6,7 @@ condor\_dagman
 meta scheduler of the jobs submitted as the nodes of a DAG or DAGs
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_dagman** *-f* *-t* *-l .* **-help**
 
@@ -28,7 +28,7 @@ Synopsis
 [**-AlwaysRunPost**\ ] [**-DoRecovery**\ ] **-dag **\ *dag\_file* [**\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_dagman* is a meta scheduler for the HTCondor jobs within a DAG
 (directed acyclic graph) (or multiple DAGs). In typical usage, a
@@ -71,7 +71,7 @@ option. Level values and what they produce is described as
    file lines as they are parsed
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information and exit.
@@ -91,42 +91,42 @@ Options
     once the number of idle procs falls below the specified limit.
     *NumberOfProcs* is a non-negative integer. If this option is
     omitted, the number of idle procs is limited by the configuration
-    variable DAGMAN\_MAX\_JOBS\_IDLE (see
+    variable ``DAGMAN_MAX_JOBS_IDLE`` (see
      `3.5.23 <ConfigurationMacros.html#x33-2120003.5.23>`__), which
     defaults to 1000. To disable this limit, set *NumberOfProcs* to 0.
     Note that submit description files that queue multiple procs can
-    cause the *NumberOfProcs* limit to be exceeded. Setting queue 5000
-    in the submit description file, where *-maxidle* is set to 250 will
-    result in a cluster of 5000 new procs being submitted to the
-    *condor\_schedd*, not 250. In this case, *condor\_dagman* will
-    resume submitting jobs when the number of idle procs falls below
-    250.
+    cause the *NumberOfProcs* limit to be exceeded. Setting
+    ``queue 5000`` in the submit description file, where *-maxidle* is
+    set to 250 will result in a cluster of 5000 new procs being
+    submitted to the *condor\_schedd*, not 250. In this case,
+    *condor\_dagman* will resume submitting jobs when the number of idle
+    procs falls below 250.
  **-maxjobs **\ *NumberOfClusters*
     Sets the maximum number of clusters within the DAG that will be
     submitted to HTCondor at one time. Note that for this argument, each
     cluster counts as one job, no matter how many individual procs are
     in the cluster. *NumberOfClusters* is a non-negative integer. If
     this option is omitted, the number of clusters is limited by the
-    configuration variable DAGMAN\_MAX\_JOBS\_SUBMITTED (see
+    configuration variable ``DAGMAN_MAX_JOBS_SUBMITTED`` (see
      `3.5.23 <ConfigurationMacros.html#x33-2120003.5.23>`__), which
     defaults to 0 (unlimited).
  **-maxpre **\ *NumberOfPreScripts*
     Sets the maximum number of PRE scripts within the DAG that may be
     running at one time. *NumberOfPreScripts* is a non-negative integer.
     If this option is omitted, the number of PRE scripts is limited by
-    the configuration variable DAGMAN\_MAX\_PRE\_SCRIPTS (see
+    the configuration variable ``DAGMAN_MAX_PRE_SCRIPTS`` (see
      `3.5.23 <ConfigurationMacros.html#x33-2120003.5.23>`__), which
     defaults to 20.
  **-maxpost **\ *NumberOfPostScripts*
     Sets the maximum number of POST scripts within the DAG that may be
     running at one time. *NumberOfPostScripts* is a non-negative
     integer. If this option is omitted, the number of POST scripts is
-    limited by the configuration variable DAGMAN\_MAX\_POST\_SCRIPTS
+    limited by the configuration variable ``DAGMAN_MAX_POST_SCRIPTS``
     (see  `3.5.23 <ConfigurationMacros.html#x33-2120003.5.23>`__), which
     defaults to 20.
  **-noeventchecks**
     This argument is no longer used; it is now ignored. Its
-    functionality is now implemented by the DAGMAN\_ALLOW\_EVENTS
+    functionality is now implemented by the ``DAGMAN_ALLOW_EVENTS``
     configuration variable.
  **-allowlogerror**
     As of verson 8.5.5 this argument is no longer supported, and setting
@@ -139,30 +139,30 @@ Options
  **-lockfile **\ *filename*
     Names the file created and used as a lock file. The lock file
     prevents execution of two of the same DAG, as defined by a DAG input
-    file. A default lock file ending with the suffix .dag.lock is passed
-    to *condor\_dagman* by *condor\_submit\_dag*.
+    file. A default lock file ending with the suffix ``.dag.lock`` is
+    passed to *condor\_dagman* by *condor\_submit\_dag*.
  **-waitfordebug**
     This optional argument causes *condor\_dagman* to wait at startup
     until someone attaches to the process with a debugger and sets the
     wait\_for\_debug variable in main\_init() to false.
  **-autorescue **\ *0\|1*
     Whether to automatically run the newest rescue DAG for the given DAG
-    file, if one exists (0 = false, 1 = true).
+    file, if one exists (0 = ``false``, 1 = ``true``).
  **-dorescuefrom **\ *number*
     Forces *condor\_dagman* to run the specified rescue DAG number for
     the given DAG. A value of 0 is the same as not specifying this
     option. Specifying a nonexistent rescue DAG is a fatal error.
  **-allowversionmismatch**
     This optional argument causes *condor\_dagman* to allow a version
-    mismatch between *condor\_dagman* itself and the .condor.sub file
-    produced by *condor\_submit\_dag* (or, in other words, between
+    mismatch between *condor\_dagman* itself and the ``.condor.sub``
+    file produced by *condor\_submit\_dag* (or, in other words, between
     *condor\_submit\_dag* and *condor\_dagman*). WARNING! This option
     should be used only if absolutely necessary. Allowing version
     mismatches can cause subtle problems when running DAGs. (Note that,
     starting with version 7.4.0, *condor\_dagman* no longer requires an
-    exact version match between itself and the .condor.sub file.
+    exact version match between itself and the ``.condor.sub`` file.
     Instead, a "minimum compatible version" is defined, and any
-    .condor.sub file of that version or newer is accepted.)
+    ``.condor.sub`` file of that version or newer is accepted.)
  **-DumpRescue**
     This optional argument causes *condor\_dagman* to immediately dump a
     Rescue DAG and then exit, as opposed to actually running the DAG.
@@ -179,13 +179,13 @@ Options
     (This argument is included only to be passed to
     *condor\_submit\_dag* if lazy submit file generation is used for
     nested DAGs.) Require *condor\_submit\_dag* to overwrite the files
-    that it produces, if the files already exist. Note that dagman.out
-    will be appended to, not overwritten. If new-style rescue DAG mode
-    is in effect, and any new-style rescue DAGs exist, the **-force**
-    flag will cause them to be renamed, and the original DAG will be
-    run. If old-style rescue DAG mode is in effect, any existing
-    old-style rescue DAGs will be deleted, and the original DAG will be
-    run. See the HTCondor manual section on Rescue DAGs for more
+    that it produces, if the files already exist. Note that
+    ``dagman.out`` will be appended to, not overwritten. If new-style
+    rescue DAG mode is in effect, and any new-style rescue DAGs exist,
+    the **-force** flag will cause them to be renamed, and the original
+    DAG will be run. If old-style rescue DAG mode is in effect, any
+    existing old-style rescue DAGs will be deleted, and the original DAG
+    will be run. See the HTCondor manual section on Rescue DAGs for more
     information.
  **-notification **\ *value*
     This argument is only included to be passed to *condor\_submit\_dag*
@@ -197,21 +197,23 @@ Options
  **-suppress\_notification**
     Causes jobs submitted by *condor\_dagman* to not send email
     notification for events. The same effect can be achieved by setting
-    the configuration variable DAGMAN\_SUPPRESS\_NOTIFICATION to True.
-    This command line option is independent of the **-notification**
-    command line option, which controls notification for the
-    *condor\_dagman* job itself. This flag is generally superfluous, as
-    DAGMAN\_SUPPRESS\_NOTIFICATION defaults to True.
+    the configuration variable ``DAGMAN_SUPPRESS_NOTIFICATION`` to
+    ``True``. This command line option is independent of the
+    **-notification** command line option, which controls notification
+    for the *condor\_dagman* job itself. This flag is generally
+    superfluous, as ``DAGMAN_SUPPRESS_NOTIFICATION`` defaults to
+    ``True``.
  **-dont\_suppress\_notification**
     Causes jobs submitted by *condor\_dagman* to defer to content within
     the submit description file when deciding to send email notification
     for events. The same effect can be achieved by setting the
-    configuration variable DAGMAN\_SUPPRESS\_NOTIFICATION to False. This
-    command line flag is independent of the **-notification** command
-    line option, which controls notification for the *condor\_dagman*
-    job itself. If both **-dont\_suppress\_notification** and
-    **-suppress\_notification** are specified within the same command
-    line, the last argument is used.
+    configuration variable ``DAGMAN_SUPPRESS_NOTIFICATION`` to
+    ``False``. This command line flag is independent of the
+    **-notification** command line option, which controls notification
+    for the *condor\_dagman* job itself. If both
+    **-dont\_suppress\_notification** and **-suppress\_notification**
+    are specified within the same command line, the last argument is
+    used.
  **-dagman **\ *DagmanExecutable*
     (This argument is included only to be passed to
     *condor\_submit\_dag* if lazy submit file generation is used for
@@ -221,32 +223,33 @@ Options
  **-outfile\_dir **\ *directory*
     (This argument is included only to be passed to
     *condor\_submit\_dag* if lazy submit file generation is used for
-    nested DAGs.) Specifies the directory in which the .dagman.out file
-    will be written. The *directory* may be specified relative to the
-    current working directory as *condor\_submit\_dag* is executed, or
-    specified with an absolute path. Without this option, the
-    .dagman.out file is placed in the same directory as the first DAG
-    input file listed on the command line.
+    nested DAGs.) Specifies the directory in which the ``.dagman.out``
+    file will be written. The *directory* may be specified relative to
+    the current working directory as *condor\_submit\_dag* is executed,
+    or specified with an absolute path. Without this option, the
+    ``.dagman.out`` file is placed in the same directory as the first
+    DAG input file listed on the command line.
  **-update\_submit**
     (This argument is included only to be passed to
     *condor\_submit\_dag* if lazy submit file generation is used for
-    nested DAGs.) This optional argument causes an existing .condor.sub
-    file to not be treated as an error; rather, the .condor.sub file
-    will be overwritten, but the existing values of **-maxjobs**,
-    **-maxidle**, **-maxpre**, and **-maxpost** will be preserved.
+    nested DAGs.) This optional argument causes an existing
+    ``.condor.sub`` file to not be treated as an error; rather, the
+    ``.condor.sub`` file will be overwritten, but the existing values of
+    **-maxjobs**, **-maxidle**, **-maxpre**, and **-maxpost** will be
+    preserved.
  **-import\_env**
     (This argument is included only to be passed to
     *condor\_submit\_dag* if lazy submit file generation is used for
     nested DAGs.) This optional argument causes *condor\_submit\_dag* to
     import the current environment into the **environment** command of
-    the .condor.sub file it generates.
+    the ``.condor.sub`` file it generates.
  **-priority **\ *number*
     Sets the minimum job priority of node jobs submitted and running
     under this *condor\_dagman* job.
  **-dont\_use\_default\_node\_log**
     **This option is disabled as of HTCondor version 8.3.1.** Tells
     *condor\_dagman* to use the file specified by the job ClassAd
-    attribute UserLog to monitor job status. If this command line
+    attribute ``UserLog`` to monitor job status. If this command line
     argument is used, then the job event log file cannot be defined with
     a macro.
  **-DontAlwaysRunPost**
@@ -267,13 +270,13 @@ Options
     argument to *condor\_submit\_dag*, and passed to *condor\_dagman*.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_dagman* will exit with a status value of 0 (zero) upon success,
 and it will exit with the value 1 (one) upon failure.
 
 Examples
-^^^^^^^^
+--------
 
 *condor\_dagman* is normally not run directly, but submitted as an
 HTCondor job by running condor\_submit\_dag. See the condor\_submit\_dag
@@ -281,12 +284,12 @@ manual page \ `2235 <Condorsubmitdag.html#x150-109200012>`__ for
 examples.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

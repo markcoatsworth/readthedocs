@@ -6,7 +6,7 @@ condor\_ping
 Attempt a security negotiation to determine if it succeeds
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_ping** [**-help \| -version**\ ]
 
@@ -16,7 +16,7 @@ Synopsis
 -table \| -verbose**\ ] *token* [*token […]*\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_ping* attempts a security negotiation to discover whether the
 configuration is set such that the negotiation succeeds. The target of
@@ -26,13 +26,13 @@ default target is the *condor\_schedd* daemon on the local machine.
 
 One or more *token*\ s may be listed, thereby specifying one or more
 authorization level to impersonate in security negotiation. A token is
-the value ALL, an authorization level, a command name, or the integer
-value of a command. The many command names and their associated integer
-values will more likely be used by experts, and they are defined in the
-file condor\_includes/condor\_commands.h.
+the value ``ALL``, an authorization level, a command name, or the
+integer value of a command. The many command names and their associated
+integer values will more likely be used by experts, and they are defined
+in the file ``condor_includes/condor_commands.h``.
 
-An authorization level may be one of the following strings. If ALL is
-listed, then negotiation is attempted for each of these possible
+An authorization level may be one of the following strings. If ``ALL``
+is listed, then negotiation is attempted for each of these possible
 authorization levels.
 
  READ
@@ -49,7 +49,7 @@ authorization levels.
  CLIENT
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information
@@ -71,7 +71,7 @@ Options
     attempt.
  **-type **\ *subsystem*
     Target the daemon identified by *subsystem*, one of the values of
-    the predefined $(SUBSYSTEM) macro.
+    the predefined ``$(SUBSYSTEM)`` macro.
  **-quiet**
     Set exit status only; no output displayed.
  **-table**
@@ -80,7 +80,7 @@ Options
     Display all available output.
 
 Examples
-^^^^^^^^
+--------
 
 The example Unix command
 
@@ -91,11 +91,11 @@ The example Unix command
 places double quote marks around the sinful string to prevent the less
 than and the greater than characters from causing redirect of input and
 output. The given IP address is targeted with 3 attempts to negotiate:
-one at the READ authorization level, one at the WRITE authorization
-level, and one at the DAEMON authorization level.
+one at the ``READ`` authorization level, one at the ``WRITE``
+authorization level, and one at the ``DAEMON`` authorization level.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_ping* will exit with the status value of the negotiation it
 attempted, where 0 (zero) indicates success, and 1 (one) indicates
@@ -103,12 +103,12 @@ failure. If multiple security negotiations were attempted, the exit
 status will be the logical OR of all values.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

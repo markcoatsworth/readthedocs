@@ -6,7 +6,7 @@ bosco\_uninstall
 uninstall a Bosco installation
 
 Synopsis
-^^^^^^^^
+--------
 
 **bosco\_uninstall**
 
@@ -16,17 +16,17 @@ information, please see the Bosco web site:
 `https://osg-bosco.github.io/docs/ <https://osg-bosco.github.io/docs/>`__.
 
 *bosco\_uninstall* removes the Bosco software, but leaves files in the
-.bosco and .ssh directories.
+``.bosco`` and ``.ssh`` directories.
 
 There are no command line arguments to this script.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

@@ -6,7 +6,7 @@ condor\_cod
 manage COD machines and jobs
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_cod** [**-help \| -version**\ ]
 
@@ -43,7 +43,7 @@ file**\ ] ] [**-requirements expr**\ ] [**-lease N**\ ]
 [**-x509proxy  **\ *ProxyFile*]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_cod* issues commands that manage and use COD claims on
 machines, given proper authorization.
@@ -86,7 +86,7 @@ An actual example of this line of output is
 The HTCondor manual has a complete description of COD.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information
@@ -120,24 +120,24 @@ Options
     Delegate an X509 proxy for the given claim
 
 General Remarks
-^^^^^^^^^^^^^^^
+---------------
 
 Examples
-^^^^^^^^
+--------
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_cod* will exit with a status value of 0 (zero) upon success,
 and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

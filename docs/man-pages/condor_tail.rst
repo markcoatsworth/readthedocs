@@ -6,7 +6,7 @@ condor\_tail
 Display the last contents of a running job’s standard output or file
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_tail** [**-help**\ ] \| [**-version**\ ]
 
@@ -16,17 +16,17 @@ Synopsis
 *job-ID* [*filename1*\ ] [*filename2 …*\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_tail* displays the last bytes of a file in the sandbox of a
-running job identified by the command line argument *job-ID*. stdout is
-tailed by default. The number of bytes displayed is limited to 1024,
+running job identified by the command line argument *job-ID*. ``stdout``
+is tailed by default. The number of bytes displayed is limited to 1024,
 unless changed by specifying the **-maxbytes** option. This limit is
 applied for each individual tail of a file; for example, when following
 a file, the limit is applied each subsequent time output is obtained.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information and exit.
@@ -48,22 +48,22 @@ Options
  **-follow**
     Repetitively tail the file(s), until interrupted.
  **-no-stdout**
-    Do not tail stdout.
+    Do not tail ``stdout``.
  **-stderr**
-    Tail stderr instead of stdout.
+    Tail ``stderr`` instead of ``stdout``.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 The exit status of *condor\_tail* is zero on success.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

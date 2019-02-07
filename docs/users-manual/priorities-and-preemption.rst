@@ -7,7 +7,7 @@ HTCondor has two independent priority controls: job priorities and user
 priorities.
 
 Job Priority
-^^^^^^^^^^^^
+------------
 
 Job priorities allow a user to assign a priority level to each of their
 own submitted HTCondor jobs, in order to control the order of job
@@ -24,14 +24,14 @@ already queued job, its priority may be set with the *condor\_prio*
 command; see the example in
 section \ `2.6.4 <ManagingaJob.html#x18-570002.6.4>`__, or the
 *condor\_prio* manual page \ `1976 <Condorprio.html#x128-90500012>`__
-for details. This sets the value of job ClassAd attribute JobPrio.
+for details. This sets the value of job ClassAd attribute ``JobPrio``.
 
 A fine-grained categorization of jobs and their ordering is available
-for experts by using the job ClassAd attributes: PreJobPrio1,
-PreJobPrio2, JobPrio, PostJobPrio1, or PostJobPrio2.
+for experts by using the job ClassAd attributes: ``PreJobPrio1``,
+``PreJobPrio2``, ``JobPrio``, ``PostJobPrio1``, or ``PostJobPrio2``.
 
 User priority
-^^^^^^^^^^^^^
+-------------
 
 Machines are allocated to users based upon a user’s priority. A lower
 numerical value for user priority means higher priority, so a user with
@@ -53,7 +53,7 @@ numerically increasing over time. If the number of machines is less then
 the priority, the priority will improve by numerically decreasing over
 time. The long-term result is fair-share access across all users. The
 speed at which HTCondor adjusts the priorities is controlled with the
-configuration variable PRIORITY\_HALFLIFE , an exponential half-life
+configuration variable ``PRIORITY_HALFLIFE`` , an exponential half-life
 value. The default is one day. If a user that has user priority of 100
 and is utilizing 100 machines removes all his/her jobs, one day later
 that user’s priority will be 50, and two days later the priority will be
@@ -71,7 +71,7 @@ priority user; it will preempt only enough jobs so that the higher
 priority user’s fair share can be realized (based upon the ratio between
 user priorities). To prevent thrashing of the system due to priority
 preemption, the HTCondor site administrator can define a
-PREEMPTION\_REQUIREMENTS expression in HTCondor’s configuration. The
+``PREEMPTION_REQUIREMENTS`` expression in HTCondor’s configuration. The
 default expression that ships with HTCondor is configured to only
 preempt lower priority jobs that have run for at least one hour. So in
 the previous example, in the worse case it could take up to a maximum of
@@ -81,9 +81,9 @@ section
 `3.7.1 <PolicyConfigurationforExecuteHostsandforSubmitHosts.html#x35-2520003.7.1>`__
 of the Administrator’s manual.
 
-User priorities are keyed on <username>@<domain>, for example
-johndoe@cs.wisc.edu. The domain name to use, if any, is configured by
-the HTCondor site administrator. Thus, user priority and therefore
+User priorities are keyed on ``<username>@<domain>``, for example
+``johndoe@cs.wisc.edu``. The domain name to use, if any, is configured
+by the HTCondor site administrator. Thus, user priority and therefore
 resource allocation is not impacted by which machine the user submits
 from or even if the user submits jobs from multiple machines.
 
@@ -98,13 +98,13 @@ account, the guest could only use cycles not wanted by other users of
 the system.
 
 Details About How HTCondor Jobs Vacate Machines
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------------------
 
 When HTCondor needs a job to vacate a machine for whatever reason, it
-sends the job an asynchronous signal specified in the KillSig attribute
-of the job’s ClassAd. The value of this attribute can be specified by
-the user at submit time by placing the **kill\_sig** option in the
-HTCondor submit description file.
+sends the job an asynchronous signal specified in the ``KillSig``
+attribute of the job’s ClassAd. The value of this attribute can be
+specified by the user at submit time by placing the **kill\_sig** option
+in the HTCondor submit description file.
 
 If a program wanted to do some special work when required to vacate a
 machine, the program may set up a signal handler to use a trappable
@@ -117,8 +117,8 @@ terminates the process.
 A job that is linked using *condor\_compile* and is subsequently
 submitted into the standard universe, will checkpoint and exit upon
 receipt of a SIGTSTP signal. Thus, SIGTSTP is the default value for
-KillSig when submitting to the standard universe. The user’s code may
-still checkpoint itself at any time by calling one of the following
+``KillSig`` when submitting to the standard universe. The user’s code
+may still checkpoint itself at any time by calling one of the following
 functions exported by the HTCondor libraries:
 
  ckpt()()
@@ -128,6 +128,7 @@ functions exported by the HTCondor libraries:
     later, potentially on a different machine.
 
 For jobs submitted into the vanilla universe, the default value for
-KillSig is SIGTERM, the usual method to nicely terminate a Unix program.
+``KillSig`` is SIGTERM, the usual method to nicely terminate a Unix
+program.
 
       

@@ -28,7 +28,7 @@ We illustrate these advantages with what we anticipate will be the most
 common uses for *condor\_annex*.
 
 Use Case: Deadlines
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 With the ability to acquire computational resources in seconds or
 minutes and retain them for days or weeks, it becomes possible to
@@ -40,7 +40,7 @@ their own deadlines and how much, in monetary terms, it’s worth to
 complete their work by that deadline.
 
 Use Case: Capabilities
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 Cloud services may offer (virtual) hardware in configurations
 unavailable in the local pool, or in quantities that it would be
@@ -61,7 +61,7 @@ longer-running jobs may be the least-disruptive way to accomodate a user
 whose jobs need more time.
 
 Use Case: Capacities
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 It may be possible for an HTCondor administrator to lower the cost of
 their pool by increasing utilization and meeting peak demand with cloud

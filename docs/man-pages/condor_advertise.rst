@@ -6,7 +6,7 @@ condor\_advertise
 Send a ClassAd to the *condor\_collector* daemon
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_advertise** [**-help \| -version**\ ]
 
@@ -14,7 +14,7 @@ Synopsis
 [**-debug**\ ] [**-tcp**\ ] [**-udp**\ ] [**-multiple**\ ] [**\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_advertise* sends one or more ClassAds to the
 *condor\_collector* daemon on the central manager machine. The optional
@@ -71,20 +71,21 @@ consists of three entries. The file contents will be similar to:
 
 ::
 
-    MyType = "Query"
-     TargetType = "Machine"
-     Requirements = Name == "condor.example.com"
+    MyType = "Query" 
+    TargetType = "Machine" 
+    Requirements = Name == "condor.example.com"
 
-The definition for MyType is always Query. TargetType is set to the
-MyType of the ad to be deleted. This MyType is DaemonMaster for the
-*condor\_master* ClassAd, Machine for the *condor\_startd* ClassAd,
-Scheduler for the *condor\_schedd* ClassAd, and Negotiator for the
-*condor\_negotiator* ClassAd. Requirements is an expression evaluated
-within the context of ads of TargetType. When Requirements evaluates to
-True, the matching ad is invalidated. A full example is given below.
+The definition for ``MyType`` is always ``Query``. ``TargetType`` is set
+to the ``MyType`` of the ad to be deleted. This ``MyType`` is
+``DaemonMaster`` for the *condor\_master* ClassAd, ``Machine`` for the
+*condor\_startd* ClassAd, ``Scheduler`` for the *condor\_schedd*
+ClassAd, and ``Negotiator`` for the *condor\_negotiator* ClassAd.
+``Requirements`` is an expression evaluated within the context of ads of
+``TargetType``. When ``Requirements`` evaluates to ``True``, the
+matching ad is invalidated. A full example is given below.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information
@@ -97,16 +98,16 @@ Options
     one or more blank lines.
  **-pool **\ *centralmanagerhostname[:portname]*
     Specify a pool by giving the central manager’s host name and an
-    optional port number. The default is the COLLECTOR\_HOST specified
-    in the configuration file.
+    optional port number. The default is the ``COLLECTOR_HOST``
+    specified in the configuration file.
  **-tcp**
     Use TCP for communication. Used by default if
-    UPDATE\_COLLECTOR\_WITH\_TCP is true.
+    ``UPDATE_COLLECTOR_WITH_TCP`` is true.
  **-udp**
     Use UDP for communication.
 
 General Remarks
-^^^^^^^^^^^^^^^
+---------------
 
 The job and machine ClassAds are regularly updated. Therefore, the
 result of *condor\_advertise* is likely to be overwritten in a very
@@ -120,32 +121,32 @@ Attributes are defined in Appendix A of the HTCondor manual.
 For those administrators who do need *condor\_advertise*, the following
 attributes may be included:
 
- DaemonStartTime
- UpdateSequenceNumber
+ ``DaemonStartTime``
+ ``UpdateSequenceNumber``
 
 If both of the above are included, the *condor\_collector* will
 automatically include the following attributes:
 
- UpdatesTotal
- UpdatesLost
- UpdatesSequenced
- UpdatesHistory
-    Affected by COLLECTOR\_DAEMON\_HISTORY\_SIZE .
+ ``UpdatesTotal``
+ ``UpdatesLost``
+ ``UpdatesSequenced``
+ ``UpdatesHistory``
+    Affected by ``COLLECTOR_DAEMON_HISTORY_SIZE`` .
 
 Examples
-^^^^^^^^
+--------
 
 Assume that a machine called condor.example.com is turned off, yet its
 *condor\_startd* ClassAd does not expire for another 20 minutes. To
 avoid this machine being matched, an administrator chooses to delete the
-machine’s *condor\_startd* ClassAd. Create a file (called remove\_file
-in this example) with the three required attributes:
+machine’s *condor\_startd* ClassAd. Create a file (called
+``remove_file`` in this example) with the three required attributes:
 
 ::
 
-    MyType = "Query"
-     TargetType = "Machine"
-     Requirements = Name == "condor.example.com"
+    MyType = "Query" 
+    TargetType = "Machine" 
+    Requirements = Name == "condor.example.com"
 
 This file is used with the command:
 
@@ -154,7 +155,7 @@ This file is used with the command:
     % condor_advertise INVALIDATE_STARTD_ADS remove_file
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_advertise* will exit with a status value of 0 (zero) upon
 success, and it will exit with the value 1 (one) upon failure. Success
@@ -165,12 +166,12 @@ all publications succeed; in this case, the exit status is 1, indicating
 failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

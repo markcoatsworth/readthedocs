@@ -6,7 +6,7 @@ condor\_power
 send packet intended to wake a machine from a low power state
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_power** [**-h**\ ]
 
@@ -14,7 +14,7 @@ Synopsis
 [**-s  **\ *subnet*] [*ClassAdFile*\ ]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_power* sends one UDP Wake on LAN (WOL) packet to a machine
 specified either by command line arguments or by the contents of a
@@ -41,7 +41,7 @@ sender, the send of a WOL packet to a machine on a different subnet may
 fail.
 
 Options
-^^^^^^^
+-------
 
  **-h**
     Print usage information and exit.
@@ -57,18 +57,18 @@ Options
     address. Without this option, a global broadcast will be sent.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_power* will exit with a status value of 0 (zero) upon success,
 and it will exit with the value 1 (one) upon failure.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

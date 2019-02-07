@@ -7,14 +7,14 @@ find machine(s) in the pool that can be used with minimal impact on
 currently running HTCondor jobs and best meet any specified constraints
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_findhost** [**-help**\ ] [**-m**\ ] [**-n  **\ *num*]
 [**-c  **\ *c\_expr*] [**-r  **\ *r\_expr*]
 [**-p  **\ *centralmanagerhostname*]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_findhost* searches an HTCondor pool of machines for the best
 machine or machines that will have the minimum impact on running
@@ -29,7 +29,7 @@ rank, the criterion used for selecting a machine or machines from the
 constrained list.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information and exit
@@ -50,7 +50,7 @@ Options
     name. Without this option, the current pool is searched.
 
 General Remarks
-^^^^^^^^^^^^^^^
+---------------
 
 *condor\_findhost* is used to locate a machine within a pool that can be
 taken out of the pool with the least disturbance of the pool.
@@ -66,7 +66,7 @@ will let *condor\_findhost* know that it can claim a machine even if
 HTCondor would not normally preempt a job running on that machine.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 The exit status of *condor\_findhost* is zero on success. If not able to
 identify as many machines as requested, it returns one more than the
@@ -76,7 +76,7 @@ able to locate any machines, or an error is encountered,
 *condor\_findhost* will return the value 1.
 
 Examples
-^^^^^^^^
+--------
 
 To find and list four machines, preferring those with the highest mips
 (on Drystone benchmark) rating:
@@ -85,20 +85,20 @@ To find and list four machines, preferring those with the highest mips
 
     condor_findhost -n 4 -r "mips"
 
-To find and list 24 machines, considering only those where the kflops
-attribute is not defined:
+To find and list 24 machines, considering only those where the
+``kflops`` attribute is not defined:
 
 ::
 
     condor_findhost -n 24 -c "kflops=?=undefined"
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

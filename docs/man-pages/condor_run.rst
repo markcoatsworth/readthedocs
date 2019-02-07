@@ -6,13 +6,13 @@ condor\_run
 Submit a shell command-line as an HTCondor job
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_run** [**-u  **\ *universe*] [**-a  **\ *submitcmd*] *"shell
 command"*
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_run* bundles a shell command line into an HTCondor job and
 submits the job. The *condor\_run* command waits for the HTCondor job to
@@ -39,13 +39,13 @@ for the machine where the job may run.
 
  CONDOR\_ARCH
     Specifies the architecture of the required platform. Values will be
-    the same as the Arch machine ClassAd attribute.
+    the same as the ``Arch`` machine ClassAd attribute.
  CONDOR\_OPSYS
     Specifies the operating system of the required platform. Values will
-    be the same as the OpSys machine ClassAd attribute.
+    be the same as the ``OpSys`` machine ClassAd attribute.
  CONDOR\_REQUIREMENTS
     Specifies any additional requirements for the HTCondor job. It is
-    recommended that the value defined for CONDOR\_REQUIREMENTS be
+    recommended that the value defined for ``CONDOR_REQUIREMENTS`` be
     enclosed in parenthesis.
 
 When one or more of these environment variables is specified, the job is
@@ -53,8 +53,8 @@ submitted with:
 
 ::
 
-    Requirements = $CONDOR_REQUIREMENTS && Arch == $CONDOR_ARCH && \
-        OpSys == $CONDOR_OPSYS
+    Requirements = $CONDOR_REQUIREMENTS && Arch == $CONDOR_ARCH && \ 
+       OpSys == $CONDOR_OPSYS
 
 Without these environment variables, the job receives the default
 requirements expression, which requests a machine of the same platform
@@ -68,7 +68,7 @@ temporary files, if *condor\_run* is killed before the HTCondor job
 completes.
 
 Options
-^^^^^^^
+-------
 
  **-u **\ *universe*
     Submit the job under the specified universe. The default is vanilla.
@@ -83,7 +83,7 @@ Options
     marks.
 
 Examples
-^^^^^^^^
+--------
 
 *condor\_run* may be used to compile an executable on a different
 platform. As an example, first set the environment variables for the
@@ -91,8 +91,8 @@ required platform:
 
 ::
 
-    % setenv CONDOR_ARCH "SUN4u"
-     % setenv CONDOR_OPSYS "SOLARIS28"
+    % setenv CONDOR_ARCH "SUN4u" 
+    % setenv CONDOR_OPSYS "SOLARIS28"
 
 Then, use *condor\_run* to submit the compilation as in the following
 three examples.
@@ -114,22 +114,22 @@ or
     % condor_run "condor_compile cc -o myprog.condor myprog.c"
 
 Files
-^^^^^
+-----
 
 *condor\_run* creates the following temporary files in the user’s
 working directory. The placeholder <pid> is replaced by the process id
 of *condor\_run*.
 
- .condor\_run.<pid>
+ ``.condor_run.<pid>``
     A shell script containing the shell command line.
- .condor\_submit.<pid>
+ ``.condor_submit.<pid>``
     The submit description file for the job.
- .condor\_log.<pid>
+ ``.condor_log.<pid>``
     The HTCondor job’s log file; it is monitored by *condor\_run*, to
     determine when the job exits.
- .condor\_out.<pid>
+ ``.condor_out.<pid>``
     The output of the HTCondor job before it is output to the terminal.
- .condor\_error.<pid>
+ ``.condor_error.<pid>``
     Any error messages for the HTCondor job before they are output to
     the terminal.
 
@@ -138,7 +138,7 @@ of *condor\_run*.
 user’s working directory, and the HTCondor job may remain in the queue.
 
 General Remarks
-^^^^^^^^^^^^^^^
+---------------
 
 *condor\_run* is intended for submitting simple shell command lines to
 HTCondor. It does not provide the full functionality of
@@ -150,34 +150,34 @@ executed on the single machine matched with the job. HTCondor will not
 distribute multiple processes of a command line pipe across multiple
 machines.
 
-*condor\_run* will use the shell specified in the SHELL environment
+*condor\_run* will use the shell specified in the ``SHELL`` environment
 variable, if one exists. Otherwise, it will use */bin/sh* to execute the
 shell command-line.
 
-By default, *condor\_run* expects Perl to be installed in /usr/bin/perl.
-If Perl is installed in another path, ask the Condor administrator to
-edit the path in the *condor\_run* script, or explicitly call Perl from
-the command line:
+By default, *condor\_run* expects Perl to be installed in
+``/usr/bin/perl``. If Perl is installed in another path, ask the Condor
+administrator to edit the path in the *condor\_run* script, or
+explicitly call Perl from the command line:
 
 ::
 
     % perl path-to-condor/bin/condor_run "shell-cmd"
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_run* exits with a status value of 0 (zero) upon complete
 success. The exit status of *condor\_run* will be non-zero upon failure.
 The exit status in the case of a single error due to a system call will
-be the error number (errno) of the failed call.
+be the error number (``errno``) of the failed call.
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All

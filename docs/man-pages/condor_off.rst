@@ -6,7 +6,7 @@ condor\_off
 Shutdown HTCondor daemons
 
 Synopsis
-^^^^^^^^
+--------
 
 **condor\_off** [**-help \| -version**\ ]
 
@@ -18,7 +18,7 @@ Synopsis
 [**-daemon  **\ *daemonname*]
 
 Description
-^^^^^^^^^^^
+-----------
 
 *condor\_off* shuts down a set of the HTCondor daemons running on a set
 of one or more machines. It does this cleanly so that checkpointable
@@ -35,10 +35,10 @@ daemons including the *condor\_master*. Specification using the
 **-daemon** option will shut down only the specified daemon.
 
 For security reasons of authentication and authorization, this command
-requires ADMINISTRATOR level of access.
+requires ``ADMINISTRATOR`` level of access.
 
 Options
-^^^^^^^
+-------
 
  **-help**
     Display usage information
@@ -60,8 +60,8 @@ Options
     Turn off master daemons in the specified annex. By default this will
     result in the corresponding instances shutting down.
  **-debug**
-    Causes debugging information to be sent to stderr, based on the
-    value of the configuration variable TOOL\_DEBUG.
+    Causes debugging information to be sent to ``stderr``, based on the
+    value of the configuration variable ``TOOL_DEBUG``.
  **-pool **\ *centralmanagerhostname[:portnumber]*
     Specify a pool by giving the central manager’s host name and an
     optional port number
@@ -83,13 +83,13 @@ Options
     command is sent to the *condor\_master* daemon.
 
 Exit Status
-^^^^^^^^^^^
+-----------
 
 *condor\_off* will exit with a status value of 0 (zero) upon success,
 and it will exit with the value 1 (one) upon failure.
 
 Examples
-^^^^^^^^
+--------
 
 To shut down all daemons (other than *condor\_master*) on the local
 host:
@@ -117,12 +117,12 @@ as its central manager:
     % condor_off  -pool condor.cae.wisc.edu -name cae17
 
 Author
-^^^^^^
+------
 
 Center for High Throughput Computing, University of Wisconsin–Madison
 
 Copyright
-^^^^^^^^^
+---------
 
 Copyright © 1990-2019 Center for High Throughput Computing, Computer
 Sciences Department, University of Wisconsin-Madison, Madison, WI. All
